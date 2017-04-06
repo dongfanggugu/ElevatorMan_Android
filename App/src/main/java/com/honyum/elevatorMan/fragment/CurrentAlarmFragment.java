@@ -612,6 +612,8 @@ public class CurrentAlarmFragment extends BaseFragment {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(mActivity, ChatActivity.class);
+
+                        intent.putExtra("enter_mode", ChatActivity.MODE_PROPERTY);
                         startActivity(intent);
                     }
                 });

@@ -988,7 +988,15 @@ public class WorkerActivity extends WorkerBaseActivity implements
                 new OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        if (null == mAlarmInfo)
+                        {
+                            return;
+                        }
+
                         Intent intent = new Intent(WorkerActivity.this, ChatActivity.class);
+                        intent.putExtra("alarm_id", mAlarmInfo.getId());
+
                         startActivity(intent);
                     }
                 });

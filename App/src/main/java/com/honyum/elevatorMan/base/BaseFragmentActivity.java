@@ -248,6 +248,12 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         initTitleBar(titleId, title, 0, null, 0, null);
     }
 
+    public void setTitle(int titleId, String title) {
+        View titleView = findViewById(titleId);
+
+        ((TextView) titleView.findViewById(R.id.tv_title)).setText(title);
+    }
+
     /**
      * 设置标题
      *

@@ -586,6 +586,8 @@ public class AlarmTraceActivity extends BaseFragmentActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(AlarmTraceActivity.this, ChatActivity.class);
+
+                        intent.putExtra("enter_mode", ChatActivity.MODE_PROPERTY);
                         startActivity(intent);
                     }
                 });

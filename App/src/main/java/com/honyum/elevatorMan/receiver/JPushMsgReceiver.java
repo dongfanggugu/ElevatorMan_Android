@@ -124,14 +124,14 @@ public class JPushMsgReceiver extends BroadcastReceiver {
         Log.d("push", "当前是否显示在聊天界面==>>>" + ChatActivity.isForeground());
         if (BaseFragmentActivity.isForeground() && "CHAT".equals(notifyType)
                 && chatMsgListener != null && ChatActivity.isForeground()) {
-            chatMsgListener.chatMsgListener();
+            chatMsgListener.chatMsgListener(alarmNotify);
         } else if ("CHAT".equals(notifyType)) {
             jumpToPage(context, alarmNotify, ChatActivity.class, msg, msgId);
         }
     }
 
     public interface onChatMsgListener {
-        void chatMsgListener();
+        void chatMsgListener(AlarmNotify alarmNotify);
     }
 
     private static onChatMsgListener chatMsgListener;

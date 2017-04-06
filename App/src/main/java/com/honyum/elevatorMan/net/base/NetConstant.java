@@ -283,4 +283,9 @@ public class NetConstant {
      * 维修工获取已完成的报修单
      */
     public static final String COMMIT_REPAIR_DESCRIBE = "/editRepairByWorker";
+
+    /**
+     * 物业获取聊天频道
+     */
+    public static final String URL_CHAT_CHANNEL = "/getChatChannels";
 }

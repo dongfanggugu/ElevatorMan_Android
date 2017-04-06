@@ -19,4 +19,7 @@
     <item type="id" name="keywords"/>
     <item type="id" name="knId"/>
 
+    <item name="channel_id" type="id"/>
+    <item name="channel_text" type="id" />
+
 </resources>
