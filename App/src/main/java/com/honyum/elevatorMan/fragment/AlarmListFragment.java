@@ -277,6 +277,7 @@ public class AlarmListFragment extends Fragment {
                     } else if (alarmInfo.getUserState().equals(Constant.WORKER_STATE_ARRIVED)) {  //已到达
                         Intent intent = new Intent(mContext, RescuProcessActivity.class);
                         intent.putExtra("alarm_id", alarmInfo.getId());
+                        intent.putExtra("alarm_info", alarmInfo);
 
                         //定义跳转来源，用于title的显示
                         startActivity(intent);

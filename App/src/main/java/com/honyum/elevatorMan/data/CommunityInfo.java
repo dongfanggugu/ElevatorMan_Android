@@ -1,11 +1,13 @@
 package com.honyum.elevatorMan.data;
 
+import java.io.Serializable;
+
 /**
  * 报警地址信息
  * @author chang
  *
  */
-public class CommunityInfo {
+public class CommunityInfo implements Serializable {
 
 	private String address;
 	

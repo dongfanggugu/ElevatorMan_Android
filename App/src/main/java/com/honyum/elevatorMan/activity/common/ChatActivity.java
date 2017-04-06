@@ -502,7 +502,6 @@ public class ChatActivity extends BaseFragmentActivity {
 
         private int selectedItem;
 
-        private String alarmId;
 
         public ChannelAdapter(Context context, List<ChannelInfo> channelList) {
             this.context = context;

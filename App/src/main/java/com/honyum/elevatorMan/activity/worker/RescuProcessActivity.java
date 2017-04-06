@@ -14,6 +14,8 @@ import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.common.ChatActivity;
 import com.honyum.elevatorMan.activity.common.MainpageActivity;
+import com.honyum.elevatorMan.constant.Constant;
+import com.honyum.elevatorMan.data.AlarmInfo;
 import com.honyum.elevatorMan.net.ReportExceptRequest;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
@@ -29,6 +31,7 @@ public class RescuProcessActivity extends WorkerBaseActivity {
         setContentView(R.layout.activity_rescu_process);
 
         Intent intent = getIntent();
+
         //获取此次报警事件的id
         String alarmId = intent.getStringExtra("alarm_id");
         initTitleBar();
@@ -82,7 +85,29 @@ public class RescuProcessActivity extends WorkerBaseActivity {
                 new OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        if (null == getIntent()) {
+                            return;
+                        }
+
+                        AlarmInfo alarmInfo = (AlarmInfo) getIntent().getSerializableExtra("alarm_info");
+
+                        if (null == alarmInfo) {
+                            return;
+                        }
+
+                        if (!alarmInfo.getState().equals(Constant.ALARM_STATE_ASSIGNED)
+                                || !alarmInfo.getState().equals(Constant.ALARM_STATE_ARRIVED)) {
+                            showToast("该报警已经完成,无法进入电梯交流群组");
+                            return;
+                        }
+
                         Intent intent = new Intent(RescuProcessActivity.this, ChatActivity.class);
+
+                        String alarmId = intent.getStringExtra("alarm_id");
+                        intent.putExtra("alarm_id", alarmId);
+
+                        intent.putExtra("enter_mode", ChatActivity.MODE_WORKER);
                         startActivity(intent);
                     }
                 });
@@ -186,7 +211,7 @@ public class RescuProcessActivity extends WorkerBaseActivity {
                         .show();
                 Intent intent = new Intent(RescuProcessActivity.this, MainpageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 startActivity(intent);
             }
 
