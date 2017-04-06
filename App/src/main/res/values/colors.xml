@@ -1,0 +1,115 @@
+<resources>
+
+    <color name="theme_bac">#f1f1f1</color>
+    <color name="blue">#0000ff</color>
+    <color name="info_bac">#cccccc</color>
+
+    <color name="color_person">#9be0f9</color>
+
+
+
+    <color name="alarm_red">#ff0000</color>
+
+    <color name="alarm_bag">#d9d9d9</color>
+
+    <color name="white">#ffffff</color>
+
+    <color name="color_half_white">#80ffffff</color>
+
+
+    <color name="grey">#cccccc</color>
+
+    <color name="item_selected">#d9d9d9</color>
+
+    <color name="transfer">#00000000</color>
+
+    <color name="elevator_title">#4a86e8</color>
+
+    <color name="title_text_color">#f4f8f9</color>
+
+    <color name="login_normal">#ff9913</color>
+
+    <color name="login_pressed">#e6890f</color>
+
+    <color name="title_bg_color">#007ec5</color>
+
+    <!--BEGIN 提示信息的颜色 -->
+
+    <color name="tip_bg">#fdf8e3</color>
+
+    <color name="tip_text_color">#25b6ed</color>
+
+    <color name="info_text_color">#999999</color>
+
+    <color name="btn_nega_color">#fcf5d9</color>
+
+    <color name="btn_nega_text_color">#25b6ed</color>
+
+    <color name="btn_posi_color">#25b6ed</color>
+
+    <color name="btn_posi_text_color">#f4f8f9</color>
+
+    <color name="tip_info_color">#ddd4af</color>
+
+    <!--END 提示信息的颜色 -->
+
+    <!-- BEGIN 任务指派弹出框颜色 -->
+    <color name="color_pop_bag">#f5f5f5</color>
+    <color name="color_pop_bag_pressed">#e5e5e5</color>
+    <color name="color_pop_text">#4f5254</color>
+    <color name="color_pop_btn_text">#007ec5</color>
+    <!-- END 任务指派弹出框颜色 -->
+
+    <!-- BEGIN 项目选择 -->
+    <color name="color_ori_bg">#fbd075</color>
+    <color name="color_blue_bg">#99cdff</color>
+    <color name="color_green_bg">#cacd96</color>
+    <!-- END 项目选择 -->
+
+    <!-- BEGIN 一键报警 -->
+    <color name="color_easy_alarm_text">#4f5254</color>
+    <!-- END 一键报警 -->
+
+    <!-- BEGIN 报警列表 -->
+    <color name="color_list_project">#4f5254</color>
+    <color name="color_list_date">#b5b5b5</color>
+    <color name="color_list_index">#f4f8f9</color>
+
+    <color name="color_index_1">#beee78</color>
+    <color name="color_index_2">#ebe084</color>
+    <color name="color_index_3">#fecccb</color>
+    <color name="color_index_4">#b2f4b1</color>
+    <color name="color_index_5">#b6b6fc</color>
+
+    <color name="color_alarm_arrived">#11e767</color>
+    <color name="color_alarm_start">#f4be19</color>
+    <color name="color_alarm_assigning">#b5b5b5</color>
+
+    <!-- END 报警列表 -->
+
+    <!-- BEGIN 救援报告 -->
+    <color name="rescu_text_color">#4f5254</color>
+    <!-- END 救援报告 -->
+
+    <!--维保上报-->
+    <color name="color_report_normal">#b2f4b1</color>
+    <color name="color_report_pressed">#b2f400</color>
+    <color name="color_red_left">#ee7651</color>
+    <color name="color_yellow_left">#ebe084</color>
+    <color name="color_green_left">#9ac25f</color>
+    <color name="color_no_plan">#e1e1e1</color>
+
+    <color name="color_submit_normal">#9ac25f</color>
+    <color name="color_submit_pressed">#9aae5b</color>
+
+    <color name="color_text_register">#666666</color>
+
+    <color name="color_plan_waiting">#cccccc</color>
+    <color name="color_plan_confirm">#9ac25f</color>
+    <color name="color_plan_reject">#f2c63e</color>
+
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="color_alarm_bottom_text">#25b6ed</color>
+</resources>

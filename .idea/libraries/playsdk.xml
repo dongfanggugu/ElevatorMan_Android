@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="playsdk">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/NetSdkTest/libs/playsdk.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

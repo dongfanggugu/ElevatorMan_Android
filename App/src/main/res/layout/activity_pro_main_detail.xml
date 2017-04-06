@@ -1,0 +1,441 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/title_detail"
+                layout="@layout/layout_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_height"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/size_plan_make_margin"
+                    android:paddingRight="@dimen/size_plan_make_margin"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="@dimen/code_size"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="项目名称"
+                        android:textColor="#666666"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_project"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#cccccc"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/size_plan_make_margin"
+                    android:paddingRight="@dimen/size_plan_make_margin"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="@dimen/code_size"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="楼栋号"
+                        android:textColor="#666666"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_building"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#cccccc"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/size_plan_make_margin"
+                    android:paddingRight="@dimen/size_plan_make_margin"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="@dimen/code_size"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="单元号"
+                        android:textColor="#666666"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#cccccc"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/size_plan_make_margin"
+                    android:paddingRight="@dimen/size_plan_make_margin"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="@dimen/code_size"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/lift_code"
+                        android:textColor="#666666"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_lift_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#cccccc"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/size_plan_make_margin"
+                    android:paddingRight="@dimen/size_plan_make_margin"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="@dimen/code_size"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/main_date"
+                        android:textColor="#666666"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_plan_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:textColor="#333333"
+                        android:textSize="17sp"/>
+
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#cccccc"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/size_plan_make_margin"
+                    android:paddingRight="@dimen/size_plan_make_margin"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="@dimen/code_size"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/main_type"
+                        android:textColor="#666666"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_plan_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#333333"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#cccccc"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_camera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/size_plan_make_margin"
+                    android:paddingRight="@dimen/size_plan_make_margin"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="@dimen/code_size"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="照片"
+                        android:textColor="#666666"
+                        android:textSize="17sp"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="6dp"
+                            android:gravity="center"
+                            android:text="设备码"
+                            android:textColor="#666666"
+                            android:textSize="15sp"/>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp">
+
+
+                            <ImageView
+                                android:id="@+id/iv_image1"
+                                android:layout_width="60dp"
+                                android:layout_height="80dp"
+                                android:layout_marginRight="6dp"
+                                android:layout_marginTop="6dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/icon_img_original"/>
+
+                            <Button
+                                android:id="@+id/btn_del_1"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="right"
+                                android:background="@drawable/icon_del_img"
+                                android:visibility="gone"/>
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="6dp"
+                            android:gravity="center"
+                            android:text="维保前"
+                            android:textColor="#666666"
+                            android:textSize="15sp"/>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp">
+
+                            <ImageView
+                                android:id="@+id/iv_image2"
+                                android:layout_width="60dp"
+                                android:layout_height="80dp"
+                                android:layout_marginRight="6dp"
+                                android:layout_marginTop="6dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/icon_img_original"/>
+
+                            <Button
+                                android:id="@+id/btn_del_2"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="right"
+                                android:background="@drawable/icon_del_img"
+                                android:visibility="gone"/>
+                        </FrameLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="6dp"
+                            android:gravity="center"
+                            android:text="维保后"
+                            android:textColor="#666666"
+                            android:textSize="15sp"/>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp">
+
+                            <ImageView
+                                android:id="@+id/iv_image3"
+                                android:layout_width="60dp"
+                                android:layout_height="80dp"
+                                android:layout_marginRight="6dp"
+                                android:layout_marginTop="6dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/icon_img_original"/>
+
+                            <Button
+                                android:id="@+id/btn_del_3"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="right"
+                                android:background="@drawable/icon_del_img"
+                                android:visibility="gone"/>
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view_temp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#cccccc"
+                    android:visibility="gone"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="@dimen/size_plan_make_margin"
+                    android:paddingRight="@dimen/size_plan_make_margin"
+                    android:paddingTop="25dp">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/btn_submit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="8"
+                        android:background="@drawable/selector_plan_submit"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="确定"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_full_screen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#86222222"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_overview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</ScrollView>

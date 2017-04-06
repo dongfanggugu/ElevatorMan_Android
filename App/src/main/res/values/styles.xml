@@ -1,0 +1,132 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/theme_bac</item>
+    </style>
+
+    <style name="WelComeTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
+    <!-- 维修工接单状态提示框风格 -->
+    <style name="alarm_tip">
+        <item name="android:textColor">@color/tip_text_color</item>
+        <item name="android:background">@color/tip_bg</item>
+        <item name="android:textSize">@dimen/tip_text_size</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- 报警信息的展示 -->
+    <style name="alarm_info">
+        <item name="android:textColor">@color/info_text_color</item>
+        <item name="android:textSize">@dimen/info_text_size</item>
+    </style>
+
+    <style name="btn_posi">
+        <item name="android:textColor">@color/btn_posi_text_color</item>
+        <item name="android:textSize">@dimen/btn_text_size</item>
+        <item name="android:background">@color/btn_posi_color</item>
+    </style>
+
+    <style name="btn_nega">
+        <item name="android:textColor">@color/btn_nega_text_color</item>
+        <item name="android:textSize">@dimen/btn_text_size</item>
+        <item name="android:background">@color/btn_nega_color</item>
+    </style>
+
+    <style name="input_edit">
+        <item name="android:background">@color/transfer</item>
+        <item name="android:textSize">@dimen/input_text_size</item>
+        <item name="android:textColor">@color/title_text_color</item>
+    </style>
+
+    <style name="sliding_item">
+        <item name="android:textSize">@dimen/person_name</item>
+        <item name="android:textColor">@color/title_text_color</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">@style/ButtonBar</item>
+        <item name="metaButtonBarButtonStyle">@style/ButtonBarButton</item>
+    </style>
+
+    <!-- Backward-compatible version of ?android:attr/buttonBarStyle -->
+    <style name="ButtonBar">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:background">@android:drawable/bottom_bar</item>
+    </style>
+
+    <!-- Backward-compatible version of ?android:attr/buttonBarButtonStyle -->
+    <style name="ButtonBarButton" />
+
+    <style name="register_input_edit">
+        <item name="android:textSize">@dimen/size_text_register</item>
+        <item name="android:textColor">@color/color_text_register</item>
+        <item name="android:background">@color/transfer</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColorHint">#cccccc</item>
+    </style>
+
+
+    <!--页面弹出弹出效果-->
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
+    <style name="PopBottom">
+
+        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+    <!--带有回退功能的页面的载入和退出动画-->
+    <style name="PushActivityAnim" parent="@android:style/Animation.Activity">
+
+        <item name="android:activityOpenEnterAnimation">@anim/in_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/out_still</item>
+        <item name="android:activityCloseEnterAnimation">@anim/in_still</item>
+        <item name="android:activityCloseExitAnimation">@anim/out_from_left</item>
+    </style>
+
+    <style name="Dialogstyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <!-- 显示对话框时当前的屏幕是否变暗 -->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+</resources>

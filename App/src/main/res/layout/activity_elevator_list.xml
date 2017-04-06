@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <include 
+        android:id="@+id/title_elevator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        layout="@layout/layout_title" />
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+    
+    <LinearLayout
+        android:id="@+id/ll_elevator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"/>
+    
+    </ScrollView>
+    
+
+
+    <!--  
+    <GridView
+        android:id="@+id/list_elevator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dip"
+        android:gravity="center"      
+        android:numColumns="3"
+        android:horizontalSpacing="1dip"
+        android:verticalSpacing="1dip"/>
+        -->
+         
+</LinearLayout>

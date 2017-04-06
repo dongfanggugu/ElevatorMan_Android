@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/color_pop_bag"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_pop_btn_text"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/pop_margin_vertical"
+            android:paddingTop="@dimen/pop_margin_vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/new_msg"
+                android:textColor="@color/white"
+                android:textSize="@dimen/pop_btn_text_size" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dddddd" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/pop_margin_vertical"
+                android:layout_marginLeft="@dimen/pop_margin_horizontal"
+                android:layout_marginRight="@dimen/pop_margin_horizontal"
+                android:layout_marginTop="@dimen/pop_margin_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="2"
+                    android:textColor="@color/color_pop_text"
+                    android:textSize="@dimen/pop_text_size" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dddddd" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/pop_margin_vertical"
+                    android:paddingTop="@dimen/pop_margin_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_left"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/cancel"
+                        android:textColor="@color/color_pop_btn_text"
+                        android:textSize="@dimen/pop_btn_text_size" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#dddddd" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_query"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/pop_margin_vertical"
+                    android:paddingTop="@dimen/pop_margin_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_right"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/confirm"
+                        android:textColor="@color/color_pop_btn_text"
+                        android:textSize="@dimen/pop_btn_text_size" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

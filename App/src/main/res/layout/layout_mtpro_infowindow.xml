@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_alarm_info"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="项目名称" />
+
+        <TextView
+            android:id="@+id/tv_pro_name"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="维保公司" />
+
+        <TextView
+            android:id="@+id/tv_branch_name"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="项目电话" />
+
+        <TextView
+            android:id="@+id/tv_pro_tel"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:autoLink="phone"
+            android:gravity="center_vertical"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="电梯品牌" />
+
+        <TextView
+            android:id="@+id/tv_et_brand"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:autoLink="phone"
+            android:gravity="center_vertical"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="项目地址" />
+
+        <TextView
+            android:id="@+id/tv_pro_address"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="项目距离" />
+
+        <TextView
+            android:id="@+id/tv_pro_distance"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

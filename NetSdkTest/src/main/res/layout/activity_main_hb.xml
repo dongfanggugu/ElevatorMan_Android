@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <!-- 主体部分 -->
+    <FrameLayout 
+        android:id="@+id/viewContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">        
+    </FrameLayout>
+    
+    <!-- 底部菜单 -->
+    <RadioGroup 
+        android:id="@+id/tab_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#C4C4C4">
+        <RadioButton 
+            android:id="@+id/radio_video"
+            style="@style/bottom_tab_button"
+            android:text="@string/preview"
+            android:textColor="@drawable/tab_radio_style"
+            android:checked="true"/>
+        <RadioButton 
+            android:id="@+id/radio_device"
+            style="@style/bottom_tab_button"
+            android:text="@string/device_info"
+            android:textColor="@drawable/tab_radio_style"/>
+    </RadioGroup>
+</LinearLayout>

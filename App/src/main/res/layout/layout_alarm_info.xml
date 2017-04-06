@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/icon_info_window"
+              android:padding="10dp"
+              android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/alarm_info"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="报警时间"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/alarm_info"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/alarm_info"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/project"/>
+
+            <TextView
+                android:id="@+id/tv_project"
+                style="@style/alarm_info"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_video"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/alarm_info"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/address"/>
+
+            <TextView
+                android:id="@+id/tv_address"
+                style="@style/alarm_info"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/alarm_info"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/distance"/>
+
+            <TextView
+                android:id="@+id/tv_distance"
+                style="@style/alarm_info"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/default_text"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/alarm_info"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/pro_tel"/>
+
+            <TextView
+                android:id="@+id/tv_telephone"
+                style="@style/alarm_info"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_phone"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dial_phone"/>
+            </LinearLayout>
+        </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="80dp">
+        <TextView
+            android:id="@+id/btn_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@drawable/shape_alarm_button"
+            android:textSize="15sp"
+            android:text="确定"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>
+

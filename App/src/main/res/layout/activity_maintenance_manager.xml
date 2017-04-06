@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.honyum.elevatorMan.activity.maintenance.MaintenanceManagerActivity">
+
+    <include
+        android:id="@+id/title_maintence_manager"
+        layout="@layout/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/ll_my_lift"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_lift_item"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/selector_mainpage_item"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/size_maintenance_item_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_maintenance_item_size"
+                        android:layout_height="@dimen/size_maintenance_item_size"
+                        android:src="@drawable/icon_my_lift"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:text="我的电梯"
+                    android:textColor="#333333"
+                    android:textSize="15sp"
+                    />
+
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_detail"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent"/>
+
+
+            <LinearLayout
+            android:id="@+id/ll_lift_plan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_my_lift_item"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/selector_mainpage_item"
+                android:orientation="horizontal"
+                android:padding="@dimen/size_maintenance_item_padding">
+
+                <ImageView
+                    android:layout_width="@dimen/size_maintenance_item_size"
+                    android:layout_height="@dimen/size_maintenance_item_size"
+                    android:src="@drawable/icon_lift_plan"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:text="维保计划"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                />
+
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_detail"/>
+        </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent"/>
+
+
+            <LinearLayout
+                android:id="@+id/ll_lift_upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_lift_item"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/selector_mainpage_item"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/size_maintenance_item_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_maintenance_item_size"
+                        android:layout_height="@dimen/size_maintenance_item_size"
+                        android:src="@drawable/icon_upload"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:text="记录上传"
+                    android:textColor="#333333"
+                    android:textSize="15sp"
+                    />
+
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_detail"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent"/>
+
+            <LinearLayout
+                android:id="@+id/ll_reminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_lift_item"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/selector_mainpage_item"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/size_maintenance_item_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_maintenance_item_size"
+                        android:layout_height="@dimen/size_maintenance_item_size"
+                        android:src="@drawable/icon_reminder"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:text="维保提醒"
+                    android:textColor="#333333"
+                    android:textSize="15sp"
+                    />
+
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_detail"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent"/>
+
+            <LinearLayout
+                android:id="@+id/ll_year_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_my_lift_item"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/selector_mainpage_item"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/size_maintenance_item_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_maintenance_item_size"
+                        android:layout_height="@dimen/size_maintenance_item_size"
+                        android:src="@drawable/icon_year_check"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:text="年检提醒"
+                    android:textColor="#333333"
+                    android:textSize="15sp"
+                    />
+
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_detail"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

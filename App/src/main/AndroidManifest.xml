@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.honyum.elevatorMan"
+    android:versionCode="38"
+    android:versionName="@string/app_version">
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <!-- 百度地图权限 -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- JPush权限 -->
+    <permission
+        android:name="com.honyum.elevatorMan.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.honyum.elevatorMan.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+
+    <application
+        android:name=".base.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/logo1"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="${MAP_VALUE}" />
+
+        <activity
+            android:name=".activity.WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WelComeTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <data
+                    android:host="honyum"
+                    android:scheme="chorstar" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.WorkerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.RescuProcessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.RescuSubmitActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.AlarmListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.PropertyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.BuildingListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.ElevatorListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.AlarmTraceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.PropertyAlarmListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.EasyAlarmActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.ProHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.WorkerHistoryActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+        <service android:name=".service.LocationService" />
+        <!-- <service android:name=".service.TimerService"/> -->
+
+
+        <!-- BEGIN:JPush定义组件 -->
+
+
+        <!-- Required SDK核心功能 -->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.honyum.elevatorMan" />
+            </intent-filter>
+        </activity>
+        <!-- Required  SDK核心功能 -->
+        <service
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!-- Required SDK 核心功能 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+
+                <category android:name="com.honyum.elevatorMan" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+        <receiver
+            android:name=".receiver.JPushMsgReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.honyum.elevatorMan" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能 -->
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
+
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="e7294fdb57006cab22fa3655" />
+
+        <!-- END:JPush定义组件 -->
+        <service
+            android:name=".service.RemindService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".receiver.RemindReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.chorstar.alarm.make_plan" />
+                <action android:name="com.chorstar.alarm.finish_plan" />
+                <action android:name="com.chorstar.alarm.dead_line" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".activity.maintenance.MyLiftActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance.SettingsActivity"
+            android:parentActivityName=".activity.worker.WorkerBaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance.MaintenanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance.PlanActivity"
+            android:label="@string/title_activity_plan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RegisterStepOneActivity"
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RegisterStepTwoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.property.PropertyMaintenanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.ProMainDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="BDAPPID"
+            android:value="6433449" />
+        <meta-data
+            android:name="BDAPPKEY"
+            android:value="Tcp2zHAW09w4RMQBFfdid0Wv" />
+
+        <activity
+            android:name=".activity.maintenance.MainHelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.PersonActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.PersonBasicInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.PersonModifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.PersonIconPopActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/PopBottom" />
+        <activity
+            android:name=".activity.PicturePickActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/PopBottom" />
+        <activity
+            android:name=".activity.common.ResetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.LiftKnowledgeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.knowledge.TitleListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.knowledge.KnContentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.MainpageActivity"
+            android:label="@string/title_activity_mainpage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance.MaintenanceManagerActivity"
+            android:label="@string/title_activity_maintenance_manager"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance.LiftActivity"
+            android:label="@string/title_activity_lift"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance.LiftDetailActivity"
+            android:label="@string/title_activity_lift_detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance.LiftPlanActivity"
+            android:label="@string/title_activity_lift_plan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance.LiftCompleteActivity"
+            android:label="@string/title_activity_lift_complete"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.HelpCenterActivity"
+            android:label="@string/title_activity_help_center"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.AddressActivity"
+            android:label="@string/title_activity_address"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.AddSelActivity"
+            android:label="@string/title_activity_add_sel"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.AlarmDetailActivity"
+            android:label="@string/title_activity_alarm_detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance_1.MaintenanceActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.common.ChatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.property.PropertyMainPageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.NearMaintenanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.PermanentAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.AddPermanentAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.RepairOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.RepairInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.AlarmHandleActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

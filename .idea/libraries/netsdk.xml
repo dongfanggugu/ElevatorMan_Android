@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="netsdk">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/NetSdkTest/libs/netsdk.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

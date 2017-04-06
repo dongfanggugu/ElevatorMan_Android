@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="64dp"
+                  android:gravity="center"
+                  android:background="#25b6ed"
+                  android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/back_normal_hb"
+            android:background="#00000000"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#f4f8f9"
+            android:textSize="24sp"
+            android:layout_marginRight="30dp"
+            android:text="电梯监控"/>
+
+    </LinearLayout>
+
+    <com.hanbang.playsdk.PlaySurfaceView
+        android:id="@+id/surface_video"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="@drawable/ic_launcher"/>
+
+
+</LinearLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <TextView 
+        android:id="@+id/text_deviceName"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_deviceName"
+        android:text="设备名"/>
+    
+    <EditText 
+        android:id="@+id/edit_deviceName"
+        android:layout_toRightOf="@id/text_deviceName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    
+    <TextView 
+        android:id="@+id/text_deviceSn"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_deviceSn"
+        android:text="序列号"/>
+    
+    <EditText 
+        android:id="@+id/edit_deviceSn"
+        android:layout_below="@id/text_deviceName"
+        android:layout_toRightOf="@id/text_deviceSn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"/>
+    
+    <TextView 
+        android:id="@+id/text_deviceType"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_deviceType"
+        android:text="设备型号"/>
+    
+    <EditText 
+        android:id="@+id/edit_deviceType"
+        android:layout_below="@id/text_deviceSn"
+        android:layout_toRightOf="@id/text_deviceType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"/>
+    
+    <TextView 
+        android:id="@+id/text_version"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_version"
+        android:text="版本信息"/>
+    
+    <EditText 
+        android:id="@+id/edit_version"
+        android:layout_below="@id/text_deviceType"
+        android:layout_toRightOf="@id/text_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"/>
+    
+    <TextView 
+        android:id="@+id/text_channelCount"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edit_channelCount"
+        android:text="通道数"/>
+    
+    <EditText 
+        android:id="@+id/edit_channelCount"
+        android:layout_below="@id/text_version"
+        android:layout_toRightOf="@id/text_channelCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"/>
+    
+    <Button 
+        android:id="@+id/btn_save"
+        android:layout_below="@id/text_channelCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="保存"/>
+    
+    <Button 
+        android:id="@+id/btn_logout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注销"/>
+
+</RelativeLayout>

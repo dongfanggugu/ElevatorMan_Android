@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_version">V3.8</string>
+    <string name="app_name">电梯易管家</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="file_name">ElevatorMan</string>
+
+    <string name="user_name">用户名:</string>
+    <string name="password">密码:</string>
+    <string name="login">登录</string>
+
+    <string name="user_null">用户名不能为空</string>
+    <string name="pwd_null">密码不能为空</string>
+
+    <string name="update_location">更新位置</string>
+    <string name="call">呼叫</string>
+    <string name="info_check">详情查看</string>
+
+    <string name="main_page">电梯易管家</string>
+
+    <string name="project">项目名称</string>
+    <string name="address">项目地址</string>
+    <string name="distance">项目距离</string>
+    <string name="pro_tel">物业电话</string>
+    <string name="elevatorInfo">电梯信息</string>
+
+    <string name="accept_alarm">接收</string>
+    <string name="cancel_alarm">取消</string>
+
+    <string name="arrive">到达</string>
+    <string name="exception">意外情况</string>
+
+    <string name="has_injured">是否有伤员</string>
+    <string name="except_choice">意外情况选择</string>
+
+    <string name="except_1">意外情况一</string>
+    <string name="except_2">意外情况二</string>
+    <string name="except_3">意外情况三</string>
+
+    <string name="has_alarm_msg">有新的报警消息</string>
+    <string name="wait_msg">报警任务已经接单，请等待分配结果</string>
+
+    <string name="task_dealing">救援中的报警</string>
+    <string name="task_assigning">指派中的报警</string>
+    <string name="task_null">未处理的报警</string>
+
+    <string name="rescu_complete">完成救援</string>
+
+    <string name="saved_count">被救人数:</string>
+    <string name="injured_count">伤亡人数:</string>
+    <string name="other">说明:</string>
+
+    <string name="submit">提交</string>
+
+    <string name="submit_suc">救援结果提交成功</string>
+
+    <string name="first_page">主页</string>
+    <string name="current_alarm">当前处理</string>
+    <string name="alarm_list">报警列表</string>
+    <string name="alarm_history_list">历史列表</string>
+    <string name="property_maintenance">维保管理</string>
+    <string name="log_out">退出登录</string>
+    <string name="alarm_page">项目报警</string>
+
+    <string name="title_alarm_list">应急救援</string>
+
+    <string name="title_rescu_process">确认救援进度</string>
+
+    <string name="title_rescu_complete">救援完成</string>
+
+    <string name="building_chosen">选择楼号</string>
+    <string name="elevator_chosen">选择报警电梯</string>
+
+    <string name="easy_alarm">一键报警</string>
+    <string name="alarm_complete">救援完成</string>
+
+    <string name="cur_state">当前状态:</string>
+    <string name="worker">维修工:</string>
+    <string name="telephone">联系方式:</string>
+    <string name="company">维保公司</string>
+
+    <string name="alarm_trace">报警状态跟踪</string>
+
+
+    <string name="new_alarm">新的报警事件</string>
+    <string name="alarm_info">有电梯发生事故，点击进入详细信息</string>
+
+    <string name="alarm_assigned">您已被指派</string>
+    <string name="assigned_info">您被指派进行电梯救援，点击进入</string>
+
+    <string name="alarm_unassigned">您未被指派</string>
+    <string name="unassigned_info">您不需要此次电梯救援</string>
+
+    <string name="injured_positive">有人伤</string>
+    <string name="injured_negative">无人伤</string>
+    <string name="alarm_remark">输入情况说明</string>
+
+    <string name="project_info">项目:</string>
+    <string name="elevator_info">电梯:</string>
+
+    <string name="alarm_submit">报警</string>
+    <string name="alarm_cancel">取消</string>
+
+    <string name="accept_suc">接单成功</string>
+
+    <string name="except_submit">已经提交意外情况</string>
+    <string name="input_name">输入您的用户名</string>
+    <string name="input_pwd">输入您的密码</string>
+
+    <string name="no_alarm">没有处理中的报警事件</string>
+    <string name="exit_confirm">确实要退出应用?</string>
+    <string name="property_complete">救援已经完成</string>
+    <string name="history_null">没有处理过的报警事件</string>
+
+
+    <string name="alarm_pre_part">您已经被分配至</string>
+    <string name="alarm_next_part">参与救援，事不宜迟</string>
+
+    <string name="go_now">立即前往</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">查看</string>
+    <string name="except_confirm">确认</string>
+    <string name="except">意外情况，无法到达</string>
+
+    <string name="default_text">——</string>
+    <string name="ip_default">ip地址设置为默认地址</string>
+    <string name="ip_illegal">ip地址不合法</string>
+
+    <string name="add_null">无法获取地址信息</string>
+
+    <string name="new_msg">新消息</string>
+    <string name="title_activity_lift">LiftActivity</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- 维保管理字符串-->
+    <string name="lift_code">电梯编号</string>
+    <string name="lift_add">电梯地址</string>
+    <string name="last_main">上次维保:</string>
+    <string name="main_type">维保类型:</string>
+    <string name="main_plan">维保计划:</string>
+    <string name="main_worker">维保工人:</string>
+    <string name="next_main_date">计划日期:</string>
+    <string name="next_main_type">计划类型</string>
+    <string name="main_date">维保日期</string>
+    <string name="main_complete">维保完成</string>
+    <string name="make_plan">制定计划</string>
+    <string name="modify_plan">修改计划</string>
+    <string name="no_plan">未制定</string>
+    <string name="null_plan">无</string>
+
+
+    <string name="my_lift">维保电梯</string>
+    <string name="remind">维保提醒</string>
+    <string name="settings">设置</string>
+    <string name="switch_on">开启</string>
+    <string name="switch_off">关闭</string>
+
+    <string name="semi_month">半月保</string>
+    <string name="month">月保</string>
+    <string name="season">季度保</string>
+    <string name="semi_year">半年保</string>
+    <string name="year">年保</string>
+    <string name="maintenance">电梯维保</string>
+    <string name="title_activity_plan">PlanActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+
+
+    <!--注册功能 -->
+    <string name="register_title">维修工注册</string>
+    <string name="register_user_name">用户名</string>
+    <string name="necessary">*</string>
+    <string name="register_pwd">密码</string>
+    <string name="pwd_confirm">确认密码</string>
+
+    <string name="register_name">姓名</string>
+    <string name="age">年龄</string>
+    <string name="sex">性别</string>
+    <string name="city">城市</string>
+    <string name="company_name">公司名称</string>
+    <string name="card_id">身份证号</string>
+    <string name="operation_code">操作证号</string>
+    <string name="phone_num">手机号码</string>
+
+    <string name="register_user_null">用户名不能为空</string>
+    <string name="register_user_repeat">用户名已经被使用</string>
+    <string name="register_pwd_null">密码不能为空</string>
+    <string name="register_confirm_pwd_null">确认密码不能为空</string>
+    <string name="register_pwd_diff">确认密码和密码不一致</string>
+    <string name="register_pwd_short">密码至少为6位</string>
+    <string name="register_name_null">姓名不能为空</string>
+    <string name="register_age_null">年龄不能为空</string>
+    <string name="register_city_null">城市不能为空</string>
+    <string name="company_null">公司名称不能为空</string>
+    <string name="card_id_null">身份证号不能为空</string>
+    <string name="card_id_incorrect">请输入合法的身份证号</string>
+    <string name="register_operation_null">操作码不能为空</string>
+    <string name="register_phone_null">手机号码不能为空</string>
+    <string name="register_phone_incorrect">请输入合法的手机号码</string>
+
+    <string name="register_success">注册成功,请等待管理员审核</string>
+    <string name="login_name_exist">用户名已经存在</string>
+    <string name="next_step">下一步</string>
+    <string name="register_submit">确认</string>
+
+
+    <string name="title_project_choose">选择项目</string>
+
+    <string name="plan_confirm">已确认</string>
+    <string name="plan_reject">已拒绝</string>
+    <string name="plan_waiting">待确认</string>
+
+    <string name="main_detail">维保详情</string>
+
+    <string name="query_all">--ALL--</string>
+    <string name="query_title">筛选</string>
+
+    <string name="person_center">个人中心</string>
+
+    <string name="basic_info">基本信息</string>
+
+    <string name="forget_password">忘记密码</string>
+
+    <string name="lift_knowledge">电梯百科</string>
+    <string name="title_activity_mainpage">MainpageActivity</string>
+
+    <string name="main_page_item_rescue">应急救援</string>
+    <string name="main_page_item_maintenance">维保管理</string>
+    <string name="main_page_item_help">帮助中心</string>
+    <string name="main_page_item_person">个人中心</string>
+    <string name="main_page_item_bbs">论坛</string>
+    <string name="main_page_item_wiki">电梯百科</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maintenance_manager">MaintenanceManagerActivity</string>
+    <string name="title_activity_lift_detail">LiftDetailActivity</string>
+    <string name="title_activity_lift_plan">LiftPlanActivity</string>
+    <string name="title_activity_lift_complete">LiftCompleteActivity</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_activity_help_center">HelpCenterActivity</string>
+    <string name="title_activity_address">AddressActivity</string>
+    <string name="title_activity_add_sel">AddSelActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_alarm_detail">AlarmDetailActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+
+</resources>

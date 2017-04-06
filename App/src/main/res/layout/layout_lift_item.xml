@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+   <LinearLayout
+       android:layout_width="50dp"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:padding="10dp"
+       android:layout_gravity="center"
+       android:gravity="center">
+
+       <View
+           android:layout_width="5dp"
+           android:layout_height="50dp"
+           android:background="@color/title_bg_color"
+           android:layout_gravity="center"/>
+   </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="214411414414142"
+            android:textSize="17sp"/>
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="#cccccc"
+            android:text="望京soho 塔2 C座3201"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_detail"/>
+    </LinearLayout>
+
+</LinearLayout>
