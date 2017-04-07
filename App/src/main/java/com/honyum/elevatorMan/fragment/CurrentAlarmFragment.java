@@ -190,7 +190,7 @@ public class CurrentAlarmFragment extends BaseFragment {
         head.setUserId(getConfig().getUserId());
         head.setAccessToken(getConfig().getToken());
 
-        body.setScope("unFinished");
+        body.setScope("unfinished");
 
         request.setHead(head);
         request.setBody(body);

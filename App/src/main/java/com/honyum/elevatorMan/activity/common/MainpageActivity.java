@@ -20,6 +20,7 @@ import com.honyum.elevatorMan.adapter.PageIndicatorAdapter;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.base.Config;
 import com.honyum.elevatorMan.base.SysActivityManager;
+import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.service.LocationService;
 
 import java.util.ArrayList;
@@ -172,6 +173,14 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
                 jumpToPerson();
                 break;
             case R.id.ll_bbs:
+                String region = getConfig().getRegion();
+
+                if (region.equals(Constant.SHANGHAI)
+                        || region.equals(Constant.BEIJING)) {
+                    showToast("该功能暂未开放");
+
+                    return;
+                }
                 jumpToRepair();
                 break;
             case R.id.ll_wiki:

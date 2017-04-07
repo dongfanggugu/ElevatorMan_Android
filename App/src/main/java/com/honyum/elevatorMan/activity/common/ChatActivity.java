@@ -181,7 +181,13 @@ public class ChatActivity extends BaseFragmentActivity {
 
         body.setAlarmId(mAlarmId);
         body.setRows(rows);
-        body.setMaxCode(maxCode);
+
+        if (REFRESH_BOTTOM == refreshType) {
+            body.setMaxCode(null);
+
+        } else {
+            body.setMaxCode(maxCode);
+        }
 
         request.setHead(head);
         request.setBody(body);
@@ -210,6 +216,13 @@ public class ChatActivity extends BaseFragmentActivity {
 
                 } else if (refreshType == REFRESH_NOES) {
                     adapter.clearAll(true);
+
+                    if (null == chatList || chatList.size() == 0) {
+                        return;
+                    }
+
+                    maxCode = chatList.get(chatList.size() - 1).getCode();
+
                     for (ChatListResponse.ChatListBody body1 : chatList) {
                         adapter.add(0, body1);
                     }
@@ -220,8 +233,6 @@ public class ChatActivity extends BaseFragmentActivity {
                     if (null == chatList || chatList.size() == 0) {
                         return;
                     }
-
-                    maxCode = chatList.get(chatList.size() - 1).getCode();
 
                     for (ChatListResponse.ChatListBody body1 : chatList) {
                         adapter.add(body1);
@@ -253,7 +264,6 @@ public class ChatActivity extends BaseFragmentActivity {
                 String alarmId = alarmNotify.getAlarmId();
 
                 if (alarmId.equals(mAlarmId)) {
-                    maxCode = null;
                     initChatContent(REFRESH_BOTTOM, 1);
 
                 } else {
