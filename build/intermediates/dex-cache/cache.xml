@@ -8,115 +8,7 @@
         optimize="true"
         revision="21.1.2"
         sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/com.android.support-appcompat-v7-20.0.0_981fa6cf9a94c657cc79d35f7f094c9e4122e6f9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/libs/jackson-all-1.9.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="b9c011c6e816af0eb462770d92a278b728071d31">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/jackson-all-1.9.0_932bbe3b454830344039ea4340b01d49e6029cc9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/com.android.support-support-v4-22.2.0_0c84cacbf60958d1095a6fcc66d69332a4e79141.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/libs/BaiduLBS_Android.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="887fe1794faa3ec058a00d0669d039833a07acd6">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/BaiduLBS_Android_b700ae0ebe2baebc822e20998195eb67ecc10ecf.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/exploded-aar/ElevatorMan_Android/NetSdkTest/unspecified/jars/libs/netsdk.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="82e024b9a527ed4c033a7b10b97cc70a925f4eb8">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/netsdk_d7b66d37d2a5646302021098e913ce4fc340aa72.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/libs/jackson-all-1.9.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="b9c011c6e816af0eb462770d92a278b728071d31">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/jackson-all-1.9.0_8d42113f18809f87d0f965a8b94045f403ca4922.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/libs/galaxy_mini.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="58de9ecfba229dbb2c3eb3f45dbe284ba58100ea">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/galaxy_mini_4f9a0e0bc379e454b8a1c48b9a4c79e299872624.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/com.android.support-support-v4-22.2.0_8cc2b286526a57f15ccb80ef2a4376bd9f5ddfb1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/exploded-aar/ElevatorMan_Android/RefreshListview/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="0bb914c6cad28ea9ff3704ca77a14ca031c3bc1f">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/ElevatorMan_Android-RefreshListview-unspecified_39cbd527e0b4897bfd6e7fdb2aab718944b5eace.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/libs/jpush-sdk-release1.7.4.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="3c85f598c111fd4d7b3b9f9fa1f8f10bfc31a898">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/jpush-sdk-release1.7.4_6e3545f90f54cd36d65a6ef0ab8ad9b45f3e0bf3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/libs/jpush-sdk-release1.7.4.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="3c85f598c111fd4d7b3b9f9fa1f8f10bfc31a898">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/jpush-sdk-release1.7.4_7f20ef573f391a3f3a1477b46ab5f3ece447931e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/exploded-aar/ElevatorMan_Android/NetSdkTest/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="7e9ea8bcf490f7dedb58ba09ab56de8b1016709d">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/ElevatorMan_Android-NetSdkTest-unspecified_ea6de16de7d65183780399b830b34ae683dc2560.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/exploded-aar/ElevatorMan/NetSdkTest/unspecified/jars/libs/playsdk.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="858e6004ff7ee128c7e1e93c0b27bacfbcbfe6a9">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/playsdk_b718d4e3d030b64396921bbcb67cf11a51862cdf.jar" />
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/com.android.support-appcompat-v7-20.0.0_981fa6cf9a94c657cc79d35f7f094c9e4122e6f9.jar" />
     </item>
     <item
         is-multidex="false"
@@ -125,16 +17,25 @@
         optimize="true"
         revision="21.1.2"
         sha1="858e6004ff7ee128c7e1e93c0b27bacfbcbfe6a9">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/playsdk_4d212277ca69e1b7d6324a59cda1964d9981923c.jar" />
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/playsdk_4d212277ca69e1b7d6324a59cda1964d9981923c.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/exploded-aar/ElevatorMan/RefreshListview/unspecified/jars/classes.jar"
+        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/libs/jackson-all-1.9.0.jar"
         jumboMode="false"
         optimize="true"
         revision="21.1.2"
-        sha1="0bb914c6cad28ea9ff3704ca77a14ca031c3bc1f">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/ElevatorMan-RefreshListview-unspecified_ac6dba4dd4e1d71105fdb51da0b076cf90551f15.jar" />
+        sha1="b9c011c6e816af0eb462770d92a278b728071d31">
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/jackson-all-1.9.0_932bbe3b454830344039ea4340b01d49e6029cc9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/exploded-aar/ElevatorMan_Android/NetSdkTest/unspecified/jars/libs/netsdk.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="82e024b9a527ed4c033a7b10b97cc70a925f4eb8">
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/netsdk_d7b66d37d2a5646302021098e913ce4fc340aa72.jar" />
     </item>
     <item
         is-multidex="false"
@@ -143,25 +44,34 @@
         optimize="true"
         revision="21.1.2"
         sha1="58de9ecfba229dbb2c3eb3f45dbe284ba58100ea">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/galaxy_mini_01278bb5863f60e7282b6bc98f6bcf816e232a9b.jar" />
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/galaxy_mini_01278bb5863f60e7282b6bc98f6bcf816e232a9b.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="21.1.2"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/internal_impl-22.2.0_e62bd8ce3ab1adf703d154e42f20dee71af0b24f.jar" />
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/com.android.support-support-v4-22.2.0_8cc2b286526a57f15ccb80ef2a4376bd9f5ddfb1.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/jars/classes.jar"
+        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/exploded-aar/ElevatorMan_Android/RefreshListview/unspecified/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="21.1.2"
-        sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/com.android.support-appcompat-v7-20.0.0_77084d8b2d98765dcec6cafa30675281a3e7d155.jar" />
+        sha1="0bb914c6cad28ea9ff3704ca77a14ca031c3bc1f">
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/ElevatorMan_Android-RefreshListview-unspecified_39cbd527e0b4897bfd6e7fdb2aab718944b5eace.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/libs/jpush-sdk-release1.7.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="3c85f598c111fd4d7b3b9f9fa1f8f10bfc31a898">
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/jpush-sdk-release1.7.4_6e3545f90f54cd36d65a6ef0ab8ad9b45f3e0bf3.jar" />
     </item>
     <item
         is-multidex="false"
@@ -170,7 +80,7 @@
         optimize="true"
         revision="21.1.2"
         sha1="887fe1794faa3ec058a00d0669d039833a07acd6">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/BaiduLBS_Android_fe575c7cd7b32781adeb1e8d078a669260af779b.jar" />
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/BaiduLBS_Android_fe575c7cd7b32781adeb1e8d078a669260af779b.jar" />
     </item>
     <item
         is-multidex="false"
@@ -179,16 +89,7 @@
         optimize="true"
         revision="21.1.2"
         sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/support-annotations-22.2.0_0d3a4f7549b5802ace15ef9a30b5fe4ecf73adcf.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/libs/android_api_1.1_forsdk.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="610ab8a4952cfec5cc008a697790e21dec7b8d3a">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/android_api_1.1_forsdk_e3ba6ffd92a8f10ae2af7854ada7f208954ac7fc.jar" />
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/support-annotations-22.2.0_0d3a4f7549b5802ace15ef9a30b5fe4ecf73adcf.jar" />
     </item>
     <item
         is-multidex="false"
@@ -197,16 +98,7 @@
         optimize="true"
         revision="21.1.2"
         sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/internal_impl-22.2.0_5a8b289cb18c00fd8e9964a259d9502f0cdca082.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/exploded-aar/ElevatorMan/NetSdkTest/unspecified/jars/libs/netsdk.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="82e024b9a527ed4c033a7b10b97cc70a925f4eb8">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/netsdk_045d9b1a43221f2db9de604df13fd7a07a75ea8b.jar" />
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/internal_impl-22.2.0_5a8b289cb18c00fd8e9964a259d9502f0cdca082.jar" />
     </item>
     <item
         is-multidex="false"
@@ -215,16 +107,16 @@
         optimize="true"
         revision="21.1.2"
         sha1="610ab8a4952cfec5cc008a697790e21dec7b8d3a">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/debug/android_api_1.1_forsdk_59ed3633ce3da65ac287050a0b645510f93aaa12.jar" />
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/android_api_1.1_forsdk_59ed3633ce3da65ac287050a0b645510f93aaa12.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/exploded-aar/ElevatorMan/NetSdkTest/unspecified/jars/classes.jar"
+        jar="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/exploded-aar/ElevatorMan_Android/NetSdkTest/unspecified/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="21.1.2"
         sha1="7e9ea8bcf490f7dedb58ba09ab56de8b1016709d">
-        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan/App/build/intermediates/pre-dexed/debug_flavor/debug/ElevatorMan-NetSdkTest-unspecified_b95360a73212ae4fce30a033e26a3643766dd5c4.jar" />
+        <dex dex="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/App/build/intermediates/pre-dexed/debug_flavor/release/ElevatorMan_Android-NetSdkTest-unspecified_ea6de16de7d65183780399b830b34ae683dc2560.jar" />
     </item>
 
 </items>

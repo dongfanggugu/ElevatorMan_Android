@@ -997,7 +997,7 @@ public class WorkerActivity extends WorkerBaseActivity implements
                         }
 
                         if (!mAlarmInfo.getState().equals(Constant.ALARM_STATE_ASSIGNED)
-                                || !mAlarmInfo.getState().equals(Constant.ALARM_STATE_ARRIVED)) {
+                                && !mAlarmInfo.getState().equals(Constant.ALARM_STATE_ARRIVED)) {
                             showToast("该报警已经完成,无法进入电梯交流群组");
                             return;
                         }

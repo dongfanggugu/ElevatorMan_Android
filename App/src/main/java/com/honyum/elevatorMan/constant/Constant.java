@@ -112,7 +112,7 @@ public class Constant {
         {
             put(BEIJING, "http://211.147.152.6:8080/lift/mobile");
 
-            put(SHANGHAI, "http://123.57.10.16:8081/lift/mobile");
+            put(SHANGHAI, "http://47.93.123.2:8080/lift/mobile");
 
             put(MA, "http://119.57.248.130/mobile");
 

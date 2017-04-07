@@ -253,7 +253,7 @@ public class LoginActivity extends BaseFragmentActivity {
     private void initRegionChoice() {
 
         //设置城市为北京，并且不可以修改
-        getConfig().setRegion(Constant.BEIJING);
+        //getConfig().setRegion(Constant.BEIJING);
         String region = getConfig().getRegion();
         tvRegion.setText(region);
 
