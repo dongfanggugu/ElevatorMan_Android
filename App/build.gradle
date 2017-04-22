@@ -55,4 +55,5 @@ dependencies {
     compile project(':RefreshListview')
     //    compile project(':chorstar')
     compile 'com.android.support:appcompat-v7:21.0.3'
+    compile project(':HandPaint')
 }

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/App/App.iml" filepath="$PROJECT_DIR$/App/App.iml" />
       <module fileurl="file://$PROJECT_DIR$/ElevatorMan_Android.iml" filepath="$PROJECT_DIR$/ElevatorMan_Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HandPaint/HandPaint.iml" filepath="$PROJECT_DIR$/HandPaint/HandPaint.iml" />
       <module fileurl="file://$PROJECT_DIR$/NetSdkTest/NetSdkTest.iml" filepath="$PROJECT_DIR$/NetSdkTest/NetSdkTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/RefreshListview/RefreshListview.iml" filepath="$PROJECT_DIR$/RefreshListview/RefreshListview.iml" />
     </modules>

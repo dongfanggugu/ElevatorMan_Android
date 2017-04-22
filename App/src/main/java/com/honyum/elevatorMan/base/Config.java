@@ -65,7 +65,7 @@ public class Config implements Serializable {
         String server = Constant.SERVER_LIST.get(region);
 
         if (StringUtils.isEmpty(server)) {
-            server = Constant.SERVER_LIST.get(Constant.CHINA);
+            server = Constant.SERVER_LIST.get(Constant.BEIJING);
         }
 
         return server;
@@ -517,4 +517,14 @@ public class Config implements Serializable {
     public String getHAddress() {
         return mPreferences.getString("haddress", "");
     }
+
+    public String getSign() {
+        return mPreferences.getString("sign_url", "");
+    }
+
+    public void setSign(String sign) {
+        mEditor.putString("sign_url", sign);
+        mEditor.commit();
+    }
+
 }

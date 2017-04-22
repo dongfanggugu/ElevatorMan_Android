@@ -46,6 +46,13 @@ public class SettingsActivity extends BaseFragmentActivity {
             }
         });
 
+        findViewById(R.id.ll_sign).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this, PersonSignActivity.class));
+            }
+        });
+
         findViewById(R.id.ll_about).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

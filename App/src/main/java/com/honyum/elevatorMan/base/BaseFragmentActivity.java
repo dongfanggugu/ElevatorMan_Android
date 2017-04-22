@@ -482,6 +482,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         getConfig().setUserId("");
         getConfig().setRole("");
         getConfig().setName("");
+        getConfig().setSign("");
         JPushInterface.setAlias(getApplicationContext(), "", null);
     }
 
@@ -533,6 +534,8 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         getConfig().setWDistrict(body.getUserAttach().getResidentCounty());
         getConfig().setWCity(body.getUserAttach().getResidentCity());
         getConfig().setWProvince(body.getUserAttach().getResidentProvince());
+
+        getConfig().setSign(body.getAutograph());
 
         //设置设备的推送别名
         String alias = token.replaceAll("-", "_");

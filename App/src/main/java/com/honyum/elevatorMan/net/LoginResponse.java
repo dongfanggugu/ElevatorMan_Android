@@ -59,6 +59,8 @@ public class LoginResponse extends Response {
 
         private String pic;
 
+        private String autograph;
+
         private AddressInfo userAttach;
 
         public String getBranchId() {
@@ -147,6 +149,14 @@ public class LoginResponse extends Response {
 
         public void setPic(String pic) {
             this.pic = pic;
+        }
+
+        public String getAutograph() {
+            return autograph;
+        }
+
+        public void setAutograph(String autograph) {
+            this.autograph = autograph;
         }
     }
 

@@ -340,8 +340,15 @@
 
                     </LinearLayout>
 
-
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerInside"
+                    android:visibility="gone"
+                />
 
                 <View
                     android:id="@+id/view_temp"
@@ -354,6 +361,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_submit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

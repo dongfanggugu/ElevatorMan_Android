@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.baidu.navisdk.util.common.StringUtils;
+import com.example.viewtest.*;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.common.MainpageActivity;
 import com.honyum.elevatorMan.activity.common.ResetPasswordActivity;

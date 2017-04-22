@@ -29,6 +29,10 @@ public class MaintenanceManagerActivity extends BaseFragmentActivity implements 
         findViewById(R.id.ll_my_lift).setOnClickListener(this);
         findViewById(R.id.ll_lift_plan).setOnClickListener(this);
         findViewById(R.id.ll_lift_upload).setOnClickListener(this);
+
+        findViewById(R.id.ll_reminder).setVisibility(View.GONE);
+
+        findViewById(R.id.ll_year_check).setVisibility(View.GONE);
     }
 
     @Override

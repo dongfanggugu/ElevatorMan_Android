@@ -49,7 +49,7 @@ public class NavigationActivity extends BaseFragmentActivity {
 
         MyAdapter adapter = new MyAdapter(viewList);
         mViewPager.setAdapter(adapter);
-        mViewPager.addOnPageChangeListener(adapter);
+        mViewPager.setOnPageChangeListener(adapter);
         mViewPager.setCurrentItem(0);
     }
 

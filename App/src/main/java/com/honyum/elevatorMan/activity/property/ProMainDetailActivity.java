@@ -32,11 +32,13 @@ import com.honyum.elevatorMan.net.base.RequestHead;
 import com.honyum.elevatorMan.utils.Utils;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProMainDetailActivity extends PropertyBaseActivity {
 
+    private ImageView imageView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,9 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
             return;
         }
 
+        imageView = (ImageView) findViewById(R.id.iv_sign);
+
+
         final LiftInfo liftInfo = (LiftInfo) intent.getSerializableExtra("lift");
         ((TextView) findViewById(R.id.tv_project)).setText(liftInfo.getCommunityName());
         ((TextView) findViewById(R.id.tv_building)).setText(liftInfo.getBuildingCode());
@@ -93,6 +98,7 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
         //维保查看
         if (getIntent().getStringExtra("type").equals("2")) {
             findViewById(R.id.btn_submit).setVisibility(View.GONE);
+            findViewById(R.id.btn_reject).setVisibility(View.GONE);
         }
 
         findViewById(R.id.btn_submit).setOnClickListener(new View.OnClickListener() {
@@ -101,8 +107,26 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
                 reportPlanState(getConfig().getUserId(), getConfig().getToken(), liftInfo.getMainId(), 2);
             }
         });
+
+
+        findViewById(R.id.btn_reject).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ProMainDetailActivity.this, MaintBackInfoActivity.class);
+                intent.putExtra("main_id", liftInfo.getMainId());
+                startActivityForResult(intent, 101);
+            }
+        });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (101 == requestCode && 102 == resultCode) {
+            finish();
+        }
+}
 
     /**
      *  获取请求维保具体信息的bean
@@ -236,16 +260,31 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
      */
     private void reportPlanState(String userId, String token, String mainId, int state) {
 
+        String url = getConfig().getSign();
+
+        if (StringUtils.isEmpty(url)) {
+            showToast("您还没有个人手写签名,请到个人中心->设置->我的签名中设置签名");
+            return;
+        }
         String server = getConfig().getServer() + NetConstant.URL_PRO_REPORT_PLAN_RESULT;
         RequestBean requestBean = getReportPlanStateRequestBean(userId, token, mainId, state);
 
         NetTask netTask = new NetTask(server, requestBean) {
             @Override
             protected void onResponse(NetTask task, String result) {
-                Intent intent = new Intent(ProMainDetailActivity.this, PropertyMaintenanceActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("page", 0);
-                startActivity(intent);
+//                Intent intent = new Intent(ProMainDetailActivity.this, PropertyMaintenanceActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                intent.putExtra("page", 0);
+//                startActivity(intent);
+
+                showToast("维保确认成功");
+                imageView.setVisibility(View.VISIBLE);
+
+                findViewById(R.id.btn_submit).setVisibility(View.GONE);
+                findViewById(R.id.btn_reject).setVisibility(View.GONE);
+                String url = getConfig().getSign();
+
+                new GetOriginPicture(url, imageView).execute();
             }
         };
 
@@ -276,4 +315,51 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
             }
         }
     };
+
+
+    /**
+     * 异步获取图片
+     *
+     * @author chang
+     */
+    public class GetOriginPicture extends AsyncTask<String, Void, String> {
+
+        private String mUrl;
+        private ImageView mImageView;
+
+        public GetOriginPicture(String url, ImageView imageView) {
+            mUrl = url;
+            mImageView = imageView;
+            mImageView.setImageResource(R.drawable.icon_person);
+        }
+
+        @Override
+        protected String doInBackground(String... arg0) {
+            // TODO Auto-generated method stub
+            String filePath = "";
+            try {
+                filePath = Utils.getImage(mUrl);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return filePath;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
+            if (!StringUtils.isEmpty(result)) {
+                //Bitmap bitmap = Utils.getBitmapBySize(result, 80, 80);
+
+                Bitmap bitmap = Utils.getImageFromFile(new File(result));
+                if (bitmap != null) {
+                    mImageView.setImageBitmap(bitmap);
+                } else {
+                    mImageView.setImageResource(R.drawable.icon_person);
+                }
+            }
+        }
+    }
 }

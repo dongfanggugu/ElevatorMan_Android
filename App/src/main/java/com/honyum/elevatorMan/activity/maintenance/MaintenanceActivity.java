@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -60,6 +61,8 @@ public class MaintenanceActivity extends WorkerBaseActivity {
     private ImageView mImageView2;
 
     private ImageView mImageView3;
+
+    private ImageView imageView;
 
 
     private String mPublicPath = "";
@@ -119,6 +122,8 @@ public class MaintenanceActivity extends WorkerBaseActivity {
         ((TextView) findViewById(R.id.tv_lift_code)).setText(liftInfo.getNum());
         ((TextView) findViewById(R.id.tv_lift_add)).setText(liftInfo.getAddress());
 
+
+        imageView = (ImageView)findViewById(R.id.iv_sign);
 
         //维保日期处理
         final TextView tvPlanDate = (TextView) findViewById(R.id.tv_plan_date);
@@ -199,6 +204,13 @@ public class MaintenanceActivity extends WorkerBaseActivity {
         findViewById(R.id.btn_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String url = getConfig().getSign();
+
+                if (StringUtils.isEmpty(url)) {
+                    showToast("您还没有设置您的手写签名,\n请到个人中心->设置->我的签名中设置");
+                    return;
+                }
+
                 String planDate = tvPlanDate.getText().toString();
 
                 String imgPath1 = (String) mImageView1.getTag(R.id.file_path);
@@ -331,7 +343,14 @@ public class MaintenanceActivity extends WorkerBaseActivity {
             protected void onResponse(NetTask task, String result) {
                 deleteFiles(dirPathList);
                 showToast("此次维保结果提交完成，请及时到维保计划里面制定您的电梯维保计划!");
-                finish();
+
+                String url = getConfig().getSign();
+
+                imageView.setVisibility(View.VISIBLE);
+                findViewById(R.id.ll_submit).setVisibility(View.GONE);
+                new GetPicture(url, imageView).execute();
+
+                //finish();
                 //Intent intent = new Intent(MaintenanceActivity.this, MyLiftActivity.class);
                 //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //startActivity(intent);
@@ -339,6 +358,52 @@ public class MaintenanceActivity extends WorkerBaseActivity {
         };
 
         addTask(task);
+    }
+
+    /**
+     * 异步获取图片
+     *
+     * @author chang
+     */
+    public class GetPicture extends AsyncTask<String, Void, String> {
+
+        private String mUrl;
+        private ImageView mImageView;
+
+        public GetPicture(String url, ImageView imageView) {
+            mUrl = url;
+            mImageView = imageView;
+            mImageView.setImageResource(R.drawable.icon_person);
+        }
+
+        @Override
+        protected String doInBackground(String... arg0) {
+            // TODO Auto-generated method stub
+            String filePath = "";
+            try {
+                filePath = Utils.getImage(mUrl);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return filePath;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
+            if (!StringUtils.isEmpty(result)) {
+                //Bitmap bitmap = Utils.getBitmapBySize(result, 80, 80);
+
+                Bitmap bitmap = Utils.getImageFromFile(new File(result));
+                if (bitmap != null) {
+                    mImageView.setImageBitmap(bitmap);
+                } else {
+                    mImageView.setImageResource(R.drawable.icon_person);
+                }
+            }
+        }
     }
 
     /**

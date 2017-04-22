@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/src/main/assets"/><source path="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/src/release/assets"/></dataSet></merger>

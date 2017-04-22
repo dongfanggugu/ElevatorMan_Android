@@ -406,7 +406,7 @@ public class Utils {
         String fileName = getFileNameByUrl(urlPath);
         String dir = getTempPath();
 
-        String filePath = dir + "/" + fileName;
+        String filePath = dir + fileName;
         File file = new File(filePath);
 
         if (!file.exists()) {
@@ -516,7 +516,7 @@ public class Utils {
      * @param file
      * @return
      */
-    private static Bitmap getImageFromFile(File file) {
+    public static Bitmap getImageFromFile(File file) {
 
         Bitmap bitmap = null;
         try {

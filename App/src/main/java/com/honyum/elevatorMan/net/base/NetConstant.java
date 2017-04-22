@@ -288,4 +288,14 @@ public class NetConstant {
      * 物业获取聊天频道
      */
     public static final String URL_CHAT_CHANNEL = "/getChatChannels";
+
+    /**
+     *上传签名
+     */
+    public static final String URL_UPLOAD_SIGN = "/updateLoadAutograph";
+
+    /**
+     * 物业反馈维保不合格
+     */
+    public static final String URL_MAINT_FAILED = "/backMaint";
 }

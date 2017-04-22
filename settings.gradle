@@ -1,1 +1,2 @@
 include ":App", ":NetSdkTest", ":RefreshListview"
+include ':HandPaint'
