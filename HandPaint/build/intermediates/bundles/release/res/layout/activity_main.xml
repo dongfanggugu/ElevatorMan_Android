@@ -25,4 +25,10 @@
         android:text="保存"
     />
 
+    <ImageView
+        android:id="@+id/iv_sign"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerInside"/>
+
 </LinearLayout>

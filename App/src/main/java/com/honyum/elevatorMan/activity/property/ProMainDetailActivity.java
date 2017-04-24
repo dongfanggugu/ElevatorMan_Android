@@ -39,11 +39,13 @@ import java.util.List;
 public class ProMainDetailActivity extends PropertyBaseActivity {
 
     private ImageView imageView;
+
+    private ImageView imageViewWorker;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pro_main_detail);
-
 
         initTitleBar();
         initView(getIntent());
@@ -68,10 +70,15 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
             return;
         }
 
+        final LiftInfo liftInfo = (LiftInfo) intent.getSerializableExtra("lift");
+
         imageView = (ImageView) findViewById(R.id.iv_sign);
 
+        imageViewWorker = (ImageView) findViewById(R.id.iv_worker_sign);
 
-        final LiftInfo liftInfo = (LiftInfo) intent.getSerializableExtra("lift");
+        new GetOriginPicture(liftInfo.getWorkerAutograph(), imageViewWorker).execute();
+
+
         ((TextView) findViewById(R.id.tv_project)).setText(liftInfo.getCommunityName());
         ((TextView) findViewById(R.id.tv_building)).setText(liftInfo.getBuildingCode());
         ((TextView) findViewById(R.id.tv_unit)).setText(liftInfo.getUnitCode());
@@ -99,6 +106,10 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
         if (getIntent().getStringExtra("type").equals("2")) {
             findViewById(R.id.btn_submit).setVisibility(View.GONE);
             findViewById(R.id.btn_reject).setVisibility(View.GONE);
+
+            imageView.setVisibility(View.VISIBLE);
+
+            new GetOriginPicture(liftInfo.getPropertyAutograph(), imageView).execute();
         }
 
         findViewById(R.id.btn_submit).setOnClickListener(new View.OnClickListener() {
@@ -330,7 +341,7 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
         public GetOriginPicture(String url, ImageView imageView) {
             mUrl = url;
             mImageView = imageView;
-            mImageView.setImageResource(R.drawable.icon_person);
+            //mImageView.setImageResource(R.drawable.icon_person);
         }
 
         @Override
@@ -356,8 +367,6 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
                 Bitmap bitmap = Utils.getImageFromFile(new File(result));
                 if (bitmap != null) {
                     mImageView.setImageBitmap(bitmap);
-                } else {
-                    mImageView.setImageResource(R.drawable.icon_person);
                 }
             }
         }

@@ -1075,47 +1075,48 @@ containing a value of this type.
         public static int switch_background=0x7f020059;
     }
     public static final class id {
-        public static int FILL=0x7f0b0013;
+        public static int FILL=0x7f0b0018;
         public static int MySurfaceView=0x7f0b003e;
-        public static int STROKE=0x7f0b0012;
+        public static int STROKE=0x7f0b0019;
         public static int action_bar=0x7f0b001e;
-        public static int action_bar_activity_content=0x7f0b0016;
+        public static int action_bar_activity_content=0x7f0b0000;
         public static int action_bar_container=0x7f0b001d;
         public static int action_bar_overlay_layout=0x7f0b0021;
         public static int action_bar_root=0x7f0b001c;
         public static int action_bar_subtitle=0x7f0b0025;
         public static int action_bar_title=0x7f0b0024;
         public static int action_context_bar=0x7f0b001f;
-        public static int action_menu_divider=0x7f0b0017;
-        public static int action_menu_presenter=0x7f0b0018;
+        public static int action_menu_divider=0x7f0b0001;
+        public static int action_menu_presenter=0x7f0b0002;
         public static int action_mode_close_button=0x7f0b0026;
         public static int activity_chooser_view_content=0x7f0b0027;
-        public static int always=0x7f0b000f;
-        public static int beginning=0x7f0b000a;
+        public static int always=0x7f0b0013;
+        public static int beginning=0x7f0b000f;
+        public static int btn_finish=0x7f0b0040;
         public static int checkbox=0x7f0b002f;
-        public static int collapseActionView=0x7f0b0011;
+        public static int collapseActionView=0x7f0b0014;
         public static int default_activity_button=0x7f0b002a;
-        public static int dialog=0x7f0b0014;
-        public static int disableHome=0x7f0b0008;
-        public static int dropdown=0x7f0b0015;
+        public static int dialog=0x7f0b001a;
+        public static int disableHome=0x7f0b0009;
+        public static int dropdown=0x7f0b001b;
         public static int edit_query=0x7f0b0032;
-        public static int end=0x7f0b000c;
+        public static int end=0x7f0b0010;
         public static int expand_activities_button=0x7f0b0028;
         public static int expanded_menu=0x7f0b002e;
-        public static int home=0x7f0b0019;
-        public static int homeAsUp=0x7f0b0005;
+        public static int home=0x7f0b0003;
+        public static int homeAsUp=0x7f0b000a;
         public static int icon=0x7f0b002c;
-        public static int ifRoom=0x7f0b000e;
+        public static int ifRoom=0x7f0b0015;
         public static int image=0x7f0b0029;
-        public static int img=0x7f0b0040;
-        public static int listMode=0x7f0b0001;
+        public static int iv_sign=0x7f0b0041;
+        public static int listMode=0x7f0b0006;
         public static int list_item=0x7f0b002b;
-        public static int middle=0x7f0b000b;
-        public static int never=0x7f0b000d;
-        public static int none=0x7f0b0009;
-        public static int normal=0x7f0b0000;
-        public static int progress_circular=0x7f0b001a;
-        public static int progress_horizontal=0x7f0b001b;
+        public static int middle=0x7f0b0011;
+        public static int never=0x7f0b0016;
+        public static int none=0x7f0b0012;
+        public static int normal=0x7f0b0007;
+        public static int progress_circular=0x7f0b0004;
+        public static int progress_horizontal=0x7f0b0005;
         public static int radio=0x7f0b0031;
         public static int reset_btn=0x7f0b003f;
         public static int search_badge=0x7f0b0034;
@@ -1129,17 +1130,17 @@ containing a value of this type.
         public static int search_src_text=0x7f0b0039;
         public static int search_voice_btn=0x7f0b003d;
         public static int shortcut=0x7f0b0030;
-        public static int showCustom=0x7f0b0007;
-        public static int showHome=0x7f0b0004;
-        public static int showTitle=0x7f0b0006;
+        public static int showCustom=0x7f0b000b;
+        public static int showHome=0x7f0b000c;
+        public static int showTitle=0x7f0b000d;
         public static int split_action_bar=0x7f0b0020;
         public static int submit_area=0x7f0b003b;
-        public static int tabMode=0x7f0b0002;
+        public static int tabMode=0x7f0b0008;
         public static int title=0x7f0b002d;
         public static int top_action_bar=0x7f0b0022;
         public static int up=0x7f0b0023;
-        public static int useLogo=0x7f0b0003;
-        public static int withText=0x7f0b0010;
+        public static int useLogo=0x7f0b000e;
+        public static int withText=0x7f0b0017;
     }
     public static final class integer {
         public static int abc_max_action_buttons=0x7f090000;
@@ -1170,8 +1171,7 @@ containing a value of this type.
         public static int abc_search_view=0x7f030016;
         public static int abc_simple_decor=0x7f030017;
         public static int activity_main=0x7f030018;
-        public static int activity_second=0x7f030019;
-        public static int support_simple_spinner_dropdown_item=0x7f03001a;
+        public static int support_simple_spinner_dropdown_item=0x7f030019;
     }
     public static final class string {
         public static int abc_action_bar_home_description=0x7f050000;
@@ -1406,7 +1406,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:background
         */
-        public static final int ActionBar_background = 10;
+        public static int ActionBar_background = 10;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#backgroundSplit}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1418,7 +1418,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           @attr name com.example.viewtest:backgroundSplit
         */
-        public static final int ActionBar_backgroundSplit = 12;
+        public static int ActionBar_backgroundSplit = 12;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#backgroundStacked}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1430,7 +1430,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           @attr name com.example.viewtest:backgroundStacked
         */
-        public static final int ActionBar_backgroundStacked = 11;
+        public static int ActionBar_backgroundStacked = 11;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#customNavigationLayout}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1440,7 +1440,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:customNavigationLayout
         */
-        public static final int ActionBar_customNavigationLayout = 13;
+        public static int ActionBar_customNavigationLayout = 13;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#displayOptions}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1461,7 +1461,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
           @attr name com.example.viewtest:displayOptions
         */
-        public static final int ActionBar_displayOptions = 3;
+        public static int ActionBar_displayOptions = 3;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#divider}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1471,7 +1471,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:divider
         */
-        public static final int ActionBar_divider = 9;
+        public static int ActionBar_divider = 9;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#height}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1487,7 +1487,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:height
         */
-        public static final int ActionBar_height = 0;
+        public static int ActionBar_height = 0;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#homeLayout}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1497,7 +1497,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:homeLayout
         */
-        public static final int ActionBar_homeLayout = 14;
+        public static int ActionBar_homeLayout = 14;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#icon}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1507,7 +1507,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:icon
         */
-        public static final int ActionBar_icon = 7;
+        public static int ActionBar_icon = 7;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#indeterminateProgressStyle}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1517,7 +1517,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:indeterminateProgressStyle
         */
-        public static final int ActionBar_indeterminateProgressStyle = 16;
+        public static int ActionBar_indeterminateProgressStyle = 16;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#itemPadding}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1533,7 +1533,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:itemPadding
         */
-        public static final int ActionBar_itemPadding = 18;
+        public static int ActionBar_itemPadding = 18;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#logo}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1543,7 +1543,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:logo
         */
-        public static final int ActionBar_logo = 8;
+        public static int ActionBar_logo = 8;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#navigationMode}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1561,7 +1561,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
           @attr name com.example.viewtest:navigationMode
         */
-        public static final int ActionBar_navigationMode = 2;
+        public static int ActionBar_navigationMode = 2;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#progressBarPadding}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1577,7 +1577,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:progressBarPadding
         */
-        public static final int ActionBar_progressBarPadding = 17;
+        public static int ActionBar_progressBarPadding = 17;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#progressBarStyle}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1587,7 +1587,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:progressBarStyle
         */
-        public static final int ActionBar_progressBarStyle = 15;
+        public static int ActionBar_progressBarStyle = 15;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#subtitle}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1601,7 +1601,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:subtitle
         */
-        public static final int ActionBar_subtitle = 4;
+        public static int ActionBar_subtitle = 4;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#subtitleTextStyle}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1611,7 +1611,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:subtitleTextStyle
         */
-        public static final int ActionBar_subtitleTextStyle = 6;
+        public static int ActionBar_subtitleTextStyle = 6;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#title}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1625,7 +1625,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:title
         */
-        public static final int ActionBar_title = 1;
+        public static int ActionBar_title = 1;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#titleTextStyle}
           attribute's value can be found in the {@link #ActionBar} array.
@@ -1635,7 +1635,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:titleTextStyle
         */
-        public static final int ActionBar_titleTextStyle = 5;
+        public static int ActionBar_titleTextStyle = 5;
         /** Attributes that can be used with a ActionBarLayout.
            <p>Includes the following attributes:</p>
            <table>
@@ -1654,7 +1654,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           attribute's value can be found in the {@link #ActionBarLayout} array.
           @attr name android:layout_gravity
         */
-        public static final int ActionBarLayout_android_layout_gravity = 0;
+        public static int ActionBarLayout_android_layout_gravity = 0;
         /** Attributes that can be used with a ActionBarWindow.
            <p>Includes the following attributes:</p>
            <table>
@@ -1694,7 +1694,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:windowActionBar
         */
-        public static final int ActionBarWindow_windowActionBar = 0;
+        public static int ActionBarWindow_windowActionBar = 0;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#windowActionBarOverlay}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1708,7 +1708,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:windowActionBarOverlay
         */
-        public static final int ActionBarWindow_windowActionBarOverlay = 1;
+        public static int ActionBarWindow_windowActionBarOverlay = 1;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#windowFixedHeightMajor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1727,7 +1727,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:windowFixedHeightMajor
         */
-        public static final int ActionBarWindow_windowFixedHeightMajor = 6;
+        public static int ActionBarWindow_windowFixedHeightMajor = 6;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#windowFixedHeightMinor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1746,7 +1746,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:windowFixedHeightMinor
         */
-        public static final int ActionBarWindow_windowFixedHeightMinor = 4;
+        public static int ActionBarWindow_windowFixedHeightMinor = 4;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#windowFixedWidthMajor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1765,7 +1765,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:windowFixedWidthMajor
         */
-        public static final int ActionBarWindow_windowFixedWidthMajor = 3;
+        public static int ActionBarWindow_windowFixedWidthMajor = 3;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#windowFixedWidthMinor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1784,7 +1784,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:windowFixedWidthMinor
         */
-        public static final int ActionBarWindow_windowFixedWidthMinor = 5;
+        public static int ActionBarWindow_windowFixedWidthMinor = 5;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#windowSplitActionBar}
           attribute's value can be found in the {@link #ActionBarWindow} array.
@@ -1798,7 +1798,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:windowSplitActionBar
         */
-        public static final int ActionBarWindow_windowSplitActionBar = 2;
+        public static int ActionBarWindow_windowSplitActionBar = 2;
         /** Attributes that can be used with a ActionMenuItemView.
            <p>Includes the following attributes:</p>
            <table>
@@ -1817,7 +1817,7 @@ containing a value of this type.
           attribute's value can be found in the {@link #ActionMenuItemView} array.
           @attr name android:minWidth
         */
-        public static final int ActionMenuItemView_android_minWidth = 0;
+        public static int ActionMenuItemView_android_minWidth = 0;
         /** Attributes that can be used with a ActionMenuView.
          */
         public static final int[] ActionMenuView = {
@@ -1854,7 +1854,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:background
         */
-        public static final int ActionMode_background = 3;
+        public static int ActionMode_background = 3;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#backgroundSplit}
           attribute's value can be found in the {@link #ActionMode} array.
@@ -1866,7 +1866,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           @attr name com.example.viewtest:backgroundSplit
         */
-        public static final int ActionMode_backgroundSplit = 4;
+        public static int ActionMode_backgroundSplit = 4;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#height}
           attribute's value can be found in the {@link #ActionMode} array.
@@ -1882,7 +1882,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:height
         */
-        public static final int ActionMode_height = 0;
+        public static int ActionMode_height = 0;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#subtitleTextStyle}
           attribute's value can be found in the {@link #ActionMode} array.
@@ -1892,7 +1892,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:subtitleTextStyle
         */
-        public static final int ActionMode_subtitleTextStyle = 2;
+        public static int ActionMode_subtitleTextStyle = 2;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#titleTextStyle}
           attribute's value can be found in the {@link #ActionMode} array.
@@ -1902,7 +1902,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:titleTextStyle
         */
-        public static final int ActionMode_titleTextStyle = 1;
+        public static int ActionMode_titleTextStyle = 1;
         /** Attributes that can be used with a ActivityChooserView.
            <p>Includes the following attributes:</p>
            <table>
@@ -1927,7 +1927,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:expandActivityOverflowButtonDrawable
         */
-        public static final int ActivityChooserView_expandActivityOverflowButtonDrawable = 1;
+        public static int ActivityChooserView_expandActivityOverflowButtonDrawable = 1;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#initialActivityCount}
           attribute's value can be found in the {@link #ActivityChooserView} array.
@@ -1941,7 +1941,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:initialActivityCount
         */
-        public static final int ActivityChooserView_initialActivityCount = 0;
+        public static int ActivityChooserView_initialActivityCount = 0;
         /** Attributes that can be used with a CompatTextView.
            <p>Includes the following attributes:</p>
            <table>
@@ -1965,7 +1965,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
           @attr name com.example.viewtest:textAllCaps
         */
-        public static final int CompatTextView_textAllCaps = 0;
+        public static int CompatTextView_textAllCaps = 0;
         /** Attributes that can be used with a LinearLayoutICS.
            <p>Includes the following attributes:</p>
            <table>
@@ -1992,7 +1992,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:divider
         */
-        public static final int LinearLayoutICS_divider = 0;
+        public static int LinearLayoutICS_divider = 0;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#dividerPadding}
           attribute's value can be found in the {@link #LinearLayoutICS} array.
@@ -2008,7 +2008,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:dividerPadding
         */
-        public static final int LinearLayoutICS_dividerPadding = 2;
+        public static int LinearLayoutICS_dividerPadding = 2;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#showDividers}
           attribute's value can be found in the {@link #LinearLayoutICS} array.
@@ -2027,7 +2027,7 @@ containing a value of this type.
 </table>
           @attr name com.example.viewtest:showDividers
         */
-        public static final int LinearLayoutICS_showDividers = 1;
+        public static int LinearLayoutICS_showDividers = 1;
         /** Attributes that can be used with a MenuGroup.
            <p>Includes the following attributes:</p>
            <table>
@@ -2057,37 +2057,37 @@ containing a value of this type.
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:checkableBehavior
         */
-        public static final int MenuGroup_android_checkableBehavior = 5;
+        public static int MenuGroup_android_checkableBehavior = 5;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#enabled}
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:enabled
         */
-        public static final int MenuGroup_android_enabled = 0;
+        public static int MenuGroup_android_enabled = 0;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#id}
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:id
         */
-        public static final int MenuGroup_android_id = 1;
+        public static int MenuGroup_android_id = 1;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#menuCategory}
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:menuCategory
         */
-        public static final int MenuGroup_android_menuCategory = 3;
+        public static int MenuGroup_android_menuCategory = 3;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#orderInCategory}
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:orderInCategory
         */
-        public static final int MenuGroup_android_orderInCategory = 4;
+        public static int MenuGroup_android_orderInCategory = 4;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#visible}
           attribute's value can be found in the {@link #MenuGroup} array.
           @attr name android:visible
         */
-        public static final int MenuGroup_android_visible = 2;
+        public static int MenuGroup_android_visible = 2;
         /** Attributes that can be used with a MenuItem.
            <p>Includes the following attributes:</p>
            <table>
@@ -2146,7 +2146,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:actionLayout
         */
-        public static final int MenuItem_actionLayout = 14;
+        public static int MenuItem_actionLayout = 14;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#actionProviderClass}
           attribute's value can be found in the {@link #MenuItem} array.
@@ -2160,7 +2160,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:actionProviderClass
         */
-        public static final int MenuItem_actionProviderClass = 16;
+        public static int MenuItem_actionProviderClass = 16;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#actionViewClass}
           attribute's value can be found in the {@link #MenuItem} array.
@@ -2174,85 +2174,85 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:actionViewClass
         */
-        public static final int MenuItem_actionViewClass = 15;
+        public static int MenuItem_actionViewClass = 15;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#alphabeticShortcut}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:alphabeticShortcut
         */
-        public static final int MenuItem_android_alphabeticShortcut = 9;
+        public static int MenuItem_android_alphabeticShortcut = 9;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#checkable}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:checkable
         */
-        public static final int MenuItem_android_checkable = 11;
+        public static int MenuItem_android_checkable = 11;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#checked}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:checked
         */
-        public static final int MenuItem_android_checked = 3;
+        public static int MenuItem_android_checked = 3;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#enabled}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:enabled
         */
-        public static final int MenuItem_android_enabled = 1;
+        public static int MenuItem_android_enabled = 1;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#icon}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:icon
         */
-        public static final int MenuItem_android_icon = 0;
+        public static int MenuItem_android_icon = 0;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#id}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:id
         */
-        public static final int MenuItem_android_id = 2;
+        public static int MenuItem_android_id = 2;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#menuCategory}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:menuCategory
         */
-        public static final int MenuItem_android_menuCategory = 5;
+        public static int MenuItem_android_menuCategory = 5;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#numericShortcut}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:numericShortcut
         */
-        public static final int MenuItem_android_numericShortcut = 10;
+        public static int MenuItem_android_numericShortcut = 10;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#onClick}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:onClick
         */
-        public static final int MenuItem_android_onClick = 12;
+        public static int MenuItem_android_onClick = 12;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#orderInCategory}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:orderInCategory
         */
-        public static final int MenuItem_android_orderInCategory = 6;
+        public static int MenuItem_android_orderInCategory = 6;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#title}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:title
         */
-        public static final int MenuItem_android_title = 7;
+        public static int MenuItem_android_title = 7;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#titleCondensed}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:titleCondensed
         */
-        public static final int MenuItem_android_titleCondensed = 8;
+        public static int MenuItem_android_titleCondensed = 8;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#visible}
           attribute's value can be found in the {@link #MenuItem} array.
           @attr name android:visible
         */
-        public static final int MenuItem_android_visible = 4;
+        public static int MenuItem_android_visible = 4;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#showAsAction}
           attribute's value can be found in the {@link #MenuItem} array.
@@ -2272,7 +2272,7 @@ containing a value of this type.
 </table>
           @attr name com.example.viewtest:showAsAction
         */
-        public static final int MenuItem_showAsAction = 13;
+        public static int MenuItem_showAsAction = 13;
         /** Attributes that can be used with a MenuView.
            <p>Includes the following attributes:</p>
            <table>
@@ -2299,56 +2299,56 @@ containing a value of this type.
          */
         public static final int[] MenuView = {
             0x010100ae, 0x0101012c, 0x0101012d, 0x0101012e,
-            0x0101012f, 0x01010130, 0x01010131, 0x01010435
+            0x0101012f, 0x01010130, 0x01010131, 0x0101052f
         };
         /**
           <p>This symbol is the offset where the {@link android.R.attr#headerBackground}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:headerBackground
         */
-        public static final int MenuView_android_headerBackground = 4;
+        public static int MenuView_android_headerBackground = 4;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#horizontalDivider}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:horizontalDivider
         */
-        public static final int MenuView_android_horizontalDivider = 2;
+        public static int MenuView_android_horizontalDivider = 2;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#itemBackground}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:itemBackground
         */
-        public static final int MenuView_android_itemBackground = 5;
+        public static int MenuView_android_itemBackground = 5;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#itemIconDisabledAlpha}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:itemIconDisabledAlpha
         */
-        public static final int MenuView_android_itemIconDisabledAlpha = 6;
+        public static int MenuView_android_itemIconDisabledAlpha = 6;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#itemTextAppearance}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:itemTextAppearance
         */
-        public static final int MenuView_android_itemTextAppearance = 1;
+        public static int MenuView_android_itemTextAppearance = 1;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#preserveIconSpacing}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:preserveIconSpacing
         */
-        public static final int MenuView_android_preserveIconSpacing = 7;
+        public static int MenuView_android_preserveIconSpacing = 7;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#verticalDivider}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:verticalDivider
         */
-        public static final int MenuView_android_verticalDivider = 3;
+        public static int MenuView_android_verticalDivider = 3;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#windowAnimationStyle}
           attribute's value can be found in the {@link #MenuView} array.
           @attr name android:windowAnimationStyle
         */
-        public static final int MenuView_android_windowAnimationStyle = 0;
+        public static int MenuView_android_windowAnimationStyle = 0;
         /** Attributes that can be used with a MyCicle.
            <p>Includes the following attributes:</p>
            <table>
@@ -2378,7 +2378,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:circle_color
         */
-        public static final int MyCicle_circle_color = 1;
+        public static int MyCicle_circle_color = 1;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#circle_width}
           attribute's value can be found in the {@link #MyCicle} array.
@@ -2394,7 +2394,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:circle_width
         */
-        public static final int MyCicle_circle_width = 0;
+        public static int MyCicle_circle_width = 0;
         /** Attributes that can be used with a MyCircleProgress.
            <p>Includes the following attributes:</p>
            <table>
@@ -2436,7 +2436,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:max
         */
-        public static final int MyCircleProgress_max = 5;
+        public static int MyCircleProgress_max = 5;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#roundColor}
           attribute's value can be found in the {@link #MyCircleProgress} array.
@@ -2451,7 +2451,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:roundColor
         */
-        public static final int MyCircleProgress_roundColor = 0;
+        public static int MyCircleProgress_roundColor = 0;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#roundProgressColor}
           attribute's value can be found in the {@link #MyCircleProgress} array.
@@ -2466,7 +2466,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:roundProgressColor
         */
-        public static final int MyCircleProgress_roundProgressColor = 1;
+        public static int MyCircleProgress_roundProgressColor = 1;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#roundWidth}
           attribute's value can be found in the {@link #MyCircleProgress} array.
@@ -2482,7 +2482,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:roundWidth
         */
-        public static final int MyCircleProgress_roundWidth = 2;
+        public static int MyCircleProgress_roundWidth = 2;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#style}
           attribute's value can be found in the {@link #MyCircleProgress} array.
@@ -2499,7 +2499,7 @@ containing a value of this type.
 </table>
           @attr name com.example.viewtest:style
         */
-        public static final int MyCircleProgress_style = 7;
+        public static int MyCircleProgress_style = 7;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#textColor}
           attribute's value can be found in the {@link #MyCircleProgress} array.
@@ -2514,7 +2514,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:textColor
         */
-        public static final int MyCircleProgress_textColor = 3;
+        public static int MyCircleProgress_textColor = 3;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#textIsDisplayable}
           attribute's value can be found in the {@link #MyCircleProgress} array.
@@ -2528,7 +2528,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:textIsDisplayable
         */
-        public static final int MyCircleProgress_textIsDisplayable = 6;
+        public static int MyCircleProgress_textIsDisplayable = 6;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#textSize}
           attribute's value can be found in the {@link #MyCircleProgress} array.
@@ -2544,7 +2544,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:textSize
         */
-        public static final int MyCircleProgress_textSize = 4;
+        public static int MyCircleProgress_textSize = 4;
         /** Attributes that can be used with a MyToggleBtn.
            <p>Includes the following attributes:</p>
            <table>
@@ -2575,7 +2575,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:current_state
         */
-        public static final int MyToggleBtn_current_state = 0;
+        public static int MyToggleBtn_current_state = 0;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#text}
           attribute's value can be found in the {@link #MyToggleBtn} array.
@@ -2589,7 +2589,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:text
         */
-        public static final int MyToggleBtn_text = 2;
+        public static int MyToggleBtn_text = 2;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#textname}
           attribute's value can be found in the {@link #MyToggleBtn} array.
@@ -2599,7 +2599,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:textname
         */
-        public static final int MyToggleBtn_textname = 1;
+        public static int MyToggleBtn_textname = 1;
         /** Attributes that can be used with a SearchView.
            <p>Includes the following attributes:</p>
            <table>
@@ -2627,19 +2627,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           attribute's value can be found in the {@link #SearchView} array.
           @attr name android:imeOptions
         */
-        public static final int SearchView_android_imeOptions = 2;
+        public static int SearchView_android_imeOptions = 2;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#inputType}
           attribute's value can be found in the {@link #SearchView} array.
           @attr name android:inputType
         */
-        public static final int SearchView_android_inputType = 1;
+        public static int SearchView_android_inputType = 1;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#maxWidth}
           attribute's value can be found in the {@link #SearchView} array.
           @attr name android:maxWidth
         */
-        public static final int SearchView_android_maxWidth = 0;
+        public static int SearchView_android_maxWidth = 0;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#iconifiedByDefault}
           attribute's value can be found in the {@link #SearchView} array.
@@ -2653,7 +2653,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:iconifiedByDefault
         */
-        public static final int SearchView_iconifiedByDefault = 3;
+        public static int SearchView_iconifiedByDefault = 3;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#queryHint}
           attribute's value can be found in the {@link #SearchView} array.
@@ -2667,7 +2667,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:queryHint
         */
-        public static final int SearchView_queryHint = 4;
+        public static int SearchView_queryHint = 4;
         /** Attributes that can be used with a Spinner.
            <p>Includes the following attributes:</p>
            <table>
@@ -2706,37 +2706,37 @@ containing a value of this type.
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:dropDownHorizontalOffset
         */
-        public static final int Spinner_android_dropDownHorizontalOffset = 4;
+        public static int Spinner_android_dropDownHorizontalOffset = 4;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#dropDownSelector}
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:dropDownSelector
         */
-        public static final int Spinner_android_dropDownSelector = 1;
+        public static int Spinner_android_dropDownSelector = 1;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#dropDownVerticalOffset}
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:dropDownVerticalOffset
         */
-        public static final int Spinner_android_dropDownVerticalOffset = 5;
+        public static int Spinner_android_dropDownVerticalOffset = 5;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#dropDownWidth}
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:dropDownWidth
         */
-        public static final int Spinner_android_dropDownWidth = 3;
+        public static int Spinner_android_dropDownWidth = 3;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#gravity}
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:gravity
         */
-        public static final int Spinner_android_gravity = 0;
+        public static int Spinner_android_gravity = 0;
         /**
           <p>This symbol is the offset where the {@link android.R.attr#popupBackground}
           attribute's value can be found in the {@link #Spinner} array.
           @attr name android:popupBackground
         */
-        public static final int Spinner_android_popupBackground = 2;
+        public static int Spinner_android_popupBackground = 2;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#disableChildrenWhenDisabled}
           attribute's value can be found in the {@link #Spinner} array.
@@ -2750,7 +2750,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:disableChildrenWhenDisabled
         */
-        public static final int Spinner_disableChildrenWhenDisabled = 9;
+        public static int Spinner_disableChildrenWhenDisabled = 9;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#popupPromptView}
           attribute's value can be found in the {@link #Spinner} array.
@@ -2760,7 +2760,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:popupPromptView
         */
-        public static final int Spinner_popupPromptView = 8;
+        public static int Spinner_popupPromptView = 8;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#prompt}
           attribute's value can be found in the {@link #Spinner} array.
@@ -2770,7 +2770,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:prompt
         */
-        public static final int Spinner_prompt = 6;
+        public static int Spinner_prompt = 6;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#spinnerMode}
           attribute's value can be found in the {@link #Spinner} array.
@@ -2787,7 +2787,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
           @attr name com.example.viewtest:spinnerMode
         */
-        public static final int Spinner_spinnerMode = 7;
+        public static int Spinner_spinnerMode = 7;
         /** Attributes that can be used with a Theme.
            <p>Includes the following attributes:</p>
            <table>
@@ -2821,7 +2821,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:actionDropDownStyle
         */
-        public static final int Theme_actionDropDownStyle = 0;
+        public static int Theme_actionDropDownStyle = 0;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#dropdownListPreferredItemHeight}
           attribute's value can be found in the {@link #Theme} array.
@@ -2837,7 +2837,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:dropdownListPreferredItemHeight
         */
-        public static final int Theme_dropdownListPreferredItemHeight = 1;
+        public static int Theme_dropdownListPreferredItemHeight = 1;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#listChoiceBackgroundIndicator}
           attribute's value can be found in the {@link #Theme} array.
@@ -2847,7 +2847,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:listChoiceBackgroundIndicator
         */
-        public static final int Theme_listChoiceBackgroundIndicator = 5;
+        public static int Theme_listChoiceBackgroundIndicator = 5;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#panelMenuListTheme}
           attribute's value can be found in the {@link #Theme} array.
@@ -2857,7 +2857,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:panelMenuListTheme
         */
-        public static final int Theme_panelMenuListTheme = 4;
+        public static int Theme_panelMenuListTheme = 4;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#panelMenuListWidth}
           attribute's value can be found in the {@link #Theme} array.
@@ -2873,7 +2873,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:panelMenuListWidth
         */
-        public static final int Theme_panelMenuListWidth = 3;
+        public static int Theme_panelMenuListWidth = 3;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#popupMenuStyle}
           attribute's value can be found in the {@link #Theme} array.
@@ -2883,7 +2883,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.example.viewtest:popupMenuStyle
         */
-        public static final int Theme_popupMenuStyle = 2;
+        public static int Theme_popupMenuStyle = 2;
         /** Attributes that can be used with a View.
            <p>Includes the following attributes:</p>
            <table>
@@ -2906,7 +2906,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           attribute's value can be found in the {@link #View} array.
           @attr name android:focusable
         */
-        public static final int View_android_focusable = 0;
+        public static int View_android_focusable = 0;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#paddingEnd}
           attribute's value can be found in the {@link #View} array.
@@ -2922,7 +2922,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:paddingEnd
         */
-        public static final int View_paddingEnd = 2;
+        public static int View_paddingEnd = 2;
         /**
           <p>This symbol is the offset where the {@link com.example.viewtest.R.attr#paddingStart}
           attribute's value can be found in the {@link #View} array.
@@ -2938,6 +2938,6 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.example.viewtest:paddingStart
         */
-        public static final int View_paddingStart = 1;
+        public static int View_paddingStart = 1;
     };
 }

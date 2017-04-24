@@ -28,6 +28,9 @@ public class MySurfaceView extends SurfaceView implements
 	private Canvas mCanvas;
 	// 控制子线程是否运行
 	private boolean startDraw;
+
+    public Bitmap mBitmap;
+
 	// Path实例
 	private Path mPath = new Path();
 	// Paint实例
@@ -47,7 +50,6 @@ public class MySurfaceView extends SurfaceView implements
 		setFocusableInTouchMode(true);
 		// 设置常亮
 		this.setKeepScreenOn(true);
-
 	}
 
 	@Override
@@ -87,11 +89,16 @@ public class MySurfaceView extends SurfaceView implements
 	private void draw() {
 		try {
 			mCanvas = mSurfaceHolder.lockCanvas();
+
+            mBitmap = Bitmap.createBitmap(this.getWidth(), this.getHeight(), Bitmap.Config.ARGB_8888);
+
 			mCanvas.drawColor(Color.WHITE);
 			mpaint.setStyle(Paint.Style.STROKE);
 
 			mpaint.setStrokeWidth(DensityUtil.px2dip(getContext(), 30));
 			mpaint.setColor(Color.BLACK);
+
+            mCanvas.drawBitmap(mBitmap, 0, 0, null);
 			mCanvas.drawPath(mPath, mpaint);
 
 	 	} catch (Exception e) {
@@ -129,31 +136,5 @@ public class MySurfaceView extends SurfaceView implements
 	public void reset() {
 		mPath.reset();
 	}
-
-    public void saveBitmap() throws Exception {
-
-        String sdpath = Environment.getExternalStorageDirectory()
-                .getAbsolutePath();// 获取sdcard的根路径
-        String filename = new SimpleDateFormat("yyyyMMddhhmmss",
-                Locale.getDefault())
-                .format(new Date(System.currentTimeMillis()));// 产生时间戳，称为文件名
-        File file = new File(sdpath + File.separator + filename + ".png");
-        file.createNewFile();
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
-
-        Bitmap cacheBitmap = Bitmap.createBitmap(this.getWidth(), this.getHeight(),
-                Bitmap.Config.ARGB_8888);
-
-        this.mCanvas.setBitmap(cacheBitmap);
-
-        cacheBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);// 以100%的品质创建png
-        // 人走带门
-        fileOutputStream.flush();
-        fileOutputStream.close();
-        Toast.makeText(getContext(),
-                "图像已保存到" + sdpath + File.separator + filename + ".png",
-                Toast.LENGTH_SHORT).show();
-
-    }
 
 }

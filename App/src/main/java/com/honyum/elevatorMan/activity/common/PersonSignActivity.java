@@ -39,18 +39,15 @@ public class PersonSignActivity extends BaseFragmentActivity {
 
         if (StringUtils.isEmpty(url)) {
             showToast("您的手写签名为空,请添加签名");
-            initTitleBar("添加");
+            initTitleBar(R.id.title_sign, "签名", R.drawable.back_normal, backClickListener,
+                    R.drawable.icon_add, rightClickListener);
             return;
         }
 
-        initTitleBar("修改");
+        initTitleBar(R.id.title_sign, "签名", R.drawable.back_normal, backClickListener,
+                R.drawable.icon_modify, rightClickListener);
 
         new GetPicture(url, imageView).execute();
-    }
-
-    private void initTitleBar(String right) {
-        initTitleBar(R.id.title_sign, "签名", R.drawable.back_normal, backClickListener,
-                R.drawable.icon_add, rightClickListener);
     }
 
     /**

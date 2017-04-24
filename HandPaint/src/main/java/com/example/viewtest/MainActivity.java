@@ -21,10 +21,12 @@ import android.os.Handler;
 
 import android.provider.Settings;
 import android.support.v4.widget.ViewDragHelper;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -45,29 +47,29 @@ public class MainActivity extends Activity {
 
 		mview = (MySurfaceView) findViewById(R.id.MySurfaceView);
 
+
 		reset_btn = (Button) findViewById(R.id.reset_btn);
 		reset_btn.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// 清除
-				//mview.reset();
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                // 清除
+                //mview.reset();
+            }
+        });
 
         findViewById(R.id.btn_finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap = loadBitmapFromView(reset_btn);
+
+               // Bitmap bitmap = loadBitmapFromView(reset_btn);
+
+                ImageView imageView = (ImageView) findViewById(R.id.iv_sign);
+                imageView.setImageBitmap(mview.mBitmap);
 
 
-                saveImage(bitmap);
 
-//                try {
-//                    mview.saveBitmap();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
+                //saveImage(bitmap);
             }
         });
 
@@ -83,12 +85,15 @@ public class MainActivity extends Activity {
         Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(bmp);
 
+
+
+       // c.setBitmap(bmp);
+
         /** 如果不设置canvas画布为白色，则生成透明 */
         c.drawColor(Color.WHITE);
 
         v.layout(0, 0, w, h);
         v.draw(c);
-
         return bmp;
     }
 

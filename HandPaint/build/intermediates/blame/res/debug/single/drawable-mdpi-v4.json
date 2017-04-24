@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ic_voice_search_api_holo_light.png",
-        "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ic_voice_search_api_holo_light.png"
-    },
-    {
         "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ab_stacked_transparent_light_holo.9.png",
         "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ab_stacked_transparent_light_holo.9.png"
+    },
+    {
+        "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ic_voice_search_api_holo_light.png",
+        "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ic_voice_search_api_holo_light.png"
     },
     {
         "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_cab_background_bottom_holo_light.9.png",
@@ -24,28 +24,28 @@
         "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ic_clear_search_api_disabled_holo_light.png"
     },
     {
-        "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ic_ab_back_holo_light.png",
-        "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ic_ab_back_holo_light.png"
-    },
-    {
         "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ic_clear_search_api_holo_light.png",
         "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ic_clear_search_api_holo_light.png"
+    },
+    {
+        "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ic_ab_back_holo_light.png",
+        "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ic_ab_back_holo_light.png"
     },
     {
         "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_menu_hardkey_panel_holo_light.9.png",
         "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_menu_hardkey_panel_holo_light.9.png"
     },
     {
-        "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ab_stacked_transparent_dark_holo.9.png",
-        "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ab_stacked_transparent_dark_holo.9.png"
+        "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ab_bottom_transparent_dark_holo.9.png",
+        "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ab_bottom_transparent_dark_holo.9.png"
     },
     {
         "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ab_solid_light_holo.9.png",
         "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ab_solid_light_holo.9.png"
     },
     {
-        "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ab_bottom_transparent_dark_holo.9.png",
-        "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ab_bottom_transparent_dark_holo.9.png"
+        "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ab_stacked_transparent_dark_holo.9.png",
+        "source": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/drawable-mdpi/abc_ab_stacked_transparent_dark_holo.9.png"
     },
     {
         "merged": "/Users/changhaozhang/AndroidStudioProjects/ElevatorMan_Android/HandPaint/build/intermediates/res/merged/debug/drawable-mdpi-v4/abc_ic_search_api_holo_light.png",

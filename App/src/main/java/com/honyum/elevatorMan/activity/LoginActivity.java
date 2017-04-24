@@ -180,6 +180,8 @@ public class LoginActivity extends BaseFragmentActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterStepOneActivity.class));
+
+                //startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
 

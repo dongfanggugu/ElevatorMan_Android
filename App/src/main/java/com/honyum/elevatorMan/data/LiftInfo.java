@@ -45,6 +45,12 @@ public class LiftInfo implements Serializable {
 
     private String mainTime = "";
 
+    //维修工签名
+    private String workerAutograph = "";
+
+    //物业签名
+    private String propertyAutograph = "";
+
     public String getBrand() {
         return brand;
     }
@@ -264,5 +270,21 @@ public class LiftInfo implements Serializable {
 
     public String getMainTypeString() {
         return typeToString(mainType);
+    }
+
+    public String getWorkerAutograph() {
+        return workerAutograph;
+    }
+
+    public void setWorkerAutograph(String workerAutograph) {
+        this.workerAutograph = workerAutograph;
+    }
+
+    public String getPropertyAutograph() {
+        return propertyAutograph;
+    }
+
+    public void setPropertyAutograph(String propertyAutograph) {
+        this.propertyAutograph = propertyAutograph;
     }
 }
