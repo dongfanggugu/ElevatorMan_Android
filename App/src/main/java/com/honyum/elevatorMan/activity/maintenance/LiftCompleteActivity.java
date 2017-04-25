@@ -120,6 +120,7 @@ public class LiftCompleteActivity extends BaseFragmentActivity {
 
         if (0 == hasPlanList.size()) {
             findViewById(R.id.tv_tip).setVisibility(View.VISIBLE);
+            mListView.setAdapter(new MyAdapter(this, hasPlanList));
             return;
         }
 

@@ -38,7 +38,7 @@ import java.util.List;
 
 public class ProMainDetailActivity extends PropertyBaseActivity {
 
-    private ImageView imageView;
+    private ImageView imageViewProperty;
 
     private ImageView imageViewWorker;
 
@@ -72,7 +72,7 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
 
         final LiftInfo liftInfo = (LiftInfo) intent.getSerializableExtra("lift");
 
-        imageView = (ImageView) findViewById(R.id.iv_sign);
+        imageViewProperty = (ImageView) findViewById(R.id.iv_sign);
 
         imageViewWorker = (ImageView) findViewById(R.id.iv_worker_sign);
 
@@ -107,9 +107,11 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
             findViewById(R.id.btn_submit).setVisibility(View.GONE);
             findViewById(R.id.btn_reject).setVisibility(View.GONE);
 
-            imageView.setVisibility(View.VISIBLE);
+            findViewById(R.id.ll_property_sign).setVisibility(View.VISIBLE);
 
-            new GetOriginPicture(liftInfo.getPropertyAutograph(), imageView).execute();
+            imageViewProperty.setVisibility(View.VISIBLE);
+
+            new GetOriginPicture(liftInfo.getPropertyAutograph(), imageViewProperty).execute();
         }
 
         findViewById(R.id.btn_submit).setOnClickListener(new View.OnClickListener() {
@@ -283,19 +285,16 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
         NetTask netTask = new NetTask(server, requestBean) {
             @Override
             protected void onResponse(NetTask task, String result) {
-//                Intent intent = new Intent(ProMainDetailActivity.this, PropertyMaintenanceActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                intent.putExtra("page", 0);
-//                startActivity(intent);
 
                 showToast("维保确认成功");
-                imageView.setVisibility(View.VISIBLE);
+
+                findViewById(R.id.ll_property_sign).setVisibility(View.VISIBLE);
 
                 findViewById(R.id.btn_submit).setVisibility(View.GONE);
                 findViewById(R.id.btn_reject).setVisibility(View.GONE);
                 String url = getConfig().getSign();
 
-                new GetOriginPicture(url, imageView).execute();
+                new GetOriginPicture(url, imageViewProperty).execute();
             }
         };
 

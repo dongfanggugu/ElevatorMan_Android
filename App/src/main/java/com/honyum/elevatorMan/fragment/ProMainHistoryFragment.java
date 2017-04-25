@@ -171,20 +171,23 @@ public class ProMainHistoryFragment extends BaseFragment implements PropertyMain
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (null == convertView) {
-                convertView = View.inflate(mContext, R.layout.layout_alarm_item, null);
+                convertView = View.inflate(mContext, R.layout.layout_maint_info_item, null);
             }
 
-            TextView tvIndex = (TextView) convertView.findViewById(R.id.tv_index);
             TextView tvProject = (TextView) convertView.findViewById(R.id.tv_project);
             TextView tvDate = (TextView) convertView.findViewById(R.id.tv_date);
+
+            TextView tvInfo = (TextView) convertView.findViewById(R.id.tv_info);
 
             final LiftInfo liftInfo = mLiftInfoList.get(position);
             convertView.setTag(liftInfo);
 
-            tvIndex.setText("" + (position + 1));
             tvProject.setText(liftInfo.getCommunityName() + liftInfo.getBuildingCode() + "号楼"
                     + liftInfo.getUnitCode() + "单元");
-            tvDate.setText(liftInfo.getMainTime());
+
+            tvDate.setText(liftInfo.getPropertyFinishedTime());
+
+            tvInfo.setText("维保时间:" + liftInfo.getMainTime() + " 维保人:" + liftInfo.getWorkerName());
             return convertView;
         }
     }

@@ -51,6 +51,12 @@ public class LiftInfo implements Serializable {
     //物业签名
     private String propertyAutograph = "";
 
+    //维保完成时间
+    private String postTime = "";
+
+    //物业确认时间 
+    private String propertyFinishedTime = "";
+
     public String getBrand() {
         return brand;
     }
@@ -286,5 +292,21 @@ public class LiftInfo implements Serializable {
 
     public void setPropertyAutograph(String propertyAutograph) {
         this.propertyAutograph = propertyAutograph;
+    }
+
+    public String getPostTime() {
+        return postTime;
+    }
+
+    public void setPostTime(String postTime) {
+        this.postTime = postTime;
+    }
+
+    public String getPropertyFinishedTime() {
+        return propertyFinishedTime;
+    }
+
+    public void setPropertyFinishedTime(String propertyFinishedTime) {
+        this.propertyFinishedTime = propertyFinishedTime;
     }
 }

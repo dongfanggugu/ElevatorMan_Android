@@ -522,9 +522,6 @@ public class Utils {
         try {
             FileInputStream fis = new FileInputStream(file);
             bitmap = BitmapFactory.decodeStream(fis);
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
