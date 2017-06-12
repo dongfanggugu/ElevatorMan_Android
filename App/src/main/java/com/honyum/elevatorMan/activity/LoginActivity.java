@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.baidu.navisdk.util.common.StringUtils;
 import com.example.viewtest.*;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.common.MainPage1Activity;
 import com.honyum.elevatorMan.activity.common.MainpageActivity;
 import com.honyum.elevatorMan.activity.common.ResetPasswordActivity;
 import com.honyum.elevatorMan.activity.maintenance_1.MaintenanceActivity;
@@ -311,7 +312,7 @@ public class LoginActivity extends BaseFragmentActivity {
                     startProperty(true);
                 } else {
                     //startWorker(getIntent() == null ? null : getIntent().getStringExtra("alarm_id"));
-                    startActivity(new Intent(LoginActivity.this, MainpageActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainPage1Activity.class));
                 }
             }
 

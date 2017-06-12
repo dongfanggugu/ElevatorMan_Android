@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.chorstar.jni.ChorstarJNI;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.knowledge.TitleListActivity;
 import com.honyum.elevatorMan.activity.maintenance.MaintenanceManagerActivity;
 import com.honyum.elevatorMan.activity.maintenance.MaintenanceServiceActivity;
 import com.honyum.elevatorMan.activity.worker.AlarmListActivity;
@@ -21,21 +22,23 @@ import com.honyum.elevatorMan.adapter.PageIndicatorAdapter;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.base.Config;
 import com.honyum.elevatorMan.base.SysActivityManager;
-import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.service.LocationService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainpageActivity extends BaseFragmentActivity implements View.OnClickListener {
+/**
+ * Created by Star on 2017/6/9.
+ */
 
+public class MainPage1Activity extends BaseFragmentActivity implements View.OnClickListener {
 
     private boolean hasAlarm = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mainpage);
+        setContentView(R.layout.activity_mainpage1);
         initTitle();
 
 //        initPageIndicator();
@@ -44,8 +47,6 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
 
         startService(new Intent(this, LocationService.class));
     }
-
-
     private List<Integer> pics;
 
     private int prePos;
@@ -94,13 +95,11 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
             }
         });
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         checkAlarm();
     }
-
     /**
      * 检测是否有未完成的任务
      */
@@ -123,7 +122,6 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
             }
         }.start();
     }
-
     @Override
     protected void handlerCallback() {
         super.handlerCallback();
@@ -135,26 +133,27 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
             view.setVisibility(View.GONE);
         }
     }
-
     /**
      * 初始化标题
      */
     private void initTitle() {
-        View titleView = findViewById(R.id.title);
-        TextView tvTitle = (TextView) titleView.findViewById(R.id.tv_title);
-        tvTitle.setText("电梯易管家");
+      initTitleBar(R.id.title_main_page,"首页");
     }
-
     /**
      * 初始化视图
      */
     private void initView() {
         findViewById(R.id.ll_rescue).setOnClickListener(this);
         findViewById(R.id.ll_maintenance).setOnClickListener(this);
-        findViewById(R.id.ll_help).setOnClickListener(this);
+        findViewById(R.id.ll_fix).setOnClickListener(this);
         findViewById(R.id.ll_person).setOnClickListener(this);
         findViewById(R.id.ll_bbs).setOnClickListener(this);
-        findViewById(R.id.ll_wiki).setOnClickListener(this);
+
+        findViewById(R.id.tv_question).setOnClickListener(this);
+        findViewById(R.id.tv_rule).setOnClickListener(this);
+        findViewById(R.id.tv_num).setOnClickListener(this);
+        findViewById(R.id.tv_handle).setOnClickListener(this);
+
 
     }
 
@@ -162,14 +161,27 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tv_question:
+                jumpToQuestion();
+                break;
+            case R.id.tv_rule:
+                jumpToSafe_rule();
+                break;
+            case R.id.tv_num:
+                jumpToSave_num();
+                break;
+            case R.id.tv_handle:
+                jumpToHandle_rule();
+                break;
+
             case R.id.ll_rescue:
                 jumpToAlarmList();
                 break;
             case R.id.ll_maintenance:
                 jumpToMaintenance();
                 break;
-            case R.id.ll_help:
-                jumpToHelpCenter();
+            case R.id.ll_fix:
+                jumpToRepair();
                 break;
             case R.id.ll_person:
                 jumpToPerson();
@@ -241,6 +253,38 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
         Intent intent = new Intent(this, HelpCenterActivity.class);
         startActivity(intent);
     }
+    /**
+     * 跳转到常见问题
+     */
+    private void jumpToQuestion() {
+        Intent intent = new Intent(MainPage1Activity.this, TitleListActivity.class);
+        intent.putExtra("type", "常见问题");
+        startActivity(intent);
+    }
+    /**
+     * 跳转到救援识别码
+     */
+    private void jumpToSave_num() {
+        Intent intent = new Intent(MainPage1Activity.this, TitleListActivity.class);
+        intent.putExtra("type", "故障对照");
+        startActivity(intent);
+    }
+    /**
+     * 跳转到操作手册
+     */
+    private void jumpToHandle_rule() {
+        Intent intent = new Intent(MainPage1Activity.this, TitleListActivity.class);
+        intent.putExtra("type", "操作手册");
+        startActivity(intent);
+    }
+    /**
+     * 跳转到安全法规
+     */
+    private void jumpToSafe_rule() {
+        Intent intent = new Intent(MainPage1Activity.this, TitleListActivity.class);
+        intent.putExtra("type", "安全法规");
+        startActivity(intent);
+    }
 
     @Override
     public void onBackPressed() {
@@ -249,7 +293,7 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
         popMsgAlertWithCancel(getString(R.string.exit_confirm), new IConfirmCallback() {
             @Override
             public void onConfirm() {
-                MainpageActivity.super.onBackPressed();
+                MainPage1Activity.super.onBackPressed();
                 SysActivityManager.getInstance().exit();
             }
         }, "否", "是", getString(R.string.exit_confirm));
@@ -273,5 +317,4 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
 //                }
 //            }).show();
     }
-
 }

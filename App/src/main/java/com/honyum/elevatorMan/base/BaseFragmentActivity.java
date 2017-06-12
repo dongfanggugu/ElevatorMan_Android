@@ -35,6 +35,7 @@ import com.honyum.elevatorMan.activity.PicturePickActivity;
 import com.honyum.elevatorMan.activity.RegisterStepOneActivity;
 import com.honyum.elevatorMan.activity.RegisterStepTwoActivity;
 import com.honyum.elevatorMan.activity.WelcomeActivity;
+import com.honyum.elevatorMan.activity.common.MainPage1Activity;
 import com.honyum.elevatorMan.activity.common.MainpageActivity;
 import com.honyum.elevatorMan.activity.common.NavigationActivity;
 import com.honyum.elevatorMan.activity.common.ResetPasswordActivity;
@@ -402,6 +403,14 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
     public void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+    /**
+     * 显示toast提示
+     *
+     * @param msg
+     */
+    public void showAppToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
 
     /**
      * 点击标题栏后退按钮事件
@@ -660,7 +669,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
     public void startWorker(String alarmId) {
 
         //启动定位
-        Intent intent = new Intent(this, MainpageActivity.class);
+        Intent intent = new Intent(this, MainPage1Activity.class);
         startActivity(intent);
     }
 

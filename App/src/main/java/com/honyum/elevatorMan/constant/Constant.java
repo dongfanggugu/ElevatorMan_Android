@@ -5,6 +5,12 @@ import java.util.Map;
 
 public class Constant {
 
+
+
+    /**
+     * 用户角色
+     */
+
     /**
      * 用户角色
      */

@@ -59,16 +59,16 @@ public class Config implements Serializable {
      */
     public String getServer() {
 
-        //return "http://123.57.10.16:8080/lift/mobile";
+        return "http://192.168.0.82:8080/mobile";
 
-        String region = getRegion();
-        String server = Constant.SERVER_LIST.get(region);
-
-        if (StringUtils.isEmpty(server)) {
-            server = Constant.SERVER_LIST.get(Constant.BEIJING);
-        }
-
-        return server;
+//        String region = getRegion();
+//        String server = Constant.SERVER_LIST.get(region);
+//
+//        if (StringUtils.isEmpty(server)) {
+//            server = Constant.SERVER_LIST.get(Constant.BEIJING);
+//        }
+//
+//        return server;
     }
 
     /**

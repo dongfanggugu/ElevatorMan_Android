@@ -298,4 +298,96 @@ public class NetConstant {
      * 物业反馈维保不合格
      */
     public static final String URL_MAINT_FAILED = "/backMaint";
+
+    /**
+     * 获取维保服务
+     */
+    public static final String URL_MAINT_SERVICE = "/getMaintOrderByWorker";
+
+    /**
+     * 获取指定服务的任务单
+     */
+    public static final String URL_MAINT_TASK = "/getMaintOrderProcessByMaintOrder";
+
+
+    /**
+     * 维保任务出发
+     */
+    public static final String URL_MAINT_TASK_START = "/editMaintOrderProcessWorkerSetOut";
+
+    /**
+     * 维保任务到达
+     */
+    public static final String URL_MAINT_TASK_ARRIVE = "/editMaintOrderProcessWorkerArrive";
+
+    /**
+     * 维保任务完成
+     */
+    public static final String URL_MAINT_TASK_FINISH = "/editMaintOrderProcessWorkerFinish";
+
+    /**
+     * 任务无法完成
+     */
+    public static final String URL_MAINT_TASK_UNFINISH = "/editMaintOrderProcessWorkerUnableFinish";
+
+
+    /**
+     * 制定维保计划
+     */
+    public static final String URL_MAINT_SERVICE_ADD = "/addMaintOrderProcess";
+
+    /**
+     * 添加维修任务单
+     */
+    public static final String URL_MAINT_TASK_ADD = "/addRepairOrderProcess";
+
+    /**
+     * 添加维修支付详情
+     */
+    public static final String URL_MAINT_FIX_PAY_ADD = "/addPriceDetails";
+
+    /**
+     * 维修工完成
+     */
+    public static final String URL_MAINT_FIX_FINISH = "/editRepairOrderProcessWorkerFinish";
+    /**
+     * 维修工到达
+     */
+    public static final String URL_MAINT_FIX_ARRIVE = "/editRepairOrderProcessWorkerArrive";
+    /**
+     * 维修工出发
+     */
+    public static final String URL_MAINT_FIX_START = "/editRepairOrderProcessWorkerSetOut";
+    /**
+     *根据服务单获取维修任务单
+     */
+    public static final String URL_MAINT_FIX_TASK_GET = "/getRepairOrderProcessByRepairOrder";
+    /**
+     * 维修工获取维修服务单
+     */
+    public static final String URL_MAINT_FIX_SERVICE_GET = "/getRepairOrderByWorker";
+
+
+
+    //维修工任务  添加  标识
+    public static final String ADD_STATE = "-1";
+    //维修工任务  待确认  标识
+    public static final String UNENSURE_STATE = "0";
+    //维修工任务  已确认  标识
+    public static final String ENSURED_STATE = "1";
+    //维修工任务  已出发  标识
+    public static final String START_STATE = "2";
+    //维修工任务  已到达  标识
+    public static final String ARRIVE_STATE = "3";
+    //维修工任务  已完成 标识
+    public static final String FINISH_STATE = "4";
+    //维修工任务  已评价 标识
+    public static final String EVA_STATE = "5";
+
+
+
+
+
+
+
 }
