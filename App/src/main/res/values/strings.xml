@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
     <string name="app_version">V1.40</string>
     <string name="app_name">电梯易管家</string>
     <string name="hello_world">Hello world!</string>
@@ -230,6 +231,7 @@
     <string name="main_page_item_person">个人中心</string>
     <string name="main_page_item_bbs">论坛</string>
     <string name="main_page_item_wiki">电梯百科</string>
+    <string name="no_order">暂无订单!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -244,5 +246,25 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_alarm_detail">AlarmDetailActivity</string>
     <string name="title_activity_about">AboutActivity</string>
+    <string name="main_man_pro">怡墅维保</string>
+    <string name="main_man_fix">怡墅维修</string>
+    <string name="mine">我的</string>
+    <string name="main_tab_page">首页</string>
+    <string name="question">常见问题</string>
+    <string name="save_num">救援识别码</string>
+    <string name="handle_rule">操作手册</string>
+    <string name="safe_rule">安全法则</string>
+    <string name="baseInfoaddress">地址</string>
+    <string name="tel">电话</string>
+    <string name="time">时间</string>
+    <string name="brand">品牌</string>
+    <string name="add_plan">添加计划</string>
+    <string name="modify">修改</string>
+    <string name="start_now">现在出发</string>
+    <string name="today_giveup">今日无法处理</string>
+    <string name="finish">完成</string>
+    <string name="look_result">查看维保结果</string>
+    <string name="look_eva">查看评价</string>
+    <string name="sucess">成功</string>
 
 </resources>

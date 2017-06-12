@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/size_10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_fix_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11121212"/>
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:text="待出发"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_fix_worker"
+        android:layout_margin="@dimen/size_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="维修人员：啊啊啊"/>
+    <TextView
+        android:id="@+id/tv_fix_contact"
+        android:layout_margin="@dimen/size_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="联系电话：11111111111"/>
+    <TextView
+        android:id="@+id/tv_fix_time"
+        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/size_10dp"
+        android:layout_height="wrap_content"
+        android:text="维修时间：2013-11-11 11:11:11"/>
+
+
+</LinearLayout>

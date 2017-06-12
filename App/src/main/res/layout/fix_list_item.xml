@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_vertical"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
+
+            <TextView
+                android:id="@+id/tv_index"
+                android:layout_width="@dimen/alarm_list_index_size"
+                android:layout_height="@dimen/alarm_list_index_size"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@drawable/shape_radius_1"
+                android:textColor="@color/color_list_index"
+                android:textSize="@dimen/alarm_list_index_text_size"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/alarm_list_vertical"
+            android:layout_marginBottom="@dimen/alarm_list_vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_vertical"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_datenumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="朝阳区佳境天城"
+                    android:textSize="@dimen/alarm_list_project_text_size"
+                    android:textColor="@color/color_list_project" />
+
+
+                <TextView
+                    android:id="@+id/tv_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size_20dp"
+                    android:text="未指派"
+                    android:textSize="@dimen/alarm_list_date_text_size"
+                    android:textColor="@color/color_list_date" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_vertical"
+                >
+                <TextView
+
+                    android:id="@+id/tv_contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="王先生:111111"
+                    android:layout_marginRight="@dimen/size_20dp"
+                    android:textSize="@dimen/alarm_list_date_text_size"
+                    android:textColor="@color/color_list_project" />/>
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_contact"
+                    android:text="预约：2015-09-02 13:45"
+                    android:textSize="@dimen/alarm_list_date_text_size"
+                    android:textColor="@color/color_list_project" />/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

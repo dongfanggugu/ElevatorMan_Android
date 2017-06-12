@@ -176,4 +176,7 @@
     <!--首页-->
     <dimen name="size_item">70dp</dimen>
 
+    <dimen name="base_infoTopPadding">10dp</dimen>
+    <dimen name="base_infoLefPadding">15dp</dimen>
+
 </resources>

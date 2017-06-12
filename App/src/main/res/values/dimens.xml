@@ -41,6 +41,13 @@
 
     <dimen name="header_footer_top_bottom_padding">12dp</dimen>
 
+    <dimen name="size_5dp">5dp</dimen>
+
+    <dimen name="size_10dp">10dp</dimen>
+    <dimen name="size_20dp">20dp</dimen>
+
     <dimen name="bottom_tab_icon_size">25dp</dimen>
+    <dimen name="image_icon_25dp">25dp</dimen>
+    <dimen name="size_0dp">0dp</dimen>
 
 </resources>

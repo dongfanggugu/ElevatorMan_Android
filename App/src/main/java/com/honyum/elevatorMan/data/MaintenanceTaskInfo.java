@@ -31,6 +31,53 @@ public class MaintenanceTaskInfo implements Serializable {
 
     private String taskCode;
 
+    private String afterImg;
+    private String beforeImg;
+
+    public String getAfterImg() {
+        return afterImg;
+    }
+
+    public void setAfterImg(String afterImg) {
+        this.afterImg = afterImg;
+    }
+
+    public String getBeforeImg() {
+        return beforeImg;
+    }
+
+    public void setBeforeImg(String beforeImg) {
+        this.beforeImg = beforeImg;
+    }
+
+    public String getEvaluateResult() {
+        return evaluateResult;
+    }
+
+    public void setEvaluateResult(String evaluateResult) {
+        this.evaluateResult = evaluateResult;
+    }
+
+    public String getEvaluateContent() {
+        return evaluateContent;
+    }
+
+    public void setEvaluateContent(String evaluateContent) {
+        this.evaluateContent = evaluateContent;
+    }
+
+    public String getEvaluateTime() {
+        return evaluateTime;
+    }
+
+    public void setEvaluateTime(String evaluateTime) {
+        this.evaluateTime = evaluateTime;
+    }
+
+    private String evaluateResult;
+    private String evaluateContent;
+    private String evaluateTime;
+
     public void setConfirmTime(String confirmTime){
         this.confirmTime = confirmTime;
     }

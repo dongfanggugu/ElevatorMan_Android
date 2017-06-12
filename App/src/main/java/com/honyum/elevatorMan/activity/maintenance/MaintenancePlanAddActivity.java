@@ -150,12 +150,25 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
 
         //获取页面的参数 进行VIEW填充
         Intent it = getIntent();
-//        tv_address.setText(it.getStringExtra("Address"));
-//        tv_tel.setText(it.getStringExtra("Tel"));
-//        tv_time.setText(it.getStringExtra("ExpireTime"));
-//        tv_product_name.setText(it.getStringExtra("Brand"));
 
-        currId = it.getStringExtra("Id");
+        if(it.getStringExtra("State").equals(ADD_STATE))
+        {
+              mMaintenanceServiceInfo  = (MaintenanceServiceInfo)it.getSerializableExtra("Info");
+              tv_address.setText(mMaintenanceServiceInfo.getVillaInfo().getAddress());
+              tv_tel.setText(mMaintenanceServiceInfo.getOwnerInfo().getTel());
+              tv_time.setText(mMaintenanceServiceInfo.getExpireTime());
+              tv_product_name.setText(mMaintenanceServiceInfo.getVillaInfo().getBrand());
+              currId = mMaintenanceServiceInfo.getId();
+        }
+        else
+        {
+            mMaintenanceTaskInfo = (MaintenanceTaskInfo)it.getSerializableExtra("Info");
+            tv_address.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getAddress());
+            tv_tel.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getOwnerInfo().getTel());
+            tv_time.setText(mMaintenanceTaskInfo.getPlanTime());
+            tv_product_name.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getBrand());
+            currId = mMaintenanceTaskInfo.getId();
+        }
         changeBottomButton(it.getStringExtra("State"));
 
 
@@ -321,7 +334,14 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
             case FINISH_STATE:
                 tv_addplan.setVisibility(View.VISIBLE);
                 tv_addplan.setText(R.string.look_result);
-
+                tv_giveup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MaintenancePlanAddActivity.this, MaintenanceTaskUnfinishActivity.class);
+                        intent.putExtra("Id", currId);
+                        startActivity(intent);
+                    }
+                });
                 tv_start.setVisibility(View.GONE);
                 tv_giveup.setVisibility(View.GONE);
                 break;
