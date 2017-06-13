@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Star on 2017/6/8.
  */
 
-public class MaintenanceFixWorkPayRequest extends RequestBean {
+public class FixWorkPayRequest extends RequestBean {
 
     private List<MaintenanceFixWorkPayBody> body;
 

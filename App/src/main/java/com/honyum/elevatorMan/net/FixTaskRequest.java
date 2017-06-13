@@ -7,21 +7,21 @@ import com.honyum.elevatorMan.net.base.RequestBody;
  * Created by Star on 2017/6/8.
  */
 
-public class MaintenanceFixTaskRequest extends RequestBean {
+public class FixTaskRequest extends RequestBean {
 
-    private MaintenanceFixTaskBody body;
+    private FixTaskBody body;
 
 
 
-    public MaintenanceFixTaskBody getBody() {
+    public FixTaskBody getBody() {
         return body;
     }
 
-    public void setBody(MaintenanceFixTaskBody body) {
+    public void setBody(FixTaskBody body) {
         this.body = body;
     }
 
-    public class MaintenanceFixTaskBody extends RequestBody {
+    public class FixTaskBody extends RequestBody {
 
         private String repairOrderId;
 
@@ -29,8 +29,9 @@ public class MaintenanceFixTaskRequest extends RequestBean {
             return repairOrderId;
         }
 
-        public void setRepairOrderId(String repairOrderId) {
+        public FixTaskBody setRepairOrderId(String repairOrderId) {
             this.repairOrderId = repairOrderId;
+            return this;
         }
     }
 

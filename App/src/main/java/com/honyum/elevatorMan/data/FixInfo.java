@@ -2,7 +2,7 @@ package com.honyum.elevatorMan.data;
 
 import java.io.Serializable;
 
-public class MaintenanceFixInfo implements Serializable
+public class FixInfo implements Serializable
 {
     private String address;
 
@@ -19,6 +19,46 @@ public class MaintenanceFixInfo implements Serializable
     private String isPayment;
 
     private String name;
+
+    private String evaluateInfo;
+
+    private String evaluate;
+
+    public String getEvaluateInfo() {
+        return evaluateInfo;
+    }
+
+    public void setEvaluateInfo(String evaluateInfo) {
+        this.evaluateInfo = evaluateInfo;
+    }
+
+    public String getEvaluate() {
+        return evaluate;
+    }
+
+    public void setEvaluate(String evaluate) {
+        this.evaluate = evaluate;
+    }
+
+    public String getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(String payTime) {
+        this.payTime = payTime;
+    }
+
+    public String getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
+    }
+
+    private String payTime;
+
+    private String branchId;
 
     private int payMoney;
 

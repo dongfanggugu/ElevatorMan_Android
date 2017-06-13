@@ -116,7 +116,7 @@ public class MaintenanceTaskUnfinishActivity extends BaseFragmentActivity {
     }
 
     private void requestMaintOrderProcessWorkerUnableFinish() {
-        NetTask task = new NetTask(getConfig().getServer() + NetConstant.URL_MAINT_TASK_FINISH,
+        NetTask task = new NetTask(getConfig().getServer() + NetConstant.URL_MAINT_TASK_UNFINISH,
                 getRequestBean(getConfig().getUserId(), getConfig().getToken())) {
             @Override
             protected void onResponse(NetTask task, String result) {

@@ -3,14 +3,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include
-        android:id="@+id/title_service_result"
+        android:id="@+id/title"
         layout="@layout/layout_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="本次维保结果"
+        android:text="本次结果"
         android:layout_margin="@dimen/size_10dp"/>
     <EditText
         android:id="@+id/et_remark"
@@ -29,12 +29,19 @@
         />
     <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+    <LinearLayout
+
+        android:layout_width="@dimen/size_0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
@@ -44,16 +51,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
-
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:padding="5dp">
-
                 <ImageView
-
                     android:id="@+id/iv_image1"
                     android:layout_width="60dp"
                     android:layout_height="80dp"
@@ -62,6 +66,115 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/icon_img_original" />
             </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="@dimen/size_0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="故障图片" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+                    <ImageView
+                        android:id="@+id/iv_image2"
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="6dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/icon_img_original" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="@dimen/size_0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:text="故障图片" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+                    <ImageView
+                        android:id="@+id/iv_image3"
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="6dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/icon_img_original" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="@dimen/size_0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="故障图片" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+                    <ImageView
+                        android:id="@+id/iv_image4"
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="6dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/icon_img_original" />
+                </FrameLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <TextView
@@ -73,7 +186,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/selector_plan_submit"
         android:padding="10dp"
-        android:text="任务单生成"
+        android:text="检修完成"
         android:textColor="@color/white"
         android:textSize="15sp" />
     <TextView
@@ -85,7 +198,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/selector_plan_submit"
         android:padding="10dp"
-        android:text="任务单生成"
+        android:text="维修完成"
         android:textColor="@color/white"
         android:textSize="15sp" />
 

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,7 +14,6 @@ import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.adapter.MSTaskListAdapter;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.base.ListItemCallback;
-import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.data.MaintenanceServiceInfo;
 import com.honyum.elevatorMan.data.MaintenanceTaskInfo;
 import com.honyum.elevatorMan.net.MaintenanceServiceResponse;
@@ -25,9 +23,7 @@ import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.NewRequestHead;
 import com.honyum.elevatorMan.net.base.RequestBean;
-import com.honyum.elevatorMan.net.base.RequestHead;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.honyum.elevatorMan.net.base.NetConstant.ADD_STATE;
@@ -132,7 +128,7 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
 
         MaintenanceServiceTaskRequest request = new MaintenanceServiceTaskRequest();
         request.setHead(new NewRequestHead().setuserId(userId).setaccessToken(token));
-        request.setBody(request.new MaintenanceTaskBody().setMaintOrderId(currInfo.getId()).setPage(1).setRows(100));
+        request.setBody(request.new MaintenanceTaskBody().setMaintOrderId(currInfo.getId()).setPage(NetConstant.PAGE).setRows(NetConstant.ROWS));
         return request;
     }
 
@@ -168,14 +164,7 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
     private RequestBean getRequestBean(String userId, String token) {
 
         RequestBean request = new RequestBean();
-        RequestHead head = new RequestHead();
-        //RequestBody body = new RequestBody();
-
-        head.setAccessToken(getConfig().getToken());
-        head.setUserId(getConfig().getUserId());
-
-
-        request.setHead(head);
+        request.setHead(new NewRequestHead().setuserId(userId).setaccessToken(token));
         //request.setBody(body);
         return request;
     }

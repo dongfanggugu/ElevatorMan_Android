@@ -7,7 +7,7 @@
     android:weightSum="3">
 
     <include
-        android:id="@+id/title_fix_task"
+        android:id="@+id/title"
         layout="@layout/layout_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height" />
@@ -31,17 +31,18 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:text="订单详情" />
+            android:text="@string/order_detail" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
         <TextView
+            android:id="@+id/tv_order_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:text="订单编号：" />
+            android:text="@string/order_id" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,29 +53,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="订单时间：" />
+                android:text="@string/order_time" />
             <TextView
+                android:id="@+id/tv_apptime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="预约时间：" />
+                android:text="@string/app_time" />
         </LinearLayout>
 
 
         <TextView
+            android:id="@+id/tv_breaktype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:text="故障类型：" />
+            android:text="@string/breaktype" />
 
         <TextView
+            android:id="@+id/tv_breakdes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:text="故障描述" />
+            android:text="@string/breakdes" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:text="故障图片" />
+            android:text="@string/break_ima" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -126,12 +130,11 @@
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
 
                 android:padding="5dp">
 
                 <ImageView
-
                     android:id="@+id/iv_image1"
                     android:layout_width="60dp"
                     android:layout_height="80dp"
@@ -150,35 +153,40 @@
 
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/tv_vill_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:text="别墅地址: " />
+                android:text="@string/vill_address" />
             <TextView
+                android:id="@+id/tv_eve_brand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:text="电梯品牌: " />
+                android:text="@string/eve_brand" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+
+                    android:id="@+id/eve_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:text="电梯品牌: " />
+                    android:text="@string/eve_weight" />
                 <TextView
+                    android:id="@+id/eve_landing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="层站: " />
+                    android:text="@string/eve_landing" />
                 <View
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
@@ -199,25 +207,25 @@
             android:layout_marginBottom="10dp"
             >
             <TextView
-                android:id="@+id/tv_start"
+                android:id="@+id/tv_nexttime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/selector_plan_submit"
                 android:padding="10dp"
-                android:text="任务单生成"
+                android:text="@string/nexttimedeal"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/tv_giveup"
+                android:id="@+id/tv_paybill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/selector_plan_submit"
                 android:padding="10dp"
-                android:text="支付单生成"
+                android:text="@string/createpaybill"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
@@ -240,6 +248,7 @@
                android:textColor="@color/black"
                android:text="维修记录"/>
            <TextView
+               android:id="@+id/tv_look_eva"
                android:layout_marginTop="@dimen/size_10dp"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -247,7 +256,7 @@
                android:textColor="@color/red"
                android:layout_marginRight="@dimen/size_20dp"
                android:layout_alignParentRight="true"
-               android:text="查看评价"/>
+               android:text="@string/look_eva"/>
        </RelativeLayout>
         <ListView
             android:layout_width="match_parent"

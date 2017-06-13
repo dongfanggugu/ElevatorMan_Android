@@ -16,6 +16,7 @@ import com.honyum.elevatorMan.activity.knowledge.TitleListActivity;
 import com.honyum.elevatorMan.activity.maintenance.MaintenanceManagerActivity;
 import com.honyum.elevatorMan.activity.maintenance.MaintenanceServiceActivity;
 import com.honyum.elevatorMan.activity.worker.AlarmListActivity;
+import com.honyum.elevatorMan.activity.worker.FixOrderListActivity;
 import com.honyum.elevatorMan.activity.worker.LiftKnowledgeActivity;
 import com.honyum.elevatorMan.activity.worker.RepairOrderActivity;
 import com.honyum.elevatorMan.adapter.PageIndicatorAdapter;
@@ -215,7 +216,7 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
      * 跳转到维修单页面
      */
     private void jumpToRepair() {
-        Intent intent = new Intent(this, RepairOrderActivity.class);
+        Intent intent = new Intent(this, FixOrderListActivity.class);
         startActivity(intent);
     }
 

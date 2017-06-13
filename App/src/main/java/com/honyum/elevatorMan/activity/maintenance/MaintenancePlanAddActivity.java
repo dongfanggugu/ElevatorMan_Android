@@ -59,9 +59,10 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
     private TextView tv_addplan;
     private TextView tv_start;
     private ImageView iv_modify_datetime;
-
     private MaintenanceTaskInfo mMaintenanceTaskInfo;
     private MaintenanceServiceInfo mMaintenanceServiceInfo;
+
+
 
 
     @Override
@@ -318,6 +319,7 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
                         Intent intent = new Intent(MaintenancePlanAddActivity.this, MaintenanceTaskFinishActivity.class);
                         intent.putExtra("Id", currId);
                         startActivity(intent);
+                        finish();
                     }
                 });
                 tv_giveup.setVisibility(View.VISIBLE);
@@ -337,8 +339,10 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
                 tv_giveup.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(MaintenancePlanAddActivity.this, MaintenanceTaskUnfinishActivity.class);
-                        intent.putExtra("Id", currId);
+                        Intent intent = new Intent(MaintenancePlanAddActivity.this, MaintenanceTaskResult.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Info", mMaintenanceTaskInfo);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                     }
                 });
@@ -348,6 +352,16 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
             case EVA_STATE:
                 tv_addplan.setVisibility(View.VISIBLE);
                 tv_addplan.setText(R.string.look_eva);
+                tv_addplan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MaintenancePlanAddActivity.this, MaintenanceEvaResult.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Info", mMaintenanceTaskInfo);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                });
                 tv_start.setVisibility(View.GONE);
                 tv_giveup.setVisibility(View.GONE);
                 break;

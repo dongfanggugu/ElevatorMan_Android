@@ -49,5 +49,7 @@
     <dimen name="bottom_tab_icon_size">25dp</dimen>
     <dimen name="image_icon_25dp">25dp</dimen>
     <dimen name="size_0dp">0dp</dimen>
+    <dimen name="size_100dp">100dp</dimen>
+    <dimen name="size_50dp">50dp</dimen>
 
 </resources>

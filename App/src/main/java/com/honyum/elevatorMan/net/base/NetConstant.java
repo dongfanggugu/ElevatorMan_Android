@@ -339,36 +339,37 @@ public class NetConstant {
     /**
      * 添加维修任务单
      */
-    public static final String URL_MAINT_TASK_ADD = "/addRepairOrderProcess";
+    public static final String URL_TASK_ADD = "/addRepairOrderProcess";
 
     /**
      * 添加维修支付详情
      */
-    public static final String URL_MAINT_FIX_PAY_ADD = "/addPriceDetails";
+    public static final String URL_FIX_PAY_ADD = "/addPriceDetails";
 
     /**
      * 维修工完成
      */
-    public static final String URL_MAINT_FIX_FINISH = "/editRepairOrderProcessWorkerFinish";
+    public static final String URL_FIX_FINISH = "/editRepairOrderProcessWorkerFinish";
     /**
      * 维修工到达
      */
-    public static final String URL_MAINT_FIX_ARRIVE = "/editRepairOrderProcessWorkerArrive";
+    public static final String URL_FIX_ARRIVE = "/editRepairOrderProcessWorkerArrive";
     /**
      * 维修工出发
      */
-    public static final String URL_MAINT_FIX_START = "/editRepairOrderProcessWorkerSetOut";
+    public static final String URL_FIX_START = "/editRepairOrderProcessWorkerSetOut";
     /**
      *根据服务单获取维修任务单
      */
-    public static final String URL_MAINT_FIX_TASK_GET = "/getRepairOrderProcessByRepairOrder";
+    public static final String URL_FIX_TASK = "/getRepairOrderProcessByRepairOrder";
     /**
      * 维修工获取维修服务单
      */
-    public static final String URL_MAINT_FIX_SERVICE_GET = "/getRepairOrderByWorker";
+    public static final String URL_FIX_LIST = "/getRepairOrderByWorker";
 
 
 
+    //维保服务标识位
     //维修工任务  添加  标识
     public static final String ADD_STATE = "-1";
     //维修工任务  待确认  标识
@@ -383,6 +384,49 @@ public class NetConstant {
     public static final String FINISH_STATE = "4";
     //维修工任务  已评价 标识
     public static final String EVA_STATE = "5";
+
+    //维修工任务  已评价 标识
+    public static final int PAGE = 1;
+    //维修工任务  已评价 标识
+    public static final int ROWS = 100;
+
+    //end
+
+
+
+
+
+    //维修任务状态
+    //维修工任务  添加  标识
+    public static final String FIX_BEFORE_START = "1";
+    //维修工任务  待确认  标识
+    public static final String FIX_STARTED = "2";
+    //维修工任务  已确认  标识
+    public static final String FIX_ARRIVED = "3";
+    //维修工任务  已出发  标识
+    public static final String FIX_LOOK_FINISHED = "5";
+    //维修工任务  已到达  标识
+    public static final String FIX_FIX_FINISH = "6";
+    //end
+
+
+
+
+
+
+    //维修任务结束状态
+    // 5 为 检修结束 ，6维修结束
+    public static final String FIX_LOOK = "5";
+    //维修工任务  待确认  标识
+    public static final String FIX_FINISH = "6";
+    //end
+
+
+
+// 支付详情生成，用于判断是否可以完成维修
+    public static final String FIX_PAYMENT_END = "7";
+
+
 
 
 

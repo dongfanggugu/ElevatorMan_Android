@@ -7,29 +7,30 @@ import com.honyum.elevatorMan.net.base.RequestBody;
  * Created by Star on 2017/6/8.
  */
 
-public class MaintenanceFixWorkFinishRequest extends RequestBean {
+public class FixWorkFinishRequest extends RequestBean {
 
-    private MaintenanceFixWorkFinishBody body;
+    private FixWorkFinishBody body;
 
 
 
-    public MaintenanceFixWorkFinishBody getBody() {
+    public FixWorkFinishBody getBody() {
         return body;
     }
 
-    public void setBody(MaintenanceFixWorkFinishBody body) {
+    public void setBody(FixWorkFinishBody body) {
         this.body = body;
     }
 
-    public class MaintenanceFixWorkFinishBody extends RequestBody {
+    public class FixWorkFinishBody extends RequestBody {
 
         public String getRepairOrderProcessId() {
             return repairOrderProcessId;
         }
 
 
-        public void setRepairOrderProcessId(String repairOrderProcessId) {
+        public FixWorkFinishBody setRepairOrderProcessId(String repairOrderProcessId) {
             this.repairOrderProcessId = repairOrderProcessId;
+            return this;
         }
 
         private String repairOrderProcessId;
@@ -41,24 +42,27 @@ public class MaintenanceFixWorkFinishRequest extends RequestBean {
             return state;
         }
 
-        public void setState(String state) {
+        public FixWorkFinishBody setState(String state) {
             this.state = state;
+            return this;
         }
 
         public String getFinishResult() {
             return finishResult;
         }
 
-        public void setFinishResult(String finishResult) {
+        public FixWorkFinishBody setFinishResult(String finishResult) {
             this.finishResult = finishResult;
+            return this;
         }
 
         public String getPictures() {
             return pictures;
         }
 
-        public void setPictures(String pictures) {
+        public FixWorkFinishBody setPictures(String pictures) {
             this.pictures = pictures;
+            return this;
         }
     }
 

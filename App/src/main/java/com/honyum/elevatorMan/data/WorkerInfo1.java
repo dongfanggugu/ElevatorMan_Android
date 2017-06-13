@@ -8,7 +8,7 @@ public class WorkerInfo1 implements Serializable
 
     private String code;
 
-    private int createdatetime;
+    private long createdatetime;
 
     private String id;
 
@@ -46,10 +46,10 @@ public class WorkerInfo1 implements Serializable
     public String getCode(){
         return this.code;
     }
-    public void setCreatedatetime(int createdatetime){
+    public void setCreatedatetime(long createdatetime){
         this.createdatetime = createdatetime;
     }
-    public int getCreatedatetime(){
+    public long getCreatedatetime(){
         return this.createdatetime;
     }
     public void setId(String id){

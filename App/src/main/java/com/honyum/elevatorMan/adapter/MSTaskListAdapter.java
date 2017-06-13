@@ -1,11 +1,9 @@
 package com.honyum.elevatorMan.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 
 import com.honyum.elevatorMan.R;
-import com.honyum.elevatorMan.activity.maintenance.MaintenancePlanAddActivity;
 import com.honyum.elevatorMan.base.ListItemCallback;
 import com.honyum.elevatorMan.data.MaintenanceTaskInfo;
 

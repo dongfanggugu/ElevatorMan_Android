@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/title_order"
+        android:id="@+id/title"
         layout="@layout/layout_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height" />
@@ -25,6 +25,7 @@
                 android:text="维修收费明细" />
 
             <TextView
+                android:id="@+id/tv_add_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -34,12 +35,12 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <ListView
             android:id="@+id/rlv_pay_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
+        </ListView>
 
         <include
             android:id="@+id/pay_list"
@@ -48,7 +49,7 @@
             android:layout_height="wrap_content" />
     <TextView
         android:layout_marginTop="@dimen/size_20dp"
-    android:id="@+id/tv_fix_complete"
+    android:id="@+id/tv_fix_payment"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"

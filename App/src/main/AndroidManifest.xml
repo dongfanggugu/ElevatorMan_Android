@@ -246,8 +246,20 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.maintenance.SettingsActivity"
-            android:parentActivityName=".activity.worker.WorkerBaseActivity"
+
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance.MaintenanceTaskResult"
+
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.maintenance.MaintenanceEvaResult"
+
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.FixOrderListActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".activity.maintenance.MaintenanceActivity"
             android:screenOrientation="portrait" />
@@ -318,10 +330,6 @@
             android:label="@string/title_activity_mainpage"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".activity.maintenance.MaintenanceManagerActivity"
-            android:label="@string/title_activity_maintenance_manager"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.maintenance.MaintenanceTaskFinishActivity"
             android:label="@string/title_activity_maintenance_manager"
@@ -404,6 +412,29 @@
         <activity
             android:name=".activity.worker.RepairInfoActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.FixDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.FixEvaLookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.FixLookFinishActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.FixNextTimeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.FixPaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.FixResultLookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.worker.FixTaskActivity"
+            android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".activity.property.AlarmHandleActivity"
             android:screenOrientation="portrait" />

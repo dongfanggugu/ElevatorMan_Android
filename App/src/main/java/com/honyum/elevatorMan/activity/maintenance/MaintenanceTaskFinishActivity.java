@@ -17,6 +17,8 @@ import com.honyum.elevatorMan.net.base.Response;
  * Created by Star on 2017/6/10.
  */
 
+//TODO 缺少图片查看，上传功能。
+
 public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
 
     private String currId;

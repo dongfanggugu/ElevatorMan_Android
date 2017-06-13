@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include
-        android:id="@+id/title_fix_app"
+        android:id="@+id/title"
         layout="@layout/layout_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height" />
@@ -11,7 +11,7 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title_fix_app" />
+        android:layout_below="@id/title" />
     <RelativeLayout
         android:background="@color/white"
         android:layout_alignParentBottom="true"
@@ -55,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="上门时间"/>
             <TextView
+                android:id="@+id/tv_time"
                 android:layout_marginLeft="@dimen/size_10dp"
                 android:layout_centerVertical="true"
                 android:layout_weight="3"
@@ -63,7 +64,7 @@
                 android:text="2019-11-33  33:33:33"/>
 
             <TextView
-                android:id="@+id/tv_plan_date"
+                android:id="@+id/tv_modify_date"
                 android:layout_marginLeft="@dimen/size_10dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
@@ -84,7 +85,6 @@
             android:layout_below="@id/ll_date"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-
             android:id="@+id/tv_submit"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"

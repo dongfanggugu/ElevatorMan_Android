@@ -1,8 +1,7 @@
 package com.honyum.elevatorMan.net;
 
 
-import com.honyum.elevatorMan.data.MaintenanceFixInfo;
-import com.honyum.elevatorMan.data.MaintenanceFixTaskInfo;
+import com.honyum.elevatorMan.data.FixTaskInfo;
 import com.honyum.elevatorMan.net.base.Response;
 import com.honyum.elevatorMan.net.base.ResponseHead;
 
@@ -12,9 +11,9 @@ import java.util.List;
  * Created by Star on 2017/6/7.
  */
 
-public class MaintenanceFixTaskResponse extends Response {
+public class FixTaskResponse extends Response {
     private ResponseHead head;
-    private List<MaintenanceFixTaskInfo> body;
+    private List<FixTaskInfo> body;
 
     @Override
     public ResponseHead getHead() {
@@ -26,11 +25,11 @@ public class MaintenanceFixTaskResponse extends Response {
         this.head = head;
     }
 
-    public List<MaintenanceFixTaskInfo> getBody() {
+    public List<FixTaskInfo> getBody() {
         return body;
     }
 
-    public void setBody(List<MaintenanceFixTaskInfo> body) {
+    public void setBody(List<FixTaskInfo> body) {
         this.body = body;
     }
 
@@ -39,8 +38,8 @@ public class MaintenanceFixTaskResponse extends Response {
      * @param json
      * @return
      */
-    public static MaintenanceFixTaskResponse getMaintenanceFixTaskInfoResponse(String json) {
-        return (MaintenanceFixTaskResponse) parseFromJson(MaintenanceFixTaskResponse.class, json);
+    public static FixTaskResponse getFixTaskResponse(String json) {
+        return (FixTaskResponse) parseFromJson(FixTaskResponse.class, json);
     }
 
 }

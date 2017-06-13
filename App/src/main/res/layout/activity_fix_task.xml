@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/title"
+        layout="@layout/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height" />
+
+    <com.baidu.mapapi.map.MapView
+        android:layout_below="@id/title"
+        android:id="@+id/baidu_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tv_index"
+        android:layout_width="@dimen/size_100dp"
+        android:layout_height="@dimen/size_100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_margin="@dimen/size_20dp"
+        android:background="@drawable/shape_radius_6"
+        android:text="出发"
+        android:textColor="@color/color_list_index"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_toLeftOf="@id/tv_index"
+        android:id="@+id/tv_look_eva"
+        android:layout_width="wrap_content"
+        android:text="查看结果"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_plan_submit"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/size_10dp"
+        android:layout_marginBottom="@dimen/size_20dp"
+        />
+    <TextView
+        android:layout_toRightOf="@id/tv_index"
+        android:id="@+id/tv_look_result"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:text="查看评价"
+        android:padding="@dimen/size_10dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_plan_submit"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/size_20dp"
+        />
+
+
+</RelativeLayout>

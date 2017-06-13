@@ -266,5 +266,34 @@
     <string name="look_result">查看维保结果</string>
     <string name="look_eva">查看评价</string>
     <string name="sucess">成功</string>
+    <string name="before_service">维保前</string>
+    <string name="after_service">维保后</string>
+    <string name="order_detail">订单详情</string>
+    <string name="order_id">订单编号：</string>
+    <string name="app_time">预约时间:</string>
+    <string name="order_time">订单时间：</string>
+    <string name="breaktype">故障类型：</string>
+    <string name="breakdes">故障描述</string>
+    <string name="vill_address">别墅地址:</string>
+    <string name="eve_brand">电梯品牌:</string>
+    <string name="eve_weight">电梯载重量:</string>
+    <string name="eve_landing">层站:</string>
+    <string name="nexttimedeal">下次上门</string>
+    <string name="createpaybill">支付单生成</string>
+    <string name="break_ima">故障图片</string>
+    <string name="fix_task">维修任务</string>
+    <string name="rec_id">记录ID</string>
+    <string name="fix_worker">维修人员：</string>
+    <string name="contact_tel">联系电话：</string>
+    <string name="fix_time">维修时间：</string>
+    <string name="curr_task">当前任务</string>
+    <string name="before_start">出发</string>
+    <string name="arrived">已到达</string>
+    <string name="fix_look_finish">维修信息提交</string>
+    <string name="fix_finish">维修完成</string>
+    <string name="fix_result_look">维修结果查看</string>
+    <string name="fix_look_eva">维修评价查看</string>
+    <string name="paymentsubmit">提交订单</string>
+    <string name="count">总计：</string>
 
 </resources>

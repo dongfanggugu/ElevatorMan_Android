@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'android-apt'
 android {
     signingConfigs {
         release {
@@ -55,5 +55,8 @@ dependencies {
     compile project(':RefreshListview')
     //    compile project(':chorstar')
     compile 'com.android.support:appcompat-v7:21.0.3'
+
     compile project(':HandPaint')
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }
