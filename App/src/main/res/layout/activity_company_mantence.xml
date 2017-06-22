@@ -4,104 +4,130 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/title_companyorder"
+        android:id="@+id/title"
         layout="@layout/layout_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height" />
+    <TextView
+        android:id="@+id/tv_look_his"
+        android:layout_marginTop="20dp"
+        android:text="查看历史"
+        android:textColor="@color/white"
+        android:layout_marginRight="@dimen/size_10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <com.baidu.mapapi.map.MapView
-        android:layout_below="@id/title_companyorder"
+        android:layout_below="@id/title"
         android:id="@+id/baidu_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <LinearLayout
         android:background="@color/white"
+        android:layout_below="@id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true">
+      >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="@color/lightgray"
             android:layout_marginBottom="5dp"
-
             >
-            <view
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/ll_subcompany"
+                android:layout_width="@dimen/size_0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/tv_branch_name"
+                android:layout_margin="@dimen/size_5dp"
+                android:layout_weight="4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="选择分公司："/>
+            <ImageView
+                android:layout_width="@dimen/size_20dp"
+                android:src="@drawable/down"
+                android:layout_margin="@dimen/size_5dp"
+                android:layout_height="@dimen/size_20dp" />
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:background="@color/gray"
+                android:layout_height="match_parent"/>
+            <LinearLayout
+                android:id="@+id/ll_name"
+                android:layout_width="@dimen/size_0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_worker_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="订单"/>
-            <view
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="0dp"/>
+                android:layout_margin="@dimen/size_5dp"
+                android:text="选择人员："/>
+            <ImageView
+                android:layout_width="@dimen/size_20dp"
+                android:src="@drawable/down"
+                android:layout_margin="@dimen/size_5dp"
+                android:layout_height="@dimen/size_20dp" />
+            </LinearLayout>
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/size_10dp"
             android:orientation="horizontal"
             android:layout_marginBottom="5dp"
             >
             <TextView
+                android:id="@+id/tv_undefine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="全部"
-                android:background="@drawable/shape_range"
+                android:text="未制定"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_horizontal"
                 android:layout_weight="1"/>
 
             <TextView
+                android:id="@+id/tv_no_continue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_range"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="未处理"/>
+                android:text="待续保"/>
             <TextView
+                android:id="@+id/tv_outbound"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/shape_range"
                 android:gravity="center_horizontal"
-                android:text="处理中"
+                android:text="超期"
                 android:layout_height="wrap_content"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="5dp"
-            >
             <TextView
+                android:id="@+id/tv_finished"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="已超期"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/shape_range"
-                android:gravity="center_horizontal"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/shape_range"
                 android:gravity="center_horizontal"
-                android:text="已处理"/>
-
-        </LinearLayout>
+                android:text="已完成"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
     </LinearLayout>
 
 

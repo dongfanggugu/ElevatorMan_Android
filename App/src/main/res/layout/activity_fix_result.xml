@@ -2,6 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/ll_full_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#86222222"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_overview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
     <include
         android:id="@+id/title"
         layout="@layout/layout_title"
@@ -18,11 +33,10 @@
        android:layout_margin="@dimen/size_10dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_alarm_info"
-        android:hint="@string/alarm_remark"
         android:layout_marginLeft="5dp"
         android:gravity="top"
-        android:maxLines="3"
-        android:lines="3"
+        android:maxLines="5"
+        android:lines="5"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:textColor="@color/color_easy_alarm_text"
@@ -32,7 +46,7 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content">
     <LinearLayout
-
+        android:id="@+id/ll_image1"
         android:layout_width="@dimen/size_0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
@@ -45,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:text="故障图片" />
+            android:text="现场图片" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,13 +78,21 @@
                     android:layout_marginRight="6dp"
                     android:layout_marginTop="6dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/icon_img_original" />
+                    android:src="@drawable/defaut_image" />
+                <Button
+                    android:id="@+id/btn_del_1"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="right"
+                    android:background="@drawable/icon_del_img"
+                    android:visibility="gone"/>
             </FrameLayout>
         </LinearLayout>
     </LinearLayout>
         <LinearLayout
             android:layout_width="@dimen/size_0dp"
             android:layout_weight="1"
+            android:id="@+id/ll_image2"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:orientation="vertical">
@@ -81,7 +103,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:text="故障图片" />
+                android:text="现场图片" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,12 +122,20 @@
                         android:layout_marginRight="6dp"
                         android:layout_marginTop="6dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/icon_img_original" />
+                        android:src="@drawable/defaut_image" />
+                    <Button
+                        android:id="@+id/btn_del_2"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="right"
+                        android:background="@drawable/icon_del_img"
+                        android:visibility="gone"/>
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="@dimen/size_0dp"
+            android:id="@+id/ll_image3"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -117,10 +147,11 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center_horizontal"
-                android:text="故障图片" />
+                android:text="现场图片" />
 
             <LinearLayout
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
@@ -136,7 +167,14 @@
                         android:layout_marginRight="6dp"
                         android:layout_marginTop="6dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/icon_img_original" />
+                        android:src="@drawable/defaut_image" />
+                    <Button
+                        android:id="@+id/btn_del_3"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="right"
+                        android:background="@drawable/icon_del_img"
+                        android:visibility="gone"/>
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>
@@ -145,6 +183,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:id="@+id/ll_image4"
             android:orientation="vertical">
 
             <TextView
@@ -153,7 +192,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:text="故障图片" />
+                android:text="现场图片" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -172,7 +211,14 @@
                         android:layout_marginRight="6dp"
                         android:layout_marginTop="6dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/icon_img_original" />
+                        android:src="@drawable/defaut_image" />
+                    <Button
+                        android:id="@+id/btn_del_4"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="right"
+                        android:background="@drawable/icon_del_img"
+                        android:visibility="gone"/>
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>
@@ -184,7 +230,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/selector_plan_submit"
+        android:background="@drawable/selector_plan_lanse"
         android:padding="10dp"
         android:text="检修完成"
         android:textColor="@color/white"
@@ -196,11 +242,13 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/selector_plan_submit"
+        android:background="@drawable/selector_plan_lanse"
         android:padding="10dp"
         android:text="维修完成"
         android:textColor="@color/white"
         android:textSize="15sp" />
+
+
 
 
 </LinearLayout>

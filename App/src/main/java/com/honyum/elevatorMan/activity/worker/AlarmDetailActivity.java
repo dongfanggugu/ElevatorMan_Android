@@ -20,7 +20,7 @@ public class AlarmDetailActivity extends BaseFragmentActivity {
     }
 
     private void initTitleBar() {
-        initTitleBar("报警详情", R.id.title_detail, R.drawable.back_normal, backClickListener);
+        initTitleBar("报警详情", R.id.title, R.drawable.back_normal, backClickListener);
     }
 
     private void initView() {

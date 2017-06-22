@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baidu.navisdk.util.common.StringUtils;
@@ -31,6 +32,9 @@ public class MaintenanceTaskResult extends BaseFragmentActivity {
     private ImageView iv_before_image;
     private ImageView iv_after_image;
 
+    private LinearLayout llFullScreen;
+    private ImageView ivOverview;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +49,35 @@ public class MaintenanceTaskResult extends BaseFragmentActivity {
         et_remark = (EditText)findViewById(R.id.et_remark);
         et_remark.setText(mMaintenanceTaskInfo.getMaintUserFeedback());
         et_remark.setFocusable(false);
+        llFullScreen = (LinearLayout) findViewById(R.id.ll_full_screen);
+        llFullScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                llFullScreen.setVisibility(View.GONE);
+            }
+        });
+        ivOverview = (ImageView) findViewById(R.id.iv_overview);
         tv_fix_complete = (TextView)findViewById(R.id.tv_fix_complete);
         tv_fix_complete.setVisibility(View.GONE);
 
 
-        iv_before_image = (ImageView)findViewById(R.id.iv_before_image);
-        iv_after_image =  (ImageView)findViewById(R.id.iv_after_image);
+
+        iv_before_image = (ImageView)findViewById(R.id.iv_image1);
+        iv_after_image =  (ImageView)findViewById(R.id.iv_image2);
+        iv_before_image.setDrawingCacheEnabled(true);
+        iv_after_image.setDrawingCacheEnabled(true);
+        iv_before_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPreviewImage(iv_before_image);
+            }
+        });
+        iv_after_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPreviewImage(iv_after_image);
+            }
+        });
 
 
         new GetPicture(mMaintenanceTaskInfo.getBeforeImg(),iv_before_image).execute();
@@ -59,6 +86,18 @@ public class MaintenanceTaskResult extends BaseFragmentActivity {
 
     }
 
+    /**
+     * 查看预览信息
+     *
+     * @param image1
+     */
+
+    private void showPreviewImage(ImageView image1) {
+        ivOverview.setImageBitmap(Bitmap.createBitmap(image1.getDrawingCache()));
+        llFullScreen.setVisibility(View.VISIBLE);
+        image1.setDrawingCacheEnabled(false);
+        image1.setDrawingCacheEnabled(true);
+    }
     /**
      * 初始化标题
      */
@@ -96,7 +135,6 @@ public class MaintenanceTaskResult extends BaseFragmentActivity {
             }
             return filePath;
         }
-//TODO 没有处理图片加载失败显示什么
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -107,7 +145,7 @@ public class MaintenanceTaskResult extends BaseFragmentActivity {
                 if (bitmap != null) {
                     mImageView.setImageBitmap(bitmap);
                 } else {
-                    //mImageView.setImageResource(R.drawable.icon_person);
+                    mImageView.setImageResource(R.drawable.defaut_image);
                 }
             }
         }

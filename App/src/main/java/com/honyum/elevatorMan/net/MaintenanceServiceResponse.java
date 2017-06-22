@@ -2,6 +2,7 @@ package com.honyum.elevatorMan.net;
 
 
 import com.honyum.elevatorMan.data.MaintenanceServiceInfo;
+import com.honyum.elevatorMan.data.newdata.ComapnyMentenanceInfo;
 import com.honyum.elevatorMan.net.base.Response;
 import com.honyum.elevatorMan.net.base.ResponseHead;
 

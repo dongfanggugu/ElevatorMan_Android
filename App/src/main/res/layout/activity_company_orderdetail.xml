@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/backgray"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        layout="@layout/layout_title"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/size_5dp"
+        android:layout_margin="@dimen/size_10dp"
+        android:background="@drawable/buletitle"
+        android:textColor="@color/white"
+        android:text="订单详情"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_oorderNum"
+        android:textColor="@color/frontgray"
+        android:text="订单编号："
+        android:layout_margin="@dimen/size_10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10dp"
+        android:id="@+id/tv_ordertime"
+        android:textColor="@color/frontgray"
+        android:text="下单时间："/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/frontgray"
+        android:id="@+id/tv_sevicetype"
+        android:text="服务类型："
+        android:layout_margin="@dimen/size_10dp"/>
+    <EditText
+        android:id="@+id/et_remark"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/size_10dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_alarm_info"
+        android:gravity="top"
+        android:maxLines="5"
+        android:textSize="15sp"
+        android:lines="5"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/color_easy_alarm_text"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lessgray"/>
+    <TextView
+        android:id="@+id/tv_brand"
+        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/size_10dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/frontgray"
+        android:text="电梯品牌："/>
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:textColor="@color/frontgray"
+        android:layout_margin="@dimen/size_10dp"
+        android:layout_height="wrap_content"
+        android:text="别墅地址："/>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_20dp"
+        android:background="@color/gray"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:layout_marginLeft="@dimen/size_10dp"
+        android:layout_height="wrap_content"
+        android:text="支付内容"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/size_10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="数量"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tv_num"
+
+            android:layout_alignParentRight="true"
+            android:text="3"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/size_10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="单价"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+
+            android:id="@+id/tv_oneprice"
+            android:layout_alignParentRight="true"
+            android:text="3"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/size_10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="折扣"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+android:id="@+id/tv_cutprice"
+            android:layout_alignParentRight="true"
+            android:text="3"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/size_10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="实际支付"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+
+            android:id="@+id/tv_finalpay"
+            android:layout_alignParentRight="true"
+            android:text="3"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/size_10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="支付方式"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+
+            android:id="@+id/tv_paytype"
+            android:layout_alignParentRight="true"
+            android:text="3"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/size_10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="支付状态"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+
+                android:id="@+id/tv_paystate"
+                android:layout_alignParentRight="true"
+                android:text="3"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/size_10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="支付时间"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="3"
+                android:id="@+id/tv_paytime"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

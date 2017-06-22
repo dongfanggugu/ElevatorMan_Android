@@ -31,7 +31,7 @@
 
     <color name="login_pressed">#e6890f</color>
 
-    <color name="title_bg_color">#007ec5</color>
+    <color name="title_bg_color">#36b0f3</color>
 
     <!--BEGIN 提示信息的颜色 -->
 
@@ -74,8 +74,9 @@
     <color name="color_list_project">#4f5254</color>
     <color name="color_list_date">#b5b5b5</color>
     <color name="color_list_index">#f4f8f9</color>
-
+    <color name="color_list_indexred">#F5645F</color>
     <color name="color_index_1">#beee78</color>
+    <color name="color_index_6">#ee7651</color>
     <color name="color_index_2">#ebe084</color>
     <color name="color_index_3">#fecccb</color>
     <color name="color_index_4">#b2f4b1</color>

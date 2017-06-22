@@ -29,6 +29,7 @@ import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.common.MainPage1Activity;
 import com.honyum.elevatorMan.activity.common.MainpageActivity;
 import com.honyum.elevatorMan.activity.common.ResetPasswordActivity;
+import com.honyum.elevatorMan.activity.company.MainPageActivity;
 import com.honyum.elevatorMan.activity.maintenance_1.MaintenanceActivity;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.base.SysActivityManager;
@@ -310,7 +311,12 @@ public class LoginActivity extends BaseFragmentActivity {
 
                 if (response.getBody().getType().equals(Constant.PROPERTY)) {
                     startProperty(true);
-                } else {
+                }
+                else if(response.getBody().getType().equals(Constant.COMPANY))
+                {
+                    startActivity(new Intent(LoginActivity.this, MainPageActivity.class));
+                }
+                    else {
                     //startWorker(getIntent() == null ? null : getIntent().getStringExtra("alarm_id"));
                     startActivity(new Intent(LoginActivity.this, MainPage1Activity.class));
                 }

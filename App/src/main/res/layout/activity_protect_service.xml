@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/backgray"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     tools:context="com.honyum.elevatorMan.activity.maintenance.MaintenanceServiceActivity"
@@ -33,14 +34,14 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/placeico1"
             android:layout_margin="10dp"
             android:id="@+id/imageView" />
         <TextView
             android:id="@+id/tv_cellname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="北京市朝阳区望京中环南路1号"
+            android:text=""
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imageView"
              />
@@ -52,7 +53,8 @@
             android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
             android:padding="5dp"
-            android:background="@color/red"
+            android:textColor="@color/white"
+            android:background="@color/salmon"
             android:text="切换"
             android:id="@+id/bt_selectPos" />
 
@@ -67,17 +69,19 @@
             android:id="@+id/tv_main_type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="按次"
+            android:text=""
             android:gravity="center_horizontal"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:layout_margin="10dp"/>
 
         <TextView
+            android:id="@+id/tv_typename"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/yellow"
-            android:text="三级管家"
+            android:background="#f79e6e"
+            android:text=""
+            android:textColor="@color/white"
             android:gravity="center_horizontal"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
@@ -90,44 +94,86 @@
             android:layout_weight="2"
             android:gravity="center_horizontal"
             android:layout_gravity="center_vertical"
-            android:text="剩余次数：0"/>
+            android:text=""/>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginBottom="25dp"
-        >
         <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/backgray"
             />
-
-        <TextView
-            android:id="@+id/tv_plan"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/selector_plan_submit"
-            android:text="制定计划"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_vertical"
-           />
+            android:orientation="horizontal"
+            android:background="@color/white"
 
-    </LinearLayout>
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="详情"
+                android:textColor="@color/oder_blue"
+                android:layout_margin="@dimen/size_10dp"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/backgray"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="联系业主"
+                android:textColor="@color/oder_blue"
+                android:layout_margin="@dimen/size_10dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_vertical"
+                />
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/backgray"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginBottom="25dp"
+            >
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                />
+
+            <TextView
+                android:id="@+id/tv_plan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#03cd99"
+                android:text="制定维保计划"
+                android:textColor="@color/white"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/size_5dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                />
+
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -137,10 +183,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="维保详情"
-                android:layout_margin="10dp"
+                android:textColor="@color/oder_blue"
+                android:layout_margin="20dp"
                 />
             <View
                 android:layout_width="match_parent"
+                android:background="@color/backgray"
                 android:layout_height="1dp"/>
             <ListView
                 android:id="@+id/lv_detail"

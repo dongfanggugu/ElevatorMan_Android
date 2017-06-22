@@ -28,13 +28,14 @@
                 android:layout_width="@dimen/image_icon_25dp"
                 android:layout_height="@dimen/image_icon_25dp"
                 android:layout_margin="@dimen/size_10dp"
-                android:src="@drawable/ic_launcher"/>
+                android:src="@drawable/placeico1"/>
             <TextView
                 android:layout_toRightOf="@id/iv_city_image"
+                android:id="@+id/tv_city"
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="北京朝阳市望京"/>
+                android:text=""/>
 
         </RelativeLayout>
         <LinearLayout
@@ -51,7 +52,8 @@
                 android:layout_marginLeft="@dimen/size_10dp"
                 android:layout_centerVertical="true"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:textColor="@color/frontgray"
                 android:layout_height="wrap_content"
                 android:text="上门时间"/>
             <TextView
@@ -59,20 +61,21 @@
                 android:layout_marginLeft="@dimen/size_10dp"
                 android:layout_centerVertical="true"
                 android:layout_weight="3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="2019-11-33  33:33:33"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/tv_modify_date"
                 android:layout_marginLeft="@dimen/size_10dp"
                 android:layout_weight="1"
+                android:textColor="@color/white"
                 android:gravity="center_horizontal"
                 android:layout_marginRight="@dimen/size_10dp"
                 android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_plan_submit"
+                android:background="@drawable/selector_plan_lanse"
                 android:text="修改"/>
 
 
@@ -86,10 +89,11 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:id="@+id/tv_submit"
+            android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/selector_plan_submit"
+            android:background="@drawable/selector_plan_lanse"
             android:layout_marginBottom="@dimen/size_20dp"
             android:layout_centerHorizontal="true"
             android:paddingLeft="@dimen/size_20dp"

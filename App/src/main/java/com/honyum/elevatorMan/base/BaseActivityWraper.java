@@ -32,6 +32,7 @@ public abstract class BaseActivityWraper extends BaseFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preView();
         setContentView(getLayoutID());
         //这里注册了BK,只适用Activity
         ButterKnife.bind( this ) ;
@@ -63,6 +64,10 @@ public abstract class BaseActivityWraper extends BaseFragmentActivity {
     protected abstract int getLayoutID();
 
 
+    protected void preView()
+    {
+
+    }
     //减少 new Intent
     protected void startActivity1(Context context, Class clz){
         startActivity(new Intent(context,clz));

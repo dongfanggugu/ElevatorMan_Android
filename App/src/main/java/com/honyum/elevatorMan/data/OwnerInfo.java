@@ -14,7 +14,7 @@ public class OwnerInfo implements Serializable
 
     private String password;
 
-    private String tel;
+    private String tel = "";
 
     public void setCreateTime(String createTime){
         this.createTime = createTime;

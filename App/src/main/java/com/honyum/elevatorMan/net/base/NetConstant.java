@@ -4,6 +4,14 @@ package com.honyum.elevatorMan.net.base;
 public class NetConstant {
 
     /**
+     * 获取广告条
+     */
+    public static final String GET_BANNER = "/getAdvertisementBySmallOwner";
+    /**
+     * 电梯常识
+     */
+    public static final String GET_KNOWLEDGE_BYKNTYPE = "/getKnowledgeByKntype";
+    /**
      * 返回成功
      */
     public static final String RSP_CODE_SUC_0 = "0";
@@ -363,9 +371,58 @@ public class NetConstant {
      */
     public static final String URL_FIX_TASK = "/getRepairOrderProcessByRepairOrder";
     /**
+     * 根据部门ID获取部门及下级部门信息
+     */
+    public static final String URL_DEP_LIST = "/getBranchsByBranchId";
+    /**
+     * 根据部门Id查找维修工
+     */
+    public static final String URL_WORKER_LIST = "/getWorkListByBranchId";
+    /**
      * 维修工获取维修服务单
      */
+    public static final String URL_MAINT_LIST = "/getMaintListByBranchId";
+    /**
+     * 维修工获取维修服务单
+     */
+    public static final String URL_MAINT_LIST_ELE = "/getMaintListByElevatorId";
+    /**
+     * 维修工获取维修服务单
+     */
+    public static final String URL_ALARM_LIST_BRANCH = "/getAlarmListByBranchId";
+    /**
+     * 维修工获取维修服务单
+     */
+    public static final String URL_COMPANY_NHMENTENANCE = "/getMaintOrderProcessByBranchIdOnState";
+    /**
+     * 维修工获取维修服务单
+     */
+    public static final String URL_COMPANY_NHMENTENANCE_LIST = "/getPaymentByBranchId";
+//    /**
+//     * 维修工获取维修服务单
+//     */
     public static final String URL_FIX_LIST = "/getRepairOrderByWorker";
+
+
+
+    /**
+     * 维修工获取维修服务单
+     */
+    public static final String URL_COMPANY_FIX = "/getRepairOrderProcessByBranchIdOnState";
+
+    /**
+     * 维修工获取维修服务单
+     */
+    public static final String URL_COMPANY_FIX_LIST = "/getRepairOrderByBranchId";
+
+
+    /**
+     * 添加聊天记录
+     */
+    public static final String UP_LOAD_IMG = "/uploadImg";
+
+
+
 
 
 
@@ -384,6 +441,8 @@ public class NetConstant {
     public static final String FINISH_STATE = "4";
     //维修工任务  已评价 标识
     public static final String EVA_STATE = "5";
+    //维修工任务  已评价 标识
+    public static final String UN_FINISH = "6";
 
     //维修工任务  已评价 标识
     public static final int PAGE = 1;
@@ -403,7 +462,7 @@ public class NetConstant {
     public static final String FIX_STARTED = "2";
     //维修工任务  已确认  标识
     public static final String FIX_ARRIVED = "3";
-    //维修工任务  已出发  标识
+    //维修工任务  检修完成  标识
     public static final String FIX_LOOK_FINISHED = "5";
     //维修工任务  已到达  标识
     public static final String FIX_FIX_FINISH = "6";
@@ -428,7 +487,7 @@ public class NetConstant {
 
 
 
-
+//
 
 
 

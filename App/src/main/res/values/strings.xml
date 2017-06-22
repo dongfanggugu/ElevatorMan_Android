@@ -2,8 +2,8 @@
 <resources>
 
 
-    <string name="app_version">V1.40</string>
-    <string name="app_name">电梯易管家</string>
+    <string name="app_version">V1.42</string>
+    <string name="app_name">梯美（管理）</string>
     <string name="hello_world">Hello world!</string>
     <string name="file_name">ElevatorMan</string>
 
@@ -251,9 +251,9 @@
     <string name="mine">我的</string>
     <string name="main_tab_page">首页</string>
     <string name="question">常见问题</string>
-    <string name="save_num">救援识别码</string>
+    <string name="save_num">故障码</string>
     <string name="handle_rule">操作手册</string>
-    <string name="safe_rule">安全法则</string>
+    <string name="safe_rule">安全法规</string>
     <string name="baseInfoaddress">地址</string>
     <string name="tel">电话</string>
     <string name="time">时间</string>
@@ -282,18 +282,30 @@
     <string name="createpaybill">支付单生成</string>
     <string name="break_ima">故障图片</string>
     <string name="fix_task">维修任务</string>
-    <string name="rec_id">记录ID</string>
+    <string name="rec_id">记录ID：</string>
     <string name="fix_worker">维修人员：</string>
     <string name="contact_tel">联系电话：</string>
     <string name="fix_time">维修时间：</string>
     <string name="curr_task">当前任务</string>
     <string name="before_start">出发</string>
     <string name="arrived">已到达</string>
-    <string name="fix_look_finish">维修信息提交</string>
+    <string name="fix_look_finish">完成维修</string>
     <string name="fix_finish">维修完成</string>
     <string name="fix_result_look">维修结果查看</string>
     <string name="fix_look_eva">维修评价查看</string>
     <string name="paymentsubmit">提交订单</string>
     <string name="count">总计：</string>
+    <string name="title_apptime">预约时间</string>
+    <string name="company_save">紧急救援</string>
+    <string name="rescu_his">救援历史</string>
+    <string name="save_detail">救援详情</string>
+    <string name="eve_ensure">电梯合格证</string>
+    <string name="EMentenance">E维保</string>
+    <string name="lookorder">查看订单</string>
+    <string name="mentenanceorder">维保订单</string>
+    <string name="orderdetail">订单详情</string>
+    <string name="fix_order">快修订单</string>
+    <string name="fixtask">维修任务</string>
+    <string name="hismen">维保历史</string>
 
 </resources>

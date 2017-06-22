@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.honyum.elevatorMan"
-    android:versionCode="140"
+    android:versionCode="142"
     android:versionName="@string/app_version">
 
     <uses-sdk
@@ -59,7 +59,7 @@
     <application
         android:name=".base.MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/logo1"
+        android:icon="@drawable/logo2"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <meta-data
@@ -329,7 +329,9 @@
             android:name=".activity.common.MainPage1Activity"
             android:label="@string/title_activity_mainpage"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".activity.maintenance.MaintenanceManagerActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.maintenance.MaintenanceTaskFinishActivity"
             android:label="@string/title_activity_maintenance_manager"
@@ -361,6 +363,12 @@
         <activity
             android:name=".activity.common.NavigationActivity"
             android:label="@string/title_activity_navigation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.NousDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.NousActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.common.HelpCenterActivity"
@@ -419,7 +427,7 @@
             android:name=".activity.worker.FixEvaLookActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.worker.FixLookFinishActivity"
+            android:name=".activity.worker.FixTaskFinishActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.worker.FixNextTimeActivity"
@@ -434,7 +442,52 @@
             android:name=".activity.worker.FixTaskActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".activity.company.RescuLookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.RescuHisListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.RescuHisDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NHMentenanceOrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NHMentenanceOrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NHMentenanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.EMantenanceLookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.EMentenanceHisListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.MainPageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NHFixDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NHFixOrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NHFixActivity"
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".activity.company.EMentenanceListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.EMantenanceDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NFMentenanceTaskDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.property.AlarmHandleActivity"
             android:screenOrientation="portrait" />

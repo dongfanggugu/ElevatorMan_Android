@@ -23,13 +23,13 @@ public class FixPaymentAdapter extends BaseListViewAdapter<FixComponent> {
 
 
     @Override
-    public void bindData(BaseViewHolder holder, FixComponent fixComponent, final int index) {
+    public void bindData(BaseViewHolder holder, final FixComponent fixComponent, final int index) {
         holder.setText(R.id.tv_componentname, fixComponent.getName())
                 .setText(R.id.tv_moneycount, fixComponent.getPrice() + "")
                 .setOnClickListener(R.id.iv_remove_item, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ((ListItemCallback) mContext).performItemCallback(index);
+                        ((ListItemCallback) mContext).performItemCallback(fixComponent);
                     }
                 });
     }

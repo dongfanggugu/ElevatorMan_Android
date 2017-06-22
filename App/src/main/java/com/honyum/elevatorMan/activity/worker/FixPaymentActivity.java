@@ -39,7 +39,7 @@ import static com.honyum.elevatorMan.net.base.NetConstant.RSP_CODE_SUC_0;
  * Created by Star on 2017/6/13.  订单页面
  */
 
-public class FixPaymentActivity extends BaseActivityWraper implements ListItemCallback<Integer> {
+public class FixPaymentActivity extends BaseActivityWraper implements ListItemCallback<FixComponent> {
 
 
     @BindView(R.id.rlv_pay_list)
@@ -73,8 +73,9 @@ public class FixPaymentActivity extends BaseActivityWraper implements ListItemCa
         mFixInfo = getIntent("Info");
         mFixPaymentAdapter = new FixPaymentAdapter(this,datas);
         rlvPayList.setAdapter(mFixPaymentAdapter);
+        tvComponentname.setTextColor(getResources().getColor(R.color.color_list_indexred));
         tvComponentname.setText(R.string.count);
-        tvMoneycount.setText("0.0");
+        tvMoneycount.setText("¥0.0");
     }
     //算钱
     private double countMoney()
@@ -122,11 +123,13 @@ public class FixPaymentActivity extends BaseActivityWraper implements ListItemCa
             public void onClick(DialogInterface dialog, int which)
             {
 
-                datas.add(new FixComponent().setName(name.getText().toString().trim()).
-                        setPrice(Double.valueOf(fee.getText().toString().trim())).
-                        setRepairOrderId(mFixInfo.getId()));
-                tvMoneycount.setText(countMoney()+"");
-                mFixPaymentAdapter.notifyDataSetChanged();
+                if(isNumber(fee.getText().toString().trim())) {
+                    datas.add(new FixComponent().setName(name.getText().toString().trim()).
+                            setPrice(Double.valueOf(fee.getText().toString().trim())).
+                            setRepairOrderId(mFixInfo.getId()));
+                    tvMoneycount.setText(countMoney() + "");
+                    mFixPaymentAdapter.notifyDataSetChanged();
+                }
 
             }
         });
@@ -154,7 +157,37 @@ public class FixPaymentActivity extends BaseActivityWraper implements ListItemCa
         };
         addTask(task);
     }
+    /**
+     * 判断字符串是否是数字
+     */
+    public  boolean isNumber(String value) {
+        return isInteger(value) || isDouble(value);
+    }
+    /**
+     * 判断字符串是否是整数
+     */
+    public  boolean isInteger(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
+    /**
+     * 判断字符串是否是浮点数
+     */
+    public  boolean isDouble(String value) {
+        try {
+            Double.parseDouble(value);
+            if (value.contains("."))
+                return true;
+            return false;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     private RequestBean getRequestBean(String userId, String token) {
 
         FixPaymentRequest request = new FixPaymentRequest();
@@ -164,9 +197,9 @@ public class FixPaymentActivity extends BaseActivityWraper implements ListItemCa
     }
 
     @Override
-    public void performItemCallback(Integer data) {
+    public void performItemCallback(FixComponent data) {
         datas.remove(data);
-        tvMoneycount.setText(countMoney()+"");
+        tvMoneycount.setText("¥"+countMoney());
         mFixPaymentAdapter.notifyDataSetChanged();
 
     }

@@ -9,9 +9,9 @@ public class VillaInfo implements Serializable {
 
     private String cellName;
 
-    private String contacts;
+    private String contacts = "";
 
-    private String contactsTel;
+    private String contactsTel = "";
 
     private String createTime;
 

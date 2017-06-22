@@ -14,8 +14,10 @@ import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.adapter.MSTaskListAdapter;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.base.ListItemCallback;
+
 import com.honyum.elevatorMan.data.MaintenanceServiceInfo;
 import com.honyum.elevatorMan.data.MaintenanceTaskInfo;
+import com.honyum.elevatorMan.data.newdata.ComapnyMentenanceInfo;
 import com.honyum.elevatorMan.net.MaintenanceServiceResponse;
 import com.honyum.elevatorMan.net.MaintenanceServiceTaskRequest;
 import com.honyum.elevatorMan.net.MiantenanceServiceTaskResponse;
@@ -39,6 +41,7 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
     private TextView left_time;
     private ListView lv_detail;
     private MSTaskListAdapter mAdapter;
+    private TextView tv_typename;
 
 
     @Override
@@ -59,8 +62,10 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
         lv_detail = (ListView) findViewById(R.id.lv_detail);
         findViewById(R.id.tv_plan).setOnClickListener(this);
         findViewById(R.id.bt_selectPos).setOnClickListener(this);
+        tv_typename = (TextView) findViewById(R.id.tv_typename);
+        
     }
-
+  //1-2 到期时间  3 是剩余次数
     @Override
     protected void onResume() {
         super.onResume();
@@ -72,10 +77,11 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
                 getRequestBean(getConfig().getUserId(), getConfig().getToken())) {
             @Override
             protected void onResponse(NetTask task, String result) {
+                Log.e("TAG", "onResponse: "+result);
                 MaintenanceServiceResponse response = MaintenanceServiceResponse.getMaintServiceInfoResponse(result);
                 msInfoList = response.getBody();
                 //获取到了返回的信息
-                if (msInfoList == null) {
+                if (msInfoList == null||msInfoList.size()==0) {
                     findViewById(R.id.tv_tips).setVisibility(View.VISIBLE);
                     findViewById(R.id.ll_content).setVisibility(View.GONE);
                     return;
@@ -98,6 +104,7 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
             protected void onResponse(NetTask task, String result) {
                 MiantenanceServiceTaskResponse response = MiantenanceServiceTaskResponse.getMaintTaskInfoResponse(result);
                 Log.e("!!!!!!!!!!!!!!", "onResponse: "+ result);
+                Log.e("TAG！！！", "onResponse: "+result);
                 msTInfoList = response.getBody();
                 //获取"taskCode": "20170603155058"   "maintUserFeedback": "完成", maintUserInfo.name
                 //获取到了返回的信息
@@ -139,8 +146,24 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
             isFirst = false;
             //更新UI
             tv_cellname.setText(mi.getVillaInfo().getCellName());
-            tv_main_type.setText(mi.getMaintypeInfo().getName());
-            left_time.setText(mi.getExpireTime());
+            tv_main_type.setText(mi.getMainttypeName());
+
+            if(mi.getMainttypeInfo().getId().equals("1"))
+            {
+                tv_typename.setText("一级管家");
+                left_time.setText("到期时间："+mi.getEndTime());
+
+            }
+            else if(mi.getMainttypeInfo().getId().equals("2"))
+            {
+                tv_typename.setText("二级管家");
+                left_time.setText("到期时间："+mi.getEndTime());
+            }
+            else if(mi.getMainttypeInfo().getId().equals("3"))
+            {
+                tv_typename.setText("三级管家");
+                left_time.setText("剩余次数："+mi.getFrequency());
+            }
 
 
         } else {
@@ -149,9 +172,25 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
                 if (!StringUtils.isEmpty(currInfo.getId()))
                     if (mi.getId().equals(currInfo.getId())) {
                         tv_cellname.setText(mi.getVillaInfo().getCellName());
-                        tv_main_type.setText(mi.getMaintypeInfo().getName());
-                        Log.e("!!!!!!!!!!!!!!", "onResponse: " + left_time.getText());
-                        left_time.setText(mi.getExpireTime());
+                        tv_main_type.setText(mi.getMainttypeName());
+                        if(mi.getMainttypeInfo().getId().equals("1"))
+                        {
+                            tv_typename.setText("一级管家");
+                            left_time.setText("到期时间："+mi.getEndTime());
+
+                        }
+                        else if(mi.getMainttypeInfo().getId().equals("2"))
+                        {
+                            tv_typename.setText("二级管家");
+                            left_time.setText("到期时间："+mi.getEndTime());
+                        }
+                        else if(mi.getMainttypeInfo().getId().equals("3"))
+                        {
+                            tv_typename.setText("三级管家");
+                            left_time.setText("剩余次数："+mi.getFrequency());
+                        }
+                       // Log.e("!!!!!!!!!!!!!!", "onResponse: " + left_time.getText());
+                       /// left_time.setText(mi.getEndTime());
                         //更新UI，
                         break;
 
@@ -170,7 +209,7 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
     }
 
     private void initTitleBar() {
-        initTitleBar("维保服务", R.id.title_service,
+        initTitleBar("维保订单", R.id.title_service,
                 R.drawable.back_normal, backClickListener);
     }
 
@@ -189,6 +228,7 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
                     public void onClick(DialogInterface dialog, int which) {
                         currInfo = msInfoList.get(which);
                         fillView();
+                        requestMaintenTaskList();
                     }
                 });
                 builder.show();
@@ -204,7 +244,7 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
         Intent intent = new Intent(this, MaintenancePlanAddActivity.class);
         intent.putExtra("State", ADD_STATE);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("Info", currInfo);
+        bundle.putSerializable("Info1", currInfo);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -214,6 +254,7 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
     public void performItemCallback(MaintenanceTaskInfo data) {
         Intent intent = new Intent(this, MaintenancePlanAddActivity.class);
         Bundle bundle = new Bundle();
+        bundle.putSerializable("Info1",currInfo);
         bundle.putSerializable("Info", data);
         intent.putExtras(bundle);
         intent.putExtra("State", data.getState());

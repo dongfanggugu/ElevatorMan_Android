@@ -2,8 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
+    <LinearLayout
+        android:id="@+id/ll_full_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#86222222"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_overview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
     <include
         android:id="@+id/title_service_result"
         layout="@layout/layout_title"
@@ -14,7 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_10dp"
-        android:text="处理结果" />
+        android:textColor="@color/frontgray"
+        android:text="本次维保结果" />
 
     <EditText
         android:id="@+id/et_remark"
@@ -24,9 +41,8 @@
         android:layout_marginLeft="5dp"
         android:background="@drawable/shape_alarm_info"
         android:gravity="top"
-        android:hint="@string/alarm_remark"
-        android:lines="3"
-        android:maxLines="3"
+        android:lines="5"
+        android:maxLines="5"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:textColor="@color/color_easy_alarm_text" />
@@ -62,17 +78,24 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:padding="5dp">
 
+
                     <ImageView
-                        android:id="@+id/iv_before_image"
-                        android:layout_width="60dp"
-                        android:layout_height="80dp"
+                        android:id="@+id/iv_image1"
+                        android:layout_width="120dp"
+                        android:layout_height="160dp"
                         android:layout_marginRight="6dp"
                         android:layout_marginTop="6dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/icon_img_original" />
+                        android:src="@drawable/defaut_image" />
+                    <Button
+                        android:id="@+id/btn_del_1"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="right"
+                        android:background="@drawable/icon_del_img"
+                        android:visibility="gone"/>
                 </FrameLayout>
             </LinearLayout>
             </LinearLayout>
@@ -104,13 +127,20 @@
                         android:padding="5dp">
 
                         <ImageView
-                            android:id="@+id/iv_after_image"
-                            android:layout_width="60dp"
-                            android:layout_height="80dp"
+                            android:id="@+id/iv_image2"
+                            android:layout_width="120dp"
+                            android:layout_height="160dp"
                             android:layout_marginRight="6dp"
                             android:layout_marginTop="6dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/icon_img_original" />
+                            android:src="@drawable/defaut_image" />
+                        <Button
+                            android:id="@+id/btn_del_2"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="right"
+                            android:background="@drawable/icon_del_img"
+                            android:visibility="gone"/>
                     </FrameLayout>
 
                 </LinearLayout>
@@ -131,10 +161,11 @@
                 android:paddingTop="@dimen/size_10dp"
                 android:paddingLeft="@dimen/size_20dp"
                 android:paddingRight="@dimen/size_20dp"
-                android:background="@drawable/selector_plan_submit"
-                android:text="提交"
+                android:background="@drawable/selector_plan_lanse"
+                android:text="提交维保结果"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
+
 
 
 </LinearLayout>

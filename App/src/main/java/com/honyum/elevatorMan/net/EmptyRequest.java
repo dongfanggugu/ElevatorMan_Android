@@ -9,5 +9,13 @@ import com.honyum.elevatorMan.net.base.RequestHead;
  */
 
 public class EmptyRequest extends RequestBean {
+    private RequestHead head = new RequestHead();
 
+    public RequestHead getHead() {
+        return head;
+    }
+
+    public void setHead(RequestHead head) {
+        this.head = head;
+    }
 }

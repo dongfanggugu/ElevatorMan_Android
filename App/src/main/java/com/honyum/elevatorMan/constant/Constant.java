@@ -20,6 +20,9 @@ public class Constant {
     //物业
     public static final String PROPERTY = "2";
 
+    //维修公司
+    public static final String COMPANY = "1";
+
     /**
      * 消息广播
      */

@@ -78,7 +78,7 @@ public class FixTaskInfo implements Serializable {
     }
 
     private String workerTel;
-    private String pictures;
+    private String pictures = "";
 
     private String startTime;
     private String arriveTime;

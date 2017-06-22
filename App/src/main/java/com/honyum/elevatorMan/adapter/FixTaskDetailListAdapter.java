@@ -24,8 +24,9 @@ public class FixTaskDetailListAdapter extends BaseListViewAdapter<FixTaskInfo> {
     @Override
     public void bindData(BaseViewHolder holder, final FixTaskInfo o, int index) {
 
-        holder.setText(R.id.tv_state, o.getState() + "")
-                .setText(R.id.tv_fix_num, mContext.getString(R.string.rec_id)+o.getId())
+        String[] stateList = new String[]{"","待出发","已出发","已到达","","检修完成","维修完成"};
+        holder.setText(R.id.tv_state, stateList[Integer.valueOf(o.getState())] + "")
+                .setText(R.id.tv_fix_num, mContext.getString(R.string.rec_id)+o.getTaskCode())
                 .setText(R.id.tv_fix_worker, mContext.getString(R.string.fix_worker)+o.getWorkerName())
                 .setText(R.id.tv_fix_contact,mContext.getString(R.string.contact_tel)+o.getWorkerTel())
                 .setText(R.id.tv_fix_time,mContext.getString(R.string.fix_time)+o.getCreateTime())

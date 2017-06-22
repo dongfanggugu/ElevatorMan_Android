@@ -15,7 +15,7 @@ import java.util.List;
 
 public class MSTaskListAdapter extends BaseListViewAdapter<MaintenanceTaskInfo> {
 
-    private Context mContext;
+    String[] stateList = new String[]{"待确认","已确认","已出发","已到达","已完成","已评价","无法完成"};
     public MSTaskListAdapter(List datas, Context context) {
         super(datas, context, R.layout.mstask_detail_item);
         mContext = context;
@@ -23,7 +23,7 @@ public class MSTaskListAdapter extends BaseListViewAdapter<MaintenanceTaskInfo> 
 
     @Override
     public void bindData(BaseViewHolder holder, final MaintenanceTaskInfo mti,int index) {
-        holder.setText(R.id.tv_state, mti.getMaintUserInfo().getState() + "").
+        holder.setText(R.id.tv_state, stateList[Integer.valueOf(mti.getState())]).
                 setText(R.id.tv_person, mti.getMaintUserInfo().getName()).setText(R.id.tv_taskcode, mti.getTaskCode()).setText(R.id.tv_index,index+1+"")
                 .setOnClickListener(R.id.ll_taskdetailinfo, new View.OnClickListener() {
             @Override

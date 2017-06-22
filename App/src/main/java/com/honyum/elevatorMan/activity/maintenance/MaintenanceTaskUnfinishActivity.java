@@ -7,12 +7,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
-import com.honyum.elevatorMan.net.MaintenanceServiceFinishRequest;
 import com.honyum.elevatorMan.net.MaintenanceServiceUnFinishRequest;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
@@ -20,6 +20,8 @@ import com.honyum.elevatorMan.net.base.NewRequestHead;
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.Response;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -36,13 +38,14 @@ public class MaintenanceTaskUnfinishActivity extends BaseFragmentActivity {
     String s2;
     private AlertDialog alertDialog;
     private View dialogLayout;
-    private TextView tv_plan_date;
+    private TextView tv_time;
     private TextView tv_submit;
+    private EditText et_remark;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fix_app_time);
+        setContentView(R.layout.activity_mentenance_app_time);
         initTitle();
         initView();
     }
@@ -52,7 +55,7 @@ public class MaintenanceTaskUnfinishActivity extends BaseFragmentActivity {
     private void initTitle() {
 
 
-        initTitleBar("另行约定", R.id.title_order,
+        initTitleBar("另行约定", R.id.title,
                 R.drawable.back_normal, backClickListener);
     }
 
@@ -63,13 +66,17 @@ public class MaintenanceTaskUnfinishActivity extends BaseFragmentActivity {
         dialogLayout = LayoutInflater.from(this).inflate(R.layout.dia_datetime_layout, null);
         datePicker = (DatePicker) dialogLayout.findViewById(R.id.datePicker);
         timePicker = (TimePicker) dialogLayout.findViewById(R.id.timePicker);
-        tv_plan_date = (TextView)findViewById(R.id.tv_plan_date);
+        tv_time = (TextView) findViewById(R.id.tv_time);
         tv_submit =  (TextView)findViewById(R.id.tv_submit);
 
+        et_remark = (EditText) findViewById(R.id.et_remark);
+        long time = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        tv_time.setText(sdf.format(new Date(time)));
         Intent it = getIntent();
-
         currId = it.getStringExtra("Id");
         //使用dialog组合日期和时间控件。
+        date = new Date();
         findViewById(R.id.ll_date).setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -96,8 +103,22 @@ public class MaintenanceTaskUnfinishActivity extends BaseFragmentActivity {
                     public void onClick(DialogInterface dialog, int arg1) {
                         s1 = (datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth());
                         String dateString = s1 + s2;
-                        tv_plan_date.setText(dateString);
-                        dialog.dismiss();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        Date d = new Date();
+                        try {
+                            d = sdf.parse(dateString);
+                            long t = d.getTime();
+                            long cl = System.currentTimeMillis();
+
+                            if (cl > t) {
+                                showToast("选择日期应大于当前日期！");
+                                return;
+                            }
+                            tv_time.setText(dateString);
+                            dialog.dismiss();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -136,8 +157,7 @@ public class MaintenanceTaskUnfinishActivity extends BaseFragmentActivity {
 
         MaintenanceServiceUnFinishRequest request = new MaintenanceServiceUnFinishRequest();
         request.setHead(new NewRequestHead().setaccessToken(token).setuserId(userId));
-        //TODO 这里的上传图片没有做
-        request.setBody(request.new MaintenanceServiceUnFinishBody().setMaintOrderProcessId(currId).setMaintUserFeedback("无法完成").setPlanTime(tv_plan_date.getText().toString()));
+        request.setBody(request.new MaintenanceServiceUnFinishBody().setMaintOrderProcessId(currId).setMaintUserFeedback(et_remark.getText().toString().trim()).setPlanTime(tv_time.getText().toString()));
         return request;
     }
 

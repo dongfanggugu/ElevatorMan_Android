@@ -55,7 +55,7 @@ dependencies {
     compile project(':RefreshListview')
     //    compile project(':chorstar')
     compile 'com.android.support:appcompat-v7:21.0.3'
-
+    compile 'com.github.bumptech.glide:glide:3.5.2'
     compile project(':HandPaint')
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'

@@ -7,6 +7,8 @@ import android.os.Handler;
 
 import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.common.MainPage1Activity;
+import com.honyum.elevatorMan.activity.company.MainPageActivity;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.utils.Utils;
@@ -81,7 +83,21 @@ public class WelcomeActivity extends BaseFragmentActivity {
         } else if (role.equals(Constant.PROPERTY)) {
             startProperty(false);
         }
+        else if (role.equals(Constant.COMPANY)) {
+            startCompany(getAlarmId());
+        }
+
         finish();
+    }
+
+    private void startCompany(String alarmId) {
+        Intent intent = new Intent(WelcomeActivity.this, MainPageActivity.class);
+
+//        if (!StringUtils.isEmpty(alarmId)) {
+//            intent.putExtra("alarm_id", alarmId);
+//            intent.setAction(Constant.ACTION_ALARM_RECEIVED);
+//        }
+        startActivity(intent);
     }
 
     /**

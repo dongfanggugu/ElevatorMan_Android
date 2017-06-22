@@ -6,6 +6,21 @@
     android:orientation="vertical"
     android:weightSum="3">
 
+    <LinearLayout
+        android:id="@+id/ll_full_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#86222222"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_overview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter" />
+
+    </LinearLayout>
     <include
         android:id="@+id/title"
         layout="@layout/layout_title"
@@ -15,253 +30,268 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/order_detail" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-        <TextView
-            android:id="@+id/tv_order_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/order_id" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tv_ordertime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:text="@string/order_time" />
-            <TextView
-                android:id="@+id/tv_apptime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:text="@string/app_time" />
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/tv_breaktype"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/breaktype" />
-
-        <TextView
-            android:id="@+id/tv_breakdes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/breakdes" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-        <EditText
-            android:id="@+id/et_remark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/shape_alarm_info"
-            android:hint="@string/alarm_remark"
-            android:gravity="top"
-            android:layout_marginLeft="5dp"
-            android:lines="3"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:textColor="@color/color_easy_alarm_text"
-             />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                />
-        </LinearLayout>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/break_ima" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:padding="5dp">
-
-                <ImageView
-                    android:id="@+id/iv_image1"
-                    android:layout_width="60dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="6dp"
-                    android:layout_marginTop="6dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/icon_img_original" />
-            </FrameLayout>
-        </LinearLayout>
-    </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:background="@color/gray"
-            android:layout_marginLeft="5dp"
-
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tv_vill_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/vill_address" />
-            <TextView
-                android:id="@+id/tv_eve_brand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/eve_brand" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                    android:id="@+id/eve_weight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/eve_weight" />
                 <TextView
-                    android:id="@+id/eve_landing"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/buletitle"
+                    android:padding="@dimen/size_10dp"
+                    android:text="订单详情"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/tv_order_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="@string/eve_landing" />
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_margin="@dimen/text_size_10"
+                    android:text="@string/order_id"
+                    android:textColor="@color/frontgray" />
+
+
+                <TextView
+                    android:id="@+id/tv_ordertime"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    />
+                    android:layout_margin="@dimen/text_size_10"
+                    android:layout_weight="1"
+                    android:text="@string/order_time"
+                    android:textColor="@color/frontgray" />
+
+                <TextView
+                    android:id="@+id/tv_apptime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_size_10"
+                    android:layout_weight="1"
+                    android:text="@string/app_time"
+                    android:textColor="@color/frontgray" />
+
+
+                <TextView
+                    android:id="@+id/tv_breaktype"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_size_10"
+                    android:text="@string/breaktype"
+                    android:textColor="@color/frontgray" />
+
+                <TextView
+                    android:id="@+id/tv_breakdes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_size_10"
+                    android:text="@string/breakdes"
+                    android:textColor="@color/frontgray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_alarm_info"
+                        android:gravity="top"
+                        android:hint=""
+                        android:lines="3"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/color_easy_alarm_text"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
             </LinearLayout>
 
 
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            >
-            <TextView
-                android:id="@+id/tv_nexttime"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/selector_plan_submit"
-                android:padding="10dp"
-                android:text="@string/nexttimedeal"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_paybill"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_size_10"
+                    android:text="@string/break_ima"
+                    android:textColor="@color/frontgray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/text_size_10"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/iv_image1"
+                            android:layout_width="60dp"
+                            android:layout_height="80dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_marginTop="6dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/defaut_image" />
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/selector_plan_submit"
-                android:padding="10dp"
-                android:text="@string/createpaybill"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:layout_marginLeft="5dp"
+                android:background="@color/backgray"
 
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_vill_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_size_10"
+                    android:text="@string/vill_address" />
+
+                <TextView
+                    android:id="@+id/tv_eve_brand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_size_10"
+                    android:text="@string/eve_brand" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:id="@+id/eve_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_size_10"
+                        android:layout_weight="1"
+                        android:text="@string/eve_weight" />
+
+                    <TextView
+                        android:id="@+id/eve_landing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_size_10"
+                        android:layout_weight="1"
+                        android:text="@string/eve_landing" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tv_nexttime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/selector_plan_lanse"
+                    android:padding="10dp"
+                    android:text="@string/nexttimedeal"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_paybill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/selector_plan_lanse"
+                    android:padding="10dp"
+                    android:text="@string/createpaybill"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/backgray" />
+
+            <RelativeLayout
+                android:id="@+id/rl_fix_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_5dp"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:background="@drawable/redtitle"
+                    android:padding="@dimen/size_10dp"
+                    android:text="维修记录"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_look_eva"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/size_5dp"
+                    android:layout_marginRight="@dimen/size_20dp"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:text="@string/look_eva"
+                    android:textColor="@color/titleblue" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lessgray" />
+
+            <com.honyum.elevatorMan.view.MyListView
+                android:id="@+id/fix_rec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.honyum.elevatorMan.view.MyListView>
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/gray"/>
-
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginBottom="@dimen/size_5dp">
-           <TextView
-               android:layout_marginTop="@dimen/size_10dp"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginLeft="@dimen/size_5dp"
-               android:textColor="@color/black"
-               android:text="维修记录"/>
-           <TextView
-               android:id="@+id/tv_look_eva"
-               android:layout_marginTop="@dimen/size_10dp"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginLeft="@dimen/size_5dp"
-               android:textColor="@color/red"
-               android:layout_marginRight="@dimen/size_20dp"
-               android:layout_alignParentRight="true"
-               android:text="@string/look_eva"/>
-       </RelativeLayout>
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/fix_rec"></ListView>
-    </LinearLayout>
     </ScrollView>
+
+
 </LinearLayout>

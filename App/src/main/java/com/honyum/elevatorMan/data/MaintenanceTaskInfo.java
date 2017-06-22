@@ -74,7 +74,7 @@ public class MaintenanceTaskInfo implements Serializable {
         this.evaluateTime = evaluateTime;
     }
 
-    private String evaluateResult;
+    private String evaluateResult = "0";
     private String evaluateContent;
     private String evaluateTime;
 

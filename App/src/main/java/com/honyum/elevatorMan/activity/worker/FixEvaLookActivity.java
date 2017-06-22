@@ -34,7 +34,7 @@ public class FixEvaLookActivity extends BaseActivityWraper {
     protected void initView() {
         mFixInfo =  getIntent("Info");
         etRemark.setText(mFixInfo.getEvaluateInfo());
-        ratingbar2.setNumStars(Integer.valueOf(mFixInfo.getEvaluate()));
+        ratingbar2.setRating(Integer.valueOf(mFixInfo.getEvaluate()));
         ratingbar2.setFocusable(false);
         etRemark.setFocusable(false);
     }

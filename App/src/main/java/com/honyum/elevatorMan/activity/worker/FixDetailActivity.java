@@ -1,28 +1,28 @@
 package com.honyum.elevatorMan.activity.worker;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.adapter.FixTaskDetailListAdapter;
-import com.honyum.elevatorMan.adapter.FixTaskListAdapter;
 import com.honyum.elevatorMan.base.BaseActivityWraper;
 import com.honyum.elevatorMan.base.ListItemCallback;
 import com.honyum.elevatorMan.data.FixInfo;
 import com.honyum.elevatorMan.data.FixTaskInfo;
-import com.honyum.elevatorMan.net.FixRequest;
-import com.honyum.elevatorMan.net.FixResponse;
 import com.honyum.elevatorMan.net.FixTaskRequest;
 import com.honyum.elevatorMan.net.FixTaskResponse;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.NewRequestHead;
 import com.honyum.elevatorMan.net.base.RequestBean;
+import com.honyum.elevatorMan.view.MyListView;
 
 import java.util.List;
 
@@ -66,9 +66,13 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
     @BindView(R.id.tv_look_eva)
     TextView tvLookEva;
     @BindView(R.id.fix_rec)
-    ListView fixRec;
+    MyListView fixRec;
+    @BindView(R.id.iv_overview)
+    ImageView ivOverview;
+    @BindView(R.id.ll_full_screen)
+    LinearLayout llFullScreen;
     private FixInfo mFixInfo;
-    private List<FixTaskInfo> mFixTasks ;
+    private List<FixTaskInfo> mFixTasks;
     private FixTaskDetailListAdapter mFixTaskDetailListAdapter;
 
 
@@ -81,17 +85,45 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
     protected void initView() {
 
         mFixInfo = getIntent("Info");
-        tvOrderId.setText(getString(R.string.order_id)+mFixInfo.getId());
-        tvOrdertime.setText(getString(R.string.order_time)+mFixInfo.getCreateTime());
-        tvApptime.setText(getString(R.string.app_time)+mFixInfo.getRepairTime());
-        tvBreaktype.setText(getString(R.string.breaktype)+mFixInfo.getRepairTypeInfo().getName());
+        tvOrderId.setText(getString(R.string.order_id) + mFixInfo.getCode());
+        tvOrdertime.setText(getString(R.string.order_time) + mFixInfo.getCreateTime());
+        tvApptime.setText(getString(R.string.app_time) + mFixInfo.getRepairTime());
+        tvBreaktype.setText(getString(R.string.breaktype) + mFixInfo.getRepairTypeInfo().getName());
+        etRemark.setFocusable(false);
         etRemark.setText(mFixInfo.getRepairTypeInfo().getContent());
-        new GetPicture(mFixInfo.getPicture(),ivImage1).execute();
-        tvVillAddress.setText(getString(R.string.vill_address)+mFixInfo.getVillaInfo().getAddress());
-        tvEveBrand.setText(getString(R.string.brand)+mFixInfo.getVillaInfo().getBrand());
-        eveWeight.setText(getString(R.string.eve_weight)+mFixInfo.getVillaInfo().getWeight());
-        eveLanding.setText(getString(R.string.eve_landing)+mFixInfo.getVillaInfo().getLayerAmount());
+        new GetPicture(mFixInfo.getPicture(), ivImage1).execute();
+        tvVillAddress.setText(getString(R.string.vill_address) + mFixInfo.getVillaInfo().getCellName());
+        tvEveBrand.setText("品牌：" + mFixInfo.getVillaInfo().getBrand());
+        eveWeight.setText(getString(R.string.eve_weight) + mFixInfo.getVillaInfo().getWeight() + "KG");
+        eveLanding.setText(getString(R.string.eve_landing) + mFixInfo.getVillaInfo().getLayerAmount() + "层");
+        ivImage1.setDrawingCacheEnabled(true);
+        int state = Integer.valueOf(mFixInfo.getState());
+        tvLookEva.setVisibility(View.GONE);
+        if (state > 8) {
+            tvNexttime.setVisibility(View.GONE);
+            tvPaybill.setVisibility(View.GONE);
+            tvLookEva.setVisibility(View.VISIBLE);
 
+        } else if (state < 8) {
+            tvNexttime.setVisibility(View.VISIBLE);
+            tvPaybill.setVisibility(View.VISIBLE);
+            tvLookEva.setVisibility(View.GONE);
+        }
+
+
+    }
+
+    /**
+     * 查看预览信息
+     *
+     * @param image1
+     */
+
+    private void showPreviewImage(ImageView image1) {
+        ivOverview.setImageBitmap(Bitmap.createBitmap(image1.getDrawingCache()));
+        llFullScreen.setVisibility(View.VISIBLE);
+        image1.setDrawingCacheEnabled(false);
+        image1.setDrawingCacheEnabled(true);
     }
 
     @Override
@@ -117,7 +149,7 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
                 FixTaskResponse response = FixTaskResponse.getFixTaskResponse(result);
                 mFixTasks = response.getBody();
                 //获取到了返回的信息
-                if (mFixTasks == null||mFixTasks.size()==0) {
+                if (mFixTasks == null || mFixTasks.size() == 0) {
                     //findViewById(R.id.tv_tips).setVisibility(View.VISIBLE);
                     findViewById(R.id.fix_rec).setVisibility(View.GONE);
                     return;
@@ -133,13 +165,14 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
         mFixTaskDetailListAdapter = new FixTaskDetailListAdapter(mFixTasks, this);
         fixRec.setAdapter(mFixTaskDetailListAdapter);
     }
+
     @Override
     protected int getLayoutID() {
         return R.layout.avtivity_fix_task_detail;
     }
 
 
-    @OnClick({R.id.tv_paybill, R.id.tv_look_eva,R.id.tv_nexttime})
+    @OnClick({R.id.tv_paybill, R.id.tv_look_eva, R.id.tv_nexttime, R.id.iv_image1, R.id.ll_full_screen})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_paybill:
@@ -148,7 +181,7 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
                     public void onClick(View v) {
                         Intent intent = new Intent(FixDetailActivity.this, FixPaymentActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("Info",mFixInfo);
+                        bundle.putSerializable("Info", mFixInfo);
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
@@ -161,7 +194,7 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
                     public void onClick(View v) {
                         Intent intent = new Intent(FixDetailActivity.this, FixEvaLookActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("Info",mFixInfo);
+                        bundle.putSerializable("Info", mFixInfo);
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
@@ -171,10 +204,17 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
             case R.id.tv_nexttime:
                 Intent intent = new Intent(FixDetailActivity.this, FixNextTimeActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("Info",mFixInfo);
+                bundle.putSerializable("Info", mFixInfo);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
+            case R.id.ll_full_screen:
+                llFullScreen.setVisibility(View.GONE);
+                break;
+            case R.id.iv_image1:
+                showPreviewImage(ivImage1);
+                break;
+
         }
     }
 
@@ -184,9 +224,11 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
         Intent intent = new Intent(FixDetailActivity.this, FixTaskActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("Info", data);
-        bundle.putSerializable("Fixdata",mFixInfo);
+        bundle.putSerializable("Fixdata", mFixInfo);
         intent.putExtras(bundle);
         startActivity(intent);
 
     }
+
+
 }

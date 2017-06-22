@@ -24,12 +24,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <ImageView
+                <include
+                    android:id="@+id/main_page_indicator"
+                    layout="@layout/layout_page_indicator"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/nicehouse" />
+                    android:layout_height="150dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -78,7 +77,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/gray" />
+                    android:background="@color/lessgray" />
 
                 <LinearLayout
                     android:layout_width="@dimen/size_0dp"
@@ -107,7 +106,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/gray" />
+                        android:background="@color/lessgray" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -137,7 +136,7 @@
                         <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:background="@color/gray" />
+                            android:background="@color/lessgray" />
 
                         <LinearLayout
                             android:id="@+id/ll_fix"
@@ -163,7 +162,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_20dp"
-                android:background="@color/gray" />
+                android:background="@color/backgray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -180,12 +179,13 @@
                         android:layout_width="@dimen/size_0dp"
                         android:layout_height="1dp"
                         android:layout_weight="2"
-                        android:background="@color/black" />
+                        android:background="@color/green" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/green"
                         android:gravity="center_horizontal"
                         android:text="电梯百科" />
 
@@ -193,7 +193,7 @@
                         android:layout_width="@dimen/size_0dp"
                         android:layout_height="1dp"
                         android:layout_weight="2"
-                        android:background="@color/black" />
+                        android:background="@color/green" />
 
                 </LinearLayout>
 
@@ -209,8 +209,11 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/size_5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/selector_plan_submit"
+                        android:background="#f79e6e"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/size_5dp"
                         android:gravity="center_horizontal"
+
                         android:text="@string/question" />
 
                     <TextView
@@ -219,8 +222,10 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/size_5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/selector_plan_submit"
                         android:gravity="center_horizontal"
+                        android:background="#03cd99"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/size_5dp"
                         android:text="@string/save_num" />
 
                     <TextView
@@ -229,7 +234,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/size_5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/selector_plan_submit"
+                        android:background="#b483be"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/size_5dp"
                         android:gravity="center_horizontal"
                         android:text="@string/handle_rule" />
 
@@ -239,7 +246,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/size_5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/selector_plan_submit"
+                        android:background="#36b0f3"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/size_5dp"
                         android:gravity="center_horizontal"
                         android:text="@string/safe_rule" />
 
@@ -247,7 +256,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_20dp"
-                    android:background="@color/gray" />
+                    android:background="@color/backgray" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -292,14 +301,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/main_tab_page"
-                    android:textColor="@color/color_bottom_tab_text" />
+                    android:textColor="@color/titleblue" />
 
             </LinearLayout>
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/gray" />
+
 
 
             <LinearLayout

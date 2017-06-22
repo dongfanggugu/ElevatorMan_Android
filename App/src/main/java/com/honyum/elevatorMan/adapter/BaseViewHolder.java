@@ -82,6 +82,19 @@ public class BaseViewHolder {
     }
 
     /**
+     * 设置 TextView 的Color值
+     *
+     * @param viewId
+     * @param
+     * @return
+     */
+    public BaseViewHolder setTextColor(int viewId, int color) {
+        TextView tv = getView(viewId);
+        tv.setTextColor(color);
+        return this;
+    }
+
+    /**
      * 设置TImageView的值
      *
      * @param viewId

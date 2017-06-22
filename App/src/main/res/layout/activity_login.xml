@@ -49,14 +49,14 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="40dp"
             android:scaleType="fitXY"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="60dp"
-            android:text="电梯易管家"
+            android:text="梯美（管理）"
             android:textColor="@color/white"
             android:textSize="22sp" />
 
@@ -151,9 +151,9 @@
                     android:id="@+id/btn_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/selector_login"
+                    android:background="@color/white"
                     android:text="@string/login"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/titleblue" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

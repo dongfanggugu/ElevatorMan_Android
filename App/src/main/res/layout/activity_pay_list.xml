@@ -12,6 +12,7 @@
 
 
         <LinearLayout
+            android:background="@color/backgray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -22,6 +23,7 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:padding="@dimen/size_10dp"
+                android:textColor="@color/frontgray"
                 android:text="维修收费明细" />
 
             <TextView
@@ -31,6 +33,7 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:padding="@dimen/size_10dp"
+                android:textColor="@color/titleblue"
                 android:text="添加收费项目" />
 
         </LinearLayout>
@@ -53,11 +56,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
+
     android:paddingBottom="@dimen/size_10dp"
     android:paddingTop="@dimen/size_10dp"
     android:paddingLeft="@dimen/size_20dp"
     android:paddingRight="@dimen/size_20dp"
-    android:background="@drawable/selector_plan_submit"
+    android:background="@drawable/selector_plan_lanse"
     android:text="提交明细"
     android:textColor="@color/white"
     android:textSize="15sp" />

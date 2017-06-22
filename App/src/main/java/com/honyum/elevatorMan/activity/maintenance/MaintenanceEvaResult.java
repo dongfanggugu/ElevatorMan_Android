@@ -44,7 +44,7 @@ public class MaintenanceEvaResult extends BaseFragmentActivity {
         mMaintenanceTaskInfo = (MaintenanceTaskInfo) it.getSerializableExtra("Info");
 
         ratingbar2 = (RatingBar)findViewById(R.id.ratingbar2);
-        ratingbar2.setNumStars(Integer.valueOf(mMaintenanceTaskInfo.getEvaluateResult()));
+        ratingbar2.setRating(Integer.valueOf(mMaintenanceTaskInfo.getEvaluateResult()));
         ratingbar2.setFocusable(false);
         et_remark = (EditText)findViewById(R.id.et_remark);
         et_remark.setText(mMaintenanceTaskInfo.getEvaluateContent());
@@ -53,13 +53,14 @@ public class MaintenanceEvaResult extends BaseFragmentActivity {
 
     }
 
+
     /**
      * 初始化标题
      */
     private void initTitle() {
 
 
-        initTitleBar("评价结果查看", R.id.title_order,
+        initTitleBar("评价结果查看", R.id.title,
                 R.drawable.back_normal, backClickListener);
     }
 }

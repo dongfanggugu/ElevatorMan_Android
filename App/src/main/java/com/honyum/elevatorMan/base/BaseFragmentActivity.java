@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -1462,5 +1463,21 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         }
 
         Log.d("AAA", "通话监听解除");
+    }
+
+    /**
+     * 保存图片的本地地址和远程地址
+     * @param key
+     * @param value
+     */
+    public void saveImageData(String key,String value)
+    {
+        SharedPreferences sp = getSharedPreferences("ImageData", Context.MODE_PRIVATE);
+        sp.edit().putString(key, value).commit();
+    }
+    public String getImageData(String key)
+    {
+        SharedPreferences sp = getSharedPreferences("ImageData", Context.MODE_PRIVATE);
+        return sp.getString(key,"");
     }
 }

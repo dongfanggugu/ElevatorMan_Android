@@ -108,8 +108,8 @@ public abstract class NetTask extends Thread {
         if (uploadJson == null || uploadJson.equals("")) {
             cancelConn();
         }
+        Log.i("NetTask", "URL:" + SERVER_URL);
         Log.i("NetTask", "uploadJson:" + uploadJson);
-
         // 获取所需上传对象的字节数组
         byte[] outData = uploadJson.getBytes();
 

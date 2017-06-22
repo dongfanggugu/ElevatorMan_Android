@@ -12,6 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.model.LatLng;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.data.MaintenanceServiceInfo;
@@ -25,6 +33,8 @@ import com.honyum.elevatorMan.net.base.NewRequestHead;
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.Response;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.honyum.elevatorMan.net.base.NetConstant.ADD_STATE;
@@ -34,6 +44,7 @@ import static com.honyum.elevatorMan.net.base.NetConstant.EVA_STATE;
 import static com.honyum.elevatorMan.net.base.NetConstant.FINISH_STATE;
 import static com.honyum.elevatorMan.net.base.NetConstant.START_STATE;
 import static com.honyum.elevatorMan.net.base.NetConstant.UNENSURE_STATE;
+import static com.honyum.elevatorMan.net.base.NetConstant.UN_FINISH;
 
 /**
  * Created by Star on 2017/6/9.
@@ -61,39 +72,117 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
     private ImageView iv_modify_datetime;
     private MaintenanceTaskInfo mMaintenanceTaskInfo;
     private MaintenanceServiceInfo mMaintenanceServiceInfo;
+    private MapView baiduMap;
+    private BaiduMap mMap;
+    private Marker locationMarker;
+    private ImageView iv_expandDetail;
+    private TextView tv_product_name1;
+    private TextView tv_product_name2;
 
-
+    private String name = "";
+    private String name1 = "";
+    private String name2 = "";
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preView();
         setContentView(R.layout.activity_order_select);
         initTitle();
         initView();
     }
 
+    public void preView() {
+        SDKInitializer.initialize(getApplicationContext());
+
+    }
+
+    /**
+     * 标记地图
+     */
+    private void markMap(MaintenanceServiceInfo alarmInfo1) {
+
+
+        //mBaiduMap.hideInfoWindow();
+        if (null == mMap) {
+            return;
+        }
+
+        if (null == alarmInfo1) {
+            return;
+        }
+
+
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory
+                .fromResource(R.drawable.marker_worker);
+
+
+        double latitude = alarmInfo1.getVillaInfo().getLat();
+        double longitude = alarmInfo1.getVillaInfo().getLng();
+        LatLng point = new LatLng(latitude, longitude);
+        MarkerOptions markerOption = new MarkerOptions().icon(bitmapDescriptor).position(point);
+        locationMarker = (Marker) mMap.addOverlay(markerOption);
+
+    }
+
+    /**
+     * 标记地图
+     */
+    private void markMap(MaintenanceTaskInfo alarmInfo1) {
+
+
+        //mBaiduMap.hideInfoWindow();
+        if (null == mMap) {
+            return;
+        }
+
+        if (null == alarmInfo1) {
+            return;
+        }
+
+
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory
+                .fromResource(R.drawable.marker_worker);
+
+
+        double latitude = alarmInfo1.getMaintOrderInfo().getVillaInfo().getLat();
+        double longitude = alarmInfo1.getMaintOrderInfo().getVillaInfo().getLng();
+        LatLng point = new LatLng(latitude, longitude);
+        MarkerOptions markerOption = new MarkerOptions().icon(bitmapDescriptor).position(point);
+        locationMarker = (Marker) mMap.addOverlay(markerOption);
+
+    }
     /**
      * 初始化标题
      */
     private void initTitle() {
 
+        Intent it = getIntent();
 
-        initTitleBar("维保计划制定", R.id.title_order,
-                R.drawable.back_normal, backClickListener);
+        if (it.getStringExtra("State").equals("-1"))
+            initTitleBar("维保计划制定", R.id.title_order,
+                    R.drawable.back_normal, backClickListener);
+        else
+            initTitleBar("维保任务单", R.id.title_order,
+                    R.drawable.back_normal, backClickListener);
     }
 
     /**
      * 初始化视图
      */
     private void initView() {
+        baiduMap = (MapView) findViewById(R.id.mapView);
+        mMap = baiduMap.getMap();
 
-        findViewById(R.id.iv_expandDetail).setOnClickListener(this);
+        iv_expandDetail = (ImageView) findViewById(R.id.iv_expandDetail);
+        iv_expandDetail.setOnClickListener(this);
         dialogLayout = LayoutInflater.from(this).inflate(R.layout.dia_datetime_layout, null);
         datePicker = (DatePicker) dialogLayout.findViewById(R.id.datePicker);
         timePicker = (TimePicker) dialogLayout.findViewById(R.id.timePicker);
         findViewById(R.id.tv_start).setVisibility(View.GONE);
         findViewById(R.id.tv_giveup).setVisibility(View.GONE);
+
 
 
         date = new Date();
@@ -125,8 +214,25 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
                     public void onClick(DialogInterface dialog, int arg1) {
                         s1 = (datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth());
                         String dateString = s1 + s2;
-                        tv_plan_date.setText(dateString);
-                        dialog.dismiss();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        Date d = new Date();
+                        try {
+                            d = sdf.parse(dateString);
+                            long t = d.getTime();
+                            long cl = System.currentTimeMillis();
+
+                            if (cl > t) {
+                                showToast("选择日期应大于当前日期！");
+                                return;
+                            }
+                            tv_plan_date.setText(dateString);
+                            dialog.dismiss();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -136,13 +242,18 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
             }
         }).create();
         //end 组合控件
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date d = new Date(System.currentTimeMillis());
+        String s = sdf.format(d).toString();
         tv_plan_date = (TextView) findViewById(R.id.tv_plan_date);
+//        tv_plan_date.setText(s);
         ll_moreinfo = (LinearLayout) findViewById(R.id.ll_moreinfo);
         tv_address = (TextView) findViewById(R.id.tv_address);
         tv_tel = (TextView) findViewById(R.id.tv_tel);
         tv_time = (TextView) findViewById(R.id.tv_time);
         tv_product_name = (TextView) findViewById(R.id.tv_product_name);
+        tv_product_name1 = (TextView) findViewById(R.id.tv_product_name1);
+        tv_product_name2 = (TextView) findViewById(R.id.tv_product_name2);
         tv_start = (TextView) findViewById(R.id.tv_start);
         tv_addplan = (TextView) findViewById(R.id.tv_addplan);
         iv_modify_datetime = (ImageView) findViewById(R.id.iv_modify_datetime);
@@ -151,26 +262,36 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
 
         //获取页面的参数 进行VIEW填充
         Intent it = getIntent();
-
+        mMaintenanceServiceInfo = (MaintenanceServiceInfo) it.getSerializableExtra("Info1");
+        mMaintenanceTaskInfo = (MaintenanceTaskInfo) it.getSerializableExtra("Info");
         if(it.getStringExtra("State").equals(ADD_STATE))
         {
-              mMaintenanceServiceInfo  = (MaintenanceServiceInfo)it.getSerializableExtra("Info");
-              tv_address.setText(mMaintenanceServiceInfo.getVillaInfo().getAddress());
-              tv_tel.setText(mMaintenanceServiceInfo.getOwnerInfo().getTel());
-              tv_time.setText(mMaintenanceServiceInfo.getExpireTime());
-              tv_product_name.setText(mMaintenanceServiceInfo.getVillaInfo().getBrand());
-              currId = mMaintenanceServiceInfo.getId();
+            //mMaintenanceServiceInfo = (MaintenanceServiceInfo) it.getSerializableExtra("Info");
+            tv_address.setText(mMaintenanceServiceInfo.getVillaInfo().getCellName());
+            tv_tel.setText(mMaintenanceServiceInfo.getVillaInfo().getContactsTel());
+            tv_time.setText(s);
+            name = mMaintenanceServiceInfo.getVillaInfo().getBrand();
+            name1 = mMaintenanceServiceInfo.getVillaInfo().getWeight() + "KG";
+            name2 = mMaintenanceServiceInfo.getVillaInfo().getLayerAmount() + "层";
+
+            currId = mMaintenanceServiceInfo.getId();
+
+            markMap(mMaintenanceServiceInfo);
         }
         else
         {
             mMaintenanceTaskInfo = (MaintenanceTaskInfo)it.getSerializableExtra("Info");
-            tv_address.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getAddress());
-            tv_tel.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getOwnerInfo().getTel());
+            tv_address.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getCellName());
+            tv_tel.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getContactsTel());
             tv_time.setText(mMaintenanceTaskInfo.getPlanTime());
-            tv_product_name.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getBrand());
             currId = mMaintenanceTaskInfo.getId();
+            name = mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getBrand();
+            name1 = mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getWeight() + "KG";
+            name2 = mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getLayerAmount() + "层";
+            markMap(mMaintenanceTaskInfo);
         }
         changeBottomButton(it.getStringExtra("State"));
+
 
 
     }
@@ -191,6 +312,7 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
         };
         addTask(task);
     }
+
 
     private RequestBean getAddRequestBean(String userId, String token) {
         MaintenanceServiceAddPlanRequest request = new MaintenanceServiceAddPlanRequest();
@@ -261,8 +383,8 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
     private void changeBottomButton(String state) {
 
         switch (state) {
-            //TODO 归类节省代码,木有做
             case ADD_STATE:
+
                 tv_addplan.setVisibility(View.VISIBLE);
                 tv_addplan.setText(R.string.add_plan);
                 tv_start.setVisibility(View.GONE);
@@ -271,57 +393,63 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
                 tv_addplan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        requestAddMaintOrderProcess();
+                        new AlertDialog.Builder(MaintenancePlanAddActivity.this).setTitle("确认添加计划继续吗？")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        requestAddMaintOrderProcess();
+                                    }
+                                })
+                                .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).show();
+
+
                     }
                 });
                 break;
             case UNENSURE_STATE:
+
                 tv_addplan.setVisibility(View.GONE);
                 //tv_addplan.setText(R.string.modify);
+                tv_plan_date.setVisibility(View.GONE);
                 tv_start.setVisibility(View.GONE);
                 tv_giveup.setVisibility(View.GONE);
                 iv_modify_datetime.setVisibility(View.GONE);
                 break;
             case ENSURED_STATE:
+
+                tv_plan_date.setVisibility(View.GONE);
                 iv_modify_datetime.setVisibility(View.GONE);
                 tv_addplan.setVisibility(View.VISIBLE);
                 tv_addplan.setText(R.string.start_now);
-                //TODO 改变按钮外观。并在回调函数设置下一个状态  需要改变形式
                 tv_addplan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        requestMaintOrderProcessWorkerSetOut(START_STATE);
+                        new AlertDialog.Builder(MaintenancePlanAddActivity.this).setTitle("确认现在出发吗？")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        requestMaintOrderProcessWorkerSetOut(START_STATE);
+                                    }
+                                })
+                                .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).show();
+
+
                     }
                 });
+
                 tv_start.setVisibility(View.GONE);
-                tv_giveup.setVisibility(View.GONE);
-                break;
-            case START_STATE:
-                tv_addplan.setVisibility(View.VISIBLE);
-                tv_addplan.setText(R.string.arrive);
-                tv_addplan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    requestMaintOrderProcessWorkerArrive(ARRIVE_STATE);
-                }
-            });
-                tv_start.setVisibility(View.GONE);
-                tv_giveup.setVisibility(View.GONE);
-                break;
-            case ARRIVE_STATE:
-                tv_addplan.setVisibility(View.GONE);
-                //tv_addplan.setText(R.string.finish);
-                tv_start.setVisibility(View.VISIBLE);
-                tv_start.setText(R.string.finish);
-                tv_start.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MaintenancePlanAddActivity.this, MaintenanceTaskFinishActivity.class);
-                        intent.putExtra("Id", currId);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
                 tv_giveup.setVisibility(View.VISIBLE);
                 tv_giveup.setText(R.string.today_giveup);
                 tv_giveup.setOnClickListener(new View.OnClickListener() {
@@ -330,13 +458,89 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
                         Intent intent = new Intent(MaintenancePlanAddActivity.this, MaintenanceTaskUnfinishActivity.class);
                         intent.putExtra("Id", currId);
                         startActivity(intent);
+                        finish();
                     }
                 });
                 break;
+            case START_STATE:
+
+                tv_plan_date.setVisibility(View.GONE);
+                tv_addplan.setVisibility(View.VISIBLE);
+                tv_addplan.setText(R.string.arrive);
+                tv_addplan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(MaintenancePlanAddActivity.this).setTitle("确认到达吗？")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    requestMaintOrderProcessWorkerArrive(ARRIVE_STATE);
+                                }
+                            })
+                            .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+                }
+            });
+                tv_start.setVisibility(View.GONE);
+                tv_giveup.setVisibility(View.GONE);
+
+                break;
+            case ARRIVE_STATE:
+
+                tv_plan_date.setVisibility(View.GONE);
+                tv_addplan.setVisibility(View.GONE);
+                //tv_addplan.setText(R.string.finish);
+                tv_start.setVisibility(View.VISIBLE);
+                tv_start.setText(R.string.finish);
+                tv_start.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(MaintenancePlanAddActivity.this).setTitle("确认提交维保结果吗？")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(MaintenancePlanAddActivity.this, MaintenanceTaskFinishActivity.class);
+                                        intent.putExtra("Id", currId);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                })
+                                .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).show();
+
+
+                    }
+                });
+
+
+                tv_giveup.setVisibility(View.GONE);
+//                tv_giveup.setText(R.string.today_giveup);
+//                tv_giveup.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent(MaintenancePlanAddActivity.this, MaintenanceTaskUnfinishActivity.class);
+//                        intent.putExtra("Id", currId);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                });
+                break;
             case FINISH_STATE:
+
+                tv_plan_date.setVisibility(View.GONE);
                 tv_addplan.setVisibility(View.VISIBLE);
                 tv_addplan.setText(R.string.look_result);
-                tv_giveup.setOnClickListener(new View.OnClickListener() {
+                tv_addplan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(MaintenancePlanAddActivity.this, MaintenanceTaskResult.class);
@@ -350,6 +554,8 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
                 tv_giveup.setVisibility(View.GONE);
                 break;
             case EVA_STATE:
+
+                tv_plan_date.setVisibility(View.GONE);
                 tv_addplan.setVisibility(View.VISIBLE);
                 tv_addplan.setText(R.string.look_eva);
                 tv_addplan.setOnClickListener(new View.OnClickListener() {
@@ -365,6 +571,16 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
                 tv_start.setVisibility(View.GONE);
                 tv_giveup.setVisibility(View.GONE);
                 break;
+            case UN_FINISH:
+
+                Intent intent = new Intent(this, MaintenancePlanAddActivity.class);
+                intent.putExtra("State", ADD_STATE);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Info1", mMaintenanceServiceInfo);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+                break;
 
         }
     }
@@ -376,8 +592,13 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
 
                 if (ll_moreinfo.getVisibility() == View.VISIBLE) {
                     ll_moreinfo.setVisibility(View.GONE);
+                    iv_expandDetail.setImageResource(R.drawable.openicon);
                 } else {
                     ll_moreinfo.setVisibility(View.VISIBLE);
+                    tv_product_name.setText(name);
+                    tv_product_name1.setText(name1);
+                    tv_product_name2.setText(name2);
+                    iv_expandDetail.setImageResource(R.drawable.colseicon);
                 }
                 break;
         }

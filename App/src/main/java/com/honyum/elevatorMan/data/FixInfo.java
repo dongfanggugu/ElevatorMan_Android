@@ -22,7 +22,7 @@ public class FixInfo implements Serializable
 
     private String evaluateInfo;
 
-    private String evaluate;
+    private String evaluate ="0";
 
     public String getEvaluateInfo() {
         return evaluateInfo;
@@ -76,7 +76,7 @@ public class FixInfo implements Serializable
 
     private SmallOwnerInfo smallOwnerInfo;
 
-    private String state;
+    private String state = "0";
 
     private String tel;
 

@@ -1,19 +1,35 @@
 package com.honyum.elevatorMan.data;
 
+
 import java.io.Serializable;
 
 public class MaintenanceServiceInfo implements Serializable {
 
+    private double allMoney;
+
+    private String branchId;
+
+    private BranchInfo1 branchInfo;
+
     private String code;
+
     private String createTime;
-    private String expireTime;
+
+    private int discountMoney;
+
+    private String endTime;
+
     private int frequency;
 
     private String id;
 
-    private String isDelete;
+    private String ip;
 
     private String isPay;
+
+    private String maintOrderId;
+
+    private MaintOrderInfo maintOrderInfo;
 
     private String maintUserId;
 
@@ -21,153 +37,196 @@ public class MaintenanceServiceInfo implements Serializable {
 
     private String mainttypeId;
 
+    private MaintTypeInfo mainttypeInfo;
+
     private String mainttypeName;
 
-    private MaintypeInfo maintypeInfo;
+    private String orderid;
 
-    private String ownerId;
+    private double payMoney;
 
-    private OwnerInfo ownerInfo;
+    private String payTime;
 
-    private double price;
+    private String smallOwnerId;
+
+    private SmallOwnerInfo smallOwnerInfo;
+
+    private String startTime;
+
+    private String terminal;
+
+    private String type;
 
     private String villaId;
 
     private VillaInfo villaInfo;
 
-    public void setCode(String code) {
+    public void setAllMoney(double allMoney){
+        this.allMoney = allMoney;
+    }
+    public double getAllMoney(){
+        return this.allMoney;
+    }
+    public void setBranchId(String branchId){
+        this.branchId = branchId;
+    }
+    public String getBranchId(){
+        return this.branchId;
+    }
+    public void setBranchInfo(BranchInfo1 branchInfo){
+        this.branchInfo = branchInfo;
+    }
+    public BranchInfo1 getBranchInfo(){
+        return this.branchInfo;
+    }
+    public void setCode(String code){
         this.code = code;
     }
-
-    public String getCode() {
+    public String getCode(){
         return this.code;
     }
-
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(String createTime){
         this.createTime = createTime;
     }
-
-    public String getCreateTime() {
+    public String getCreateTime(){
         return this.createTime;
     }
-
-    public void setFrequency(int frequency) {
+    public void setDiscountMoney(int discountMoney){
+        this.discountMoney = discountMoney;
+    }
+    public int getDiscountMoney(){
+        return this.discountMoney;
+    }
+    public void setEndTime(String endTime){
+        this.endTime = endTime;
+    }
+    public String getEndTime(){
+        return this.endTime;
+    }
+    public void setFrequency(int frequency){
         this.frequency = frequency;
     }
-
-    public int getFrequency() {
+    public int getFrequency(){
         return this.frequency;
     }
-
-    public void setExpireTime(String expireTime) {
-        this.expireTime = expireTime;
-    }
-
-    public String getExpireTime() {
-        return this.expireTime;
-    }
-
-    public void setId(String id) {
+    public void setId(String id){
         this.id = id;
     }
-
-    public String getId() {
+    public String getId(){
         return this.id;
     }
-
-    public void setIsDelete(String isDelete) {
-        this.isDelete = isDelete;
+    public void setIp(String ip){
+        this.ip = ip;
     }
-
-    public String getIsDelete() {
-        return this.isDelete;
+    public String getIp(){
+        return this.ip;
     }
-
-    public void setIsPay(String isPay) {
+    public void setIsPay(String isPay){
         this.isPay = isPay;
     }
-
-    public String getIsPay() {
+    public String getIsPay(){
         return this.isPay;
     }
-
-    public void setMaintUserId(String maintUserId) {
+    public void setMaintOrderId(String maintOrderId){
+        this.maintOrderId = maintOrderId;
+    }
+    public String getMaintOrderId(){
+        return this.maintOrderId;
+    }
+    public void setMaintOrderInfo(MaintOrderInfo maintOrderInfo){
+        this.maintOrderInfo = maintOrderInfo;
+    }
+    public MaintOrderInfo getMaintOrderInfo(){
+        return this.maintOrderInfo;
+    }
+    public void setMaintUserId(String maintUserId){
         this.maintUserId = maintUserId;
     }
-
-    public String getMaintUserId() {
+    public String getMaintUserId(){
         return this.maintUserId;
     }
-
-    public void setMaintUserInfo(MaintUserInfo maintUserInfo) {
+    public void setMaintUserInfo(MaintUserInfo maintUserInfo){
         this.maintUserInfo = maintUserInfo;
     }
-
-    public MaintUserInfo getMaintUserInfo() {
+    public MaintUserInfo getMaintUserInfo(){
         return this.maintUserInfo;
     }
-
-    public void setMainttypeId(String mainttypeId) {
+    public void setMainttypeId(String mainttypeId){
         this.mainttypeId = mainttypeId;
     }
-
-    public String getMainttypeId() {
+    public String getMainttypeId(){
         return this.mainttypeId;
     }
-
-    public void setMainttypeName(String mainttypeName) {
+    public void setMainttypeInfo(MaintTypeInfo mainttypeInfo){
+        this.mainttypeInfo = mainttypeInfo;
+    }
+    public MaintTypeInfo getMainttypeInfo(){
+        return this.mainttypeInfo;
+    }
+    public void setMainttypeName(String mainttypeName){
         this.mainttypeName = mainttypeName;
     }
-
-    public String getMainttypeName() {
+    public String getMainttypeName(){
         return this.mainttypeName;
     }
-
-    public void setMaintypeInfo(MaintypeInfo maintypeInfo) {
-        this.maintypeInfo = maintypeInfo;
+    public void setOrderid(String orderid){
+        this.orderid = orderid;
     }
-
-    public MaintypeInfo getMaintypeInfo() {
-        return this.maintypeInfo;
+    public String getOrderid(){
+        return this.orderid;
     }
-
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
+    public void setPayMoney(double payMoney){
+        this.payMoney = payMoney;
     }
-
-    public String getOwnerId() {
-        return this.ownerId;
+    public double getPayMoney(){
+        return this.payMoney;
     }
-
-    public void setOwnerInfo(OwnerInfo ownerInfo) {
-        this.ownerInfo = ownerInfo;
+    public void setPayTime(String payTime){
+        this.payTime = payTime;
     }
-
-    public OwnerInfo getOwnerInfo() {
-        return this.ownerInfo;
+    public String getPayTime(){
+        return this.payTime;
     }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setSmallOwnerId(String smallOwnerId){
+        this.smallOwnerId = smallOwnerId;
     }
-
-    public double getPrice() {
-        return this.price;
+    public String getSmallOwnerId(){
+        return this.smallOwnerId;
     }
-
-    public void setVillaId(String villaId) {
+    public void setSmallOwnerInfo(SmallOwnerInfo smallOwnerInfo){
+        this.smallOwnerInfo = smallOwnerInfo;
+    }
+    public SmallOwnerInfo getSmallOwnerInfo(){
+        return this.smallOwnerInfo;
+    }
+    public void setStartTime(String startTime){
+        this.startTime = startTime;
+    }
+    public String getStartTime(){
+        return this.startTime;
+    }
+    public void setTerminal(String terminal){
+        this.terminal = terminal;
+    }
+    public String getTerminal(){
+        return this.terminal;
+    }
+    public void setType(String type){
+        this.type = type;
+    }
+    public String getType(){
+        return this.type;
+    }
+    public void setVillaId(String villaId){
         this.villaId = villaId;
     }
-
-    public String getVillaId() {
+    public String getVillaId(){
         return this.villaId;
     }
-
-    public void setVillaInfo(VillaInfo villaInfo) {
+    public void setVillaInfo(VillaInfo villaInfo){
         this.villaInfo = villaInfo;
     }
-
-    public VillaInfo getVillaInfo() {
+    public VillaInfo getVillaInfo(){
         return this.villaInfo;
     }
 }

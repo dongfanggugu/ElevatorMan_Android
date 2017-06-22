@@ -1,6 +1,8 @@
 package com.honyum.elevatorMan.data;
 
-public class MaintOrderInfo
+import java.io.Serializable;
+
+public class MaintOrderInfo implements Serializable
 {
     private String code;
 
@@ -18,7 +20,7 @@ public class MaintOrderInfo
 
     private String ownerId;
 
-    private OwnerInfo ownerInfo;
+    private OwnerInfo ownerInfo = new OwnerInfo();
 
     private int price;
 

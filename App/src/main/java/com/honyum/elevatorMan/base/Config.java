@@ -59,7 +59,8 @@ public class Config implements Serializable {
      */
     public String getServer() {
 
-        return "http://192.168.0.82:8080/mobile";
+        //return "http://192.168.0.82:8080/mobile";
+       return "http://www.chorstar.com:8081/mobile";
 
 //        String region = getRegion();
 //        String server = Constant.SERVER_LIST.get(region);

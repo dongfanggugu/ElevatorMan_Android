@@ -8,24 +8,23 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height" />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="以下是您的评分："
+        android:text="本次工作已经完成，感谢您对客户提供的服务："
         android:layout_margin="40dp"
         android:layout_gravity="center_horizontal"
         />
     <RatingBar android:id="@+id/ratingbar2"
         android:layout_width="wrap_content"
-
+        android:layout_marginBottom="@dimen/size_10dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:numStars="5"
-        android:rating="4" />
+        android:rating="0" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="以下是用户意见："
-        android:layout_margin="40dp"
+        android:text="用户意见："
         android:layout_gravity="center_horizontal"
         />
     <LinearLayout
@@ -40,15 +39,16 @@
 
     <EditText
         android:id="@+id/et_remark"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_alarm_info"
-        android:hint="@string/alarm_remark"
+        android:hint=""
         android:layout_marginLeft="5dp"
         android:gravity="top"
         android:layout_weight="1"
         android:maxLines="3"
-        android:lines="3"
+        android:lines="5"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:textColor="@color/color_easy_alarm_text"
