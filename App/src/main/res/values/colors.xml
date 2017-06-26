@@ -35,6 +35,13 @@
 
     <!--BEGIN 提示信息的颜色 -->
 
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorChecked">#43CD80</color>
+    <color name="colorUnChecked">#454545</color>
+
     <color name="tip_bg">#fdf8e3</color>
 
     <color name="tip_text_color">#25b6ed</color>

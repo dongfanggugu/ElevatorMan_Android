@@ -29,7 +29,7 @@ public class MaintenanceServiceInfo implements Serializable {
 
     private String maintOrderId;
 
-    private MaintOrderInfo maintOrderInfo;
+    private MaintOrderInfo maintOrderInfo = new MaintOrderInfo();
 
     private String maintUserId;
 
@@ -59,7 +59,7 @@ public class MaintenanceServiceInfo implements Serializable {
 
     private String villaId;
 
-    private VillaInfo villaInfo;
+    private VillaInfo villaInfo = new VillaInfo();
 
     public void setAllMoney(double allMoney){
         this.allMoney = allMoney;

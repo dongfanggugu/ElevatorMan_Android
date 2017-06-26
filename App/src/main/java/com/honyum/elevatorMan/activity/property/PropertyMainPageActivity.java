@@ -2,74 +2,210 @@ package com.honyum.elevatorMan.activity.property;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.common.NousActivity;
 import com.honyum.elevatorMan.activity.common.PersonActivity;
+import com.honyum.elevatorMan.adapter.BannerAdapter;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.base.SysActivityManager;
+import com.honyum.elevatorMan.data.BannerInfo;
+import com.honyum.elevatorMan.net.BannerResponse;
+import com.honyum.elevatorMan.net.EmptyRequest;
+import com.honyum.elevatorMan.net.base.NetConstant;
+import com.honyum.elevatorMan.net.base.NetTask;
 
-public class PropertyMainPageActivity extends BaseFragmentActivity {
+import java.util.List;
+
+public class PropertyMainPageActivity extends BaseFragmentActivity implements View.OnClickListener{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_property1);
+        setContentView(R.layout.activity_mainpage1);
 
-        initTitleBar(R.id.title, "电梯易管家");
+        initTitle();
+
+//        initPageIndicator();
 
         initView();
     }
+    /**
+     * 初始化标题
+     */
+    private void initTitle() {
+        initTitleBar(R.id.title_main_page,"首页");
+    }
+    private List<Integer> pics;
+
+    private void requestBanner() {
+        String server = getConfig().getServer() + NetConstant.GET_BANNER;
+
+        //String request = Constant.EMPTY_REQUEST;
+
+        NetTask netTask = new NetTask(server, new EmptyRequest()) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                BannerResponse response = BannerResponse.getResult(result);
+                initPageIndicator(response.getBody());
+            }
+        };
+
+        addBackGroundTask(netTask);
+    }
+    private int prePos;
+
+    private int curItemPos;
+
+    private void initPageIndicator(final List<BannerInfo> pics) {
+
+        View view = findViewById(R.id.main_page_indicator);
+
+        final ViewPager vp = (ViewPager) view.findViewById(R.id.viewPager);
+        final BannerAdapter adapter = new BannerAdapter(this, pics);
+        vp.setAdapter(adapter);
+        vp.setCurrentItem(adapter.getCount() / 2);
+        curItemPos = adapter.getCount() / 2;
+
+        final LinearLayout llIndicator = (LinearLayout) view.findViewById(R.id.ll_indicator);
+        for (BannerInfo pic : pics) {
+            ImageView iv = new ImageView(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.leftMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
+            iv.setLayoutParams(params);
+            iv.setBackgroundResource(R.drawable.sel_page_indicator);
+            llIndicator.addView(iv);
+        }
+        llIndicator.getChildAt(0).setEnabled(false);
+
+        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                llIndicator.getChildAt(position % pics.size()).setEnabled(false);
+                llIndicator.getChildAt(prePos).setEnabled(true);
+                prePos = position % pics.size();
+                curItemPos = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                vp.setCurrentItem(curItemPos++);
+                handler.postDelayed(this, 5000);
+            }
+        }, 5000);
+    }
+
+
 
     private void initView() {
-        findViewById(R.id.ll_current_alarm).setOnClickListener(new View.OnClickListener() {
+
+
+        findViewById(R.id.ll_rescue).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 jumpToCurAlarm();
             }
         });
-
-        findViewById(R.id.ll_project_alarm).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jumpToProAlarm();
-            }
-        });
-
-        findViewById(R.id.ll_elevator_mall).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jumpToElevatorMall();
-            }
-        });
-
         findViewById(R.id.ll_maintenance).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 jumpToProjectList();
             }
         });
-
-        findViewById(R.id.ll_personal_center).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jumpToPerson();
-            }
-        });
-
-        findViewById(R.id.ll_near_maintenance).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ll_fix).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 jumpToNearMt();
             }
         });
-
-        findViewById(R.id.ll_value_added_service).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ll_person).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                jumpToValueAddedService();
+                jumpToPerson();
             }
         });
+        findViewById(R.id.ll_bbs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jumpToElevatorMall();
+            }
+        });
+
+        ((TextView)findViewById(R.id.tv_evemall)).setText("电梯商城");
+        ((TextView)findViewById(R.id.tv_nhfix)).setText("附近维保");
+        findViewById(R.id.tv_question).setOnClickListener(this);
+        findViewById(R.id.tv_rule).setOnClickListener(this);
+        findViewById(R.id.tv_num).setOnClickListener(this);
+        findViewById(R.id.tv_handle).setOnClickListener(this);
+        requestBanner();
+
+
+//        findViewById(R.id.ll_current_alarm).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                jumpToCurAlarm();
+//            }
+//        });
+//
+//        findViewById(R.id.ll_project_alarm).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                jumpToProAlarm();
+//            }
+//        });
+//
+//        findViewById(R.id.ll_elevator_mall).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                jumpToElevatorMall();
+//            }
+//        });
+//
+//        findViewById(R.id.ll_maintenance).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                jumpToProjectList();
+//            }
+//        });
+//
+//        findViewById(R.id.ll_personal_center).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                jumpToPerson();
+//            }
+//        });
+//
+//        findViewById(R.id.ll_near_maintenance).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                jumpToNearMt();
+//            }
+//        });
+//
+//        findViewById(R.id.ll_value_added_service).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                jumpToValueAddedService();
+//            }
+//        });
     }
 
 
@@ -111,6 +247,8 @@ public class PropertyMainPageActivity extends BaseFragmentActivity {
      * 跳转到电梯商城
      */
     private void jumpToElevatorMall() {
+        Intent intent = new Intent(this, ElevatorMallActivity.class);
+        startActivity(intent);
     }
 
 
@@ -164,5 +302,84 @@ public class PropertyMainPageActivity extends BaseFragmentActivity {
                 SysActivityManager.getInstance().exit();
             }
         }, "否", "是", getString(R.string.exit_confirm));
+    }
+    /**
+     * 跳转到常见问题
+     */
+    private void jumpToQuestion() {
+//        Intent intent = new Intent(MainPageActivity.this, TitleListActivity.class);
+//        intent.putExtra("type", "常见问题");
+//        startActivity(intent);
+        Intent intent =new Intent(this,NousActivity.class);
+        //用Bundle携带数据
+        Bundle bundle=new Bundle();
+        //传递name参数为tinyphp
+        bundle.putString("kntype", "常见问题");
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+    /**
+     * 跳转到救援识别码
+     */
+    private void jumpToSave_num() {
+//        Intent intent = new Intent(MainPageActivity.this, TitleListActivity.class);
+//        intent.putExtra("type", "故障对照");
+//        startActivity(intent);
+        Intent intent =new Intent(this,NousActivity.class);
+        //用Bundle携带数据
+        Bundle bundle=new Bundle();
+        //传递name参数为tinyphp
+        bundle.putString("kntype", "故障码");
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+    /**
+     * 跳转到操作手册
+     */
+    private void jumpToHandle_rule() {
+//        Intent intent = new Intent(MainPageActivity.this, TitleListActivity.class);
+//        intent.putExtra("type", "操作手册");
+//        startActivity(intent);
+        Intent intent =new Intent(this,NousActivity.class);
+        //用Bundle携带数据
+        Bundle bundle=new Bundle();
+        //传递name参数为tinyphp
+        bundle.putString("kntype", "操作手册");
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+    /**
+     * 跳转到安全法规
+     */
+    private void jumpToSafe_rule() {
+//        Intent intent = new Intent(MainPageActivity.this, TitleListActivity.class);
+//        intent.putExtra("type", "安全法规");
+//        startActivity(intent);
+
+        Intent intent =new Intent(this,NousActivity.class);
+        //用Bundle携带数据
+        Bundle bundle=new Bundle();
+        //传递name参数为tinyphp
+        bundle.putString("kntype", "安全法规");
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_question:
+                jumpToQuestion();
+                break;
+            case R.id.tv_rule:
+                jumpToSafe_rule();
+                break;
+            case R.id.tv_num:
+                jumpToSave_num();
+                break;
+            case R.id.tv_handle:
+                jumpToHandle_rule();
+                break;
+        }
     }
 }

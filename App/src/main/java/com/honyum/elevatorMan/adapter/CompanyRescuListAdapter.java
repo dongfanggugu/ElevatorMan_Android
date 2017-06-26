@@ -34,7 +34,7 @@ public class CompanyRescuListAdapter extends BaseListViewAdapter<AlarmInfo1> {
                 {
                     holder.setText(R.id.tv_state,"已撤销");
                 }
-                else if(o.getState().equals("1") || o.getState().equals("2"))
+                else
                 {
                     holder.setText(R.id.tv_state,"已完成");
                 }

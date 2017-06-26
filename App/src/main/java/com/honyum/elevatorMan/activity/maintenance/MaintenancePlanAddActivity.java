@@ -83,6 +83,8 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
     private String name1 = "";
     private String name2 = "";
 
+    private boolean isTimePass;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -217,15 +219,18 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                         Date d = new Date();
                         try {
+                            isTimePass = false;
                             d = sdf.parse(dateString);
                             long t = d.getTime();
                             long cl = System.currentTimeMillis();
 
                             if (cl > t) {
-                                showToast("选择日期应大于当前日期！");
-                                return;
+                                isTimePass = false;
                             }
-                            tv_plan_date.setText(dateString);
+                            else {
+                                isTimePass = true;
+                            }
+                            tv_time.setText(dateString);
                             dialog.dismiss();
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -393,12 +398,14 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
                 tv_addplan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        new AlertDialog.Builder(MaintenancePlanAddActivity.this).setTitle("确认添加计划继续吗？")
+                        new AlertDialog.Builder(MaintenancePlanAddActivity.this).setTitle("确认添加计划吗？")
                                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        if(isTimePass)
                                         requestAddMaintOrderProcess();
+                                        else showToast("选择日期应大于当前日期！");
                                     }
                                 })
                                 .setNegativeButton("返回", new DialogInterface.OnClickListener() {

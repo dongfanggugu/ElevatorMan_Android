@@ -1,7 +1,5 @@
 package com.honyum.elevatorMan.net.base;
 
-import org.apache.http.client.protocol.RequestDefaultHeaders;
-
 /**
  * Created by Star on 2017/6/9.   包装RequestHead 变成链式
  */

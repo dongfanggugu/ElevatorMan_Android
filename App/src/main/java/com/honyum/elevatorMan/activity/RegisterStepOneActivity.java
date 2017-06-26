@@ -25,6 +25,7 @@ import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.data.City;
 import com.honyum.elevatorMan.data.CityInfo;
 import com.honyum.elevatorMan.data.Province;
+import com.honyum.elevatorMan.net.RegisterCompanyRequest;
 import com.honyum.elevatorMan.net.RegisterPropertyRequest;
 import com.honyum.elevatorMan.net.RegisterRequest;
 import com.honyum.elevatorMan.net.base.NetConstant;
@@ -45,6 +46,8 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
 
     private TextView tvCity;
 
+    private EditText tv_phonenum;
+
     /**
      * begin:用来处理长按事件的标记参数
      **/
@@ -60,6 +63,7 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
     private int mLastMotionY = 0;
 
     private static final int TOUCH_SLOP = 20;
+    private EditText et_company_name;
 
     /**
      * end:用来处理长按事件的标记参数
@@ -76,20 +80,24 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
         dialog.setCancelable(false);
 
         dialog.setTitle("选择注册类型");
-        dialog.setItems(new String[]{"维修工注册", "物业注册", "取消"}, new DialogInterface.OnClickListener() {
+        dialog.setItems(new String[]{"企业管理人员","维修工注册", "物业注册", "取消"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 switch (which) {
                     case 0:
+                        setContentView(R.layout.activity_register_company);
+                        initView0();
+                        break;
+                    case 1:
                         setContentView(R.layout.activity_register);
                         initView();
                         break;
-                    case 1:
+                    case 2:
                         setContentView(R.layout.activity_register_property);
                         initView1();
                         break;
-                    case 2:
+                    case 3:
                         finish();
                         break;
                 }
@@ -99,6 +107,90 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
         });
 
         dialog.create().show();
+    }
+
+    private void initView0() {
+        initTitleBar();
+
+
+
+        final EditText etUserName = (EditText) findViewById(R.id.et_user_name);
+        final EditText etPwd = (EditText) findViewById(R.id.et_pwd);
+        final EditText etPwdConfirm = (EditText) findViewById(R.id.et_pwd_confirm);
+
+        et_company_name = (EditText)findViewById(R.id.et_company_name);
+
+        tv_phonenum = (EditText) findViewById(R.id.et_phonenum);
+        findViewById(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerCompany(tv_phonenum.getText().toString(),
+                        etUserName.getText().toString(),
+                        et_company_name.getText().toString(),
+                        etPwd.getText().toString(),etPwdConfirm.getText().toString());
+            }
+        });
+
+
+
+
+    }
+
+    private void registerCompany(final String tel, String userName, String company, String pwd, String rePwd) {
+        if (TextUtils.isEmpty(tel) || TextUtils.isEmpty(userName)
+                || TextUtils.isEmpty(tel) || TextUtils.isEmpty(company)||TextUtils.isEmpty(pwd)||TextUtils.isEmpty(rePwd)) {
+            showToast("注册信息不能为空");
+            return;
+        }
+        if (!Utils.isMobileNumber(tel)) {
+            showToast("手机号码格式不正确");
+            return;
+        }
+        //密码和确认密码需要一致
+        if (!isSame(pwd, rePwd)) {
+            showToast(getString(R.string.register_pwd_diff));
+            return;
+        }
+        String server = getConfig().getServer() + NetConstant.REG_COMPANY;
+
+        RegisterCompanyRequest request = new RegisterCompanyRequest();
+        RequestHead head = new RequestHead();
+        RegisterCompanyRequest.RegisterCompanyBody body = request.new RegisterCompanyBody();
+
+        head.setAccessToken(getConfig().getToken());
+        head.setUserId(getConfig().getUserId());
+
+        body.setName(userName);
+        body.setCompanyName(company);
+        body.setTel(tel);
+        body.setPassword(EncryptUtils.encryptMD5(pwd));
+
+        request.setHead(head);
+        request.setBody(body);
+
+        NetTask netTask = new NetTask(server, request) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                showSuccessDialog1(tel);
+            }
+        };
+
+        addTask(netTask);
+    }
+
+    private void showSuccessDialog1(String tel) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("注册成功");
+        builder.setItems(new String[]{"公司账号", "用户名为：" + tel}, null);
+
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                onBackPressed();
+            }
+        });
+
+        builder.create().show();
     }
 
     /**

@@ -2,14 +2,15 @@ package com.honyum.elevatorMan.activity.worker;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.adapter.FixTaskDetailListAdapter;
 import com.honyum.elevatorMan.base.BaseActivityWraper;
@@ -27,6 +28,7 @@ import com.honyum.elevatorMan.view.MyListView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -71,6 +73,8 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
     ImageView ivOverview;
     @BindView(R.id.ll_full_screen)
     LinearLayout llFullScreen;
+    @BindView(R.id.line)
+    View line;
     private FixInfo mFixInfo;
     private List<FixTaskInfo> mFixTasks;
     private FixTaskDetailListAdapter mFixTaskDetailListAdapter;
@@ -91,7 +95,10 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
         tvBreaktype.setText(getString(R.string.breaktype) + mFixInfo.getRepairTypeInfo().getName());
         etRemark.setFocusable(false);
         etRemark.setText(mFixInfo.getRepairTypeInfo().getContent());
-        new GetPicture(mFixInfo.getPicture(), ivImage1).execute();
+        if(StringUtils.isNotEmpty(mFixInfo.getPicture())) {
+            ivImage1.setVisibility(View.VISIBLE);
+            new GetPicture(mFixInfo.getPicture(), ivImage1).execute();
+        }
         tvVillAddress.setText(getString(R.string.vill_address) + mFixInfo.getVillaInfo().getCellName());
         tvEveBrand.setText("品牌：" + mFixInfo.getVillaInfo().getBrand());
         eveWeight.setText(getString(R.string.eve_weight) + mFixInfo.getVillaInfo().getWeight() + "KG");
@@ -99,15 +106,23 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
         ivImage1.setDrawingCacheEnabled(true);
         int state = Integer.valueOf(mFixInfo.getState());
         tvLookEva.setVisibility(View.GONE);
-        if (state > 8) {
+
+        if (state == 8) {
             tvNexttime.setVisibility(View.GONE);
             tvPaybill.setVisibility(View.GONE);
-            tvLookEva.setVisibility(View.VISIBLE);
+            tvLookEva.setVisibility(View.GONE);
 
-        } else if (state < 8) {
+        } else if (state == 7) {
             tvNexttime.setVisibility(View.VISIBLE);
             tvPaybill.setVisibility(View.VISIBLE);
             tvLookEva.setVisibility(View.GONE);
+        } else if (state == 9) {
+            tvNexttime.setVisibility(View.GONE);
+            tvPaybill.setVisibility(View.GONE);
+            tvLookEva.setVisibility(View.VISIBLE);
+        } else {
+            tvNexttime.setVisibility(View.VISIBLE);
+            tvPaybill.setVisibility(View.VISIBLE);
         }
 
 
@@ -120,7 +135,9 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
      */
 
     private void showPreviewImage(ImageView image1) {
-        ivOverview.setImageBitmap(Bitmap.createBitmap(image1.getDrawingCache()));
+        String filePath = (String) image1.getTag(R.id.file_path);
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        ((ImageView) findViewById(R.id.iv_overview)).setImageBitmap(bitmap);
         llFullScreen.setVisibility(View.VISIBLE);
         image1.setDrawingCacheEnabled(false);
         image1.setDrawingCacheEnabled(true);
@@ -227,8 +244,10 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
         bundle.putSerializable("Fixdata", mFixInfo);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
 
     }
+
 
 
 }

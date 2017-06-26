@@ -41,7 +41,7 @@ public class RescuHisListActivity extends BaseActivityWraper implements ListItem
     @Override
     protected void onResume() {
         super.onResume();
-        requestAlarmListInfo("3");
+        requestAlarmListInfo("1");
     }
 
     @Override

@@ -129,6 +129,7 @@ public abstract class BaseActivityWraper extends BaseFragmentActivity {
                 Bitmap bitmap = Utils.getImageFromFile(new File(result));
                 if (bitmap != null) {
                     mImageView.setImageBitmap(bitmap);
+                    mImageView.setTag(R.id.file_path,result);
                 } else {
                     //mImageView.setImageResource(R.drawable.icon_person);
                 }

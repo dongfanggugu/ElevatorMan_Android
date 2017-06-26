@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="device_sn">序列号</string>
+    <string name="device_ip">局域网Ip</string>
+    <string name="device_port">端口</string>
+    <string name="device_user">用户名</string>
+    <string name="device_password">密码</string>
+    <string name="device_add">添加</string>
 
 
-    <string name="app_version">V1.42</string>
+    <string name="device">设备</string>
+    <string name="video">视频</string>
+    <string name="alarm">报警</string>
+    <string name="add_by_sn">序列号添加</string>
+    <string name="add_by_ip">IP/域名添加</string>
+
+
+    <string name="select_device">选择设备</string>
+    <string name="login_device">登录设备</string>
+    <string name="real_play">预览</string>
+
+    <string name="app_version">V1.43</string>
     <string name="app_name">梯美（管理）</string>
     <string name="hello_world">Hello world!</string>
     <string name="file_name">ElevatorMan</string>

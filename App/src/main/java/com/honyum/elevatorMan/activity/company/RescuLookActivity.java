@@ -98,9 +98,17 @@ public class RescuLookActivity extends BaseActivityWraper {
         {
             tvState.setText("当前状态：已撤销");
         }
-        else
+        else if(alarmInfo1.getState().equals("1") || alarmInfo1.getState().equals("2"))
+        {
+            tvState.setText("当前状态：救援中");
+        }
+        else if(alarmInfo1.getState().equals("3"))
         {
             tvState.setText("当前状态：已完成");
+        }
+        else if(alarmInfo1.getState().equals("0"))
+        {
+            tvState.setText("当前状态：待处理");
         }
 
     }
@@ -110,7 +118,7 @@ public class RescuLookActivity extends BaseActivityWraper {
     @Override
     protected void onResume() {
         super.onResume();
-        requestAlarmListInfo("1");
+        requestAlarmListInfo("2");
     }
 
     @Override
@@ -143,7 +151,7 @@ public class RescuLookActivity extends BaseActivityWraper {
                 GetAlarmListResponse response = GetAlarmListResponse.getAlarmListResponse(result);
                 mAlarmInfo1 = response.getBody();
                 //获取到了返回的信息
-                if (mAlarmInfo1 == null || mAlarmInfo1.size() == 0) {
+                if (mAlarmInfo1 == null) {
                     return;
                 }
                 groupbyState();
@@ -188,6 +196,7 @@ public class RescuLookActivity extends BaseActivityWraper {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_predetail:
+
                 AllSet();
                 tvPredetail.setTextColor(getResources().getColor(R.color.titleblue));
                 markAlarm(mpreDealAlarmInfo1, R.drawable.undefinedtask);
@@ -243,7 +252,17 @@ public class RescuLookActivity extends BaseActivityWraper {
             Bundle bundle = new Bundle();
             bundle.putSerializable("Info", info);
             locationMarker.setExtraInfo(bundle);
+            mMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    mMap.hideInfoWindow();
+                }
 
+                @Override
+                public boolean onMapPoiClick(MapPoi mapPoi) {
+                    return false;
+                }
+            });
             mMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
 
             @Override
@@ -259,6 +278,7 @@ public class RescuLookActivity extends BaseActivityWraper {
 
     public void AllSet() {
         mMap.clear();
+        ll_data.setVisibility(View.GONE);
         tvPredetail.setTextColor(Color.BLACK);
         tvSaving.setTextColor(Color.BLACK);
         tvCanceled.setTextColor(Color.BLACK);

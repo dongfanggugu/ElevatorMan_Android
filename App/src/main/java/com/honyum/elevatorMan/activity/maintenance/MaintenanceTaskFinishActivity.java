@@ -39,7 +39,6 @@ import java.util.Date;
  * Created by Star on 2017/6/10.
  */
 
-//TODO 缺少图片查看，上传功能。
 
 public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
 
@@ -124,7 +123,7 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
             showImage(dirPath, imageView, delButton);
             String imgPath1 = (String) mImageView1.getTag(R.id.file_path);
             Log.e("TAG", "onActivityResult: " + imgPath1);
-            requestUploadImage(Utils.imgToStrByBase64(imgPath1), requestCode);
+            requestUploadImage(Utils.imgToStrByBase64(imgPath1), imgPath1,requestCode);
 
         } else if (2 == requestCode) {
             imageView = mImageView2;
@@ -133,7 +132,7 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
             showImage(dirPath, imageView, delButton);
             String imgPath2 = (String) mImageView2.getTag(R.id.file_path);
             Log.e("TAG", "onActivityResult: " + imgPath2);
-            requestUploadImage(Utils.imgToStrByBase64(imgPath2), requestCode);
+            requestUploadImage(Utils.imgToStrByBase64(imgPath2),imgPath2, requestCode);
 
         }
 
@@ -232,7 +231,7 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
                     saveImageData(imageView.getTag().toString(), "");
                 }
                 imageView.setTag(R.id.file_path, "");
-                imageView.setImageResource(R.drawable.icon_img_original);
+                imageView.setImageResource(R.drawable.defaut_image);
                 imageView.setOnClickListener(imageViewClickListener);
             }
         });
@@ -427,7 +426,7 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
     }
 
 
-    private void requestUploadImage(final String path, final int request) {
+    private void requestUploadImage(final String path, final String realPath, final int request) {
         NetTask task = new NetTask(getConfig().getServer() + NetConstant.UP_LOAD_IMG,
                 getImageRequestBean(getConfig().getUserId(), getConfig().getToken(), path)) {
             @Override
@@ -438,9 +437,9 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
                     showAppToast(getString(R.string.sucess));
                     if (request == 1) {
                         ai = url;
-                        saveImageData(path, url);
+                        saveImageData(realPath, url);
                     } else if (request == 2) {
-                        saveImageData(path, url);
+                        saveImageData(realPath, url);
                         bi = url;
                     }
                 }

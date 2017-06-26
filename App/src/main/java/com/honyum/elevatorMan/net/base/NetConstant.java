@@ -3,6 +3,12 @@ package com.honyum.elevatorMan.net.base;
 
 public class NetConstant {
 
+
+    /**
+     * 获取广告条
+     */
+    public static final String REG_COMPANY = "/registerMaintUser";
+
     /**
      * 获取广告条
      */

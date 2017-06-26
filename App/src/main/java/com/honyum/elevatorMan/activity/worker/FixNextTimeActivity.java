@@ -28,6 +28,7 @@ import com.honyum.elevatorMan.net.base.NewRequestHead;
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.Response;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -60,6 +61,7 @@ public class FixNextTimeActivity extends BaseActivityWraper {
     TextView tvSubmit;
     private BaiduMap mMap;
     private FixInfo mFixInfo;
+    private boolean isTimePass;
 
     @Override
     public String getTitleString() {
@@ -101,8 +103,24 @@ public class FixNextTimeActivity extends BaseActivityWraper {
                     public void onClick(DialogInterface dialog, int arg1) {
                         s1 = (datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth());
                         String dateString = s1 + s2;
-                        tvTime.setText(dateString);
-                        dialog.dismiss();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        Date d = new Date();
+                        try {
+                            d = sdf.parse(dateString);
+                            long t = d.getTime();
+                            long cl = System.currentTimeMillis();
+
+                            if (cl > t) {
+                                isTimePass = false;
+                            }
+                            else {
+                                isTimePass = true;
+                            }
+                            tvTime.setText(dateString);
+                            dialog.dismiss();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -112,23 +130,23 @@ public class FixNextTimeActivity extends BaseActivityWraper {
             }
         }).create();
         //end 组合控件
-        alertDialog = new AlertDialog.Builder(this).setTitle("选择时间").setView(dialogLayout).setPositiveButton("确定",
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int arg1) {
-                        s1 = (datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth());
-                        String dateString = s1 + s2;
-                        tvTime.setText(dateString);
-                        dialog.dismiss();
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int arg1) {
-                dialog.dismiss();
-            }
-        }).create();
+//        alertDialog = new AlertDialog.Builder(this).setTitle("选择时间").setView(dialogLayout).setPositiveButton("确定",
+//                new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int arg1) {
+//                        s1 = (datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth());
+//                        String dateString = s1 + s2;
+//                        tvTime.setText(dateString);
+//                        dialog.dismiss();
+//                    }
+//                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int arg1) {
+//                dialog.dismiss();
+//            }
+//        }).create();
         //end 组合控件
         tv_city.setText(mFixInfo.getVillaInfo().getCellName());
         long time = System.currentTimeMillis();
@@ -206,7 +224,10 @@ public class FixNextTimeActivity extends BaseActivityWraper {
         switch (view.getId()) {
 
             case R.id.tv_submit:
-                requestAddRepairOrderProcess();
+                if(isTimePass)
+                    requestAddRepairOrderProcess();
+                else showToast("选择日期应大于当前日期！");
+
                 break;
         }
     }

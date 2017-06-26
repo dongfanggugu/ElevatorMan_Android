@@ -41,6 +41,7 @@ public class MaintenanceTaskUnfinishActivity extends BaseFragmentActivity {
     private TextView tv_time;
     private TextView tv_submit;
     private EditText et_remark;
+    private boolean IsTimePass;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,11 +112,13 @@ public class MaintenanceTaskUnfinishActivity extends BaseFragmentActivity {
                             long cl = System.currentTimeMillis();
 
                             if (cl > t) {
-                                showToast("选择日期应大于当前日期！");
-                                return;
+                                IsTimePass = false;
+                                
                             }
-                            tv_time.setText(dateString);
-                            dialog.dismiss();
+                            else
+                                IsTimePass = true;
+                            
+                           
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -131,7 +134,9 @@ public class MaintenanceTaskUnfinishActivity extends BaseFragmentActivity {
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(IsTimePass)
                 requestMaintOrderProcessWorkerUnableFinish();
+                else showToast("选择日期应大于当前日期！");
             }
         });
     }

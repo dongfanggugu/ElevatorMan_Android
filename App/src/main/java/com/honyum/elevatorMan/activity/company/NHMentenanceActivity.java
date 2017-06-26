@@ -14,6 +14,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
@@ -182,7 +183,17 @@ public class NHMentenanceActivity extends BaseActivityWraper {
             Bundle bundle = new Bundle();
             bundle.putSerializable("Info", info);
             locationMarker.setExtraInfo(bundle);
+            mMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    mMap.hideInfoWindow();
+                }
 
+                @Override
+                public boolean onMapPoiClick(MapPoi mapPoi) {
+                    return false;
+                }
+            });
             mMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
 
                 @Override

@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+              android:orientation="vertical"
+             tools:context="com.hbzh.sdkexample.VedioFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择设备:"
+            android:textSize="18dp"/>
+
+        <Spinner
+            android:id="@+id/device_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+    <!-- 视口 -->
+    <com.hanbang.playsdk.PlaySurfaceView
+        android:id="@+id/video_surface"
+        android:layout_width="352dp"
+        android:layout_height="288dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/layout_select_device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btn_login_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/login_device"/>
+
+        <Button
+            android:id="@+id/btn_realplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:text="@string/real_play"/>
+
+        <Button
+            android:id="@+id/btn_get_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:text="查询"/>
+
+        <Button
+            android:id="@+id/btn_play_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:text="回放"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/play_file"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:textSize="15sp"/>
+
+</LinearLayout>

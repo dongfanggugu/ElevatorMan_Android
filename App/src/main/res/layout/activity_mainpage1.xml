@@ -131,6 +131,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_evemall"
                                 android:text="怡墅维保" />
                         </LinearLayout>
                         <View
@@ -151,6 +152,7 @@
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/fix_nicehouse" />
                             <TextView
+                                android:id="@+id/tv_nhfix"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="怡墅维修" />

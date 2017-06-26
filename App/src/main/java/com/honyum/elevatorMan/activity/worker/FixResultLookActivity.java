@@ -1,7 +1,5 @@
 package com.honyum.elevatorMan.activity.worker;
 
-import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -9,12 +7,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.base.BaseActivityWraper;
 import com.honyum.elevatorMan.data.FixTaskInfo;
+import com.honyum.elevatorMan.utils.Utils;
+
+import java.io.File;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -105,7 +106,10 @@ public class FixResultLookActivity extends BaseActivityWraper {
      */
 
     private void showPreviewImage(ImageView image1) {
-        ivOverview.setImageBitmap(Bitmap.createBitmap(image1.getDrawingCache()));
+
+        String s = (String) image1.getTag(R.id.file_path);
+        if(StringUtils.isNotEmpty(s))
+        ivOverview.setImageBitmap(Utils.getImageFromFile(new File(s)));
         llFullScreen.setVisibility(View.VISIBLE);
         image1.setDrawingCacheEnabled(false);
         image1.setDrawingCacheEnabled(true);

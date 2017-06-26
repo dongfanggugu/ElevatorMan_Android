@@ -137,7 +137,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_size_10"
+                    android:layout_margin="@dimen/size_10dp"
                     android:text="@string/break_ima"
                     android:textColor="@color/frontgray" />
 
@@ -145,23 +145,77 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <FrameLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/text_size_10"
+                        android:layout_margin="@dimen/size_5dp"
                         android:padding="5dp">
 
                         <ImageView
                             android:id="@+id/iv_image1"
                             android:layout_width="60dp"
                             android:layout_height="80dp"
+                            android:visibility="gone"
                             android:layout_marginRight="6dp"
                             android:layout_marginTop="6dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/defaut_image" />
                     </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/size_5dp"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/iv_image2"
+                            android:layout_width="60dp"
+                            android:layout_height="80dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_marginTop="6dp"
+                            android:visibility="gone"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/defaut_image" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/size_5dp"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/iv_image3"
+                            android:layout_width="60dp"
+                            android:layout_height="80dp"
+                            android:visibility="gone"
+                            android:layout_marginRight="6dp"
+                            android:layout_marginTop="6dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/defaut_image" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/size_5dp"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/iv_image4"
+                            android:layout_width="60dp"
+                            android:visibility="gone"
+                            android:layout_height="80dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_marginTop="6dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/defaut_image" />
+                    </FrameLayout>
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -250,6 +304,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
+                android:id="@+id/line"
                 android:background="@color/backgray" />
 
             <RelativeLayout

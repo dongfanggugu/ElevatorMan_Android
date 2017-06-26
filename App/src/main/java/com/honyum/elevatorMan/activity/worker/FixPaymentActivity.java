@@ -130,6 +130,10 @@ public class FixPaymentActivity extends BaseActivityWraper implements ListItemCa
                     tvMoneycount.setText(countMoney() + "");
                     mFixPaymentAdapter.notifyDataSetChanged();
                 }
+                else
+                {
+                    showToast("请输入合法金额!");
+                }
 
             }
         });

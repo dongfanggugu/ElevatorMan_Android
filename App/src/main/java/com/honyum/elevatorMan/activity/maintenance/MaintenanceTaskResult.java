@@ -2,6 +2,7 @@ package com.honyum.elevatorMan.activity.maintenance;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -93,7 +94,9 @@ public class MaintenanceTaskResult extends BaseFragmentActivity {
      */
 
     private void showPreviewImage(ImageView image1) {
-        ivOverview.setImageBitmap(Bitmap.createBitmap(image1.getDrawingCache()));
+        String filePath = (String) image1.getTag(R.id.file_path);
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        ((ImageView) findViewById(R.id.iv_overview)).setImageBitmap(bitmap);
         llFullScreen.setVisibility(View.VISIBLE);
         image1.setDrawingCacheEnabled(false);
         image1.setDrawingCacheEnabled(true);
@@ -144,6 +147,7 @@ public class MaintenanceTaskResult extends BaseFragmentActivity {
                 Bitmap bitmap = Utils.getImageFromFile(new File(result));
                 if (bitmap != null) {
                     mImageView.setImageBitmap(bitmap);
+                    mImageView.setTag(R.id.file_path,result);
                 } else {
                     mImageView.setImageResource(R.drawable.defaut_image);
                 }

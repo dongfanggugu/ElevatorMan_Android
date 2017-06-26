@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.hbzh.sdkexample.MainActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/radio_group"
+        android:background="#B0B0B0"/>
+
+    <!--Tab按钮布局-->
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_btn_device"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/device"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/radio_group"
+            android:background="#B0B0B0"/>
+
+        <RadioButton
+            android:id="@+id/radio_btn_video"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/video"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/radio_group"
+            android:background="#B0B0B0"/>
+
+        <RadioButton
+            android:id="@+id/radio_btn_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/alarm"/>
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_above="@+id/radio_group">
+
+        <fragment
+            android:id="@+id/device_fragment"
+            android:name="com.hbzh.sdkexample.DeivceListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <fragment
+            android:id="@+id/vedio_fragment"
+            android:name="com.hbzh.sdkexample.VedioFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <fragment
+            android:id="@+id/alarm_fragment"
+            android:name="com.hbzh.sdkexample.AlarmFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
+
+</RelativeLayout>

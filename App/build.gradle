@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 android {
+    repositories {
+        flatDir {
+            dirs '../ydtlibrary/libs'
+        }
+    }
     signingConfigs {
         release {
             storeFile file('key/honyum.keystore')
@@ -14,7 +19,6 @@ android {
     }
     compileSdkVersion 21
     buildToolsVersion '21.1.2'
-
     defaultConfig {
         applicationId "com.honyum.elevatorMan"
         minSdkVersion 15
@@ -59,4 +63,5 @@ dependencies {
     compile project(':HandPaint')
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    //compile project(':ydtlibrary')
 }

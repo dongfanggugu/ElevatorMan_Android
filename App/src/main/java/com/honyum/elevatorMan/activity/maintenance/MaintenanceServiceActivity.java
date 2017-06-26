@@ -3,6 +3,7 @@ package com.honyum.elevatorMan.activity.maintenance;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.honyum.elevatorMan.net.base.RequestBean;
 import java.util.List;
 
 import static com.honyum.elevatorMan.net.base.NetConstant.ADD_STATE;
+import static com.honyum.elevatorMan.net.base.NetConstant.START_STATE;
 
 public class MaintenanceServiceActivity extends BaseFragmentActivity implements View.OnClickListener,ListItemCallback<MaintenanceTaskInfo> {
 
@@ -42,6 +44,7 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
     private ListView lv_detail;
     private MSTaskListAdapter mAdapter;
     private TextView tv_typename;
+    private TextView tv_detail;
 
 
     @Override
@@ -57,12 +60,15 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
         //tv_cellname
         tv_cellname = (TextView) findViewById(R.id.tv_cellname);
         tv_main_type = (TextView) findViewById(R.id.tv_main_type);
+        findViewById(R.id.tv_detail).setOnClickListener(this);
         //tv_main_type  left_time  bt_selectPos
         left_time = (TextView) findViewById(R.id.left_time);
         lv_detail = (ListView) findViewById(R.id.lv_detail);
         findViewById(R.id.tv_plan).setOnClickListener(this);
         findViewById(R.id.bt_selectPos).setOnClickListener(this);
         tv_typename = (TextView) findViewById(R.id.tv_typename);
+        findViewById(R.id.tv_callnumber).setOnClickListener(this);
+
         
     }
   //1-2 到期时间  3 是剩余次数
@@ -236,6 +242,34 @@ public class MaintenanceServiceActivity extends BaseFragmentActivity implements 
             case R.id.tv_plan:
                 junmpToAddServicePlan();
                 break;
+            case R.id.tv_detail:
+
+                Intent intent = new Intent(this, MaintenanceDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Info", currInfo);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                break;
+            case R.id.tv_callnumber:
+                if(currInfo.getVillaInfo().getContactsTel()!="") {
+                    new AlertDialog.Builder(MaintenanceServiceActivity.this).setTitle("呼出:"+currInfo.getVillaInfo().getContactsTel())
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent1 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + currInfo.getVillaInfo().getContactsTel()));
+                                    startActivity(intent1);
+                                }
+                            })
+                            .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+
+                }
+
         }
     }
 

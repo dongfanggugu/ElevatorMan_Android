@@ -24,6 +24,8 @@ public class Config implements Serializable {
 
     private Editor mEditor;
 
+    private String baseUrl = "http://www.chorstar.com:8081";
+    //private String baseUrl = "http://192.168.0.82:8080";
 
     public Config(Context context) {
         mPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
@@ -59,8 +61,22 @@ public class Config implements Serializable {
      */
     public String getServer() {
 
-        //return "http://192.168.0.82:8080/mobile";
-       return "http://www.chorstar.com:8081/mobile";
+        return baseUrl+"/mobile";
+      // return "http://www.chorstar.com:8081/mobile";
+
+//        String region = getRegion();
+//        String server = Constant.SERVER_LIST.get(region);
+//
+//        if (StringUtils.isEmpty(server)) {
+//            server = Constant.SERVER_LIST.get(Constant.BEIJING);
+//        }
+//
+//        return server;
+    }
+    public String getPCServer() {
+
+        return baseUrl;
+        // return "http://www.chorstar.com:8081/mobile";
 
 //        String region = getRegion();
 //        String server = Constant.SERVER_LIST.get(region);

@@ -86,9 +86,10 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
     @Override
     protected void initView() {
         initPublicPath();
-        mFixTaskInfo = getIntent("Info");
+
         mFixInfo = getIntent("Fixdata");
-        currId = mFixTaskInfo.getId();
+
+       // Log.e("TAG", "initView: "+mFixTaskInfo.getState()+"!!!"+mFixInfo.getState() );
         if(mFixInfo.getState().equals("7"))
         {
             tvFixComplete1.setVisibility(View.VISIBLE);
@@ -197,7 +198,7 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
                     di = "";
                     saveImageData(filePath,"");
                 }
-                imageView.setImageResource(R.drawable.icon_img_original);
+                imageView.setImageResource(R.drawable.defaut_image);
                 imageView.setOnClickListener(imageViewClickListener);
             }
         });
@@ -209,8 +210,8 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
      * @param
      */
     private void initPublicPath() {
-        Intent it = getIntent();
-        currId = it.getStringExtra("Id");
+        mFixTaskInfo = getIntent("Info");
+        currId = mFixTaskInfo.getId();
         String sdPath = Utils.getSdPath();
 
         if (null == sdPath) {
@@ -254,7 +255,7 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
             showImage(dirPath, imageView, delButton);
             String imgPath1 = (String) ivImage1.getTag(R.id.file_path);
             Log.e("TAG", "onActivityResult: " + imgPath1);
-            requestUploadImage(Utils.imgToStrByBase64(imgPath1),requestCode);
+            requestUploadImage(Utils.imgToStrByBase64(imgPath1),imgPath1,requestCode);
 
         } else if (2 == requestCode) {
             imageView = ivImage2;
@@ -263,7 +264,7 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
             showImage(dirPath, imageView, delButton);
             String imgPath2 = (String) ivImage2.getTag(R.id.file_path);
             Log.e("TAG", "onActivityResult: " + imgPath2);
-            requestUploadImage(Utils.imgToStrByBase64(imgPath2),requestCode);
+            requestUploadImage(Utils.imgToStrByBase64(imgPath2),imgPath2,requestCode);
 
         } else if (3 == requestCode) {
             imageView = ivImage3;
@@ -272,7 +273,7 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
             showImage(dirPath, imageView, delButton);
             String imgPath2 = (String) ivImage3.getTag(R.id.file_path);
             Log.e("TAG", "onActivityResult: " + imgPath2);
-            requestUploadImage(Utils.imgToStrByBase64(imgPath2),requestCode);
+            requestUploadImage(Utils.imgToStrByBase64(imgPath2),imgPath2,requestCode);
 
         } else if (4 == requestCode) {
             imageView = ivImage4;
@@ -281,7 +282,7 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
             showImage(dirPath, imageView, delButton);
             String imgPath2 = (String) ivImage4.getTag(R.id.file_path);
             Log.e("TAG", "onActivityResult: " + imgPath2);
-            requestUploadImage(Utils.imgToStrByBase64(imgPath2),requestCode);
+            requestUploadImage(Utils.imgToStrByBase64(imgPath2),imgPath2,requestCode);
 
         }
 
@@ -398,7 +399,7 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
 
 
                 imageView.setTag(R.id.file_path, "");
-                imageView.setImageResource(R.drawable.icon_img_original);
+                imageView.setImageResource(R.drawable.defaut_image);
                 imageView.setOnClickListener(imageViewClickListener);
             }
         });
@@ -509,7 +510,7 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
     }
 
 
-    private void requestUploadImage(final String path, final int request) {
+    private void requestUploadImage(final String path,final String realPath ,final int request) {
         NetTask task = new NetTask(getConfig().getServer() + NetConstant.UP_LOAD_IMG,
                 getImageRequestBean(getConfig().getUserId(), getConfig().getToken(), path)) {
             @Override
@@ -521,22 +522,22 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
                     if(request == 1)
                     {
                         ai = url;
-                        saveImageData(path,url);
+                        saveImageData(realPath,url);
                     }
                     else if(request == 2)
                     {
                         bi = url;
-                        saveImageData(path,url);
+                        saveImageData(realPath,url);
                     }
                     else if(request == 3)
                     {
                         ci = url;
-                        saveImageData(path,url);
+                        saveImageData(realPath,url);
                     }
                     else if(request == 4)
                     {
                         di = url;
-                        saveImageData(path,url);
+                        saveImageData(realPath,url);
                     }
                 }
                 //Log.e("!!!!!!!!!!!!!!", "onResponse: "+ msInfoList.get(0).getMainttypeId());
