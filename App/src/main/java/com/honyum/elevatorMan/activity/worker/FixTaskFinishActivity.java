@@ -112,12 +112,12 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
 
         Button button1 = (Button) findViewById(R.id.btn_del_1);
         Button button2 = (Button) findViewById(R.id.btn_del_2);
-        button1.setTag(1);
-        button2.setTag(2);
+        button1.setTag(R.id.index,1);
+        button2.setTag(R.id.index,2);
         Button button3 = (Button) findViewById(R.id.btn_del_3);
         Button button4 = (Button) findViewById(R.id.btn_del_4);
-        button3.setTag(3);
-        button4.setTag(4);
+        button3.setTag(R.id.index,3);
+        button4.setTag(R.id.index,4);
         loadPicture(mPublicPath + "/1/", ivImage1, button1);
         loadPicture(mPublicPath + "/2/", ivImage2, button2);
         loadPicture(mPublicPath + "/3/", ivImage3, button3);
@@ -178,22 +178,22 @@ public class FixTaskFinishActivity extends BaseActivityWraper {
                 file.delete();
 
                 delButton.setVisibility(View.GONE);
-                if( (int)delButton.getTag() == 1)
+                if( (int)delButton.getTag(R.id.index) == 1)
                 {
                     ai = "";
                     saveImageData(filePath,"");
                 }
-                else if((int)delButton.getTag()  == 2)
+                else if((int)delButton.getTag(R.id.index)  == 2)
                 {
                     bi = "";
                     saveImageData(filePath,"");
                 }
-                else if((int)delButton.getTag()  == 3)
+                else if((int)delButton.getTag(R.id.index)  == 3)
                 {
                     ci = "";
                     saveImageData(filePath,"");
                 }
-                else if((int)delButton.getTag()  == 4)
+                else if((int)delButton.getTag(R.id.index)  == 4)
                 {
                     di = "";
                     saveImageData(filePath,"");

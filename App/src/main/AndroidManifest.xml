@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.chorstar.enterOwner"
-    android:versionCode="143"
+    package="com.honyum.elevatorMan"
+    android:versionCode="144"
     android:versionName="@string/app_version">
 
     <uses-sdk
@@ -10,6 +10,9 @@
         android:targetSdkVersion="21"
         tools:overrideLibrary="com.hbzh.ydtlibrary"
         />
+    <!-- 音频权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -33,10 +36,10 @@
 
     <!-- JPush权限 -->
     <permission
-        android:name="com.honyum.elevatorMan.permission.JPUSH_MESSAGE"
+        android:name="com.chorstar.enterOwner.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.honyum.elevatorMan.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="com.chorstar.enterOwner.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -65,7 +68,8 @@
         android:name="com.honyum.elevatorMan.base.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo2"
-        android:label="@string/app_name"
+        android:label="@string/app1_name"
+        tools:replace="android:label"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -101,56 +105,56 @@
             android:name="com.honyum.elevatorMan.activity.worker.RescuProcessActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.RescuSubmitActivity"
+            android:name=".activity.worker.RescuSubmitActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.AlarmListActivity"
+            android:name=".activity.worker.AlarmListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.PropertyActivity"
+            android:name=".activity.property.PropertyActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.BuildingListActivity"
+            android:name=".activity.property.BuildingListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.ElevatorMallActivity"
+            android:name=".activity.property.ElevatorMallActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.EMdtpjActivity"
+            android:name=".activity.property.EMdtpjActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.LiftMessageActivity"
+            android:name=".activity.property.LiftMessageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.MarketWebViewActivity"
+            android:name=".activity.property.MarketWebViewActivity"
             android:screenOrientation="portrait" />
 
 
         <activity
 
-            android:name="com.honyum.elevatorMan.activity.property.ElevatorListActivity"
+            android:name=".activity.property.ElevatorListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.AlarmTraceActivity"
+            android:name=".activity.property.AlarmTraceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.PropertyAlarmListActivity"
+            android:name=".activity.property.PropertyAlarmListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.EasyAlarmActivity"
+            android:name=".activity.property.EasyAlarmActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.ProHistoryActivity"
+            android:name=".activity.property.ProHistoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.WorkerHistoryActivity"
+            android:name=".activity.worker.WorkerHistoryActivity"
             android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-        <service android:name="com.honyum.elevatorMan.service.LocationService" />
+        <service android:name=".service.LocationService" />
         <!-- <service android:name=".service.TimerService"/> -->
 
 
@@ -166,7 +170,7 @@
                 <action android:name="cn.jpush.android.ui.PushActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.honyum.elevatorMan" />
+                <category android:name="com.chorstar.enterOwner" />
             </intent-filter>
         </activity>
         <!-- Required  SDK核心功能 -->
@@ -195,7 +199,7 @@
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
 
-                <category android:name="com.honyum.elevatorMan" />
+                <category android:name="com.chorstar.enterOwner" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -212,7 +216,7 @@
 
         <!-- User defined.  For test only  用户自定义的广播接收器 -->
         <receiver
-            android:name="com.honyum.elevatorMan.receiver.JPushMsgReceiver"
+            android:name=".receiver.JPushMsgReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
@@ -228,7 +232,7 @@
                 <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <category android:name="com.honyum.elevatorMan" />
+                <category android:name="com.chorstar.enterOwner" />
             </intent-filter>
         </receiver>
 
@@ -241,16 +245,16 @@
             android:value="developer-default" />
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="e7294fdb57006cab22fa3655" />
+            android:value="994e4ff535ba5c479fa49c7e" />
 
         <!-- END:JPush定义组件 -->
         <service
-            android:name="com.honyum.elevatorMan.service.RemindService"
+            android:name=".service.RemindService"
             android:enabled="true"
             android:exported="true" />
 
         <receiver
-            android:name="com.honyum.elevatorMan.receiver.RemindReceiver"
+            android:name=".receiver.RemindReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -261,44 +265,44 @@
         </receiver>
 
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.MyLiftActivity"
+            android:name=".activity.maintenance.MyLiftActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.SettingsActivity"
+            android:name=".activity.maintenance.SettingsActivity"
 
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.MaintenanceTaskResult"
+            android:name=".activity.maintenance.MaintenanceTaskResult"
 
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.MaintenanceEvaResult"
+            android:name=".activity.maintenance.MaintenanceEvaResult"
 
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.FixOrderListActivity"
+            android:name=".activity.worker.FixOrderListActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.MaintenanceActivity"
+            android:name=".activity.maintenance.MaintenanceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.PlanActivity"
+            android:name=".activity.maintenance.PlanActivity"
             android:label="@string/title_activity_plan"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.RegisterStepOneActivity"
+            android:name=".activity.RegisterStepOneActivity"
             android:label="@string/title_activity_register"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.RegisterStepTwoActivity"
+            android:name=".activity.RegisterStepTwoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.PropertyMaintenanceActivity"
+            android:name=".activity.property.PropertyMaintenanceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.ProMainDetailActivity"
+            android:name=".activity.property.ProMainDetailActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -309,217 +313,236 @@
             android:value="Tcp2zHAW09w4RMQBFfdid0Wv" />
 
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.MainHelpActivity"
+            android:name=".activity.maintenance.MainHelpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.PersonActivity"
+            android:name=".activity.common.PersonActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.PersonBasicInfoActivity"
+            android:name=".activity.common.PersonBasicInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.PersonModifyActivity"
+            android:name=".activity.common.PersonModifyActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.PersonIconPopActivity"
+            android:name=".activity.common.PersonIconPopActivity"
             android:screenOrientation="portrait"
             android:theme="@style/PopBottom" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.PicturePickActivity"
+            android:name=".activity.PicturePickActivity"
             android:screenOrientation="portrait"
             android:theme="@style/PopBottom" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.ResetPasswordActivity"
+            android:name=".activity.common.ResetPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.LiftKnowledgeActivity"
+            android:name=".activity.worker.LiftKnowledgeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.knowledge.TitleListActivity"
+            android:name=".activity.knowledge.TitleListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.knowledge.KnContentActivity"
+            android:name=".activity.knowledge.KnContentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.MainpageActivity"
+            android:name=".activity.common.MainpageActivity"
             android:label="@string/title_activity_mainpage"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.MainPage1Activity"
+            android:name=".activity.common.MainPage1Activity"
             android:label="@string/title_activity_mainpage"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.MaintenanceManagerActivity"
+            android:name=".activity.maintenance.MaintenanceManagerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.MaintenanceTaskFinishActivity"
+            android:name=".activity.maintenance.MaintenanceTaskFinishActivity"
             android:label="@string/title_activity_maintenance_manager"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.MaintenanceDetailActivity"
+            android:name=".activity.maintenance.MaintenanceDetailActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.MaintenanceTaskUnfinishActivity"
+            android:name=".activity.maintenance.MaintenanceTaskUnfinishActivity"
             android:label="@string/title_activity_maintenance_manager"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.MaintenancePlanAddActivity"
+            android:name=".activity.maintenance.MaintenancePlanAddActivity"
             android:label="@string/title_activity_maintenance_manager"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.LiftActivity"
+            android:name=".activity.maintenance.LiftActivity"
             android:label="@string/title_activity_lift"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.LiftDetailActivity"
+            android:name=".activity.maintenance.LiftDetailActivity"
             android:label="@string/title_activity_lift_detail"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.LiftPlanActivity"
+            android:name=".activity.maintenance.LiftPlanActivity"
             android:label="@string/title_activity_lift_plan"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance.LiftCompleteActivity"
+            android:name=".activity.maintenance.LiftCompleteActivity"
             android:label="@string/title_activity_lift_complete"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.NavigationActivity"
+            android:name=".activity.common.NavigationActivity"
             android:label="@string/title_activity_navigation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.NousDetailActivity"
+            android:name=".activity.common.NousDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.NousActivity"
+            android:name=".activity.common.NousActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.HelpCenterActivity"
+            android:name=".activity.common.HelpCenterActivity"
             android:label="@string/title_activity_help_center"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.AddressActivity"
+            android:name=".activity.common.AddressActivity"
             android:label="@string/title_activity_address"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.AddSelActivity"
+            android:name=".activity.common.AddSelActivity"
             android:label="@string/title_activity_add_sel"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.SettingsActivity"
+            android:name=".activity.common.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.AlarmDetailActivity"
+            android:name=".activity.worker.AlarmDetailActivity"
             android:label="@string/title_activity_alarm_detail"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.AboutActivity"
+            android:name=".activity.common.AboutActivity"
             android:label="@string/title_activity_about"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.maintenance_1.MaintenanceActivity"
+            android:name=".activity.maintenance_1.MaintenanceActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.ChatActivity"
+            android:name=".activity.common.ChatActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.PropertyMainPageActivity"
+            android:name=".activity.property.PropertyMainPageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.NearMaintenanceActivity"
+            android:name=".activity.property.NearMaintenanceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.PermanentAddressActivity"
+            android:name=".activity.common.PermanentAddressActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.AddPermanentAddressActivity"
+            android:name=".activity.property.AddPermanentAddressActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.RepairOrderActivity"
+            android:name=".activity.worker.RepairOrderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.RepairInfoActivity"
+            android:name=".activity.worker.RepairInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.FixDetailActivity"
+            android:name=".activity.worker.FixDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.FixEvaLookActivity"
+            android:name=".activity.worker.FixEvaLookActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.FixTaskFinishActivity"
+            android:name=".activity.worker.FixTaskFinishActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.FixNextTimeActivity"
+            android:name=".activity.worker.FixNextTimeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.FixPaymentActivity"
+            android:name=".activity.worker.FixPaymentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.FixResultLookActivity"
+            android:name=".activity.worker.FixResultLookActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.worker.FixTaskActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.RescuLookActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.RescuHisListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.RescuHisDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.NHMentenanceOrderListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.NHMentenanceOrderDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.NHMentenanceActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.EMantenanceLookActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.EMentenanceHisListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.MainPageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.NHFixDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.NHFixOrderListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.honyum.elevatorMan.activity.company.NHFixActivity"
+            android:name=".activity.worker.FixTaskActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.honyum.elevatorMan.activity.company.EMentenanceListActivity"
+            android:name=".activity.company.RescuLookActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.company.EMantenanceDetailActivity"
+            android:name=".activity.company.RescuHisListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.company.NFMentenanceTaskDetailActivity"
+            android:name=".activity.company.RescuHisDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.honyum.elevatorMan.activity.property.AlarmHandleActivity"
+            android:name=".activity.company.NHMentenanceOrderListActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.honyum.elevatorMan.activity.common.PersonSignActivity"></activity>
         <activity
-            android:name="com.honyum.elevatorMan.activity.common.SecondActivity"
+            android:name=".activity.company.NHMentenanceOrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NHMentenanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.EMantenanceLookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.EMentenanceHisListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.MainPageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NHFixDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NHFixOrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NHFixActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.company.EMentenanceListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.EMantenanceDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.NFMentenanceTaskDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.AlarmHandleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.MainGroupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.MallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.company.MainPageGroupCompanyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.honyum.elevatorMan.hb.HBLookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.honyum.elevatorMan.activity.worker.AlarmLookActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.property.MainPropertyGroupActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.common.PersonSignActivity"></activity>
+        <activity
+            android:name=".activity.common.SecondActivity"
             android:screenOrientation="landscape" />
-        <activity android:name="com.honyum.elevatorMan.activity.property.MaintBackInfoActivity"></activity>
-        <activity android:name="com.honyum.elevatorMan.activity.maintenance.MaintenanceServiceActivity"></activity>
+        <activity android:name=".activity.property.MaintBackInfoActivity"></activity>
+        <activity android:name=".activity.maintenance.MaintenanceServiceActivity"></activity>
     </application>
 
 </manifest>

@@ -26,10 +26,12 @@ import android.widget.TextView;
 import com.baidu.navisdk.util.common.StringUtils;
 import com.example.viewtest.*;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.common.MainGroupActivity;
 import com.honyum.elevatorMan.activity.common.MainPage1Activity;
 import com.honyum.elevatorMan.activity.common.MainpageActivity;
 import com.honyum.elevatorMan.activity.common.ResetPasswordActivity;
 import com.honyum.elevatorMan.activity.company.MainPageActivity;
+import com.honyum.elevatorMan.activity.company.MainPageGroupCompanyActivity;
 import com.honyum.elevatorMan.activity.maintenance_1.MaintenanceActivity;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.base.SysActivityManager;
@@ -37,6 +39,7 @@ import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.data.City;
 import com.honyum.elevatorMan.data.CityInfo;
 import com.honyum.elevatorMan.data.Province;
+import com.honyum.elevatorMan.hb.HBLookActivity;
 import com.honyum.elevatorMan.net.LoginRequest;
 import com.honyum.elevatorMan.net.LoginRequest.LoginReqBody;
 import com.honyum.elevatorMan.net.LoginResponse;
@@ -181,7 +184,8 @@ public class LoginActivity extends BaseFragmentActivity {
         findViewById(R.id.tv_register).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterStepOneActivity.class));
+          //     startActivity(new Intent(LoginActivity.this, RegisterStepOneActivity.class));
+                startActivity(new Intent(LoginActivity.this, HBLookActivity.class));
 
                 //startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
@@ -314,11 +318,11 @@ public class LoginActivity extends BaseFragmentActivity {
                 }
                 else if(response.getBody().getType().equals(Constant.COMPANY))
                 {
-                    startActivity(new Intent(LoginActivity.this, MainPageActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainPageGroupCompanyActivity.class));
                 }
                     else {
                     //startWorker(getIntent() == null ? null : getIntent().getStringExtra("alarm_id"));
-                    startActivity(new Intent(LoginActivity.this, MainPage1Activity.class));
+                    startActivity(new Intent(LoginActivity.this, MainGroupActivity.class));
                 }
             }
 

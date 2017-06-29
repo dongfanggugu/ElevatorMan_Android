@@ -22,6 +22,16 @@ public class MaintOrderInfo implements Serializable
 
     private OwnerInfo ownerInfo = new OwnerInfo();
 
+    public SmallOwnerInfo getSmallOwnerInfo() {
+        return smallOwnerInfo;
+    }
+
+    public void setSmallOwnerInfo(SmallOwnerInfo smallOwnerInfo) {
+        this.smallOwnerInfo = smallOwnerInfo;
+    }
+
+    private SmallOwnerInfo smallOwnerInfo;
+
     private int price;
 
     private String villaId;

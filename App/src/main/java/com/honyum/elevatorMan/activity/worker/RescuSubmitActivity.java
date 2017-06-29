@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.common.MainGroupActivity;
+import com.honyum.elevatorMan.activity.common.MainPage1Activity;
 import com.honyum.elevatorMan.activity.common.MainpageActivity;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.net.AudioUrlResponse;
@@ -157,7 +159,7 @@ public class RescuSubmitActivity extends BaseFragmentActivity {
                 @Override
                 protected void onResponse(NetTask task, String result) {
                     AudioUrlResponse response = AudioUrlResponse.getAudioUrl(result);
-                    String picUrl = response.getBody().getUrl();
+                    String picUrl = response.getBody().getPic();
                     submit(alarmId, savedCount, injuredCount, other, picUrl);
                 }
             };
@@ -184,7 +186,7 @@ public class RescuSubmitActivity extends BaseFragmentActivity {
                 // TODO Auto-generated method stub
                 Toast.makeText(RescuSubmitActivity.this, getString(R.string.submit_suc), Toast.LENGTH_LONG)
                         .show();
-                Intent intent = new Intent(RescuSubmitActivity.this, MainpageActivity.class);
+                Intent intent = new Intent(RescuSubmitActivity.this, MainGroupActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //                	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -195,7 +197,7 @@ public class RescuSubmitActivity extends BaseFragmentActivity {
                 //super.onFailed(task, errorCode, errorMsg);
                 showToast(errorMsg);
 
-                Intent intent = new Intent(RescuSubmitActivity.this, MainpageActivity.class);
+                Intent intent = new Intent(RescuSubmitActivity.this, MainGroupActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

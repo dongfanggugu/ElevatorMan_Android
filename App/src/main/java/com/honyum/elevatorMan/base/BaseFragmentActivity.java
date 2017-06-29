@@ -36,12 +36,14 @@ import com.honyum.elevatorMan.activity.PicturePickActivity;
 import com.honyum.elevatorMan.activity.RegisterStepOneActivity;
 import com.honyum.elevatorMan.activity.RegisterStepTwoActivity;
 import com.honyum.elevatorMan.activity.WelcomeActivity;
+import com.honyum.elevatorMan.activity.common.MainGroupActivity;
 import com.honyum.elevatorMan.activity.common.MainPage1Activity;
 import com.honyum.elevatorMan.activity.common.MainpageActivity;
 import com.honyum.elevatorMan.activity.common.NavigationActivity;
 import com.honyum.elevatorMan.activity.common.ResetPasswordActivity;
 import com.honyum.elevatorMan.activity.maintenance_1.MaintenanceActivity;
 import com.honyum.elevatorMan.activity.property.AlarmTraceActivity;
+import com.honyum.elevatorMan.activity.property.MainPropertyGroupActivity;
 import com.honyum.elevatorMan.activity.property.PropertyMainPageActivity;
 import com.honyum.elevatorMan.activity.worker.WorkerActivity;
 import com.honyum.elevatorMan.constant.Constant;
@@ -107,7 +109,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         super.onResume();
         isForeground = true;
         registerForeMsg();
-
+     //   JPushInterface.onResume(this);
         //当是欢迎和登陆页面和注册页面时不需要进行判断
         if (this instanceof LoginActivity
                 || this instanceof WelcomeActivity
@@ -576,6 +578,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 
 
         super.onPause();
+      //  JPushInterface.onPause(this);
     }
 
     @Override
@@ -670,7 +673,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
     public void startWorker(String alarmId) {
 
         //启动定位
-        Intent intent = new Intent(this, MainPage1Activity.class);
+        Intent intent = new Intent(this, MainGroupActivity.class);
         startActivity(intent);
     }
 
@@ -683,7 +686,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         Intent intent = new Intent(this, LocationService.class);
         stopService(intent);
 
-        startActivity(new Intent(BaseFragmentActivity.this, PropertyMainPageActivity.class));
+        startActivity(new Intent(BaseFragmentActivity.this, MainPropertyGroupActivity.class));
 
 //        NetTask netTask = new NetTask(getConfig().getServer() + NetConstant.URL_ALARM_LIST_ONE,
 //                getAlarmListRequest()) {
@@ -1269,14 +1272,14 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 
                     int port = Utils.StringToInt(body.getDevicePort());
 
-                    Intent intent = new Intent(BaseFragmentActivity.this, com.chorstar.video.LiftVideoActivity.class);
-
-                    intent.putExtra("user", user);
-                    intent.putExtra("password", password);
-                    intent.putExtra("ip", ip);
-                    intent.putExtra("port", port);
-
-                    startActivity(intent);
+//                    Intent intent = new Intent(BaseFragmentActivity.this, com.chorstar.video.LiftVideoActivity.class);
+//
+//                    intent.putExtra("user", user);
+//                    intent.putExtra("password", password);
+//                    intent.putExtra("ip", ip);
+//                    intent.putExtra("port", port);
+//
+//                    startActivity(intent);
                 }
             }
         };

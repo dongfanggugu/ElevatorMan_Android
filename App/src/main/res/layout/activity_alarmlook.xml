@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/title"
+        layout="@layout/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height" />
+    <com.hanbang.playsdk.PlaySurfaceView
+        android:id="@+id/video_surface"
+        android:layout_width="match_parent"
+        android:layout_height="288dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_stop"
+        android:layout_margin="@dimen/size_20dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_plan_lanse"
+        android:textColor="@color/white"
+        android:padding="@dimen/size_10dp"
+        android:text="关闭播放"
+        android:layout_gravity="center_horizontal"
+        />
+
+</LinearLayout>

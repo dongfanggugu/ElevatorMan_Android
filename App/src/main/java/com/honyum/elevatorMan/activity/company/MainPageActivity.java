@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.chorstar.jni.ChorstarJNI;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.common.HelpCenterActivity;
+import com.honyum.elevatorMan.activity.common.MallActivity;
 import com.honyum.elevatorMan.activity.common.NousActivity;
 import com.honyum.elevatorMan.activity.common.PersonActivity;
 import com.honyum.elevatorMan.activity.knowledge.TitleListActivity;
@@ -219,7 +220,8 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
         findViewById(R.id.ll_rescue).setOnClickListener(this);
         findViewById(R.id.ll_maintenance).setOnClickListener(this);
         findViewById(R.id.ll_fix).setOnClickListener(this);
-        findViewById(R.id.ll_person).setOnClickListener(this);
+//        findViewById(R.id.ll_person).setOnClickListener(this);
+//        findViewById(R.id.ll_person1).setOnClickListener(this);
         findViewById(R.id.ll_bbs).setOnClickListener(this);
 
         findViewById(R.id.tv_question).setOnClickListener(this);
@@ -246,7 +248,9 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
             case R.id.tv_handle:
                 jumpToHandle_rule();
                 break;
-
+            case R.id.ll_person1:
+                jumpToMall();
+                break;
             case R.id.ll_rescue:
                 jumpToAlarmList();
                 break;
@@ -275,7 +279,12 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
                 break;
         }
     }
+    private void jumpToMall() {
+        Intent intent = new Intent(this, MallActivity.class);
+        startActivity(intent);
 
+
+    }
     /**
      * 跳转到维保服务页面
      */

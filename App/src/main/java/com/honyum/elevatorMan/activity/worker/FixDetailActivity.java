@@ -94,7 +94,7 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
         tvApptime.setText(getString(R.string.app_time) + mFixInfo.getRepairTime());
         tvBreaktype.setText(getString(R.string.breaktype) + mFixInfo.getRepairTypeInfo().getName());
         etRemark.setFocusable(false);
-        etRemark.setText(mFixInfo.getRepairTypeInfo().getContent());
+        etRemark.setText(mFixInfo.getPhenomenon());
         if(StringUtils.isNotEmpty(mFixInfo.getPicture())) {
             ivImage1.setVisibility(View.VISIBLE);
             new GetPicture(mFixInfo.getPicture(), ivImage1).execute();
@@ -201,6 +201,7 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
                         bundle.putSerializable("Info", mFixInfo);
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        finish();
                     }
 
                 });
@@ -244,7 +245,7 @@ public class FixDetailActivity extends BaseActivityWraper implements ListItemCal
         bundle.putSerializable("Fixdata", mFixInfo);
         intent.putExtras(bundle);
         startActivity(intent);
-        finish();
+        //finish();
 
     }
 

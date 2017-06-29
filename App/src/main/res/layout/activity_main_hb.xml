@@ -3,7 +3,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.hbzh.sdkexample.MainActivity">
+    >
 
     <View
         android:layout_width="match_parent"
@@ -28,7 +28,8 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="@string/device"/>
+            android:text="@string/device"
+            android:visibility="gone"/>
 
         <View
             android:layout_width="1dp"
@@ -69,21 +70,22 @@
         android:paddingRight="10dp"
         android:layout_above="@+id/radio_group">
 
-        <fragment
+<!--        <fragment
             android:id="@+id/device_fragment"
             android:name="com.hbzh.sdkexample.DeivceListFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            />-->
 
         <fragment
             android:id="@+id/vedio_fragment"
-            android:name="com.hbzh.sdkexample.VedioFragment"
+            android:name="com.honyum.elevatorMan.hb.VedioFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
         <fragment
             android:id="@+id/alarm_fragment"
-            android:name="com.hbzh.sdkexample.AlarmFragment"
+            android:name="com.honyum.elevatorMan.hb.AlarmFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

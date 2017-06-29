@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include
+                android:id="@+id/main_page_indicator"
+                layout="@layout/layout_page_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="@dimen/size_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/ll_rescue"
+                    android:layout_width="@dimen/size_item"
+                    android:layout_height="@dimen/size_item">
+
+                    <View
+                        android:id="@+id/tip_msg"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/shape_mainpage_msg"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/eme_save" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="应急救援" />
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/lessgray" />
+
+            <LinearLayout
+                android:layout_width="@dimen/size_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/ll_maintenance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ms_manage" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="维保管理" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lessgray" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:id="@+id/ll_bbs"
+                        android:gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+
+                            android:src="@drawable/nicehouse_ms" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_evemall"
+                            android:text="怡墅维保" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/lessgray" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_fix"
+                        android:gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/fix_nicehouse" />
+                        <TextView
+                            android:id="@+id/tv_nhfix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="怡墅维修" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_20dp"
+            android:background="@color/backgray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="2"
+                    android:background="@color/green" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/green"
+                    android:gravity="center_horizontal"
+                    android:text="电梯百科" />
+
+                <View
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="2"
+                    android:background="@color/green" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/size_10dp">
+
+                <TextView
+                    android:layout_width="@dimen/size_0dp"
+                    android:id="@+id/tv_question"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_5dp"
+                    android:layout_weight="1"
+                    android:background="#f79e6e"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/size_5dp"
+                    android:gravity="center_horizontal"
+
+                    android:text="@string/question" />
+
+                <TextView
+                    android:id="@+id/tv_num"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:background="#03cd99"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/size_5dp"
+                    android:text="@string/save_num" />
+
+                <TextView
+                    android:id="@+id/tv_handle"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_5dp"
+                    android:layout_weight="1"
+                    android:background="#b483be"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/size_5dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/handle_rule" />
+
+                <TextView
+                    android:id="@+id/tv_rule"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_5dp"
+                    android:layout_weight="1"
+                    android:background="#36b0f3"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/size_5dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/safe_rule" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_20dp"
+                android:background="@color/backgray" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/banr1" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

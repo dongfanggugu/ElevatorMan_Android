@@ -116,6 +116,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.githang/status-bar-compat/0.3/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.jakewharton/butterknife/8.4.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
@@ -136,6 +137,7 @@
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="jackson-all-1.9.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
+    <orderEntry type="library" exported="" name="status-bar-compat-0.3" level="project" />
     <orderEntry type="library" exported="" name="galaxy_mini" level="project" />
     <orderEntry type="library" exported="" name="butterknife-annotations-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="BaiduLBS_Android" level="project" />
@@ -143,8 +145,8 @@
     <orderEntry type="library" exported="" name="glide-3.5.2" level="project" />
     <orderEntry type="library" exported="" name="android_api_1.1_forsdk" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-24.1.0" level="project" />
-    <orderEntry type="module" module-name="NetSdkTest" exported="" />
     <orderEntry type="module" module-name="RefreshListview" exported="" />
     <orderEntry type="module" module-name="HandPaint" exported="" />
+    <orderEntry type="module" module-name="ydtlibrary" exported="" />
   </component>
 </module>

@@ -3,9 +3,13 @@ package com.honyum.elevatorMan.net.base;
 
 public class NetConstant {
 
-
     /**
      * 获取广告条
+     */
+    public static final String YI_ZHU = "/h5/yiZhuIndexPage";
+
+    /**
+     * 注册信息
      */
     public static final String REG_COMPANY = "/registerMaintUser";
 

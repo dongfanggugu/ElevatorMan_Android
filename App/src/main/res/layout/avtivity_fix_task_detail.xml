@@ -60,7 +60,7 @@
                     android:id="@+id/tv_order_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_size_10"
+                    android:layout_margin="@dimen/size_10dp"
                     android:text="@string/order_id"
                     android:textColor="@color/frontgray" />
 
@@ -69,7 +69,7 @@
                     android:id="@+id/tv_ordertime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_size_10"
+                    android:layout_margin="@dimen/size_10dp"
                     android:layout_weight="1"
                     android:text="@string/order_time"
                     android:textColor="@color/frontgray" />
@@ -78,7 +78,7 @@
                     android:id="@+id/tv_apptime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_size_10"
+                    android:layout_margin="@dimen/size_10dp"
                     android:layout_weight="1"
                     android:text="@string/app_time"
                     android:textColor="@color/frontgray" />
@@ -88,7 +88,7 @@
                     android:id="@+id/tv_breaktype"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_size_10"
+                    android:layout_margin="@dimen/size_10dp"
                     android:text="@string/breaktype"
                     android:textColor="@color/frontgray" />
 
@@ -96,7 +96,7 @@
                     android:id="@+id/tv_breakdes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_size_10"
+                    android:layout_margin="@dimen/size_10dp"
                     android:text="@string/breakdes"
                     android:textColor="@color/frontgray" />
 
@@ -231,14 +231,14 @@
                     android:id="@+id/tv_vill_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_size_10"
+                    android:layout_margin="@dimen/size_10dp"
                     android:text="@string/vill_address" />
 
                 <TextView
                     android:id="@+id/tv_eve_brand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_size_10"
+                    android:layout_margin="@dimen/size_10dp"
                     android:text="@string/eve_brand" />
 
                 <LinearLayout
@@ -251,7 +251,7 @@
                         android:id="@+id/eve_weight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/text_size_10"
+                        android:layout_margin="@dimen/size_10dp"
                         android:layout_weight="1"
                         android:text="@string/eve_weight" />
 
@@ -259,7 +259,7 @@
                         android:id="@+id/eve_landing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/text_size_10"
+                        android:layout_margin="@dimen/size_10dp"
                         android:layout_weight="1"
                         android:text="@string/eve_landing" />
 

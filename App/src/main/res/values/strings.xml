@@ -19,8 +19,8 @@
     <string name="login_device">登录设备</string>
     <string name="real_play">预览</string>
 
-    <string name="app_version">V1.43</string>
-    <string name="app_name">梯美（管理）</string>
+    <string name="app_version">V1.44</string>
+    <string name="app1_name">梯美（管理）</string>
     <string name="hello_world">Hello world!</string>
     <string name="file_name">ElevatorMan</string>
 
@@ -287,14 +287,14 @@
     <string name="after_service">维保后</string>
     <string name="order_detail">订单详情</string>
     <string name="order_id">订单编号：</string>
-    <string name="app_time">预约时间:</string>
+    <string name="app_time">预约时间：</string>
     <string name="order_time">订单时间：</string>
     <string name="breaktype">故障类型：</string>
     <string name="breakdes">故障描述</string>
-    <string name="vill_address">别墅地址:</string>
-    <string name="eve_brand">电梯品牌:</string>
-    <string name="eve_weight">电梯载重量:</string>
-    <string name="eve_landing">层站:</string>
+    <string name="vill_address">别墅地址：</string>
+    <string name="eve_brand">电梯品牌：</string>
+    <string name="eve_weight">电梯载重量：</string>
+    <string name="eve_landing">层站：</string>
     <string name="nexttimedeal">下次上门</string>
     <string name="createpaybill">支付单生成</string>
     <string name="break_ima">故障图片</string>

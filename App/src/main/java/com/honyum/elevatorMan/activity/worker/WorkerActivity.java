@@ -40,11 +40,17 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.baidu.navisdk.util.common.StringUtils;
+import com.hanbang.netsdk.HBNetCtrl;
+import com.hanbang.ydtsdk.YdtDeviceInfo;
+import com.hanbang.ydtsdk.YdtDeviceParam;
+import com.hanbang.ydtsdk.YdtNetSDK;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.common.ChatActivity;
 import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.data.AlarmInfo;
 import com.honyum.elevatorMan.data.ContactList;
+import com.honyum.elevatorMan.hb.AccountInfo;
+import com.honyum.elevatorMan.hb.DeviceInfo;
 import com.honyum.elevatorMan.net.AcceptAlarmReqBody;
 import com.honyum.elevatorMan.net.AcceptAlarmRequest;
 import com.honyum.elevatorMan.net.AlarmInfoRequest;
@@ -61,6 +67,7 @@ import com.honyum.elevatorMan.net.base.RequestHead;
 import com.honyum.elevatorMan.receiver.LocationReceiver;
 import com.honyum.elevatorMan.receiver.LocationReceiver.ILocationComplete;
 import com.honyum.elevatorMan.service.LocationService;
+import com.honyum.elevatorMan.utils.DeviceInfoUtils;
 import com.honyum.elevatorMan.utils.Utils;
 import com.honyum.elevatorMan.view.CircleImageView;
 
@@ -77,6 +84,12 @@ public class WorkerActivity extends WorkerBaseActivity implements
 
     private boolean hasAlarm = false;
 
+    private DeviceInfo mSelectDevice;
+    //未知错误
+    final static int ERR_UNKNOWN = -201;
+
+    //序列号不匹配
+    final static int ERR_DISMATCH_SN = -202;
 
     private MapView mMapView;
     private BaiduMap mBaiduMap;
@@ -90,6 +103,8 @@ public class WorkerActivity extends WorkerBaseActivity implements
     private AlarmInfo mAlarmInfo = null;
 
     private String mCurrentAdd = "";
+
+    private TextView tv_look;
 
 
     /**
@@ -137,7 +152,7 @@ public class WorkerActivity extends WorkerBaseActivity implements
 
     private void initListView() {
         listView = (ListView) findViewById(R.id.listView);
-
+        tv_look = (TextView) findViewById(R.id.tv_look);
         TextView textView = new TextView(this);
         textView.setText("暂无合作伙伴!");
         textView.setGravity(Gravity.CENTER);
@@ -987,7 +1002,7 @@ public class WorkerActivity extends WorkerBaseActivity implements
         initTitleBar(getString(R.string.main_page), R.id.title_worker,
                 R.drawable.back_normal, backClickListener);
 
-        initTitleBar(R.id.title_worker, getString(R.string.main_page), R.drawable.icon_bbs,
+        initTitleBar(R.id.title_worker, "救援确认", R.drawable.icon_bbs,
                 new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -1027,6 +1042,110 @@ public class WorkerActivity extends WorkerBaseActivity implements
     }
 
     /**
+     * 设备登录
+     */
+    private void loginDevice() {
+        //progressDialog = ProgressDialog.show( getActivity(), "", "正在登录...", false );
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                YdtNetSDK ydtNetSDK = AccountInfo.getInstance().getYdtNetSDK();
+                YdtDeviceInfo ydtDeviceInfo = ydtNetSDK.getSpecifiedDeviceWithoutLogin("5a088189");
+
+                if (ydtDeviceInfo.nErrorCode == 0) {
+                    YdtDeviceParam deviceParam = ydtDeviceInfo.deviceList.get(0);
+                    mSelectDevice = new DeviceInfo();
+                    mSelectDevice.deviceUser = deviceParam.devUser;
+                    mSelectDevice.devicePsw = deviceParam.devPassword;
+                    mSelectDevice.deviceSn = deviceParam.devSN;
+                    mSelectDevice.deviceId = deviceParam.devId;
+                    mSelectDevice.deviceName = deviceParam.devName;
+                    mSelectDevice.deviceDomain = deviceParam.devDomain;
+                    mSelectDevice.domainPort = deviceParam.devDomainPort;
+                    mSelectDevice.vveyeId = deviceParam.devVNIp;
+                    mSelectDevice.vveyeRemortPort = deviceParam.devVNPort;
+                    mSelectDevice.channelCount = deviceParam.devChannelCount;
+
+                    //登录设备
+                    if (null == mSelectDevice.hbNetCtrl) {
+                        mSelectDevice.hbNetCtrl = new HBNetCtrl();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+//                    //首先尝试局域网登录
+                    int result = ERR_UNKNOWN;
+
+
+                    //如果局域网登录失败，尝试VV穿透
+                    if (0 != result && !mSelectDevice.vveyeId.isEmpty() && 0 != mSelectDevice.vveyeRemortPort) {
+                        result = mSelectDevice.hbNetCtrl
+                                .loginVveye(mSelectDevice.deviceUser, mSelectDevice.devicePsw, mSelectDevice.vveyeId, mSelectDevice.vveyeRemortPort,
+                                        mSelectDevice.callback);
+                    }
+
+
+                    if (0 == result) {
+                        //登录成功，对设备序列号进行校验
+                        String devSn = mSelectDevice.hbNetCtrl.getSerialNo();
+                        if (!devSn.equals(mSelectDevice.deviceSn)) {
+                            //序列号不匹配，登录失败
+                            result = ERR_DISMATCH_SN;
+
+                            //注销对错误设备的登录
+                            mSelectDevice.hbNetCtrl.logout();
+                        } else {
+                            mSelectDevice.isOnline = true;
+                        }
+                        DeviceInfoUtils.mSelectDevice = mSelectDevice;
+
+                        //开始预览
+                        //  startRealplay();
+
+                        tv_look.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                tv_look.setTextColor(getResources().getColor(R.color.titleblue));
+                                DeviceInfoUtils.isVideoLoaded = true;
+                                tv_look.setText("查看视频");
+                                tv_look.setOnClickListener(new OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent it = new Intent(WorkerActivity.this,AlarmLookActivity.class);
+                                        startActivity(it);
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+
+                } else {
+                    tv_look.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            // progressDialog.dismiss();
+
+                            tv_look.setTextColor(getResources().getColor(R.color.titleblue));
+                            DeviceInfoUtils.isVideoLoaded = false;
+                            tv_look.setText("重试");
+                            tv_look.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                   loginDevice();
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+
+    /**
      * 根据报警id报警信息
      *
      * @param alarmId
@@ -1044,7 +1163,27 @@ public class WorkerActivity extends WorkerBaseActivity implements
                         .getAlarmInfoRsp(result);
                 mAlarmInfo = response.getBody();
                 callback.onGetAlarmInfo(response.getBody());
+                if(!mAlarmInfo.getElevatorInfo().getNvrCode().equals(""))
+                {
+                    Log.e("TAG", "onResponse: "+ mAlarmInfo.getElevatorInfo().getNvrCode());
+                    tv_look.setVisibility(View.VISIBLE);
 
+                    loginDevice();
+                }
+                else
+                {
+                    tv_look.setVisibility(View.GONE);
+                }
+//                tv_look.setVisibility(View.VISIBLE);
+//                tv_look.setOnClickListener(new OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent it = new Intent(WorkerActivity.this,AlarmLookActivity.class);
+//                        startActivity(it);
+//
+//                    }
+//                });
+//                loginDevice();
                 MyAdapter myAdapter = new MyAdapter(mAlarmInfo.getContactList());
                 listView.setAdapter(myAdapter);
             }

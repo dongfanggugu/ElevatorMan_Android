@@ -404,7 +404,7 @@ public class ChatActivity extends BaseFragmentActivity {
                 @Override
                 protected void onResponse(NetTask task, String result) {
                     AudioUrlResponse response = AudioUrlResponse.getAudioUrl(result);
-                    String audioUrl = response.getBody().getUrl();
+                    String audioUrl = response.getBody().getPic();
 
                     sendChat(CHAT_CONTENT_VOICE, audioUrl);
                 }

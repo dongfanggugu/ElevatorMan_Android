@@ -125,94 +125,7 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
             }
         }, 5000);
     }
-    private void initPageIndicator1() {
-        pics = new ArrayList<Integer>();
-        pics.add(R.drawable.banner);
-        pics.add(R.drawable.banner);
-        pics.add(R.drawable.banner);
 
-        View pi = findViewById(R.id.main_page_indicator);
-
-        ViewPager vp = (ViewPager) pi.findViewById(R.id.viewPager);
-        PageIndicatorAdapter adapter = new PageIndicatorAdapter(this, pics);
-        vp.setAdapter(adapter);
-        vp.setCurrentItem(adapter.getCount() / 2);
-
-        final LinearLayout llIndicator = (LinearLayout) pi.findViewById(R.id.ll_indicator);
-        for (Integer pic : pics) {
-            ImageView v = new ImageView(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.leftMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
-            v.setLayoutParams(params);
-            v.setBackgroundResource(R.drawable.sel_page_indicator);
-            llIndicator.addView(v);
-        }
-        llIndicator.getChildAt(0).setEnabled(false);
-
-        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-
-            @Override
-            public void onPageSelected(int position) {
-                llIndicator.getChildAt(position % pics.size()).setEnabled(false);
-//                llIndicator.getChildAt(position % 5).startAnimation(AnimationUtils.loadAnimation(this, R.anim.indicator));
-                llIndicator.getChildAt(prePos).setEnabled(true);
-                prePos = position % pics.size();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-    }
-    private void initPageIndicator() {
-        pics = new ArrayList<Integer>();
-        pics.add(R.drawable.banner);
-        pics.add(R.drawable.banner);
-        pics.add(R.drawable.banner);
-
-        View pi = findViewById(R.id.main_page_indicator);
-
-        ViewPager vp = (ViewPager) pi.findViewById(R.id.viewPager);
-        PageIndicatorAdapter adapter = new PageIndicatorAdapter(this, pics);
-        vp.setAdapter(adapter);
-        vp.setCurrentItem(adapter.getCount() / 2);
-
-        final LinearLayout llIndicator = (LinearLayout) pi.findViewById(R.id.ll_indicator);
-        for (Integer pic : pics) {
-            ImageView v = new ImageView(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.leftMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
-            v.setLayoutParams(params);
-            v.setBackgroundResource(R.drawable.sel_page_indicator);
-            llIndicator.addView(v);
-        }
-        llIndicator.getChildAt(0).setEnabled(false);
-
-        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-
-            @Override
-            public void onPageSelected(int position) {
-                llIndicator.getChildAt(position % pics.size()).setEnabled(false);
-//                llIndicator.getChildAt(position % 5).startAnimation(AnimationUtils.loadAnimation(this, R.anim.indicator));
-                llIndicator.getChildAt(prePos).setEnabled(true);
-                prePos = position % pics.size();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -265,7 +178,8 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
         findViewById(R.id.ll_rescue).setOnClickListener(this);
         findViewById(R.id.ll_maintenance).setOnClickListener(this);
         findViewById(R.id.ll_fix).setOnClickListener(this);
-        findViewById(R.id.ll_person).setOnClickListener(this);
+//        findViewById(R.id.ll_person).setOnClickListener(this);
+//        findViewById(R.id.ll_person1).setOnClickListener(this);
         findViewById(R.id.ll_bbs).setOnClickListener(this);
 
         findViewById(R.id.tv_question).setOnClickListener(this);
@@ -306,6 +220,9 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
             case R.id.ll_person:
                 jumpToPerson();
                 break;
+            case R.id.ll_person1:
+                jumpToMall();
+                break;
             case R.id.ll_bbs:
                 String region = getConfig().getRegion();
 
@@ -322,6 +239,13 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
 
                 break;
         }
+    }
+
+    private void jumpToMall() {
+        Intent intent = new Intent(this, MallActivity.class);
+        startActivity(intent);
+
+
     }
 
     /**

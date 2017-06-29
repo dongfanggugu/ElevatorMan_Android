@@ -24,8 +24,7 @@ public class PersonActivity extends BaseFragmentActivity {
      * 初始化标题栏
      */
     private void initTitleBar() {
-        initTitleBar(getString(R.string.person_center), R.id.title_person,
-                R.drawable.back_normal, backClickListener);
+        initTitleBar(R.id.title_person,getString(R.string.person_center));//R.drawable.back_normal, backClickListener
     }
 
     @Override
@@ -38,7 +37,7 @@ public class PersonActivity extends BaseFragmentActivity {
      * 初始化视图
      */
     private void initView() {
-        ((TextView) findViewById(R.id.tv_user_name)).setText(getConfig().getUserName());
+        ((TextView) findViewById(R.id.tv_user_name)).setText(getConfig().getName());
         ((TextView) findViewById(R.id.tv_age)).setText("" + getConfig().getAge());
         ((TextView) findViewById(R.id.tv_sex)).setText(getConfig().getSex() == 0 ? "女" : "男");
         ((TextView) findViewById(R.id.tv_company)).setText(getConfig().getBranchName());

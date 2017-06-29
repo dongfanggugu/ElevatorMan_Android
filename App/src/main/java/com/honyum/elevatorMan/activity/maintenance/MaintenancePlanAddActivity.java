@@ -273,7 +273,7 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
         {
             //mMaintenanceServiceInfo = (MaintenanceServiceInfo) it.getSerializableExtra("Info");
             tv_address.setText(mMaintenanceServiceInfo.getVillaInfo().getCellName());
-            tv_tel.setText(mMaintenanceServiceInfo.getVillaInfo().getContactsTel());
+            tv_tel.setText(mMaintenanceServiceInfo.getSmallOwnerInfo().getName()+" "+mMaintenanceServiceInfo.getVillaInfo().getContactsTel());
             tv_time.setText(s);
             name = mMaintenanceServiceInfo.getVillaInfo().getBrand();
             name1 = mMaintenanceServiceInfo.getVillaInfo().getWeight() + "KG";
@@ -287,7 +287,7 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
         {
             mMaintenanceTaskInfo = (MaintenanceTaskInfo)it.getSerializableExtra("Info");
             tv_address.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getCellName());
-            tv_tel.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getContactsTel());
+            tv_tel.setText(mMaintenanceTaskInfo.getMaintOrderInfo().getSmallOwnerInfo().getName()+" "+mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getContactsTel());
             tv_time.setText(mMaintenanceTaskInfo.getPlanTime());
             currId = mMaintenanceTaskInfo.getId();
             name = mMaintenanceTaskInfo.getMaintOrderInfo().getVillaInfo().getBrand();

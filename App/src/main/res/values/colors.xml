@@ -16,7 +16,6 @@
 
     <color name="color_half_white">#80ffffff</color>
 
-
     <color name="grey">#cccccc</color>
 
     <color name="item_selected">#d9d9d9</color>
@@ -36,7 +35,7 @@
     <!--BEGIN 提示信息的颜色 -->
 
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#36b0f3</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorChecked">#43CD80</color>

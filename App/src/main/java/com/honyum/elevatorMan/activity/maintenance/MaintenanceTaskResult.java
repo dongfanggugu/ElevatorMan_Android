@@ -142,9 +142,9 @@ public class MaintenanceTaskResult extends BaseFragmentActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             if (!StringUtils.isEmpty(result)) {
-                //Bitmap bitmap = Utils.getBitmapBySize(result, 80, 80);
+                Bitmap bitmap = Utils.getBitmapBySize(result, 80, 80);
 
-                Bitmap bitmap = Utils.getImageFromFile(new File(result));
+                //Bitmap bitmap = Utils.getImageFromFile(new File(result));
                 if (bitmap != null) {
                     mImageView.setImageBitmap(bitmap);
                     mImageView.setTag(R.id.file_path,result);

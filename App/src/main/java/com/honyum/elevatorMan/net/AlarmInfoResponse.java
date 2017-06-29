@@ -51,6 +51,7 @@ public class AlarmInfoResponse extends Response {
 
 		private String id;
 
+
 		private String remark;
 
 		private String state; // 救援状态 1：已出发 2:已到达 3.已完成 4.拒绝

@@ -136,12 +136,12 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
                 jumpToNearMt();
             }
         });
-        findViewById(R.id.ll_person).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jumpToPerson();
-            }
-        });
+//        findViewById(R.id.ll_person).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                jumpToPerson();
+//            }
+//        });
         findViewById(R.id.ll_bbs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

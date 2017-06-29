@@ -11,6 +11,15 @@ public class Elevator implements Serializable {
 
     private String id = "0000";     //电梯id，用于报警
 
+    public String getNvrCode() {
+        return nvrCode;
+    }
+
+    public void setNvrCode(String nvrCode) {
+        this.nvrCode = nvrCode;
+    }
+
+    private String nvrCode="";
     private String unitCode = "1";     //单元号: unitCode + "单元"
 
     private String liftNum = "ABC1102";       //电梯唯一编号

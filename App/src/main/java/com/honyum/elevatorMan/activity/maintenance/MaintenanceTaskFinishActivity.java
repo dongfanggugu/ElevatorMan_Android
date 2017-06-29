@@ -223,12 +223,12 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
 
                 delButton.setVisibility(View.GONE);
 
-                if ((int)delButton.getTag() == 1) {
+                if ((int)delButton.getTag(R.id.index) == 1) {
                     ai = "";
-                    saveImageData(imageView.getTag().toString(), "");
-                } else if ((int)delButton.getTag() == 2) {
+                    saveImageData(imageView.getTag(R.id.index).toString(), "");
+                } else if ((int)delButton.getTag(R.id.index) == 2) {
                     bi = "";
-                    saveImageData(imageView.getTag().toString(), "");
+                    saveImageData(imageView.getTag(R.id.index).toString(), "");
                 }
                 imageView.setTag(R.id.file_path, "");
                 imageView.setImageResource(R.drawable.defaut_image);
@@ -272,8 +272,8 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
 
         Button button1 = (Button) findViewById(R.id.btn_del_1);
         Button button2 = (Button) findViewById(R.id.btn_del_2);
-        button1.setTag(1);
-        button2.setTag(2);
+        button1.setTag(R.id.index,1);
+        button2.setTag(R.id.index,2);
         loadPicture(mPublicPath + "/1/", mImageView1, button1);
         loadPicture(mPublicPath + "/2/", mImageView2, button2);
         if (StringUtils.isEmpty(mPublicPath)) {
@@ -317,9 +317,9 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
         Bitmap bitmap = Utils.getBitmapBySize(filePath, 60, 80);
         imageView.setImageBitmap(bitmap);
         imageView.setTag(R.id.file_path, filePath);
-        if ((int)imageView.getTag() == 1) {
+        if ((int)imageView.getTag(R.id.index) == 1) {
             ai = getImageData(filePath);
-        } else if ((int)imageView.getTag() == 2) {
+        } else if ((int)imageView.getTag(R.id.index) == 2) {
             bi = getImageData(filePath);
         }
         imageView.setOnClickListener(overViewClickListener);
@@ -333,12 +333,12 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
 
                 delButton.setVisibility(View.GONE);
 
-                if ((int)delButton.getTag() == 1) {
+                if ((int)delButton.getTag(R.id.index) == 1) {
                     ai = "";
-                    saveImageData(imageView.getTag().toString(), "");
-                } else if ((int)delButton.getTag() == 2) {
+                    saveImageData(imageView.getTag(R.id.index).toString(), "");
+                } else if ((int)delButton.getTag(R.id.index) == 2) {
                     bi = "";
-                    saveImageData(imageView.getTag().toString(), "");
+                    saveImageData(imageView.getTag(R.id.index).toString(), "");
                 }
                 imageView.setImageResource(R.drawable.defaut_image);
                 imageView.setOnClickListener(imageViewClickListener);

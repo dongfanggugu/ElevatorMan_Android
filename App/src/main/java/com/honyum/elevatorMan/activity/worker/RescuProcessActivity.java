@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.common.ChatActivity;
+import com.honyum.elevatorMan.activity.common.MainGroupActivity;
+import com.honyum.elevatorMan.activity.common.MainPage1Activity;
 import com.honyum.elevatorMan.activity.common.MainpageActivity;
 import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.data.AlarmInfo;
@@ -209,7 +211,7 @@ public class RescuProcessActivity extends WorkerBaseActivity {
                 // TODO Auto-generated method stub
                 Toast.makeText(RescuProcessActivity.this, "无法完成救援已经提交,感谢您的参与", Toast.LENGTH_LONG)
                         .show();
-                Intent intent = new Intent(RescuProcessActivity.this, MainpageActivity.class);
+                Intent intent = new Intent(RescuProcessActivity.this, MainGroupActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 startActivity(intent);

@@ -18,15 +18,17 @@ public class AudioUrlResponse extends Response {
 
     public static class AudioUrlBody extends ResponseBody {
 
-        private String url;
-
-        public String getUrl() {
-            return url;
+        public String getPic() {
+            return pic;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
+        public void setPic(String pic) {
+            this.pic = pic;
         }
+
+        private String pic;
+
+
     }
 
     public static AudioUrlResponse getAudioUrl(String json) {

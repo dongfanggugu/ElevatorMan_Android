@@ -1,11 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 android {
-    repositories {
-        flatDir {
-            dirs '../ydtlibrary/libs'
-        }
-    }
+
+
     signingConfigs {
         release {
             storeFile file('key/honyum.keystore')
@@ -20,7 +17,7 @@ android {
     compileSdkVersion 21
     buildToolsVersion '21.1.2'
     defaultConfig {
-        applicationId "com.honyum.elevatorMan"
+        applicationId "com.chorstar.enterOwner"
         minSdkVersion 15
         targetSdkVersion 21
         signingConfig signingConfigs.release
@@ -28,15 +25,15 @@ android {
 
     productFlavors {
         debug_flavor {
-            manifestPlaceholders = [MAP_VALUE: "aeOYCOHmVZgYF9BHu3i6xeMj"]
+            manifestPlaceholders = [MAP_VALUE: "zWVuxf5PgCPpB7TAET3SefEUGqqwabgk"]
             signingConfig signingConfigs.debug
-            applicationId "com.honyum.elevatorMan"
+            applicationId "com.chorstar.enterOwner"
         }
 
         release_flavor {
-            manifestPlaceholders = [MAP_VALUE: "qvBqoTEagXRYHP8uXhNlrjRO"]
+            manifestPlaceholders = [MAP_VALUE: "3kxN8pYiAFfHXXhUoSz8ieEkGwTD8kq3"]
             signingConfig signingConfigs.release
-            applicationId "com.honyum.elevatorMan"
+            applicationId "com.chorstar.enterOwner"
         }
     }
     buildTypes {
@@ -48,14 +45,17 @@ android {
         }
     }
 }
-
+repositories {
+    flatDir {
+        dirs '../ydtlibrary/libs'
+    }
+}
 dependencies {
     compile files('libs/android_api_1.1_forsdk.jar')
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/galaxy_mini.jar')
     compile files('libs/jackson-all-1.9.0.jar')
     compile files('libs/jpush-sdk-release1.7.4.jar')
-    compile project(':NetSdkTest')
     compile project(':RefreshListview')
     //    compile project(':chorstar')
     compile 'com.android.support:appcompat-v7:21.0.3'
@@ -63,5 +63,6 @@ dependencies {
     compile project(':HandPaint')
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    //compile project(':ydtlibrary')
+    compile 'com.githang:status-bar-compat:0.3'
+    compile project(':ydtlibrary')
 }

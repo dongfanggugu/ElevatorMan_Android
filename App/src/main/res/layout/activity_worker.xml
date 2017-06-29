@@ -98,6 +98,13 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="3"
                                 android:text="@string/default_text" />
+                            <TextView
+                                android:id="@+id/tv_look"
+                                style="@style/alarm_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="连接中.." />
                         </LinearLayout>
 
                         <LinearLayout
