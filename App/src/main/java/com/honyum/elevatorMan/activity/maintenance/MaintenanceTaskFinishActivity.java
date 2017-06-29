@@ -225,10 +225,10 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
 
                 if ((int)delButton.getTag(R.id.index) == 1) {
                     ai = "";
-                    saveImageData(imageView.getTag(R.id.index).toString(), "");
+                    saveImageData(imageView.getTag(R.id.file_path).toString(), "");
                 } else if ((int)delButton.getTag(R.id.index) == 2) {
                     bi = "";
-                    saveImageData(imageView.getTag(R.id.index).toString(), "");
+                    saveImageData(imageView.getTag(R.id.file_path).toString(), "");
                 }
                 imageView.setTag(R.id.file_path, "");
                 imageView.setImageResource(R.drawable.defaut_image);
@@ -335,10 +335,10 @@ public class MaintenanceTaskFinishActivity extends BaseFragmentActivity {
 
                 if ((int)delButton.getTag(R.id.index) == 1) {
                     ai = "";
-                    saveImageData(imageView.getTag(R.id.index).toString(), "");
+                    saveImageData(imageView.getTag(R.id.file_path).toString(), "");
                 } else if ((int)delButton.getTag(R.id.index) == 2) {
                     bi = "";
-                    saveImageData(imageView.getTag(R.id.index).toString(), "");
+                    saveImageData(imageView.getTag(R.id.file_path).toString(), "");
                 }
                 imageView.setImageResource(R.drawable.defaut_image);
                 imageView.setOnClickListener(imageViewClickListener);

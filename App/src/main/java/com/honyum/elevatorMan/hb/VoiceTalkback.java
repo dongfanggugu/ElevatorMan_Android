@@ -13,7 +13,7 @@ import com.hanbang.playsdk.PlaySDK;
 /**
  * 语音对讲
  */
-class VoiceTalkback
+public class VoiceTalkback
 {
 	final static int SAPMLERATE_IN_HZ 	= 8000;			//采样率
 	final static int PACKET_SIZE	   	= 640;			//一包PAM数据的大小
@@ -31,7 +31,7 @@ class VoiceTalkback
     
     public final static byte AUDIO_ENCODE_TYPE_PCM = 2;
 
-	VoiceTalkback( DeviceInfo device )
+	public VoiceTalkback( DeviceInfo device )
 	{
         mDeviceInfo = device;
         mHBNetCtrl = mDeviceInfo.hbNetCtrl;
@@ -204,7 +204,7 @@ class VoiceTalkback
     };
 	
 	//关闭语音对讲
-	void stopTalkback()
+	public void stopTalkback()
 	{
 	    try
         {

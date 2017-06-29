@@ -1050,7 +1050,7 @@ public class WorkerActivity extends WorkerBaseActivity implements
             @Override
             public void run() {
                 YdtNetSDK ydtNetSDK = AccountInfo.getInstance().getYdtNetSDK();
-                YdtDeviceInfo ydtDeviceInfo = ydtNetSDK.getSpecifiedDeviceWithoutLogin("5a088189");
+                YdtDeviceInfo ydtDeviceInfo = ydtNetSDK.getSpecifiedDeviceWithoutLogin("5a1cd5c5");
 
                 if (ydtDeviceInfo.nErrorCode == 0) {
                     YdtDeviceParam deviceParam = ydtDeviceInfo.deviceList.get(0);

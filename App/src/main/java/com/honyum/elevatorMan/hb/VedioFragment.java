@@ -52,6 +52,8 @@ public class VedioFragment extends Fragment implements View.OnClickListener
     Button playBack;//回放按钮
     Button getFileBtn;//获取文件的按钮
     TextView mPlayFileText;//显示录像文件
+
+
     
     List<DeviceInfo> deviceList = new ArrayList<DeviceInfo>();
     DeviceInfo mSelectDevice;

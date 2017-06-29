@@ -1477,12 +1477,12 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
     {
         SharedPreferences sp = getSharedPreferences("ImageData", Context.MODE_PRIVATE);
         sp.edit().putString(key, value).commit();
-        Log.e("TAG", "saveImageData: "+key );
+        Log.e("TAG", "saveImageData: "+key+"!!"+value );
     }
     public String getImageData(String key)
     {
         SharedPreferences sp = getSharedPreferences("ImageData", Context.MODE_PRIVATE);
-        Log.e("TAG", "getImageData: "+key );
+        Log.e("TAG", "saveImageData: "+key+"!!"+sp.getString(key,"") );
         return sp.getString(key,"");
     }
 }

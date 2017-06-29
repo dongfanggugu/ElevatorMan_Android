@@ -1,5 +1,8 @@
 package com.honyum.elevatorMan.activity.worker;
 
+import android.content.Context;
+import android.media.AudioManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -9,6 +12,8 @@ import com.hanbang.playsdk.PlaySDK;
 import com.hanbang.playsdk.PlaySurfaceView;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.base.BaseActivityWraper;
+import com.honyum.elevatorMan.hb.FinishCallback;
+import com.honyum.elevatorMan.hb.VoiceTalkback;
 import com.honyum.elevatorMan.utils.DeviceInfoUtils;
 
 /**
@@ -18,6 +23,9 @@ import com.honyum.elevatorMan.utils.DeviceInfoUtils;
 public class AlarmLookActivity extends BaseActivityWraper {
     PlaySurfaceView videoView;
     private boolean isPreviewing;
+    VoiceTalkback mTalkback;
+    TextView tv_stop;
+    AudioManager am;
     //解码对象
     PlaySDK mPlayer = new PlaySDK();
 
@@ -29,12 +37,52 @@ public class AlarmLookActivity extends BaseActivityWraper {
     @Override
     protected void initView() {
 
+        am = (AudioManager) getSystemService( Context.AUDIO_SERVICE);
+        //听筒模式下设置为false
+        am.setSpeakerphoneOn(false);
+        //设置成听筒模式
+        am.setMode(AudioManager.MODE_IN_COMMUNICATION);
+
+        int max = am.getStreamMaxVolume( AudioManager.STREAM_VOICE_CALL );
+        am.setStreamVolume( AudioManager.STREAM_VOICE_CALL,max * 10,0 );
+
+        //设置为通话状态
+        setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
 
         videoView = (PlaySurfaceView) findViewById(R.id.video_surface);
-        findView(R.id.tv_stop).setOnClickListener(new View.OnClickListener() {
+        tv_stop = findView(R.id.tv_stop);
+        tv_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
+                mTalkback = new VoiceTalkback( DeviceInfoUtils.mSelectDevice );
+                //对讲
+                mTalkback.startTalkback( new FinishCallback()
+                {
+
+                    @Override
+                    public void onFinish( int error, Object tag )
+                    {
+                        tv_stop.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText( AlarmLookActivity.this,"开启成功",Toast.LENGTH_SHORT ).show();
+                                tv_stop.setText("关闭语音");
+                                tv_stop.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        mTalkback.stopTalkback();
+                                    }
+                                });
+
+                            }
+                        });
+
+
+
+                    }
+                }, null );
+
             }
         });
 
@@ -44,6 +92,26 @@ public class AlarmLookActivity extends BaseActivityWraper {
     @Override
     protected int getLayoutID() {
         return R.layout.activity_alarmlook;
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                am.adjustStreamVolume(
+                        AudioManager.STREAM_MUSIC,
+                        AudioManager.ADJUST_RAISE,
+                        AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                am.adjustStreamVolume(
+                        AudioManager.STREAM_MUSIC,
+                        AudioManager.ADJUST_LOWER,
+                        AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
+                return true;
+            default:
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     //预览数据回调

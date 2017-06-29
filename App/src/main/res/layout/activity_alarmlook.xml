@@ -21,7 +21,7 @@
         android:background="@drawable/selector_plan_lanse"
         android:textColor="@color/white"
         android:padding="@dimen/size_10dp"
-        android:text="关闭播放"
+        android:text="开启语音"
         android:layout_gravity="center_horizontal"
         />
 
