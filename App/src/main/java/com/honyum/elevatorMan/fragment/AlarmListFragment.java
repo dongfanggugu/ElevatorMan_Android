@@ -283,6 +283,7 @@ public class AlarmListFragment extends Fragment {
                         startActivity(intent);
                     } else if (alarmInfo.getUserState().equals(Constant.WORKER_STATE_COMPLETE)) {
                         Intent intent = new Intent(mContext, AlarmDetailActivity.class);
+                        intent.putExtra("Id", alarmInfo.getId());
                         intent.putExtra("project", alarmInfo.getCommunityInfo().getName());
                         intent.putExtra("add", alarmInfo.getCommunityInfo().getAddress());
                         intent.putExtra("code", alarmInfo.getElevatorInfo().getLiftNum());

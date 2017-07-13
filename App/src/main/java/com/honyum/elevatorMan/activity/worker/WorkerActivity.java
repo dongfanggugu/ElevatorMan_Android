@@ -2,6 +2,7 @@ package com.honyum.elevatorMan.activity.worker;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -278,6 +279,8 @@ public class WorkerActivity extends WorkerBaseActivity implements
         super.onDestroy();
         try {
             mMapView.onDestroy();
+            logoutDevice();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1011,11 +1014,11 @@ public class WorkerActivity extends WorkerBaseActivity implements
                             return;
                         }
 
-                        if (!mAlarmInfo.getState().equals(Constant.ALARM_STATE_ASSIGNED)
-                                && !mAlarmInfo.getState().equals(Constant.ALARM_STATE_ARRIVED)) {
-                            showToast("该报警已经完成,无法进入电梯交流群组");
-                            return;
-                        }
+//                        if (!mAlarmInfo.getState().equals(Constant.ALARM_STATE_ASSIGNED)
+//                                && !mAlarmInfo.getState().equals(Constant.ALARM_STATE_ARRIVED)) {
+//                            showToast("该报警已经完成,无法进入电梯交流群组");
+//                            return;
+//                        }
 
                         Intent intent = new Intent(WorkerActivity.this, ChatActivity.class);
                         intent.putExtra("alarm_id", mAlarmInfo.getId());
@@ -1042,6 +1045,29 @@ public class WorkerActivity extends WorkerBaseActivity implements
     }
 
     /**
+     * 设备退出
+     */
+    private void logoutDevice()
+    {
+        if ( null == DeviceInfoUtils.mSelectDevice || null == DeviceInfoUtils.mSelectDevice.hbNetCtrl )
+        {
+            return;
+        }
+
+        //progressDialog = ProgressDialog.show( getActivity(), "", "正在注销...", false );
+        new Thread( new Runnable()
+        {
+            @Override
+            public void run()
+            {
+
+                DeviceInfoUtils.mSelectDevice.hbNetCtrl.logout();
+                DeviceInfoUtils.mSelectDevice.isOnline = false;
+
+            }
+        } ).start();
+    }
+    /**
      * 设备登录
      */
     private void loginDevice() {
@@ -1050,7 +1076,7 @@ public class WorkerActivity extends WorkerBaseActivity implements
             @Override
             public void run() {
                 YdtNetSDK ydtNetSDK = AccountInfo.getInstance().getYdtNetSDK();
-                YdtDeviceInfo ydtDeviceInfo = ydtNetSDK.getSpecifiedDeviceWithoutLogin("5a1cd5c5");
+                YdtDeviceInfo ydtDeviceInfo = ydtNetSDK.getSpecifiedDeviceWithoutLogin(mAlarmInfo.getElevatorInfo().getNvrCode());
 
                 if (ydtDeviceInfo.nErrorCode == 0) {
                     YdtDeviceParam deviceParam = ydtDeviceInfo.deviceList.get(0);
@@ -1115,6 +1141,7 @@ public class WorkerActivity extends WorkerBaseActivity implements
                                     @Override
                                     public void onClick(View v) {
                                         Intent it = new Intent(WorkerActivity.this,AlarmLookActivity.class);
+                                        it.putExtra("Id",mAlarmInfo.getElevatorInfo().getLiftNum());
                                         startActivity(it);
                                     }
                                 });
@@ -1166,6 +1193,7 @@ public class WorkerActivity extends WorkerBaseActivity implements
                 if(!mAlarmInfo.getElevatorInfo().getNvrCode().equals(""))
                 {
                     Log.e("TAG", "onResponse: "+ mAlarmInfo.getElevatorInfo().getNvrCode());
+                    Log.e("TAG", "onClick: "+mAlarmInfo.getElevatorInfo().getLiftNum() );
                     tv_look.setVisibility(View.VISIBLE);
 
                     loginDevice();

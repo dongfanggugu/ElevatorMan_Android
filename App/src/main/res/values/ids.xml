@@ -8,6 +8,7 @@
     <item name="project_id" type="id"/>
 
     <item name="index" type="id" />
+    <item name="url" type="id" />
     <item name="file_path" type="id" />
 	
 	<item type="id" name="gridview" />

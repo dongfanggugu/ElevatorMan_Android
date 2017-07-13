@@ -11,7 +11,7 @@ public class BannerInfo implements Serializable {
 
     private String pic;
 
-    private String picUrl;
+    private String picUrl = "";
 
     public String getId() {
         return id;

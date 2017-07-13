@@ -87,6 +87,8 @@ public class CurrentAlarmFragment extends BaseFragment {
 
     private Marker startMarker;
 
+    private TextView tv_ensure;
+
     private Overlay traceOverlay;
 
     private List<Marker> mMarkerList;
@@ -111,6 +113,7 @@ public class CurrentAlarmFragment extends BaseFragment {
     private String mAlarmState = "";
 
     private static final int REQ_WORKER_SUC = 0;
+    private static final int REQ_ENSURE_COMMIT = 1;
 
     private Handler mHandler = new Handler() {
 
@@ -123,6 +126,11 @@ public class CurrentAlarmFragment extends BaseFragment {
                     String result = (String) msg.obj;
                     AlarmStateResponse response = AlarmStateResponse.getAlarmState(result);
                     markWorkersLocation(response.getBody());
+                    break;
+                case REQ_ENSURE_COMMIT:
+                    String result1 = (String) msg.obj;
+                    tv_ensure.setVisibility(View.GONE);
+                    requestAlarmList();
             }
         }
 
@@ -152,6 +160,7 @@ public class CurrentAlarmFragment extends BaseFragment {
 
         Intent intent = getActivity().getIntent();
 
+        tv_ensure = (TextView) mView.findViewById(R.id.tv_ensure);
         mMarkerList = new ArrayList<Marker>();
 
         mMarkerMap = new HashMap<String, Marker>();
@@ -245,7 +254,7 @@ public class CurrentAlarmFragment extends BaseFragment {
         if (infos != null && infos.size() > 0) {
             AlarmInfo info = infos.get(0);
             projectAdd = info.getCommunityInfo().getAddress();
-            adapter.setSelectedItem(0);
+            //adapter.setSelectedItem(0);
             alarmLatLng = new LatLng(Utils.getDouble(info.getCommunityInfo().getLat()), Utils.getDouble(info.getCommunityInfo().getLng()));
             markCenterLocation(info);
             requestAlarmState(info.getId());
@@ -261,7 +270,7 @@ public class CurrentAlarmFragment extends BaseFragment {
 
                 mBaiduMap.clear();
 
-                AlarmInfo info = (AlarmInfo) adapter.getItem(position);
+                final AlarmInfo info = (AlarmInfo) adapter.getItem(position);
 
                 adapter.setSelectedItem(position);
 
@@ -271,11 +280,46 @@ public class CurrentAlarmFragment extends BaseFragment {
 
                 markCenterLocation(info);
 
-                requestAlarmState(info.getId());
+                if(info.getState().equals("3")) {
+                    mView.findViewById(R.id.worker_listView).setVisibility(View.GONE);
+                    tv_ensure.setVisibility(View.VISIBLE);
+                    tv_ensure.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            requestSubmitAlarmCompleted(info.getId());
+                        }
+                    });
+
+                }
+                else {
+                    requestAlarmState(info.getId());
+                }
             }
         });
     }
+    /**
+     *
+     *
+     * @param alarmId
+     */
+    private void requestSubmitAlarmCompleted(String alarmId) {
+        NetTask netTask = new NetTask(getConfig().getServer() + NetConstant.PROPERTY_CONFIRM,
+                getAlarmStateRequest(alarmId)) {
 
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                Message msg = Message.obtain();
+                msg.arg1 = REQ_ENSURE_COMMIT;
+                msg.obj = result;
+                mHandler.sendMessage(msg);
+
+//                AlarmStateResponse response = AlarmStateResponse.getAlarmState(result);
+//                initWorkerListView(response.getBody());
+            }
+        };
+
+        mActivity.addBackGroundTask(netTask);
+    }
 
     /**
      * 初始化地图
@@ -648,6 +692,7 @@ public class CurrentAlarmFragment extends BaseFragment {
     private void initWorkerListView(List<WorkerInfo> infos) {
 
         mView.findViewById(R.id.worker_listView).setVisibility(View.VISIBLE);
+        tv_ensure.setVisibility(View.GONE);
 
         ListView listView = (ListView) mView.findViewById(R.id.worker_listView);
         adapter = new WorkerAdapter(infos);

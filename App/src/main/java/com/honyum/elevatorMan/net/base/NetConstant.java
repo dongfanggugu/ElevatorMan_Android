@@ -4,9 +4,22 @@ package com.honyum.elevatorMan.net.base;
 public class NetConstant {
 
     /**
+     * 维修公司提交任务完成状态
+     */
+    public static final String PROPERTY_CONFIRM = "/propertyConfirmComplete";
+    /**
+     * 上传音频
+     */
+    public static final String UPLOAD_VIDEO = "/uploadVideo";
+    /**
      * 获取广告条
      */
     public static final String YI_ZHU = "/h5/yiZhuIndexPage";
+
+    /**
+     * 获取广告条
+     */
+    public static final String NY_YI_ZHU = "/h5/myYiZhuPage";
 
     /**
      * 注册信息
@@ -45,7 +58,10 @@ public class NetConstant {
      * 请求报警信息
      */
     public static final String URL_ALARM_INFO = "/getAlarmDetail";
-
+    /**
+     * 上传位置信息
+     */
+    public static final String URL_PROCESS_ALARM = "/getProcessByAlarmId";
 
     /**
      * 上传位置信息
@@ -431,6 +447,14 @@ public class NetConstant {
      */
     public static final String UP_LOAD_IMG = "/uploadImg";
 
+    /**
+     * 添加聊天记录
+     */
+    public static final String GET_ADVERTISEMENT_DETAIL = "/getAdvertisementDetail";
+    /**
+     * 添加聊天记录
+     */
+    public static final String GET_PROCESS_BY_ALARMID = "/getProcessByAlarmId";
 
 
 
@@ -478,29 +502,14 @@ public class NetConstant {
     public static final String FIX_FIX_FINISH = "6";
     //end
 
-
-
-
-
-
     //维修任务结束状态
     // 5 为 检修结束 ，6维修结束
     public static final String FIX_LOOK = "5";
     //维修工任务  待确认  标识
     public static final String FIX_FINISH = "6";
     //end
-
-
-
 // 支付详情生成，用于判断是否可以完成维修
     public static final String FIX_PAYMENT_END = "7";
 
-
-
 //
-
-
-
-
-
 }

@@ -1,6 +1,9 @@
 package com.honyum.elevatorMan.activity.property;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -10,21 +13,30 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.common.MainPage1Activity;
 import com.honyum.elevatorMan.activity.common.NousActivity;
+import com.honyum.elevatorMan.activity.common.NousDetailActivity;
 import com.honyum.elevatorMan.activity.common.PersonActivity;
+import com.honyum.elevatorMan.activity.company.MainPageActivity;
 import com.honyum.elevatorMan.adapter.BannerAdapter;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
+import com.honyum.elevatorMan.base.ListItemCallback;
 import com.honyum.elevatorMan.base.SysActivityManager;
 import com.honyum.elevatorMan.data.BannerInfo;
+import com.honyum.elevatorMan.net.AdvDetailRequest;
+import com.honyum.elevatorMan.net.AdvDetailResponse;
 import com.honyum.elevatorMan.net.BannerResponse;
 import com.honyum.elevatorMan.net.EmptyRequest;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
+import com.honyum.elevatorMan.net.base.NewRequestHead;
+import com.honyum.elevatorMan.net.base.RequestHead;
 
 import java.util.List;
 
-public class PropertyMainPageActivity extends BaseFragmentActivity implements View.OnClickListener{
+public class PropertyMainPageActivity extends BaseFragmentActivity implements View.OnClickListener,ListItemCallback<ImageView> {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +72,40 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
 
         addBackGroundTask(netTask);
     }
+    private void requestBannerAdv(String Id, final ImageView iv) {
+        String server = getConfig().getServer() + NetConstant.GET_ADVERTISEMENT_DETAIL;
+
+        AdvDetailRequest request = new AdvDetailRequest();
+        request.setHead(new NewRequestHead().setuserId(getConfig().getUserId()).setaccessToken(getConfig().getToken()));
+        request.setBody(request.new AdvDetailBody().setId(Id));
+
+
+        NetTask netTask = new NetTask(server, request) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                AdvDetailResponse response = AdvDetailResponse.getAdvDetail(result);
+                final String i = response.getBody().getContent();
+                if(iv!=null)
+                {
+                    iv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(PropertyMainPageActivity.this, NousDetailActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putString("kntype", "详情");
+                            bundle.putString("content",i);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    });
+
+                }
+
+            }
+        };
+
+        addBackGroundTask(netTask);
+    }
     private int prePos;
 
     private int curItemPos;
@@ -75,12 +121,28 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
         curItemPos = adapter.getCount() / 2;
 
         final LinearLayout llIndicator = (LinearLayout) view.findViewById(R.id.ll_indicator);
-        for (BannerInfo pic : pics) {
+        for (final BannerInfo pic : pics) {
             ImageView iv = new ImageView(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.leftMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
             iv.setLayoutParams(params);
             iv.setBackgroundResource(R.drawable.sel_page_indicator);
+            if(pic.getPicUrl()!="") {
+                iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.setAction("android.intent.action.VIEW");
+                        Uri content_url = Uri.parse(pic.getPicUrl());
+                        intent.setData(content_url);
+                        startActivity(intent);
+                    }
+                });
+            }
+            else
+            {
+                requestBannerAdv(pic.getId(),iv);
+            }
             llIndicator.addView(iv);
         }
         llIndicator.getChildAt(0).setEnabled(false);
@@ -151,10 +213,35 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
 
         ((TextView)findViewById(R.id.tv_evemall)).setText("电梯商城");
         ((TextView)findViewById(R.id.tv_nhfix)).setText("附近维保");
+        ((ImageView)findViewById(R.id.iv_image)).setImageResource(R.drawable.mall);
         findViewById(R.id.tv_question).setOnClickListener(this);
         findViewById(R.id.tv_rule).setOnClickListener(this);
         findViewById(R.id.tv_num).setOnClickListener(this);
         findViewById(R.id.tv_handle).setOnClickListener(this);
+        final TextView tel = (TextView) findViewById(R.id.alarmtel);
+        final String telNum = tel.getText().toString().replace("-","");
+
+        tel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(PropertyMainPageActivity.this).setTitle("呼出:"+telNum)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent1 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + telNum));
+                                startActivity(intent1);
+                            }
+                        })
+                        .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+            }
+        });
+
         requestBanner();
 
 
@@ -380,6 +467,26 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
             case R.id.tv_handle:
                 jumpToHandle_rule();
                 break;
+        }
+    }
+    @Override
+    public void performItemCallback(final ImageView iv) {
+        final String info = (String) iv.getTag(R.id.url);
+        if(info!="") {
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setAction("android.intent.action.VIEW");
+                    Uri content_url = Uri.parse(info);
+                    intent.setData(content_url);
+                    startActivity(intent);
+                }
+            });
+        }
+        else if(StringUtils.isNotEmpty((String) iv.getTag()))
+        {
+            requestBannerAdv((String) iv.getTag(),iv);
         }
     }
 }

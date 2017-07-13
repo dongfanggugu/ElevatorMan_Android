@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.honyum.elevatorMan"
-    android:versionCode="144"
+    android:versionCode="147"
     android:versionName="@string/app_version">
 
     <uses-sdk
@@ -10,8 +10,11 @@
         android:targetSdkVersion="21"
         tools:overrideLibrary="com.hbzh.ydtlibrary"
         />
+    <!-- 网络视频 -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- 音频权限 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -264,6 +267,7 @@
             </intent-filter>
         </receiver>
 
+
         <activity
             android:name=".activity.maintenance.MyLiftActivity"
             android:screenOrientation="portrait" />
@@ -395,6 +399,16 @@
             android:name=".activity.common.NousDetailActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.common.RecordVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.VideoPreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.CommonPicturePickActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ActivityDialogStyle"/>
+        <activity
             android:name=".activity.common.NousActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -426,9 +440,24 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".activity.worker.AlarmProcessDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.property.AlarmHisDetailActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
             android:name=".activity.common.ChatActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
+        <activity
+            android:name=".activity.common.WebViewDetailActivity"
+            android:screenOrientation="portrait"
+            />
+
+
         <activity
             android:name=".activity.property.PropertyMainPageActivity"
             android:screenOrientation="portrait" />

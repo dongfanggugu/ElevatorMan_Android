@@ -30,6 +30,7 @@
             android:gravity="right"
             android:padding="5dp"
             android:text="全国"
+            android:visibility="gone"
             android:textColor="@color/title_text_color"
             android:textSize="15sp" />
 
@@ -180,11 +181,13 @@
                         android:id="@+id/tv_reset_pwd"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
                         android:gravity="right"
                         android:text="忘记密码"
                         android:textColor="@color/title_text_color"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

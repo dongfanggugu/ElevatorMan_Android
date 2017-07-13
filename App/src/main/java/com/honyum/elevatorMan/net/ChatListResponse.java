@@ -45,7 +45,7 @@ public class ChatListResponse extends Response {
         private String senderName;
 
         private String senderId;
-        //1.文字  2.语音
+        //1.文字  2.语音 3.图片 4.视频
         private String type;
 
         private int timeLength;

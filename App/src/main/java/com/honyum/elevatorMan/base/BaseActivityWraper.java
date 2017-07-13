@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
@@ -86,9 +87,6 @@ public abstract class BaseActivityWraper extends BaseFragmentActivity {
         return (T) it.getSerializableExtra(key);
 
     }
-
-
-
 
 
     /**

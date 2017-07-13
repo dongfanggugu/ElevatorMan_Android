@@ -134,6 +134,59 @@
             android:paddingLeft="20dp" />
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccccc" />
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_icode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center_vertical|left"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_icode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="验证码"
+                android:textColor="@color/color_text_register"
+                android:textSize="@dimen/size_text_register" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_icode"
+            style="@style/register_input_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="请输入验证码"
+            android:maxLength="20"
+            android:text="1333"
+            android:paddingLeft="20dp" />
+        <TextView
+            android:id="@+id/tv_geticode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_plan_lanse"
+            android:textColor="@color/white"
+            android:padding="@dimen/size_10dp"
+            android:text="获取验证码"/>
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

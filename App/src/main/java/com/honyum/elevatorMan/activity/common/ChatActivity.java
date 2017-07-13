@@ -1,27 +1,38 @@
 package com.honyum.elevatorMan.activity.common;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.adapter.ChatAdapter;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
+import com.honyum.elevatorMan.base.ImageCallback;
+import com.honyum.elevatorMan.base.ListItemCallback;
 import com.honyum.elevatorMan.data.AlarmNotify;
 import com.honyum.elevatorMan.data.ChannelInfo;
 import com.honyum.elevatorMan.net.AudioUrlResponse;
@@ -40,12 +51,11 @@ import com.honyum.elevatorMan.view.RecordButton;
 
 import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.FileNameMap;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatActivity extends BaseFragmentActivity {
+public class ChatActivity extends BaseFragmentActivity implements ListItemCallback<String>, ImageCallback<String> {
 
     private static final int REFRESH_NOES = 0;
     private static final int REFRESH_TOP = 1;
@@ -53,6 +63,16 @@ public class ChatActivity extends BaseFragmentActivity {
 
     private static final int CHAT_CONTENT_TEXT = 1;
     private static final int CHAT_CONTENT_VOICE = 2;
+    private static final int VIDEO_TAG = 1;
+    private static final int PICK_TAG = 2;
+    private static final int CARMA_TAG = 3;
+
+    private FrameLayout fl_vv;
+    private VideoView videoView_show;
+    private FrameLayout fl_image;
+    private ImageView iv_show;
+
+
 
     private AudioRecorder audioRecorder;
 
@@ -94,12 +114,67 @@ public class ChatActivity extends BaseFragmentActivity {
 
     private static OnActivityFinishListener onActivityFinishListener;
 
+
+    @Override
+    public void performItemCallback(String data) {
+        fl_vv = (FrameLayout) findViewById(R.id.fl_vv);
+        fl_vv.setVisibility(View.VISIBLE);
+        Uri uri = Uri.parse(data);
+        videoView_show.setVideoURI(uri);
+        videoView_show.requestFocus();
+        //videoView_show.set
+        videoView_show.start();
+        videoView_show.setClickable(true);
+        fl_vv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (videoView_show.isPlaying()) {
+                    videoView_show.stopPlayback();
+                }
+                fl_vv.setVisibility(View.GONE);
+                findViewById(R.id.ll_content).setVisibility(View.VISIBLE);
+            }
+        });
+        findViewById(R.id.ll_content).setVisibility(View.GONE);
+
+
+    }
+
+
+    @Override
+    public void performImageCallback(String data) {
+        fl_image = (FrameLayout) findViewById(R.id.fl_image);
+        fl_image.setVisibility(View.VISIBLE);
+        iv_show = (ImageView) findViewById(R.id.iv_show);
+        Glide.with(this)
+                .load(data)
+                .into(iv_show);
+        iv_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fl_image.setVisibility(View.GONE);
+                findViewById(R.id.ll_content).setVisibility(View.VISIBLE);
+            }
+        });
+        findViewById(R.id.ll_content).setVisibility(View.GONE);
+
+    }
+
+
     public interface OnActivityFinishListener {
         void onFinishListener();
     }
 
     public static void setOnActivityFinishListener(OnActivityFinishListener onActivityFinishListener) {
         ChatActivity.onActivityFinishListener = onActivityFinishListener;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (videoView_show.isPlaying()) {
+            videoView_show.stopPlayback();
+        }
     }
 
 
@@ -118,7 +193,7 @@ public class ChatActivity extends BaseFragmentActivity {
             }
         }
 
-        isForeground = true;
+
 
         if (audioRecorder == null) {
             audioRecorder = new AudioRecorder();
@@ -160,12 +235,32 @@ public class ChatActivity extends BaseFragmentActivity {
                     channelListView.setAdapter(adapter);
 
                     channelListView.setOnItemClickListener(channelClickListener);
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+                    Dialog dialog = null;
+                    builder.setTitle("提示");
+                    builder.setCancelable(false);
+
+                    builder.setMessage("所有任务都已完成！")
+                            .setPositiveButton("确定",
+                                    new DialogInterface.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                            dialog.cancel();
+
+                                        }
+                                    });
+                    dialog = builder.create();
+                    dialog.show();
+
                 }
 
             }
         };
 
-        addTask(netTask);
+        addBackGroundTask(netTask);
     }
 
     private void initChatContent(final int refreshType, int rows) {
@@ -245,16 +340,29 @@ public class ChatActivity extends BaseFragmentActivity {
         addBackGroundTask(netTask);
     }
 
-    private void initView() {
+    @Override
+    protected void onResume() {
+        isForeground = true;
+        super.onResume();
+        refreshData();
+    }
 
-        channelListView = (ListView)findViewById(R.id.list_channel);
-        channelListView.setVisibility(View.GONE);
-
+    private void refreshData() {
+        maxCode = null;
         if (MODE_PROPERTY == mode) {
             getChannel();
         } else {
+            //adapter.clearAll(true);
             initChatContent(REFRESH_NOES, 10);
         }
+    }
+
+    private void initView() {
+
+        channelListView = (ListView) findViewById(R.id.list_channel);
+        channelListView.setVisibility(View.GONE);
+
+        videoView_show = (VideoView) findViewById(R.id.videoView_show);
 
 
         JPushMsgReceiver.setChatMsgListener(new JPushMsgReceiver.onChatMsgListener() {
@@ -329,6 +437,23 @@ public class ChatActivity extends BaseFragmentActivity {
                 }
             }
         });
+        etChat.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                long oldTime = 0, newTime = 0;
+                if (((actionId == EditorInfo.IME_ACTION_SEND)
+                        || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) && event.getAction() == KeyEvent.ACTION_DOWN) {
+
+                    newTime = System.currentTimeMillis();
+                    if (oldTime == 0 || newTime - oldTime > 1000) {
+                        sendChat(CHAT_CONTENT_TEXT, etChat.getText().toString());
+                    }
+                    oldTime = newTime;
+                    return true;
+                }
+                return false;
+            }
+        });
 
         listView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -354,11 +479,28 @@ public class ChatActivity extends BaseFragmentActivity {
             }
         });
 
-        findViewById(R.id.chat_send).setOnClickListener(new View.OnClickListener() {
+//        findViewById(R.id.chat_send).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String textChat = etChat.getText().toString();
+//                sendChat(CHAT_CONTENT_TEXT, textChat);
+//            }
+//        });
+        findViewById(R.id.chat_video).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String textChat = etChat.getText().toString();
-                sendChat(CHAT_CONTENT_TEXT, textChat);
+                Intent intent = new Intent(ChatActivity.this, RecordVideoActivity.class);
+                intent.putExtra("AlarmId", mAlarmId);
+                startActivityForResult(intent, VIDEO_TAG);
+
+            }
+        });
+        findViewById(R.id.chat_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatActivity.this, CommonPicturePickActivity.class);
+                intent.putExtra("AlarmId", mAlarmId);
+                startActivityForResult(intent, PICK_TAG);
             }
         });
     }
@@ -404,8 +546,7 @@ public class ChatActivity extends BaseFragmentActivity {
                 @Override
                 protected void onResponse(NetTask task, String result) {
                     AudioUrlResponse response = AudioUrlResponse.getAudioUrl(result);
-                    String audioUrl = response.getBody().getPic();
-
+                    String audioUrl = response.getBody().getUrl();
                     sendChat(CHAT_CONTENT_VOICE, audioUrl);
                 }
             };
@@ -462,10 +603,11 @@ public class ChatActivity extends BaseFragmentActivity {
             protected void onResponse(NetTask task, String result) {
                 listView.setSelection(listView.getBottom());
                 etChat.setText("");
+                //refreshData();
             }
         };
 
-        addTask(netTask);
+        addBackGroundTask(netTask);
     }
 
 

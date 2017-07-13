@@ -81,8 +81,7 @@ public class WelcomeActivity extends BaseFragmentActivity {
         else if (role.equals(Constant.COMPANY)) {
             startCompany(getAlarmId());
         }
-
-        finish();
+            finish();
     }
 
     private void startCompany(String alarmId) {
@@ -93,6 +92,7 @@ public class WelcomeActivity extends BaseFragmentActivity {
 //            intent.setAction(Constant.ACTION_ALARM_RECEIVED);
 //        }
         startActivity(intent);
+        finish();
     }
 
     /**
@@ -107,6 +107,7 @@ public class WelcomeActivity extends BaseFragmentActivity {
             intent.setAction(Constant.ACTION_ALARM_RECEIVED);
         }
         startActivity(intent);
+       // finish();
     }
 
     /**

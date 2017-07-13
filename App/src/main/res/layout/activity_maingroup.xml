@@ -10,7 +10,10 @@
         android:layout_weight="0.95"
         android:gravity="center"
         />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/backgray"/>
     <LinearLayout
         android:layout_below="@id/body"
         android:layout_width="match_parent"

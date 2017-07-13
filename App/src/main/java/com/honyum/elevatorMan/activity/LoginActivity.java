@@ -184,8 +184,8 @@ public class LoginActivity extends BaseFragmentActivity {
         findViewById(R.id.tv_register).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-          //     startActivity(new Intent(LoginActivity.this, RegisterStepOneActivity.class));
-                startActivity(new Intent(LoginActivity.this, HBLookActivity.class));
+               startActivity(new Intent(LoginActivity.this, RegisterStepOneActivity.class));
+              //  startActivity(new Intent(LoginActivity.this, HBLookActivity.class));
 
                 //startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
@@ -324,8 +324,8 @@ public class LoginActivity extends BaseFragmentActivity {
                     //startWorker(getIntent() == null ? null : getIntent().getStringExtra("alarm_id"));
                     startActivity(new Intent(LoginActivity.this, MainGroupActivity.class));
                 }
+                finish();
             }
-
         };
         addTask(task);
     }

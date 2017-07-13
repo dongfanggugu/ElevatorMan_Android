@@ -7,6 +7,7 @@ package com.honyum.elevatorMan.net.base;
 public class NewRequestHead extends RequestHead{
 
 
+
     public NewRequestHead setuserId(String userId) {
         super.setUserId(userId);
         return this;

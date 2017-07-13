@@ -247,7 +247,7 @@ public class PropertySettingFragment extends BaseFragment {
 	 * 获取 BaseFragmentActivity 对象
 	 * @return
 	 */
-	private BaseFragmentActivity getContext() {
+	public BaseFragmentActivity getContext() {
 		return (BaseFragmentActivity) getActivity();
 	}
 	

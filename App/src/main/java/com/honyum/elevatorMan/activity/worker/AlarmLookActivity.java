@@ -36,6 +36,8 @@ public class AlarmLookActivity extends BaseActivityWraper {
 
     @Override
     protected void initView() {
+        String s = getIntent().getStringExtra("Id");
+
 
         am = (AudioManager) getSystemService( Context.AUDIO_SERVICE);
         //听筒模式下设置为false
@@ -51,6 +53,14 @@ public class AlarmLookActivity extends BaseActivityWraper {
 
         videoView = (PlaySurfaceView) findViewById(R.id.video_surface);
         tv_stop = findView(R.id.tv_stop);
+        if(s.equals("30101101052008070016"))
+        {
+            tv_stop.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_stop.setVisibility(View.GONE);
+        }
         tv_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +81,7 @@ public class AlarmLookActivity extends BaseActivityWraper {
                                 tv_stop.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        tv_stop.setText("开启语音");
                                         mTalkback.stopTalkback();
                                     }
                                 });
@@ -183,6 +194,7 @@ public class AlarmLookActivity extends BaseActivityWraper {
                 DeviceInfoUtils.mSelectDevice.hbNetCtrl.stopPreview( 1);
 
                 //停止解码
+                if(mPlayer!=null)
                 mPlayer.closeStream();
                 isPreviewing = false;
             }
@@ -190,10 +202,14 @@ public class AlarmLookActivity extends BaseActivityWraper {
 
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         stopRealPlay();
+
+        if(mTalkback!=null)
+        mTalkback.stopTalkback();
     }
 
     @Override

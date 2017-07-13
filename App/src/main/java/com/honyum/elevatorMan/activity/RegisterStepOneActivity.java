@@ -32,6 +32,7 @@ import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.RequestHead;
+import com.honyum.elevatorMan.utils.CountDownTimerUtils;
 import com.honyum.elevatorMan.utils.EncryptUtils;
 import com.honyum.elevatorMan.utils.Utils;
 
@@ -46,7 +47,9 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
 
     private TextView tvCity;
 
-    private EditText tv_phonenum;
+    private EditText et_phonenum;
+
+    private TextView tv_geticode;
 
     /**
      * begin:用来处理长按事件的标记参数
@@ -117,22 +120,43 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
         final EditText etUserName = (EditText) findViewById(R.id.et_user_name);
         final EditText etPwd = (EditText) findViewById(R.id.et_pwd);
         final EditText etPwdConfirm = (EditText) findViewById(R.id.et_pwd_confirm);
+        tv_geticode = (TextView) findViewById(R.id.tv_geticode);
+
 
         et_company_name = (EditText)findViewById(R.id.et_company_name);
 
-        tv_phonenum = (EditText) findViewById(R.id.et_phonenum);
+        et_phonenum = (EditText) findViewById(R.id.et_phonenum);
+
+
         findViewById(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerCompany(tv_phonenum.getText().toString(),
+                registerCompany(et_phonenum.getText().toString(),
                         etUserName.getText().toString(),
                         et_company_name.getText().toString(),
                         etPwd.getText().toString(),etPwdConfirm.getText().toString());
             }
         });
+        tv_geticode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkNum(et_phonenum.getText().toString());
+            }
+        });
 
 
 
+    }
+
+    //
+    private void checkNum(final String tel) {
+
+        if (!Utils.isMobileNumber(tel)) {
+            showToast("手机号码格式不正确");
+            return;
+        }
+        CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tv_geticode, 60000, 1000);
+        mCountDownTimerUtils.start();
 
     }
 
@@ -205,6 +229,7 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
         final EditText etTel = (EditText) findViewById(R.id.et_property_tel);
         final EditText etAddress = (EditText) findViewById(R.id.et_property_address);
 
+
         findViewById(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,6 +237,12 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
                         etContact.getText().toString(),
                         etTel.getText().toString(),
                         etAddress.getText().toString());
+            }
+        });
+        findViewById(R.id.tv_geticode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkNum(etTel.getText().toString());
             }
         });
     }

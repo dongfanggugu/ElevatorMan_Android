@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
 
+import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
+import com.honyum.elevatorMan.net.base.NetConstant;
 
 public class NousDetailActivity extends BaseFragmentActivity {
 
@@ -27,8 +29,9 @@ public class NousDetailActivity extends BaseFragmentActivity {
 
         web_nous_detail = (WebView) findViewById(R.id.web_nous_detail);
         web_nous_detail.getSettings().setJavaScriptEnabled(true);
-        Log.e("content", content);
-        web_nous_detail.loadDataWithBaseURL(null,content,"text/html","utf-8",null);
+     //   Log.e("content", content);
+
+        web_nous_detail.loadDataWithBaseURL(getConfig().getPCServer(),content,"text/html","utf-8",null);
     }
 
 }

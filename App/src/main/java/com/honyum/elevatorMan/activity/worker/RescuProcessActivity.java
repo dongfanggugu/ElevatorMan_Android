@@ -98,11 +98,11 @@ public class RescuProcessActivity extends WorkerBaseActivity {
                             return;
                         }
 
-                        if (!alarmInfo.getState().equals(Constant.ALARM_STATE_ASSIGNED)
-                                && !alarmInfo.getState().equals(Constant.ALARM_STATE_ARRIVED)) {
-                            showToast("该报警已经完成,无法进入电梯交流群组");
-                            return;
-                        }
+//                        if (!alarmInfo.getState().equals(Constant.ALARM_STATE_ASSIGNED)
+//                                && !alarmInfo.getState().equals(Constant.ALARM_STATE_ARRIVED)) {
+//                            showToast("该报警已经完成,无法进入电梯交流群组");
+//                            return;
+//                        }
 
                         Intent intent = new Intent(RescuProcessActivity.this, ChatActivity.class);
 

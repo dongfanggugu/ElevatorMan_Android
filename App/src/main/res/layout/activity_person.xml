@@ -162,6 +162,43 @@
                     android:layout_height="1dp"
                     android:background="#cccccc"/>
                  -->
+                <LinearLayout
+                    android:id="@+id/ll_business"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/size_10dp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/selector_mainpage_item"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/size_person_icon"
+                            android:layout_height="@dimen/size_person_icon"
+                            android:src="@drawable/icon_cooperation"
+                            />
+
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:text="我的商机"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/transparent"/>
 
                 <LinearLayout
                     android:id="@+id/ll_branch"

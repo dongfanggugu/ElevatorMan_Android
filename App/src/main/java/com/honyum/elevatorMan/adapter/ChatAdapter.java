@@ -2,22 +2,36 @@ package com.honyum.elevatorMan.adapter;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.common.ChatActivity;
+import com.honyum.elevatorMan.base.ImageCallback;
+import com.honyum.elevatorMan.base.ListItemCallback;
 import com.honyum.elevatorMan.net.ChatListResponse;
 import com.honyum.elevatorMan.utils.Utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -27,6 +41,11 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
     private static final int TEXT_RIGHT = 1;
     private static final int VOICE_LEFE = 2;
     private static final int VOICE_RIGHT = 3;
+    private static final int IMAGE_LEFE = 4;
+    private static final int IMAGE_RIGHT = 5;
+    private static final int VIDEO_LEFE = 6;
+    private static final int VIDEO_RIGHT = 7;
+
 
     private static final long INTERVAL_TIME = 2 * 60 * 1000;
 
@@ -86,6 +105,41 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
 
                     convertView.setTag(vh);
                     break;
+                case 3:
+                    if (itemViewType == IMAGE_RIGHT) {
+                        convertView = inflater.inflate(R.layout.chat_video_right_item, parent, false);
+                    } else {
+                        convertView = inflater.inflate(R.layout.chat_video_left_item, parent, false);
+                    }
+
+                    vh = new ViewHolder();
+
+                    vh.chatTime = (TextView) convertView.findViewById(R.id.chat_time);
+                    vh.tvName = (TextView) convertView.findViewById(R.id.tv_name);
+                    vh.voiceContent = (ImageView) convertView.findViewById(R.id.voiceContent);
+                    vh.voiceDuration = (TextView) convertView.findViewById(R.id.chat_voice_duration);
+                    vh.pdSending = (ProgressBar) convertView.findViewById(R.id.chat_progressBar);
+
+                    convertView.setTag(vh);
+                    break;
+                case 4:
+                    if (itemViewType == VIDEO_RIGHT) {
+                        convertView = inflater.inflate(R.layout.chat_video_right_item, parent, false);
+                    } else {
+                        convertView = inflater.inflate(R.layout.chat_video_left_item, parent, false);
+                    }
+
+                    vh = new ViewHolder();
+
+                    vh.chatTime = (TextView) convertView.findViewById(R.id.chat_time);
+                    vh.tvName = (TextView) convertView.findViewById(R.id.tv_name);
+                    vh.voiceContent = (ImageView) convertView.findViewById(R.id.voiceContent);
+                    vh.voiceDuration = (TextView) convertView.findViewById(R.id.chat_voice_duration);
+                    vh.pdSending = (ProgressBar) convertView.findViewById(R.id.chat_progressBar);
+
+
+                    convertView.setTag(vh);
+                    break;
                 default:
                     throw new RuntimeException("不正确的消息类型");
             }
@@ -112,7 +166,7 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
             case 1:
                 vh.tvName.setText(body.getSenderName());
 
-                String content = body.getContent();
+                final String content = body.getContent();
                 try {
                     vh.chatContent.setText(URLDecoder.decode(content, "utf-8"));
                 } catch (UnsupportedEncodingException e) {
@@ -160,10 +214,72 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
                 });
 
                 break;
+            case 3:
+                vh.tvName.setText(body.getSenderName());
+                // vh.voiceDuration.setHint(body.getTimeLength() + "＂");
+                vh.voiceDuration.setVisibility(View.GONE);
+                Glide.with(context)
+                        .load(body.getContent()).override(60, 80)
+                        .into(vh.voiceContent);
+                vh.voiceContent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((ImageCallback<String>)context).performImageCallback(body.getContent());
+                    }
+                });
+
+                break;
+            case 4:
+                vh.tvName.setText(body.getSenderName());
+                vh.voiceDuration.setVisibility(View.GONE);
+                vh.voiceContent.setBackground(new BitmapDrawable(createVideoThumbnail(body.getContent(), 60, 80)));
+                vh.voiceContent.setImageResource(R.drawable.video_play);
+                vh.voiceContent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((ListItemCallback<String>)context).performItemCallback(body.getContent());
+                    }
+                });
+
+
+
+
+
+                break;
         }
 
         return convertView;
     }
+
+    private Bitmap createVideoThumbnail(String url, int width, int height) {
+        Bitmap bitmap = null;
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        int kind = MediaStore.Video.Thumbnails.MINI_KIND;
+        try {
+            if (Build.VERSION.SDK_INT >= 14) {
+                retriever.setDataSource(url, new HashMap<String, String>());
+            } else {
+                retriever.setDataSource(url);
+            }
+            bitmap = retriever.getFrameAtTime();
+        } catch (IllegalArgumentException ex) {
+            // Assume this is a corrupt video file
+        } catch (RuntimeException ex) {
+            // Assume this is a corrupt video file.
+        } finally {
+            try {
+                retriever.release();
+            } catch (RuntimeException ex) {
+                // Ignore failures while cleaning up.
+            }
+        }
+        if (kind == MediaStore.Images.Thumbnails.MICRO_KIND && bitmap != null) {
+            bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
+                    ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
+        }
+        return bitmap;
+    }
+
 
     private void playVoice(String audioUri, final ImageView voiceContent, final int pos) {
         try {
@@ -274,6 +390,18 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
                 } else {
                     return VOICE_LEFE;
                 }
+            case 3:
+                if (mId.equals(id)) {
+                    return IMAGE_RIGHT;
+                } else {
+                    return IMAGE_LEFE;
+                }
+            case 4:
+                if (mId.equals(id)) {
+                    return VIDEO_RIGHT;
+                } else {
+                    return VIDEO_LEFE;
+                }
             default:
                 throw new RuntimeException("不正确的消息类型");
         }
@@ -281,7 +409,7 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
 
     @Override
     public int getViewTypeCount() {
-        return 4;
+        return 8;
     }
 
     static class ViewHolder {

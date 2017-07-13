@@ -2,16 +2,19 @@ package com.honyum.elevatorMan.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.property.AlarmHisDetailActivity;
 import com.honyum.elevatorMan.base.BaseFragment;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.constant.Constant;
@@ -104,7 +107,7 @@ public class HistoryAlarmFragment extends BaseFragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             // TODO Auto-generated method stub
             if (null == convertView) {
                 convertView = View.inflate(mContext, R.layout.layout_alarm_item, null);
@@ -117,7 +120,17 @@ public class HistoryAlarmFragment extends BaseFragment {
             TextView tvProject = (TextView) convertView.findViewById(R.id.tv_project);
             TextView tvDate = (TextView) convertView.findViewById(R.id.tv_date);
             TextView tvState = (TextView) convertView.findViewById(R.id.tv_state);
-
+            LinearLayout ll_content = (LinearLayout) convertView.findViewById(R.id.ll_content);
+            ll_content.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it = new Intent(mActivity,AlarmHisDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Info",mAlarmInfoList.get(position));
+                    it.putExtras(bundle);
+                    startActivity(it);
+                }
+            });
             tvIndex.setText("" + (position + 1));
             tvIndex.setTag(position);
             tvProject.setText(mAlarmInfoList.get(position).getCommunityInfo().getName());

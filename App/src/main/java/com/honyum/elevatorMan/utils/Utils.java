@@ -422,6 +422,30 @@ public class Utils {
         }
         return filePath;
     }
+    /**
+     * 根据图片url获取图片
+     */
+    public static String getVideo(String urlPath) throws Exception {
+
+        String fileName = getFileNameByUrl(urlPath);
+        String dir = getTempPath();
+
+        String filePath = dir + fileName;
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            URL url = new URL(urlPath);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(5 * 1000);
+            if (conn.getResponseCode() == 200) {
+                InputStream inputStream = conn.getInputStream();
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                saveBitmap(bitmap, dir, fileName);
+            }
+        }
+        return filePath;
+    }
 
     /**
      * 保存图片文件

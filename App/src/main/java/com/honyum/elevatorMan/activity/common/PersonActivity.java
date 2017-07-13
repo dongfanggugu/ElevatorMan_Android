@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.constant.Constant;
+import com.honyum.elevatorMan.net.base.NetConstant;
 
 public class PersonActivity extends BaseFragmentActivity {
 
@@ -42,7 +44,17 @@ public class PersonActivity extends BaseFragmentActivity {
         ((TextView) findViewById(R.id.tv_sex)).setText(getConfig().getSex() == 0 ? "女" : "男");
         ((TextView) findViewById(R.id.tv_company)).setText(getConfig().getBranchName());
         ((TextView) findViewById(R.id.tv_operation_code)).setText(getConfig().getOperationCard());
-
+        ((LinearLayout) findViewById(R.id.ll_business)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PersonActivity.this, WebViewDetailActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("kntype", "我的商机");
+                bundle.putString("content", NetConstant.NY_YI_ZHU+"?UserId="+getConfig().getUserId());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         if (!StringUtils.isEmpty(getConfig().getHAddress())) {
             ((TextView) findViewById(R.id.tv_home_place)).setText(getConfig().getHAddress());
         }

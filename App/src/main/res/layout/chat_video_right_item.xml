@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/chat_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:background="@drawable/chat_time_bg"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="今天 12:34"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="8dp"
+            android:gravity="end"
+            android:maxWidth="80dp"
+            android:text="小红花" />
+
+        <ImageView
+            android:id="@+id/voiceContent"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_toLeftOf="@+id/tv_name"
+            />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_toLeftOf="@+id/voiceContent">
+
+            <TextView
+                android:id="@+id/chat_voice_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="12&apos;&apos;"
+                android:padding="5dp" />
+
+            <ProgressBar
+                android:id="@+id/chat_progressBar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:visibility="invisible" />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

@@ -6,11 +6,27 @@
     android:orientation="vertical"
     tools:context="com.honyum.elevatorMan.activity.worker.AlarmDetailActivity">
 
-    <include
-        android:id="@+id/title_detail"
-        layout="@layout/layout_title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/title_detail"
+            layout="@layout/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height" />
+        <TextView
+            android:id="@+id/tv_processDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:text="过程详情"/>
+        </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"

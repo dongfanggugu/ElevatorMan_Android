@@ -1,9 +1,13 @@
 package com.honyum.elevatorMan.activity.property;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -44,6 +48,22 @@ public class MarketWebViewActivity extends BaseFragmentActivity {
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
+        webView.setWebChromeClient(new WebChromeClient(){
+            public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
+                AlertDialog.Builder b = new AlertDialog.Builder(MarketWebViewActivity.this);
+                b.setTitle("提示");
+                b.setMessage(message);
+                b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        result.confirm();
+                    }
+                });
+                b.setCancelable(false);
+                b.create().show();
+                return true;
+            }
+        });
         String type = getIntent().getStringExtra("type");
 
         String url = "";

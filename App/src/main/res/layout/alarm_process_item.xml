@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/size_10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试物业"
+        android:textSize="17sp"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="@dimen/size_10dp"
+        />
+    <TextView
+        android:layout_below="@id/tv_name"
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:text="13333333333"
+        android:textColor="@color/frontgray"
+        android:layout_height="wrap_content"
+
+        android:layout_alignLeft="@id/tv_name"
+        />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_margin="@dimen/size_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="2013-11-11 11:11:11"
+        android:textColor="@color/frontgray"
+        android:layout_alignParentRight="true"
+
+        />
+    <TextView
+        android:layout_below="@id/tv_time"
+        android:id="@+id/tv_state"
+        android:layout_alignTop="@id/tv_num"
+        android:layout_alignRight="@id/tv_name"
+        android:layout_width="wrap_content"
+        android:text="13333333333"
+        android:textColor="@color/titleblue"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+
+        android:layout_marginRight="@dimen/size_10dp"
+        />
+
+    <View
+        android:layout_marginTop="@dimen/size_5dp"
+        android:layout_below="@id/tv_num"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lessgray"
+        />
+
+
+
+
+
+
+</RelativeLayout>

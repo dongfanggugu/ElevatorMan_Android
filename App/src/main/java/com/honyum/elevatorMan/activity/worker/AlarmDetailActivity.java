@@ -3,6 +3,7 @@ package com.honyum.elevatorMan.activity.worker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.honyum.elevatorMan.R;
@@ -11,6 +12,7 @@ import com.honyum.elevatorMan.data.AlarmInfo;
 
 public class AlarmDetailActivity extends BaseFragmentActivity {
 
+    private TextView tv_processDetail;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,10 +22,20 @@ public class AlarmDetailActivity extends BaseFragmentActivity {
     }
 
     private void initTitleBar() {
-        initTitleBar("报警详情", R.id.title, R.drawable.back_normal, backClickListener);
+        initTitleBar("报警详情", R.id.title_detail, R.drawable.back_normal, backClickListener);
     }
 
     private void initView() {
+        final String id = getIntent().getStringExtra("Id");
+        tv_processDetail = (TextView) findViewById(R.id.tv_processDetail);
+        tv_processDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(AlarmDetailActivity.this, AlarmProcessDetailActivity.class);
+                it.putExtra("Id",id);
+                startActivity(it);
+            }
+        });
         Intent intent = getIntent();
         if(null == intent) {
             return;
