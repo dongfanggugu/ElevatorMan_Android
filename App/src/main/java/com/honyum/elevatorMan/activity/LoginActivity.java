@@ -26,6 +26,8 @@ import android.widget.TextView;
 import com.baidu.navisdk.util.common.StringUtils;
 import com.example.viewtest.*;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.common.EchartActivity;
+import com.honyum.elevatorMan.activity.common.HelpCenterActivity;
 import com.honyum.elevatorMan.activity.common.MainGroupActivity;
 import com.honyum.elevatorMan.activity.common.MainPage1Activity;
 import com.honyum.elevatorMan.activity.common.MainpageActivity;
@@ -180,14 +182,15 @@ public class LoginActivity extends BaseFragmentActivity {
         });
 
 
-        //注册
         findViewById(R.id.tv_register).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(new Intent(LoginActivity.this, RegisterStepOneActivity.class));
-              //  startActivity(new Intent(LoginActivity.this, HBLookActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterStepOneActivity.class));
+                //  startActivity(new Intent(LoginActivity.this, HBLookActivity.class));
 
                 //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+
             }
         });
 

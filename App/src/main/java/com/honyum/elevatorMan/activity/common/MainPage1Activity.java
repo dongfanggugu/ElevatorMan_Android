@@ -277,7 +277,7 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
      * 跳转到维保服务页面
      */
     private void jumpToMainService() {
-        //  NHMentenanceActivity  MaintenanceServiceActivity
+        //  NHMentenanceActivity  MaintenanceServiceActivity  MaintenanceServiceActivity
         Intent intent = new Intent(this, MaintenanceServiceActivity.class);
         startActivity(intent);
     }
@@ -311,7 +311,7 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
     /**
      * 跳转到个人中心
      */
-    private void jumpToPerson() {
+    private void jumpToPerson() {  //PersonActivity
         Intent intent = new Intent(this, PersonActivity.class);
         startActivity(intent);
     }
