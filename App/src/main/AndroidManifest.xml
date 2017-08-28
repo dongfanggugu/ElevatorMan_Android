@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.honyum.elevatorMan"
-    android:versionCode="147"
+    android:versionCode="148"
     android:versionName="@string/app_version">
 
     <uses-sdk
@@ -132,7 +132,10 @@
             android:name=".activity.property.MarketWebViewActivity"
             android:screenOrientation="portrait" />
 
+        <activity
 
+            android:name=".activity.company.LookPersonsActivity"
+            android:screenOrientation="portrait" />
         <activity
 
             android:name=".activity.property.ElevatorListActivity"
@@ -246,6 +249,8 @@
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="developer-default" />
+
+        <!--     994e4ff535ba5c479fa49c7e  e7294fdb57006cab22fa3655 -->
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="994e4ff535ba5c479fa49c7e" />
@@ -322,6 +327,14 @@
         <activity
             android:name=".activity.common.PersonActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.InsuranceBuyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.common.AddInsuranceDataActivity"
+            android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".activity.common.PersonBasicInfoActivity"
             android:screenOrientation="portrait" />
@@ -446,10 +459,15 @@
             android:name=".activity.worker.AlarmProcessDetailActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.worker.EbuyActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.property.AlarmHisDetailActivity"
             android:screenOrientation="portrait" />
 
-
+        <activity
+            android:name=".activity.worker.EBuyOrderListActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.common.ChatActivity"
             android:screenOrientation="portrait"

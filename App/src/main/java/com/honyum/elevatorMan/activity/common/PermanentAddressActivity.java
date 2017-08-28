@@ -178,7 +178,8 @@ public class PermanentAddressActivity extends BaseFragmentActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(PermanentAddressActivity.this,
-                                AddPermanentAddressActivity.class);
+                                AddressActivity.class);
+                        intent.putExtra("category","wy");
                         startActivity(intent);
                     }
                 });

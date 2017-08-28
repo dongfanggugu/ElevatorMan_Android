@@ -44,10 +44,11 @@
             android:layout_marginBottom="@dimen/alarm_list_vertical" >
 
             <RelativeLayout
+                android:id="@+id/rl_parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_vertical"
-                android:orientation="vertical" >
+                >
 
                 <TextView
                     android:id="@+id/tv_datenumber"
@@ -55,6 +56,7 @@
                     android:layout_height="wrap_content"
                     android:text="朝阳区佳境天城"
                     android:textSize="@dimen/alarm_list_project_text_size"
+                    android:maxEms="10"
                     android:textColor="@color/color_list_project" />
 
 

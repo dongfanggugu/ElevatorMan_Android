@@ -22,6 +22,12 @@ public class ForeMsgReceiver extends BroadcastReceiver {
         }
     }
 
+
+
+
+
+
+
     /**
      * 取消内部消息的action
      * @param action

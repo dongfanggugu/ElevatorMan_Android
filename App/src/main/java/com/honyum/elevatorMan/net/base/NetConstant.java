@@ -4,6 +4,37 @@ package com.honyum.elevatorMan.net.base;
 public class NetConstant {
 
     /**
+     * 提交保险信息
+     */
+    public static final String EDIT_INSURANCE = "/editInsuranceByUser";
+
+
+
+    /**
+     * 获取保险人员信息
+     */
+    public static final String GET_PERSON_INFO = "/getUserById";
+
+    /**
+     * 获取在线人员列表
+     */
+    public static final String GET_PERSONS_LIST = "/getUserWorkBybranch";
+
+    /**
+     * 获取在线人数
+     */
+    public static final String GET_PERSONS = "/getUserWorkOnLineCountBybranch";
+
+
+    /**
+     * e梯配
+     */
+    public static final String EASY_LADDER_ORDERBYUSER = "/getEasyLadderOrderByUser";
+    /**
+     * e梯配
+     */
+    public static final String EASY_LADDER_URL = "/getEasyLadderUrl";
+    /**
      * 维修公司提交任务完成状态
      */
     public static final String PROPERTY_CONFIRM = "/propertyConfirmComplete";

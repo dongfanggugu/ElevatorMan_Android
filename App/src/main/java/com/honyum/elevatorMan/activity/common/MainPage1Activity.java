@@ -20,6 +20,7 @@ import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.maintenance.MaintenanceManagerActivity;
 import com.honyum.elevatorMan.activity.maintenance.MaintenanceServiceActivity;
 import com.honyum.elevatorMan.activity.worker.AlarmListActivity;
+import com.honyum.elevatorMan.activity.worker.EbuyActivity;
 import com.honyum.elevatorMan.activity.worker.FixOrderListActivity;
 import com.honyum.elevatorMan.activity.worker.LiftKnowledgeActivity;
 import com.honyum.elevatorMan.adapter.BannerAdapter;
@@ -74,6 +75,9 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
 
         addBackGroundTask(netTask);
     }
+
+
+
 
     private int prePos;
 
@@ -188,6 +192,23 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
         findViewById(R.id.tv_rule).setOnClickListener(this);
         findViewById(R.id.tv_num).setOnClickListener(this);
         findViewById(R.id.tv_handle).setOnClickListener(this);
+        findViewById(R.id.ll_worker_extra).setVisibility(View.VISIBLE);
+        findViewById(R.id.ll_mall).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(MainPage1Activity.this, MallActivity.class);
+                startActivity(it);
+            }
+        });
+        findViewById(R.id.ll_work_insurance).setOnClickListener(v -> {Intent it = new Intent(MainPage1Activity.this, InsuranceBuyActivity.class);
+            startActivity(it);});
+        findViewById(R.id.ll_ebuy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(MainPage1Activity.this, EbuyActivity.class);
+                startActivity(it);
+            }
+        });
         requestBanner();
         final TextView tel = (TextView) findViewById(R.id.alarmtel);
         final String telNum = tel.getText().toString().replace("-", "");
@@ -388,37 +409,49 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
         startActivity(intent);
     }
 
+
     @Override
     public void onBackPressed() {
-        // TODO Auto-generated method stub
+        //方式一：将此任务转向后台
+        moveTaskToBack(false);
 
-        popMsgAlertWithCancel(getString(R.string.exit_confirm), new IConfirmCallback() {
-            @Override
-            public void onConfirm() {
-                MainPage1Activity.super.onBackPressed();
-                SysActivityManager.getInstance().exit();
-            }
-        }, "否", "是", getString(R.string.exit_confirm));
-//            new AlertDialog.Builder(this).setTitle(R.string.exit_confirm)
-//                    .setPositiveButton("是", new DialogInterface.OnClickListener() {
-//
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            // TODO Auto-generated method stub
-//                            dialog.dismiss();
-//                            onBackPressed();
-//                            SysActivityManager.getInstance().exit();
-//                        }
-//
-//                    }).setNegativeButton("否", new DialogInterface.OnClickListener() {
-//
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    // TODO Auto-generated method stub
-//                    dialog.dismiss();
-//                }
-//            }).show();
+        //方式二：返回手机的主屏幕
+    /*Intent intent = new Intent(Intent.ACTION_MAIN);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addCategory(Intent.CATEGORY_HOME);
+    startActivity(intent);*/
     }
+//    @Override
+//    public void onBackPressed() {
+//        // TODO Auto-generated method stub
+//
+//        popMsgAlertWithCancel(getString(R.string.exit_confirm), new IConfirmCallback() {
+//            @Override
+//            public void onConfirm() {
+//                MainPage1Activity.super.onBackPressed();
+//                SysActivityManager.getInstance().exit();
+//            }
+//        }, "否", "是", getString(R.string.exit_confirm));
+////            new AlertDialog.Builder(this).setTitle(R.string.exit_confirm)
+////                    .setPositiveButton("是", new DialogInterface.OnClickListener() {
+////
+////                        @Override
+////                        public void onClick(DialogInterface dialog, int which) {
+////                            // TODO Auto-generated method stub
+////                            dialog.dismiss();
+////                            onBackPressed();
+////                            SysActivityManager.getInstance().exit();
+////                        }
+////
+////                    }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+////
+////                @Override
+////                public void onClick(DialogInterface dialog, int which) {
+////                    // TODO Auto-generated method stub
+////                    dialog.dismiss();
+////                }
+////            }).show();
+//    }
 
     private void requestBannerAdv(String Id, final ImageView iv) {
         String server = getConfig().getServer() + NetConstant.GET_ADVERTISEMENT_DETAIL;

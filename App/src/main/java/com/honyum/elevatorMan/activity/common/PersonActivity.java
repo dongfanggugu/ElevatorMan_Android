@@ -1,5 +1,8 @@
 package com.honyum.elevatorMan.activity.common;
 
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +12,16 @@ import android.widget.TextView;
 
 import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.company.MainPageGroupCompanyActivity;
+import com.honyum.elevatorMan.activity.worker.EBuyOrderListActivity;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.net.base.NetConstant;
 
 public class PersonActivity extends BaseFragmentActivity {
 
+    private boolean isManager;
+    private boolean isWorker;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +42,32 @@ public class PersonActivity extends BaseFragmentActivity {
         initView();
     }
 
+    public void changeToManager() {
+        Intent it = new Intent(this, MainPageGroupCompanyActivity.class);
+        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(it);
+        finish();
+    }
     /**
      * 初始化视图
      */
     private void initView() {
+        isManager = getIntent().getBooleanExtra("isManager", false);
+        isWorker = getIntent().getBooleanExtra("isWorker", false);
+        if (isManager) {
+            TextView tv_changeRole = (TextView) findViewById(R.id.tv_changeRole);
+            tv_changeRole.setVisibility(View.VISIBLE);
+
+            tv_changeRole.setOnClickListener(v -> changeToAnother("确认转换到维修经理？",MainPageGroupCompanyActivity.class));
+
+        }
+
+        if (isWorker) {
+            TextView tv_changeRole = (TextView) findViewById(R.id.tv_changeRole);
+            tv_changeRole.setVisibility(View.VISIBLE);
+
+            tv_changeRole.setOnClickListener(v -> changeToAnother("确认转换到维修工？",MainGroupActivity.class));
+        }
         ((TextView) findViewById(R.id.tv_user_name)).setText(getConfig().getName());
         ((TextView) findViewById(R.id.tv_age)).setText("" + getConfig().getAge());
         ((TextView) findViewById(R.id.tv_sex)).setText(getConfig().getSex() == 0 ? "女" : "男");
@@ -127,6 +156,15 @@ public class PersonActivity extends BaseFragmentActivity {
             }
         });
 
+        //设置
+        findViewById(R.id.ll_ebuy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PersonActivity.this, EBuyOrderListActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //退出登陆
         findViewById(R.id.tv_logout).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +172,32 @@ public class PersonActivity extends BaseFragmentActivity {
                 logout();
             }
         });
+    }
+
+
+
+    private void changeToAnother(String  message,Class clazz) {
+        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        ab.setTitle("确定");
+        ab.setMessage(message);
+        ab.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent it = new Intent(PersonActivity.this, clazz);
+                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(it);
+                finish();
+            }
+        });
+        ab.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        ab.create().show();
+
     }
 
 

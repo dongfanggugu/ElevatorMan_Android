@@ -39,6 +39,15 @@ public class LoginResponse extends Response {
 
     public class LoginRspBody extends ResponseBody {
 
+        public String getRoleId() {
+            return roleId;
+        }
+
+        public void setRoleId(String roleId) {
+            this.roleId = roleId;
+        }
+
+        private String roleId = "";
         private String userId; // 用户id
 
         private String type; // 用户角色

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 android {
-
 
     signingConfigs {
         release {
@@ -27,6 +27,7 @@ android {
         debug_flavor {
             manifestPlaceholders = [MAP_VALUE: "zWVuxf5PgCPpB7TAET3SefEUGqqwabgk"]
             signingConfig signingConfigs.debug
+            //com.chorstar.enterOwner
             applicationId "com.chorstar.enterOwner"
         }
 
@@ -44,12 +45,17 @@ android {
             //signingConfig signingConfigs.release
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 repositories {
     flatDir {
         dirs '../ydtlibrary/libs'
     }
 }
+
 dependencies {
     compile files('libs/android_api_1.1_forsdk.jar')
     compile files('libs/BaiduLBS_Android.jar')

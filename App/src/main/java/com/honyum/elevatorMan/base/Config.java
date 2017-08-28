@@ -27,8 +27,8 @@ public class Config implements Serializable {
 
 
     //private String baseUrl = "http://211.147.152.6:8080/lift";
-    private String baseUrl = "http://www.chorstar.com:8081";
-    //private String baseUrl = "http://192.168.0.82:8080";
+    //private String baseUrl = "http://www.chorstar.com:8081";
+    private String baseUrl = "http://192.168.0.82:8080";
 
     public Config(Context context) {
         mPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
@@ -545,6 +545,15 @@ public class Config implements Serializable {
     public void setSign(String sign) {
         mEditor.putString("sign_url", sign);
         mEditor.commit();
+    }
+
+    public void setRoleId(String roleId)
+    {
+        mEditor.putString("role_id", roleId);
+        mEditor.commit();
+    }
+    public String getRoleId() {
+        return mPreferences.getString("role_id", "");
     }
 
 }

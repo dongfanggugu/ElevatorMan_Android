@@ -157,7 +157,7 @@ public class AddSelActivity extends BaseFragmentActivity {
                 checkRemoteVersion(new ICheckVersionCallback() {
                     @Override
                     public void onCheckVersion(int remoteVersion, String url, int isForce, String description) {
-                        citySearch(1, getIntent().getStringExtra("add"));
+                        citySearch(1, getIntent().getStringExtra("city"),getIntent().getStringExtra("add"));
                     }
                 });
             }
@@ -166,12 +166,13 @@ public class AddSelActivity extends BaseFragmentActivity {
     }
 
 
-    private void citySearch(int page, String address) {
+    private void citySearch(int page,
+                            String city,String address) {
         if (StringUtils.isEmpty(address)) {
             return;
         }
         PoiCitySearchOption options = new PoiCitySearchOption();
-        options.city("北京市");
+        options.city(city);
         options.keyword(address);
         options.pageCapacity(10);
         options.pageNum(page);

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.base.MyApplication;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -30,6 +31,8 @@ public class MainGroupActivity extends ActivityGroup {
     private TextView tv_order;
     private TextView tv_mine;
     private TextView tv_page;
+
+    private static final String fRoleId= "f0f29e21-9273-48df-9e5b-9e9f1abf7d42";
 
     /**
      * Called when the activity is first created.
@@ -95,6 +98,7 @@ public class MainGroupActivity extends ActivityGroup {
 
         one = (LinearLayout) findViewById(R.id.ll_page);
         two = (LinearLayout) findViewById(R.id.ll_person1);
+        two.setVisibility(View.GONE);
         three = (LinearLayout) findViewById(R.id.ll_person);
         bodyView = (LinearLayout) findViewById(R.id.body);
 
@@ -108,7 +112,17 @@ public class MainGroupActivity extends ActivityGroup {
 
 
     }
+    @Override
+    public void onBackPressed() {
+        //方式一：将此任务转向后台
+        moveTaskToBack(false);
 
+        //方式二：返回手机的主屏幕
+    /*Intent intent = new Intent(Intent.ACTION_MAIN);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addCategory(Intent.CATEGORY_HOME);
+    startActivity(intent);*/
+    }
     // 在主界面中显示其他界面
     public void showView(int flag) {
         switch (flag) {
@@ -141,8 +155,12 @@ public class MainGroupActivity extends ActivityGroup {
                 break;
             case 2:
                 bodyView.removeAllViews();
+
+                Intent it = new Intent(MainGroupActivity.this, PersonActivity.class);
+                if(((MyApplication)getApplication()).getConfig().getRoleId().equals(fRoleId))
+                it.putExtra("isManager",true);
                 bodyView.addView(getLocalActivityManager().startActivity(
-                        "three", new Intent(MainGroupActivity.this, PersonActivity.class))
+                        "three", it)
                         .getDecorView());
                 iv_page.setBackgroundResource(R.drawable.normal_page);
                 iv_order.setBackgroundResource(R.drawable.normal_order);

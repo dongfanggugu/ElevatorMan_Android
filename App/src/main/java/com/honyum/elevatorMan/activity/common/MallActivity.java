@@ -52,10 +52,21 @@ public class MallActivity extends BaseFragmentActivity {
 
 
 
-        initView();
+
         StatusBarCompat.compat(MallActivity.this, R.color.titleblue);
 
     }
+
+    private void initTitleBar() {
+        initTitleBar("我的商机", R.id.title, R.drawable.back_normal, backClickListener);
+    }
+    @Override
+    protected void onResume() {
+        initView();
+        initTitleBar();
+        super.onResume();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
@@ -86,6 +97,7 @@ public class MallActivity extends BaseFragmentActivity {
     private void initView() {
 
         webView = (WebView) findViewById(R.id.wv_mall_content);
+
 
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setJavaScriptEnabled(true);

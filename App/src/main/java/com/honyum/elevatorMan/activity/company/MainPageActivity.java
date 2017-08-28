@@ -17,17 +17,13 @@ import android.widget.TextView;
 import com.baidu.navisdk.util.common.StringUtils;
 import com.chorstar.jni.ChorstarJNI;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.common.ChatActivity;
 import com.honyum.elevatorMan.activity.common.HelpCenterActivity;
-import com.honyum.elevatorMan.activity.common.MainPage1Activity;
+import com.honyum.elevatorMan.activity.common.InsuranceBuyActivity;
 import com.honyum.elevatorMan.activity.common.MallActivity;
 import com.honyum.elevatorMan.activity.common.NousActivity;
 import com.honyum.elevatorMan.activity.common.NousDetailActivity;
 import com.honyum.elevatorMan.activity.common.PersonActivity;
-import com.honyum.elevatorMan.activity.knowledge.TitleListActivity;
-import com.honyum.elevatorMan.activity.maintenance.MaintenanceManagerActivity;
-import com.honyum.elevatorMan.activity.maintenance.MaintenanceServiceActivity;
-import com.honyum.elevatorMan.activity.worker.AlarmListActivity;
-import com.honyum.elevatorMan.activity.worker.FixOrderListActivity;
 import com.honyum.elevatorMan.activity.worker.LiftKnowledgeActivity;
 import com.honyum.elevatorMan.adapter.BannerAdapter;
 import com.honyum.elevatorMan.adapter.PageIndicatorAdapter;
@@ -40,14 +36,19 @@ import com.honyum.elevatorMan.net.AdvDetailRequest;
 import com.honyum.elevatorMan.net.AdvDetailResponse;
 import com.honyum.elevatorMan.net.BannerResponse;
 import com.honyum.elevatorMan.net.EmptyRequest;
+import com.honyum.elevatorMan.net.PersonResponse;
+import com.honyum.elevatorMan.net.PersonsRequest;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.NewRequestHead;
-import com.honyum.elevatorMan.net.base.RequestHead;
+import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.service.LocationService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.honyum.elevatorMan.activity.common.ChatActivity.MODE_PROPERTY;
+import static com.honyum.elevatorMan.activity.common.ChatActivity.MODE_WORKER;
 
 /**
  * Created by Star on 2017/6/14.
@@ -56,6 +57,7 @@ import java.util.List;
 public class MainPageActivity extends BaseFragmentActivity implements View.OnClickListener,ListItemCallback<ImageView> {
     private boolean hasAlarm = false;
 
+    private TextView personNum;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,7 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
 //        initPageIndicator();
 
         initView();
-
+        //开启位置上传
         startService(new Intent(this, LocationService.class));
     }
     private List<Integer> pics;
@@ -120,6 +122,41 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
 
         addBackGroundTask(netTask);
     }
+
+
+    private RequestBean getPesonsBean() {
+
+        PersonsRequest rt = new PersonsRequest();
+        rt.setHead(new NewRequestHead().setuserId(getConfig().getUserId()).setaccessToken(getConfig().getToken()));
+        rt.setBody(rt.new PersonsBody().setBranchId(getConfig().getBranchId()));
+        return rt;
+
+    }
+    private void getPersons() {
+        String address = getConfig().getServer() + NetConstant.GET_PERSONS;
+        NetTask netTask = new NetTask(address, getPesonsBean()) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+
+                PersonResponse pr = PersonResponse.getPersonResponse(result);
+                if (StringUtils.isNotEmpty(pr.getBody().getCount())) {
+                    personNum.setText(pr.getBody().getCount());
+                }
+                personNum.setOnClickListener(v -> goToLookActivity());
+
+
+            }
+        };
+        addTask(netTask);
+    }
+    public void goToLookActivity() {
+        Intent it = new Intent(MainPageActivity.this, LookPersonsActivity.class);
+        startActivity(it);
+    }
+
+
+
+
     private int prePos;
 
     private int curItemPos;
@@ -256,6 +293,7 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
     protected void onResume() {
         super.onResume();
         checkAlarm();
+        getPersons();
     }
     /**
      * 检测是否有未完成的任务
@@ -300,6 +338,15 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
      * 初始化视图
      */
     private void initView() {
+
+        findViewById(R.id.ll_company_extra_content).setVisibility(View.VISIBLE);
+
+        findViewById(R.id.ll_business).setOnClickListener(v -> jumpToMall());
+        findViewById(R.id.ll_insurance).setOnClickListener(v -> jumpToInsurance());
+        findViewById(R.id.ll_chat).setOnClickListener(v -> jumpToChat());
+
+        findViewById(R.id.ll_content).setVisibility(View.VISIBLE);
+        personNum = (TextView) findViewById(R.id.tv_personsnum);
         findViewById(R.id.ll_rescue).setOnClickListener(this);
         findViewById(R.id.ll_maintenance).setOnClickListener(this);
         findViewById(R.id.ll_fix).setOnClickListener(this);
@@ -337,6 +384,12 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
 
         requestBanner();
 
+    }
+
+    private void jumpToChat() {
+        Intent it = new Intent(this, ChatActivity.class);
+        it.putExtra("enter_mode", MODE_PROPERTY);
+        startActivity(it);
     }
 
 
@@ -391,6 +444,10 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
         startActivity(intent);
 
 
+    }
+    private void jumpToInsurance() {
+        Intent intent = new Intent(this, InsuranceBuyActivity.class);
+        startActivity(intent);
     }
     /**
      * 跳转到维保服务页面

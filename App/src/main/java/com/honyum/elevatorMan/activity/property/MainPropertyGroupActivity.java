@@ -91,7 +91,17 @@ public class MainPropertyGroupActivity extends ActivityGroup {
         super.onPause();
         JPushInterface.onPause(MainPropertyGroupActivity.this);
     }
+    @Override
+    public void onBackPressed() {
+        //方式一：将此任务转向后台
+        moveTaskToBack(false);
 
+        //方式二：返回手机的主屏幕
+    /*Intent intent = new Intent(Intent.ACTION_MAIN);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addCategory(Intent.CATEGORY_HOME);
+    startActivity(intent);*/
+    }
     /*
      * 初始化主界面
      */

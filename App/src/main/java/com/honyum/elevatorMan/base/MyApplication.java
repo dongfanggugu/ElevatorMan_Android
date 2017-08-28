@@ -14,6 +14,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         // TODO Auto-generated method stub
         super.onCreate();
+        // LitePal.initialize(this);
         //CrashHandler.getInstance().init(this);
         JPushInterface.setDebugMode(false);
         JPushInterface.init(this);

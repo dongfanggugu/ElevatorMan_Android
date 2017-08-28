@@ -19,7 +19,7 @@
     <string name="login_device">登录设备</string>
     <string name="real_play">预览</string>
 
-    <string name="app_version">V1.47</string>
+    <string name="app_version">V1.48</string>
     <string name="app1_name">梯美（管理）</string>
     <string name="hello_world">Hello world!</string>
     <string name="file_name">ElevatorMan</string>
@@ -324,5 +324,26 @@
     <string name="fix_order">快修订单</string>
     <string name="fixtask">维修任务</string>
     <string name="hismen">维保历史</string>
+
+
+    <array name="political_data">
+
+        <item>群众</item>
+        <item>团员</item>
+        <item>党员</item>
+    </array>
+    <array name="sex_data">
+
+        <item>男</item>
+        <item>女</item>
+    </array>
+    <array name="education_data">
+
+        <item>初中</item>
+        <item>高中</item>
+        <item>专科</item>
+        <item>本科</item>
+        <item>研究生</item>
+    </array>
 
 </resources>

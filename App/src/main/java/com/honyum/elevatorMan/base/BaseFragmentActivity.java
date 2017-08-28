@@ -549,6 +549,8 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 
         getConfig().setSign(body.getAutograph());
 
+        getConfig().setRoleId(body.getRoleId());
+
         //设置设备的推送别名
         String alias = token.replaceAll("-", "_");
         new JPushAliasThread(alias).start();

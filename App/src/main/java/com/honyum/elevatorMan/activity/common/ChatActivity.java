@@ -241,7 +241,7 @@ public class ChatActivity extends BaseFragmentActivity implements ListItemCallba
                     builder.setTitle("提示");
                     builder.setCancelable(false);
 
-                    builder.setMessage("所有任务都已完成！")
+                    builder.setMessage("当前无对话！")
                             .setPositiveButton("确定",
                                     new DialogInterface.OnClickListener() {
 
@@ -617,9 +617,9 @@ public class ChatActivity extends BaseFragmentActivity implements ListItemCallba
             initTitleBar("聊天", R.id.title, R.drawable.back_normal, backClickListener);
         } else {
 
-            initTitleBar(R.id.title, "物业",
+            initTitleBar(R.id.title, "聊天",
                     R.drawable.back_normal, backClickListener,
-                    R.drawable.icon_menu, showChannelListener);
+                    R.drawable.more_chat, showChannelListener);
         }
     }
 

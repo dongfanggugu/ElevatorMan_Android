@@ -57,6 +57,32 @@
                     android:textSize="13sp"
                     android:text="400-61-12580"/>
 
+                <LinearLayout
+                    android:id="@+id/ll_content"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="40dp"
+                    android:id="@+id/tv_persons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/titleblue"
+                    android:textSize="13sp"
+                    android:text="在线人数："/>
+                <TextView
+                    android:id="@+id/tv_personsnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/titleblue"
+                    android:textSize="13sp"
+                    android:text="0"/>
+                </LinearLayout>
+
+
+
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -188,6 +214,167 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lessgray" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_20dp"
+                android:background="@color/backgray" />
+            <LinearLayout
+                android:id="@+id/ll_worker_extra"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:id="@+id/ll_mall"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/size_10dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/icon_coop" />
+
+                    <TextView
+                        android:layout_marginTop="@dimen/size_5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="商机" />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/ll_work_insurance"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/size_10dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/icon_ensurance" />
+
+                    <TextView
+                        android:layout_marginTop="@dimen/size_5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="电梯保险" />
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_ebuy"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/size_10dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/icon_market" />
+
+                    <TextView
+                        android:layout_marginTop="@dimen/size_5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="电梯商城" />
+
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+                android:visibility="gone"
+                android:id="@+id/ll_company_extra_content"
+                android:layout_width="match_parent"
+                android:weightSum="3"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/ll_business"
+                    android:layout_width="0dp"
+                    android:padding="@dimen/size_10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/icon_coop" />
+                    <TextView
+                        android:layout_marginTop="@dimen/size_5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="商机"/>
+                </LinearLayout>
+                <!--
+                 <View
+                     android:layout_width="1dp"
+                     android:background="@color/lessgray"
+                     android:layout_height="match_parent"/>
+                 -->
+                <LinearLayout
+                    android:id="@+id/ll_insurance"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="@dimen/size_10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/icon_ensurance" />
+                    <TextView
+                        android:layout_marginTop="@dimen/size_5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="电梯保险"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_chat"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="@dimen/size_10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/icon_alarm_chat" />
+                    <TextView
+                        android:layout_marginTop="@dimen/size_5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="救援聊天"/>
+                </LinearLayout>
+
+
             </LinearLayout>
 
             <View

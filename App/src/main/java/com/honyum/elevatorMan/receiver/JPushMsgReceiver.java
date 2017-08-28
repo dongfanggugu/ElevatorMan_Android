@@ -115,9 +115,10 @@ public class JPushMsgReceiver extends BroadcastReceiver {
         //使用角色控制维修工和物业的登录冲突
         String role = getRole(context);
 
-        if (role.equals(Constant.WORKER)&& ChatActivity.isForeground()) {
+        //ChatActivity.isForeground()    &&ChatActivity.isForeground()
+        if (role.equals(Constant.WORKER)) {
             notifyWorker(context, alarmNotify, WorkerActivity.class, msg, msgId);
-        } else if (role.equals(Constant.PROPERTY)&& ChatActivity.isForeground()) {
+        } else if (role.equals(Constant.PROPERTY)) {
             notifyProperty(context, alarmNotify, AlarmTraceActivity.class, msg, msgId);
         }
 

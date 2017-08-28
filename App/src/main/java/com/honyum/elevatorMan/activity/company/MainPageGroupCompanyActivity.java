@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.common.MallActivity;
 import com.honyum.elevatorMan.activity.common.PersonActivity;
+import com.honyum.elevatorMan.base.MyApplication;
+import com.honyum.elevatorMan.constant.Constant;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -110,7 +112,17 @@ public class MainPageGroupCompanyActivity extends ActivityGroup {
 
 
     }
+    @Override
+    public void onBackPressed() {
+        //方式一：将此任务转向后台
+        moveTaskToBack(false);
 
+        //方式二：返回手机的主屏幕
+    /*Intent intent = new Intent(Intent.ACTION_MAIN);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addCategory(Intent.CATEGORY_HOME);
+    startActivity(intent);*/
+    }
     // 在主界面中显示其他界面
     public void showView(int flag) {
         switch (flag) {
@@ -143,12 +155,17 @@ public class MainPageGroupCompanyActivity extends ActivityGroup {
                 tv_page.setTextColor(getResources().getColor(R.color.frontgray));
                 tv_order.setTextColor(getResources().getColor(R.color.titleblue));
                 tv_mine.setTextColor(getResources().getColor(R.color.frontgray));
+
                 break;
             case 2:
                 bodyView.removeAllViews();
+                Intent it = new Intent(MainPageGroupCompanyActivity.this, PersonActivity.class);
+                if(((MyApplication)getApplication()).getConfig().getRole().equals(Constant.WORKER))
+                    it.putExtra("isWorker",true);
                 bodyView.addView(getLocalActivityManager().startActivity(
-                        "three", new Intent(MainPageGroupCompanyActivity.this, PersonActivity.class))
+                        "three",it )
                         .getDecorView());
+
                 iv_page.setBackgroundResource(R.drawable.normal_page);
                 iv_order.setBackgroundResource(R.drawable.normal_order);
                 iv_mine.setBackgroundResource(R.drawable.select_mine);

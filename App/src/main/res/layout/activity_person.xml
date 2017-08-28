@@ -5,11 +5,25 @@
     android:orientation="vertical"
     tools:context="com.honyum.elevatorMan.activity.common.PersonActivity">
 
-    <include
-        android:id="@+id/title_person"
-        layout="@layout/layout_title"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height" />
+        android:layout_height="@dimen/title_height">
+        <include
+            android:id="@+id/title_person"
+            layout="@layout/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height" />
+        <TextView
+            android:id="@+id/tv_changeRole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="切换角色"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/size_10dp"/>
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -162,6 +176,43 @@
                     android:layout_height="1dp"
                     android:background="#cccccc"/>
                  -->
+                <LinearLayout
+                    android:id="@+id/ll_ebuy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/size_10dp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/selector_mainpage_item"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/size_person_icon"
+                            android:layout_height="@dimen/size_person_icon"
+                            android:src="@drawable/icon_market_order"
+                            />
+
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:text="E梯配订单"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/transparent"/>
                 <LinearLayout
                     android:id="@+id/ll_business"
                     android:layout_width="match_parent"

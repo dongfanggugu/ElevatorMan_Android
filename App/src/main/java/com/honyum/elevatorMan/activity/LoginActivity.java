@@ -316,6 +316,8 @@ public class LoginActivity extends BaseFragmentActivity {
 
                 setUserInfo(token, response.getBody());
 
+                //用户类型，type
+                //用户角色
                 if (response.getBody().getType().equals(Constant.PROPERTY)) {
                     startProperty(true);
                 }
