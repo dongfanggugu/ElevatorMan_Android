@@ -251,7 +251,7 @@ public class RecordVideoActivity extends BaseFragmentActivity implements View.On
                 }
             };
 
-            addTask(netTask);
+            addBackGroundTask(netTask);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -329,7 +329,7 @@ public class RecordVideoActivity extends BaseFragmentActivity implements View.On
             }
         };
 
-        addTask(netTask);
+        addBackGroundTask(netTask);
     }
 
     @Override

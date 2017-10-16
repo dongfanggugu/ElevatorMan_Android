@@ -24,15 +24,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.baidu.navisdk.util.common.StringUtils;
-import com.example.viewtest.*;
 import com.honyum.elevatorMan.R;
-import com.honyum.elevatorMan.activity.common.EchartActivity;
-import com.honyum.elevatorMan.activity.common.HelpCenterActivity;
 import com.honyum.elevatorMan.activity.common.MainGroupActivity;
-import com.honyum.elevatorMan.activity.common.MainPage1Activity;
-import com.honyum.elevatorMan.activity.common.MainpageActivity;
 import com.honyum.elevatorMan.activity.common.ResetPasswordActivity;
-import com.honyum.elevatorMan.activity.company.MainPageActivity;
 import com.honyum.elevatorMan.activity.company.MainPageGroupCompanyActivity;
 import com.honyum.elevatorMan.activity.maintenance_1.MaintenanceActivity;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
@@ -41,7 +35,6 @@ import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.data.City;
 import com.honyum.elevatorMan.data.CityInfo;
 import com.honyum.elevatorMan.data.Province;
-import com.honyum.elevatorMan.hb.HBLookActivity;
 import com.honyum.elevatorMan.net.LoginRequest;
 import com.honyum.elevatorMan.net.LoginRequest.LoginReqBody;
 import com.honyum.elevatorMan.net.LoginResponse;
@@ -312,9 +305,12 @@ public class LoginActivity extends BaseFragmentActivity {
                 Log.i("zhenhao", "result:" + result);
                 LoginResponse response = LoginResponse.getLoginResonse(result);
 
+
+
                 String token = response.getHead().getAccessToken();
 
-                setUserInfo(token, response.getBody());
+                String password1 = EncryptUtils.encryptMD5(password);
+                setUserInfo(token, response.getBody(), password1);
 
                 //用户类型，type
                 //用户角色

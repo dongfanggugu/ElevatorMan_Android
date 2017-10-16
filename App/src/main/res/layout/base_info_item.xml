@@ -4,10 +4,6 @@
     android:background="@color/white"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-
-
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -166,6 +162,7 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/apptime" />
 
@@ -173,12 +170,14 @@
                 android:id="@+id/tv_time1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/iv_date"
                 android:layout_marginRight="@dimen/size_10dp"
                 android:text="@string/time" />
 
             <TextView
                 android:id="@+id/tv_time"
+                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tv_time1"
@@ -188,15 +187,14 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_plan_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:text="修改计划时间"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginRight="@dimen/size_5dp"
                     android:gravity="left"
                     android:textColor="@color/oder_blue"
@@ -205,15 +203,16 @@
                 <LinearLayout
                     android:id="@+id/ll_calendar"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <ImageView
-                        android:visibility="gone"
+                        android:layout_width="25dp"
                         android:id="@+id/iv_modify_datetime"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center_vertical"
-                        android:scaleType="centerInside"
+                        android:layout_marginRight="@dimen/size_10dp"
+                        android:scaleType="fitCenter"
+                        android:visibility="visible"
                         android:src="@drawable/icon_date"/>
 
                 </LinearLayout>

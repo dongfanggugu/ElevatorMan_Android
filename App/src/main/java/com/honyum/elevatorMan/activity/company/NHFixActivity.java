@@ -16,6 +16,9 @@ import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapPoi;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
@@ -78,6 +81,22 @@ public class NHFixActivity extends BaseActivityWraper {
     @Override
     protected void initView() {
         mMap = baiduMap.getMap();
+        if (getConfig().getLat().equals("") || getConfig().getLng().equals("")) {
+
+        } else {
+            LatLng cenpt = new LatLng(Double.valueOf(getConfig().getLat()), Double.valueOf(getConfig().getLng()));
+            //Log.e("TAG", "jingdu lng"+getConfig().getLng()+"weidu"+ getConfig().getLat());
+            //定义地图状态
+            MapStatus mMapStatus = new MapStatus.Builder()
+                    .target(cenpt)
+                    .build();
+            //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+
+
+            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+            //改变地图状态
+            mMap.setMapStatus(mMapStatusUpdate);
+        }
     }
 
     @Override

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.honyum.elevatorMan"
-    android:versionCode="148"
+    android:versionCode="150"
     android:versionName="@string/app_version">
 
     <uses-sdk
@@ -156,11 +156,15 @@
             android:name=".activity.worker.WorkerHistoryActivity"
             android:screenOrientation="portrait" />
 
+        <service android:name=".service.DaemonService"
+            android:process=":romoteservice"
+            android:enabled="true"></service>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-        <service android:name=".service.LocationService" />
+        <service android:name=".service.LocationService"
+            />
         <!-- <service android:name=".service.TimerService"/> -->
 
 
@@ -174,7 +178,6 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.chorstar.enterOwner" />
             </intent-filter>

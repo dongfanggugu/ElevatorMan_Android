@@ -150,7 +150,7 @@ public class NetTaskNew extends Thread {
 
 		if (mResult != null) {
 			onReturn(NetTaskNew.this, mResult);
-			Log.i("newnettask", "result:" + mResult);
+			//Log.i("newnettask", "result:" + mResult);
 		} else {
 			Log.i("newnettask", "result is null");
 		}

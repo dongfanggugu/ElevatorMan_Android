@@ -1,15 +1,21 @@
 package com.honyum.elevatorMan.activity.common;
 
 import android.app.ActivityGroup;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.base.MyApplication;
+import com.honyum.elevatorMan.base.SysActivityManager;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -76,9 +82,15 @@ public class MainGroupActivity extends ActivityGroup {
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return  getCurrentActivity().onKeyDown(keyCode,event);
+    }
+
+    @Override
     protected void onResume() {
         // TODO Auto-generated method stub
         JPushInterface.onResume(MainGroupActivity.this);
+        bodyView.requestFocus();
         super.onResume();
 
 
@@ -112,7 +124,41 @@ public class MainGroupActivity extends ActivityGroup {
 
 
     }
+
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("TAG", "onDestroy: "+ "被调用 " );
+    }
+
+//    @Override
+//    public boolean dispatchKeyEvent(KeyEvent event) {
+//        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK)
+//        {
+//            if (event.getAction() == KeyEvent.ACTION_DOWN
+//                    && event.getRepeatCount() == 0) {
+//                ((MyApplication)getApplication()).getBaseActivity().popMsgAlertWithCancel(getString(R.string.exit_confirm), new BaseFragmentActivity.IConfirmCallback() {
+//                    @Override
+//                    public void onConfirm() {
+//                        MainGroupActivity.super.onBackPressed();
+//                        SysActivityManager.getInstance().exit();
+//                    }
+//                }, "否", "是", getString(R.string.exit_confirm));
+//
+//            }
+//            return true;
+//
+//        }
+//        return super.dispatchKeyEvent(event);
+//    }
+
+//    @Override
+//    public void onBackPressed() {
+//        // TODO Auto-generated method stub
+//
+//
+//    }
+//    @Override
     public void onBackPressed() {
         //方式一：将此任务转向后台
         moveTaskToBack(false);

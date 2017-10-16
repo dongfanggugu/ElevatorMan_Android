@@ -27,7 +27,6 @@ import com.honyum.elevatorMan.adapter.BannerAdapter;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.base.Config;
 import com.honyum.elevatorMan.base.ListItemCallback;
-import com.honyum.elevatorMan.base.SysActivityManager;
 import com.honyum.elevatorMan.data.BannerInfo;
 import com.honyum.elevatorMan.net.AdvDetailRequest;
 import com.honyum.elevatorMan.net.AdvDetailResponse;
@@ -36,7 +35,6 @@ import com.honyum.elevatorMan.net.EmptyRequest;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.NewRequestHead;
-import com.honyum.elevatorMan.service.LocationService;
 
 import java.util.List;
 
@@ -55,7 +53,8 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
         initTitle();
         initView();
 
-        startService(new Intent(this, LocationService.class));
+        startLocationService();
+        //startService(new Intent(this, LocationService.class));
     }
     private List<Integer> pics;
 
@@ -167,8 +166,12 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
         View view = findViewById(R.id.tip_msg);
         if (hasAlarm) {
             view.setVisibility(View.VISIBLE);
+            getConfig().setCurrDelay(getConfig().getLocationUploadTask());
+            startLocationService();
         } else {
             view.setVisibility(View.GONE);
+            getConfig().setCurrDelay(getConfig().getLocationUpload());
+            startLocationService();
         }
     }
     /**
@@ -410,49 +413,6 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
     }
 
 
-    @Override
-    public void onBackPressed() {
-        //方式一：将此任务转向后台
-        moveTaskToBack(false);
-
-        //方式二：返回手机的主屏幕
-    /*Intent intent = new Intent(Intent.ACTION_MAIN);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    intent.addCategory(Intent.CATEGORY_HOME);
-    startActivity(intent);*/
-    }
-//    @Override
-//    public void onBackPressed() {
-//        // TODO Auto-generated method stub
-//
-//        popMsgAlertWithCancel(getString(R.string.exit_confirm), new IConfirmCallback() {
-//            @Override
-//            public void onConfirm() {
-//                MainPage1Activity.super.onBackPressed();
-//                SysActivityManager.getInstance().exit();
-//            }
-//        }, "否", "是", getString(R.string.exit_confirm));
-////            new AlertDialog.Builder(this).setTitle(R.string.exit_confirm)
-////                    .setPositiveButton("是", new DialogInterface.OnClickListener() {
-////
-////                        @Override
-////                        public void onClick(DialogInterface dialog, int which) {
-////                            // TODO Auto-generated method stub
-////                            dialog.dismiss();
-////                            onBackPressed();
-////                            SysActivityManager.getInstance().exit();
-////                        }
-////
-////                    }).setNegativeButton("否", new DialogInterface.OnClickListener() {
-////
-////                @Override
-////                public void onClick(DialogInterface dialog, int which) {
-////                    // TODO Auto-generated method stub
-////                    dialog.dismiss();
-////                }
-////            }).show();
-//    }
-
     private void requestBannerAdv(String Id, final ImageView iv) {
         String server = getConfig().getServer() + NetConstant.GET_ADVERTISEMENT_DETAIL;
 
@@ -468,18 +428,12 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
                 AdvDetailResponse response = AdvDetailResponse.getAdvDetail(result);
                 final String i = response.getBody().getContent();
                 if (iv != null) {
-                    iv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
                             Intent intent = new Intent(MainPage1Activity.this, NousDetailActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("kntype", "详情");
                             bundle.putString("content", i);
                             intent.putExtras(bundle);
                             startActivity(intent);
-                        }
-                    });
-
                 }
 
             }

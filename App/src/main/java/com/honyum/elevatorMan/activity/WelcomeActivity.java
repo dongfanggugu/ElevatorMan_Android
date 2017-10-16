@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.baidu.navisdk.util.common.StringUtils;
@@ -17,6 +18,7 @@ import com.honyum.elevatorMan.activity.company.MainPageActivity;
 import com.honyum.elevatorMan.activity.company.MainPageGroupCompanyActivity;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.constant.Constant;
+import com.honyum.elevatorMan.net.LoginResponse;
 import com.honyum.elevatorMan.utils.Utils;
 
 import cn.jpush.android.api.JPushInterface;
@@ -32,6 +34,7 @@ public class WelcomeActivity extends BaseFragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+
 //        boolean first = getConfig().getIsFirst();
 //        if (first) {
 //            getConfig().setUnFirst();
@@ -44,6 +47,9 @@ public class WelcomeActivity extends BaseFragmentActivity {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(new GlideDrawableImageViewTarget(iv, 1));
 
+        LoginResponse s = null;
+        Log.d("Test",s+"111111D");
+        Log.i("Test",s+"111111i");
         // 延迟1秒后执行run方法中的页面跳转
         new Handler().postDelayed(new Runnable() {
             @Override

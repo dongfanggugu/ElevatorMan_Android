@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.company.MainPageGroupCompanyActivity;
 import com.honyum.elevatorMan.activity.worker.EBuyOrderListActivity;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
+import com.honyum.elevatorMan.base.SysActivityManager;
 import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.net.base.NetConstant;
 
@@ -199,7 +201,6 @@ public class PersonActivity extends BaseFragmentActivity {
         ab.create().show();
 
     }
-
 
     /**
      * 退出登录

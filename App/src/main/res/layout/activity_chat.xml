@@ -113,7 +113,9 @@
             android:visibility="visible">
 
             <EditText
+                android:singleLine="true"
                 android:id="@+id/chat_et"
+                android:imeOptions="actionSend"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"

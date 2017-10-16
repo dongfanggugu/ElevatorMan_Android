@@ -77,8 +77,13 @@ public class BannerAdapter extends PagerAdapter {
             });
         }
         else {
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((ListItemCallback<ImageView>) context).performItemCallback(iv);
+                }
+            });
 
-            ((ListItemCallback<ImageView>) context).performItemCallback(iv);
         }
 
         container.addView(iv);

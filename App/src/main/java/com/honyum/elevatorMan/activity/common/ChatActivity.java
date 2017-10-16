@@ -200,7 +200,7 @@ public class ChatActivity extends BaseFragmentActivity implements ListItemCallba
         }
 
         initTitleBar();
-
+        refreshData();
         initView();
 
     }
@@ -344,7 +344,7 @@ public class ChatActivity extends BaseFragmentActivity implements ListItemCallba
     protected void onResume() {
         isForeground = true;
         super.onResume();
-        refreshData();
+
     }
 
     private void refreshData() {
@@ -440,9 +440,8 @@ public class ChatActivity extends BaseFragmentActivity implements ListItemCallba
         etChat.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId,
                                           KeyEvent event) {
-                long oldTime = 0, newTime = 0;
-                if (((actionId == EditorInfo.IME_ACTION_SEND)
-                        || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) && event.getAction() == KeyEvent.ACTION_DOWN) {
+                long oldTime = 0, newTime = 0;   //&& event.getAction() == KeyEvent.ACTION_DOWN
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
 
                     newTime = System.currentTimeMillis();
                     if (oldTime == 0 || newTime - oldTime > 1000) {

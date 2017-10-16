@@ -64,7 +64,7 @@ dependencies {
     compile files('libs/jpush-sdk-release1.7.4.jar')
     compile project(':RefreshListview')
     //    compile project(':chorstar')
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.github.bumptech.glide:glide:3.5.2'
     compile project(':HandPaint')
     compile 'com.jakewharton:butterknife:8.4.0'

@@ -63,7 +63,7 @@ public class MallActivity extends BaseFragmentActivity {
     @Override
     protected void onResume() {
         initView();
-        initTitleBar();
+        //initTitleBar();
         super.onResume();
     }
 

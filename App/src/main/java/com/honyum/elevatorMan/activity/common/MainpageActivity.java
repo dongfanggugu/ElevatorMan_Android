@@ -41,8 +41,8 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
 //        initPageIndicator();
 
         initView();
-
-        startService(new Intent(this, LocationService.class));
+        startLocationService();
+       // startService(new Intent(this, LocationService.class));
     }
 
 

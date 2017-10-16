@@ -68,7 +68,8 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
 
         initView();
         //开启位置上传
-        startService(new Intent(this, LocationService.class));
+        startLocationService();
+        // startService(new Intent(this, LocationService.class));
     }
     private List<Integer> pics;
 

@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.baidu.navisdk.util.common.StringUtils;
@@ -20,6 +21,7 @@ import com.honyum.elevatorMan.activity.maintenance.MyLiftActivity;
 import com.honyum.elevatorMan.activity.property.AlarmTraceActivity;
 import com.honyum.elevatorMan.activity.worker.WorkerActivity;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
+import com.honyum.elevatorMan.base.MyApplication;
 import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.data.AlarmNotify;
 import com.honyum.elevatorMan.net.NotifyFeedbackRequest;
@@ -56,6 +58,8 @@ public class JPushMsgReceiver extends BroadcastReceiver {
      * @param bundle
      */
     private void processNotify(Context context, Bundle bundle) {
+
+        //if(bundle!=null&&bundle.getS)
         setNotification(context, bundle);
     }
 
@@ -74,6 +78,7 @@ public class JPushMsgReceiver extends BroadcastReceiver {
         Log.i("push", "extra msg:" + extraMsg);
         Log.i("push", "msg:" + msg);
         Log.i("push", "msgId:" + msgId);
+
 
         AlarmNotify alarmNotify = AlarmNotify.getAlarmNotify(extraMsg);
 
@@ -106,6 +111,12 @@ public class JPushMsgReceiver extends BroadcastReceiver {
             }
         };
         task.start();
+//        if(bundle!=null&& !TextUtils.isEmpty(msg))
+//        {
+//            String []  s = msg.split("说:");
+//            if(s[0].equals(((MyApplication)context.getApplicationContext()).getConfig().getName()))
+//                return;
+//        }
 
         //维修工维保信息被拒绝
         if (notifyType.equals(Constant.ACTION_MAIN_REJECT)) {
@@ -122,7 +133,8 @@ public class JPushMsgReceiver extends BroadcastReceiver {
             notifyProperty(context, alarmNotify, AlarmTraceActivity.class, msg, msgId);
         }
 
-        Log.d("push", "当前是否显示在聊天界面==>>>" + ChatActivity.isForeground());
+        Log.e("push", "BaseFragmentActivity当前是否显示在聊天界面==>>>" + BaseFragmentActivity.isForeground()+ ChatActivity.isForeground()+chatMsgListener == null?"false":"true");
+        Log.e("push", "ChatActivity当前是否显示在聊天界面==>>>" + ChatActivity.isForeground());
         if (BaseFragmentActivity.isForeground() && "CHAT".equals(notifyType)
                 && chatMsgListener != null && ChatActivity.isForeground()) {
             chatMsgListener.chatMsgListener(alarmNotify);

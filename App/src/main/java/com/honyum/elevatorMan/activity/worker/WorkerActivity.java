@@ -2,7 +2,6 @@ package com.honyum.elevatorMan.activity.worker;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -18,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -57,12 +57,15 @@ import com.honyum.elevatorMan.net.AcceptAlarmRequest;
 import com.honyum.elevatorMan.net.AlarmInfoRequest;
 import com.honyum.elevatorMan.net.AlarmInfoRequest.AlarmInfoReqBody;
 import com.honyum.elevatorMan.net.AlarmInfoResponse;
+import com.honyum.elevatorMan.net.GetDistanceRequest;
+import com.honyum.elevatorMan.net.GetDistanceResponse;
 import com.honyum.elevatorMan.net.ReportExceptRequest;
 import com.honyum.elevatorMan.net.ReportExceptRequest.ReportExceptReqBody;
 import com.honyum.elevatorMan.net.ReportStateRequest;
 import com.honyum.elevatorMan.net.ReportStateRequest.ReportStateReqBody;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
+import com.honyum.elevatorMan.net.base.NewRequestHead;
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.RequestHead;
 import com.honyum.elevatorMan.receiver.LocationReceiver;
@@ -123,6 +126,8 @@ public class WorkerActivity extends WorkerBaseActivity implements
 
 
     private ListView listView;
+    private boolean isDistanceUpdate;
+    private long distance;
 
 
     @Override
@@ -140,9 +145,10 @@ public class WorkerActivity extends WorkerBaseActivity implements
 
         initListView();
 
-        Intent sIntent = new Intent(this, LocationService.class);
-        startService(sIntent);
+//        Intent sIntent = new Intent(this, LocationService.class);
+//        startService(sIntent);
 
+        startLocationService();
         //初始化定位按钮
         initLocationBtn();
 
@@ -331,6 +337,10 @@ public class WorkerActivity extends WorkerBaseActivity implements
         if (focus) {
             imgMarker.setImageResource(R.drawable.marker_alarm);
         }
+
+        int x = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, this.getResources().getDisplayMetrics());
+        imgMarker.setLayoutParams(new FrameLayout.LayoutParams(x, x));
+        imgMarker.setScaleType(ImageView.ScaleType.FIT_XY);
 
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory
                 .fromView(view);
@@ -660,7 +670,7 @@ public class WorkerActivity extends WorkerBaseActivity implements
             if (centerMarker != null && workerMarker != null) {
                 LatLng center = centerMarker.getPosition();
                 LatLng worker = workerMarker.getPosition();
-                int distance = (int) DistanceUtil.getDistance(center, worker);
+                distance = (int) DistanceUtil.getDistance(center, worker);
                 ((TextView) findViewById(R.id.tv_distance)).setText("" + distance + " m");
             }
 
@@ -668,7 +678,7 @@ public class WorkerActivity extends WorkerBaseActivity implements
                 @Override
                 public void onClick(View v) {
                     if (centerMarker == null || workerMarker == null) {
-                        showToast("请等待等位结果...");
+                        showToast("请等待定位结果...");
                         return;
                     }
 
@@ -794,7 +804,10 @@ public class WorkerActivity extends WorkerBaseActivity implements
                     if (null == alarmInfo.getState() || alarmInfo.getState().equals("0")) {
                         acceptAlarm(alarmInfo);
                     } else if (alarmInfo.getUserState().equals("1")) {
-                        reportState(Constant.ALARM_STATE_ARRIVED, alarmInfo);
+
+
+                        requestDistance(alarmInfo);
+
                     }
                     break;
                 case R.id.tv_refuse:
@@ -861,6 +874,46 @@ public class WorkerActivity extends WorkerBaseActivity implements
     private void cancelAlarm() {
         setFloatView(TYPE_NO_TASK, null);
     }
+
+
+    /**
+     * 获取代理商配置的可顺利到达距离
+     */
+    private RequestBean getDistance() {
+        GetDistanceRequest gr = new GetDistanceRequest();
+        gr.setHead(new NewRequestHead().setaccessToken(getConfig().getToken()).setuserId(getConfig().getUserId()));
+        gr.setBody(gr.new GetDistanceBody().setBranchId(getConfig().getBranchId()));
+        return gr;
+    }
+
+    /**
+     * 维修工到达现场
+     *
+     * @param
+     * @param alarmInfo
+     */
+    private void requestDistance(AlarmInfo alarmInfo) {
+        NetTask netTask = new NetTask(getConfig().getServer() + NetConstant.GET_DISTANCE,
+                getDistance()) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                GetDistanceResponse gr = GetDistanceResponse.getGetDistance(result);
+
+                if (isDistanceUpdate && distance < gr.getBody().getReachDistance()) {
+                    reportState(Constant.ALARM_STATE_ARRIVED, alarmInfo);
+                }
+                else
+                {
+                    showToast("到达事发地点"+gr.getBody().getReachDistance()+"米处才能确认到达！");
+                }
+//
+            }
+
+        };
+        addTask(netTask);
+    }
+
+
 
     /**
      * 维修工到达现场
@@ -1284,6 +1337,7 @@ public class WorkerActivity extends WorkerBaseActivity implements
         LatLng worker = workerMarker.getPosition();
         int distance = (int) DistanceUtil.getDistance(center, worker);
         ((TextView) findViewById(R.id.tv_distance)).setText("" + distance + " m");
+        isDistanceUpdate = true;
     }
 
 

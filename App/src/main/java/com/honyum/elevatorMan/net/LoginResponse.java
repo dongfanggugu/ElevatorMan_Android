@@ -50,6 +50,32 @@ public class LoginResponse extends Response {
         private String roleId = "";
         private String userId; // 用户id
 
+        private double lat;
+
+        private double lng;
+
+        public int getLocationUpload() {
+            return locationUpload;
+        }
+
+        public void setLocationUpload(int locationUpload) {
+            this.locationUpload = locationUpload;
+        }
+
+        public int getLocationUploadTask() {
+            return locationUploadTask;
+        }
+
+        public void setLocationUploadTask(int locationUploadTask) {
+            this.locationUploadTask = locationUploadTask;
+        }
+
+        //无任务位置上传频率
+        private int locationUpload = 30;
+        //有任务位置上传频率
+        private int locationUploadTask = 5;
+
+
         private String type; // 用户角色
 
         private String name; // 用户姓名
@@ -167,6 +193,23 @@ public class LoginResponse extends Response {
         public void setAutograph(String autograph) {
             this.autograph = autograph;
         }
-    }
 
+        public double getLat() {
+            return lat;
+        }
+
+        public void setLat(double lat) {
+            this.lat = lat;
+        }
+
+        public double getLng() {
+            return lng;
+        }
+
+        public void setLng(double lng) {
+            this.lng = lng;
+        }
+
+
+    }
 }

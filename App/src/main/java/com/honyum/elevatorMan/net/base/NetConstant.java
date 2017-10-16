@@ -4,9 +4,23 @@ package com.honyum.elevatorMan.net.base;
 public class NetConstant {
 
     /**
+     * 获取验证码
+     */
+
+    public static final String SMS_CODE = "/getSMSCodeBySmallOwner";
+
+
+
+    /**
      * 提交保险信息
      */
     public static final String EDIT_INSURANCE = "/editInsuranceByUser";
+
+
+    /**
+     * 提交保险信息
+     */
+    public static final String GET_DISTANCE = "/getReachDistanceBybranch";
 
 
 

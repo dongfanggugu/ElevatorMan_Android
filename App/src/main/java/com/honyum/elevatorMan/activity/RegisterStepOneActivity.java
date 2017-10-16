@@ -28,12 +28,15 @@ import com.honyum.elevatorMan.data.Province;
 import com.honyum.elevatorMan.net.RegisterCompanyRequest;
 import com.honyum.elevatorMan.net.RegisterPropertyRequest;
 import com.honyum.elevatorMan.net.RegisterRequest;
+import com.honyum.elevatorMan.net.SmsCodeRequest;
+import com.honyum.elevatorMan.net.SmsCodeResponse;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.RequestHead;
 import com.honyum.elevatorMan.utils.CountDownTimerUtils;
 import com.honyum.elevatorMan.utils.EncryptUtils;
+import com.honyum.elevatorMan.utils.ToastUtils;
 import com.honyum.elevatorMan.utils.Utils;
 
 import java.io.InputStream;
@@ -49,7 +52,11 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
 
     private EditText et_phonenum;
 
+    private String code = "";
+
     private TextView tv_geticode;
+
+    private EditText et_icode;
 
     /**
      * begin:用来处理长按事件的标记参数
@@ -122,6 +129,9 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
         final EditText etPwdConfirm = (EditText) findViewById(R.id.et_pwd_confirm);
         tv_geticode = (TextView) findViewById(R.id.tv_geticode);
 
+        et_icode = (EditText) findViewById(R.id.et_icode);
+
+
 
         et_company_name = (EditText)findViewById(R.id.et_company_name);
 
@@ -131,10 +141,14 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
         findViewById(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(code.equals(et_icode.getText().toString().trim()))
                 registerCompany(et_phonenum.getText().toString(),
                         etUserName.getText().toString(),
                         et_company_name.getText().toString(),
                         etPwd.getText().toString(),etPwdConfirm.getText().toString());
+                else
+                    showToast("验证码填写错误！");
+
             }
         });
         tv_geticode.setOnClickListener(new View.OnClickListener() {
@@ -158,8 +172,38 @@ public class RegisterStepOneActivity extends BaseFragmentActivity {
         CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(tv_geticode, 60000, 1000);
         mCountDownTimerUtils.start();
 
+        getSMSCode(tel);
+
+
     }
 
+    private void getSMSCode(String tel) {
+        String server = getConfig().getServer() + NetConstant.SMS_CODE;
+
+        SmsCodeRequest sr = new SmsCodeRequest();
+        sr.setHead(new RequestHead());
+        SmsCodeRequest.SmsCodeRequestBody srb = sr.new SmsCodeRequestBody();
+        srb.setTel(tel);
+        sr.setBody(srb);
+        NetTask netTask = new NetTask(server, sr) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                SmsCodeResponse response = SmsCodeResponse.getResponse(result);
+                if(!Utils.isEmpty(response)&&!Utils.isEmpty(response.getBody()))
+                {
+                    code = response.getBody().getCode();
+                }
+                else
+                {
+                    showToast("获取验证码失败！");
+                }
+
+
+            }
+
+        };
+        addTask(netTask);
+    }
     private void registerCompany(final String tel, String userName, String company, String pwd, String rePwd) {
         if (TextUtils.isEmpty(tel) || TextUtils.isEmpty(userName)
                 || TextUtils.isEmpty(tel) || TextUtils.isEmpty(company)||TextUtils.isEmpty(pwd)||TextUtils.isEmpty(rePwd)) {

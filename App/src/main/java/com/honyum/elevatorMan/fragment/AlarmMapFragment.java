@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -34,6 +38,7 @@ import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.base.Config;
 import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.data.AlarmInfo;
+import com.honyum.elevatorMan.data.MaintRecInfo;
 import com.honyum.elevatorMan.net.AcceptAlarmReqBody;
 import com.honyum.elevatorMan.net.AcceptAlarmRequest;
 import com.honyum.elevatorMan.net.AlarmListRequest;
@@ -90,6 +95,8 @@ public class AlarmMapFragment extends Fragment implements LocationReceiver.ILoca
         mView = inflater.inflate(R.layout.fragment_alarm_map, container, false);
         mMapView = (MapView) mView.findViewById(R.id.baidu_map);
         mMap = mMapView.getMap();
+
+
         initView();
         return mView;
     }
@@ -119,8 +126,10 @@ public class AlarmMapFragment extends Fragment implements LocationReceiver.ILoca
         requestUnassignedAlarmList();
         //markOnMap();
 
-        Intent sIntent = new Intent(mContext, LocationService.class);
-        mContext.startService(sIntent);
+//        Intent sIntent = new Intent(mContext, LocationService.class);
+//        mContext.startService(sIntent);
+
+        mContext.startLocationService();
         //初始化定位按钮
         initLocationBtn();
 
@@ -440,7 +449,22 @@ public class AlarmMapFragment extends Fragment implements LocationReceiver.ILoca
                 return false;
             }
         });*/
+        if (mContext.getConfig().getLat().equals("") || mContext.getConfig().getLng().equals("")) {
 
+        } else {
+            LatLng cenpt = new LatLng(Double.valueOf(mContext.getConfig().getLat()), Double.valueOf(mContext.getConfig().getLng()));
+            //Log.e("TAG", "jingdu lng"+getConfig().getLng()+"weidu"+ getConfig().getLat());
+            //定义地图状态
+            MapStatus mMapStatus = new MapStatus.Builder()
+                    .target(cenpt)
+                    .build();
+            //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+
+
+            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+            //改变地图状态
+            mMap.setMapStatus(mMapStatusUpdate);
+        }
 
         //去掉百度地图的下方的标签信息
         int count = mMapView.getChildCount();
@@ -496,6 +520,9 @@ public class AlarmMapFragment extends Fragment implements LocationReceiver.ILoca
         ImageView imgMarker = (ImageView) view.findViewById(R.id.img_marker);
 
         imgMarker.setImageResource(R.drawable.marker_alarm);
+        int x = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,30,this.getResources().getDisplayMetrics());
+        imgMarker.setLayoutParams(new FrameLayout.LayoutParams(x,x));
+        imgMarker.setScaleType(ImageView.ScaleType.FIT_XY);
 
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory
                 .fromView(view);
@@ -548,6 +575,9 @@ public class AlarmMapFragment extends Fragment implements LocationReceiver.ILoca
             ImageView imgMarker = (ImageView) view.findViewById(R.id.img_marker);
 
             imgMarker.setImageResource(R.drawable.marker_worker);
+            int x = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,30,this.getResources().getDisplayMetrics());
+            imgMarker.setLayoutParams(new FrameLayout.LayoutParams(x,x));
+            imgMarker.setScaleType(ImageView.ScaleType.FIT_XY);
 
             BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory
                     .fromView(view);

@@ -40,17 +40,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -175,6 +178,39 @@ public class Utils {
         }
     }
 
+    /**
+     * 判断OBJ是否为空
+     * 字符串还判断 ""
+     * 集合还判断size  size=0 为true
+     * 数组还判断length length=0 为true
+     * */
+    public static boolean isEmpty(Object obj){
+        if (obj == null)
+            return true;
+
+        //如果为String类型
+        if (obj instanceof String) {
+            if("null".equals(((String) obj).toLowerCase())){
+                return true;
+            }else{
+                return ((String) obj).trim().equals("");
+            }
+        } else if (obj instanceof Collection) {
+            // 如果是collection
+            Collection coll = (Collection) obj;
+            return coll.size() == 0;
+        } else if (obj instanceof Map) {
+            // 如果是Map
+            Map map = (Map) obj;
+            return map.size() == 0;
+        } else if (obj.getClass().isArray()) {
+            // 如果是数组
+            return Array.getLength(obj) == 0;
+        } else{
+            // 其他的话
+            return false;
+        }
+    }
     /**
      * 判断应用是否在后台
      *
@@ -605,6 +641,9 @@ public class Utils {
     }
 
 
+
+
+
     /**
      * 获取图片缩放的比例
      *
@@ -935,7 +974,7 @@ public class Utils {
      * @return
      */
     public static boolean isMobileNumber(String mobile) {
-        Pattern pattern = Pattern.compile("^((13[0-9])|(14[0-9])|(15[^4,\\D])|(17[0-9])|(18[0,5-9]))\\d{8}$");
+        Pattern pattern = Pattern.compile("^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$");
         Matcher matcher = pattern.matcher(mobile);
         return matcher.matches();
     }

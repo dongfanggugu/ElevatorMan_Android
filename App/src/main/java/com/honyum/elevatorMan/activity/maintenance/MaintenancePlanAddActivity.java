@@ -16,6 +16,8 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
@@ -125,6 +127,8 @@ public class MaintenancePlanAddActivity extends BaseFragmentActivity implements 
         LatLng point = new LatLng(latitude, longitude);
         MarkerOptions markerOption = new MarkerOptions().icon(bitmapDescriptor).position(point);
         locationMarker = (Marker) mMap.addOverlay(markerOption);
+        MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(point);
+        mMap.animateMapStatus(update);
 
     }
 

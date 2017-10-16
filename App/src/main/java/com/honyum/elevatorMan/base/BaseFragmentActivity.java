@@ -11,8 +11,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.location.LocationManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,14 +39,11 @@ import com.honyum.elevatorMan.activity.RegisterStepOneActivity;
 import com.honyum.elevatorMan.activity.RegisterStepTwoActivity;
 import com.honyum.elevatorMan.activity.WelcomeActivity;
 import com.honyum.elevatorMan.activity.common.MainGroupActivity;
-import com.honyum.elevatorMan.activity.common.MainPage1Activity;
-import com.honyum.elevatorMan.activity.common.MainpageActivity;
 import com.honyum.elevatorMan.activity.common.NavigationActivity;
 import com.honyum.elevatorMan.activity.common.ResetPasswordActivity;
 import com.honyum.elevatorMan.activity.maintenance_1.MaintenanceActivity;
 import com.honyum.elevatorMan.activity.property.AlarmTraceActivity;
 import com.honyum.elevatorMan.activity.property.MainPropertyGroupActivity;
-import com.honyum.elevatorMan.activity.property.PropertyMainPageActivity;
 import com.honyum.elevatorMan.activity.worker.WorkerActivity;
 import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.listener.MyPhoneStateListener;
@@ -52,6 +51,7 @@ import com.honyum.elevatorMan.listener.OnCallStateListener;
 import com.honyum.elevatorMan.net.AlarmListRequest;
 import com.honyum.elevatorMan.net.LiftVideoRequest;
 import com.honyum.elevatorMan.net.LiftVideoResponse;
+import com.honyum.elevatorMan.net.LoginRequest;
 import com.honyum.elevatorMan.net.LoginResponse;
 import com.honyum.elevatorMan.net.VersionCheckRequest;
 import com.honyum.elevatorMan.net.VersionCheckResponse;
@@ -61,8 +61,10 @@ import com.honyum.elevatorMan.net.base.NetWorkManager;
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.RequestHead;
 import com.honyum.elevatorMan.receiver.ForeMsgReceiver;
+import com.honyum.elevatorMan.service.DaemonService;
 import com.honyum.elevatorMan.service.LocationService;
 import com.honyum.elevatorMan.utils.DownloadFilesTask;
+import com.honyum.elevatorMan.utils.EncryptUtils;
 import com.honyum.elevatorMan.utils.RemindUtils;
 import com.honyum.elevatorMan.utils.Utils;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -81,7 +83,11 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 
     private SlidingMenu slidingMenu;
 
+    private NetTask mNetTask;
+
     private static boolean isForeground = false;
+
+    private static int currDelay;
 
     private ForeMsgReceiver mForeMsgReceiver;
 
@@ -92,6 +98,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 
     //用来维护消息弹出框，每个单独的弹出框维护单独的报警事件
     private static Map<String, AlertDialog> mAlertDialogMap = new HashMap<String, AlertDialog>();
+
 
 
     @Override
@@ -135,7 +142,75 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         }
     }
 
+    /**
+     * 登录请求bean
+     *
+     * @return
+     */
+    private RequestBean getLoginReq(String userName, String password) {
+        LoginRequest request = new LoginRequest();
+        LoginRequest.LoginReqBody body = request.new LoginReqBody();
+        RequestHead head = new RequestHead();
 
+        body.setUserName(userName);
+        body.setPassword(password);
+
+        request.setBody(body);
+        request.setHead(head);
+
+        return request;
+    }
+
+    /**
+     * 登录
+     */
+    private void login(String userName, String password) {
+        getConfig().setUserName(userName);
+
+        NetTask task = new NetTask(getConfig().getServer() + NetConstant.URL_LOG_IN,
+                getLoginReq(userName, password)) {
+
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                // TODO Auto-generated method stub
+                Log.i("zhenhao", "result:" + result);
+                LoginResponse response = LoginResponse.getLoginResonse(result);
+
+                String token = response.getHead().getAccessToken();
+
+                setUserInfo(token, response.getBody(), password);
+
+
+                Intent intent = new Intent(BaseFragmentActivity.this, LocationService.class);
+                startService(intent);
+
+
+
+
+
+                addTask(getNetTask());
+
+
+                //用户类型，type
+                //用户角色
+//                if (response.getBody().getType().equals(Constant.PROPERTY)) {
+//                    startProperty(true);
+//                }
+//                else if(response.getBody().getType().equals(Constant.COMPANY))
+//                {
+//                    startActivity(new Intent(BaseFragmentActivity.this, MainPageGroupCompanyActivity.class));
+//                }
+//                else {
+//                    //startWorker(getIntent() == null ? null : getIntent().getStringExtra("alarm_id"));
+//                    startActivity(new Intent(BaseFragmentActivity.this, MainGroupActivity.class));
+//                }
+//                finish();
+            }
+        };
+        addBackGroundTask(task);
+    }
+
+    public static final int GPS_WEAK = -99;
     /**
      * 处理网路请求的错误信息
      */
@@ -149,7 +224,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 
             if (0 == msg.arg1) { // 请求成功，不做操作
                 handlerCallback();
-            } else if (-9 == msg.arg1) {
+            } else if (-9 == msg.arg1 && !((String) msg.obj).contains("登录超时")) {
                 // 保存错误编码
                 getConfig().setErrorCode("" + msg.arg1);
 
@@ -161,7 +236,17 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
                 Intent intent = new Intent(BaseFragmentActivity.this,
                         LoginActivity.class);
                 startActivity(intent);
-            } else {
+            }
+            else if (-9 == msg.arg1 && ((String) msg.obj).contains("登录超时")) {
+
+                login(getConfig().getUserName(),getConfig().getPwd());
+
+            } else if(msg.arg1 == GPS_WEAK)
+            {
+
+                showToast(msg.arg2+"");
+            }
+            else {
                 showToast((String) msg.obj);
 
                 //如果是欢迎页面，当网络请求失败后，需要进入登陆页面
@@ -181,6 +266,9 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
      */
     protected void handlerCallback() {
         Log.i("zhenhao", "handler callback");
+
+
+
     }
 
     /**
@@ -307,6 +395,9 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
      * @param task
      */
     public void addTask(NetTask task) {
+
+
+        this.setNetTask(task);
         addTask(task, true, null, null);
     }
 
@@ -343,6 +434,41 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         }
     }
 
+    /**
+     * 判断GPS是否开启，GPS或者AGPS开启一个就认为是开启的
+     * @param context
+     * @return true 表示开启
+     */
+    public static final boolean isOPen(final Context context) {
+        LocationManager locationManager
+                = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        // 通过GPS卫星定位，定位级别可以精确到街（通过24颗卫星定位，在室外和空旷的地方定位准确、速度快）
+        boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        // 通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位）
+        boolean network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if (gps || network) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 强制帮用户打开GPS
+     * @param context
+     */
+    public static final void openGPS(Context context) {
+        Intent GPSIntent = new Intent();
+        GPSIntent.setClassName("com.android.settings",
+                "com.android.settings.widget.SettingsAppWidgetProvider");
+        GPSIntent.addCategory("android.intent.category.ALTERNATIVE");
+        GPSIntent.setData(Uri.parse("custom:3"));
+        try {
+            PendingIntent.getBroadcast(context, 0, GPSIntent, 0).send();
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 获取全局aplication对象
@@ -520,8 +646,9 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
      * 保存登陆信息
      *
      * @param body
+     * @param password
      */
-    protected void setUserInfo(String token, LoginResponse.LoginRspBody body) {
+    protected void setUserInfo(String token, LoginResponse.LoginRspBody body, String password) {
 
         //将用户id和角色以及token保存在本地
         getConfig().setUserId(body.getUserId());
@@ -551,6 +678,18 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 
         getConfig().setRoleId(body.getRoleId());
 
+
+        getConfig().setPwd(password);
+
+
+        getConfig().setLat(body.getLat() + "");
+        getConfig().setLng(body.getLng() + "");
+        getConfig().setRoleId(body.getRoleId());
+
+        getConfig().setLocationUpload(body.getLocationUpload());
+        getConfig().setLocationUploadTask(body.getLocationUploadTask());
+
+
         //设置设备的推送别名
         String alias = token.replaceAll("-", "_");
         new JPushAliasThread(alias).start();
@@ -558,9 +697,10 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         //mJpushAliasThread.start();
     }
 
-    protected void startLocationService() {
+    public void startLocationService() {
         Intent intent = new Intent(this, LocationService.class);
         startService(intent);
+        //startService(new Intent(this, DaemonService.class));
     }
 
     @Override
@@ -674,7 +814,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
      */
     public void startWorker(String alarmId) {
 
-        //启动定位
+
         Intent intent = new Intent(this, MainGroupActivity.class);
         startActivity(intent);
     }
@@ -822,6 +962,14 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
     public void popMsgAlertWithCancel(String msg, final IConfirmCallback callback,
                                       String leftText, String rightText, String title) {
         popMessageAlert(msg, callback, true, leftText, rightText, title, null);
+    }
+
+    public NetTask getNetTask() {
+        return mNetTask;
+    }
+
+    public void setNetTask(NetTask netTask) {
+        mNetTask = netTask;
     }
 
     /**

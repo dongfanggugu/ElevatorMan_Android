@@ -64,7 +64,6 @@
             android:layout_height="1dp"
             android:background="#cccccc" />
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/ll_icode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,11 +99,13 @@
                 android:layout_weight="2"
                 android:hint="请输入验证码"
                 android:maxLength="20"
-                android:text="1333"
+                android:text=""
                 android:paddingLeft="20dp" />
             <TextView
                 android:id="@+id/tv_geticode"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_plan_lanse"
                 android:textColor="@color/white"

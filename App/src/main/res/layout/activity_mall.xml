@@ -9,9 +9,8 @@
         android:layout_height="match_parent">
 
     </WebView>
-    <include
+    <!--<include
         layout="@layout/layout_title"
         android:id="@+id/title"
-        />
-
+        />  -->
 </FrameLayout>

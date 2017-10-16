@@ -24,11 +24,14 @@ public class Config implements Serializable {
 
     private Editor mEditor;
 
+    private int CurrDelay = 0;
+
+
 
 
     //private String baseUrl = "http://211.147.152.6:8080/lift";
-    //private String baseUrl = "http://www.chorstar.com:8081";
-    private String baseUrl = "http://192.168.0.82:8080";
+    private String baseUrl = "http://www.chorstar.com:8081";
+    //private String baseUrl = "http://192.168.0.82:8080";
 
     public Config(Context context) {
         mPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
@@ -101,6 +104,85 @@ public class Config implements Serializable {
         mEditor.commit();
     }
 
+    /**
+     * 保存当前项目的lat
+     *
+     * @param lat
+     */
+    public void setLat(String lat) {
+        mEditor.putString("Reslat", lat);
+        mEditor.commit();
+    }
+
+
+
+    /**
+     * 保存当前项目的 lng
+     *
+     * @param lng
+     */
+    public void setLng(String lng) {
+        mEditor.putString("Reslng", lng);
+        mEditor.commit();
+    }
+
+
+
+    /**
+     * 保存当前项目的lat
+     *
+     * @param
+     */
+    public String getLat() {
+
+
+        return mPreferences.getString("Reslat", "0");
+    }
+
+
+    public int getLocationUpload()
+    {
+        return  mPreferences.getInt("LocationUpload",300);
+
+    }
+
+    public int getLocationUploadTask()
+    {
+        return  mPreferences.getInt("LocationUploadTask",15);
+
+    }
+
+    public void setLocationUpload(int LocationUpload)
+    {
+        mEditor.putInt("LocationUpload", LocationUpload);
+        mEditor.commit();
+    }
+
+    public void setCurrDelay(int CurrDelay)
+    {
+        mEditor.putInt("CurrDelay", CurrDelay);
+        mEditor.commit();
+    }
+    public int getCurrDelay()
+    {
+        return mPreferences.getInt("CurrDelay",15);
+    }
+    public void setLocationUploadTask(int LocationUploadTask)
+    {
+        mEditor.putInt("LocationUploadTask", LocationUploadTask);
+        mEditor.commit();
+    }
+
+
+
+    /**
+     * 保存当前项目的 lng
+     *
+     * @param
+     */
+    public String getLng() {
+        return mPreferences.getString("Reslng", "0");
+    }
     /**
      * 获取用户id
      *
@@ -547,6 +629,15 @@ public class Config implements Serializable {
         mEditor.commit();
     }
 
+
+    public String getPwd() {
+        return mPreferences.getString("Pwd", "");
+    }
+
+    public void setPwd(String sign) {
+        mEditor.putString("Pwd", sign);
+        mEditor.commit();
+    }
     public void setRoleId(String roleId)
     {
         mEditor.putString("role_id", roleId);
