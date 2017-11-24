@@ -25,10 +25,13 @@ import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.data.AlarmInfo;
 import com.honyum.elevatorMan.net.AlarmListRequest;
 import com.honyum.elevatorMan.net.AlarmListResponse;
+import com.honyum.elevatorMan.net.ChatListResponse;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.RequestHead;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
@@ -227,6 +230,13 @@ public class AlarmListFragment extends Fragment {
             tvTip.setVisibility(View.VISIBLE);
             return;
         }
+        StringBuffer sb = new StringBuffer();
+        for (AlarmInfo alarmInfo : mAlarmList) {
+            sb.append(",'"+alarmInfo.getId()+"'");
+        }
+        String ids = sb.toString().trim().replaceFirst(",","");
+
+        DataSupport.deleteAll(ChatListResponse.ChatListBody.class,"alarmId not in( "+ids+")");
         MyAdapter adapter = new MyAdapter(mContext, mAlarmList);
         mListView.setAdapter(adapter);
         setListener(mListView);

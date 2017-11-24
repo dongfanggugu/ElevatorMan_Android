@@ -8,18 +8,16 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.ThumbnailUtils;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.honyum.elevatorMan.R;
@@ -30,6 +28,7 @@ import com.honyum.elevatorMan.net.ChatListResponse;
 import com.honyum.elevatorMan.utils.Utils;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.ref.WeakReference;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +61,15 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
         this.mId = mId;
         list = dataSource;
     }
+    //去除本地临时假数据
+    public void cleanLoadData()
+    {
+        while (list.size()>0&&list.get(list.size()-1)!=null&&list.get(list.size()-1).isLoad()==true)
+        {
+            list.remove(list.size()-1);
+        }
+
+    }
 
     @Override
     public View getItemView(int position, View convertView, ViewGroup parent) {
@@ -85,7 +93,7 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
                     vh.chatTime = (TextView) convertView.findViewById(R.id.chat_time);
                     vh.tvName = (TextView) convertView.findViewById(R.id.tv_name);
                     vh.chatContent = (TextView) convertView.findViewById(R.id.chat_content);
-
+                    vh.pdSending = (ProgressBar) convertView.findViewById(R.id.chat_progressBar);
                     convertView.setTag(vh);
                     break;
                 case 2:
@@ -163,7 +171,15 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
         }
 
         switch (type) {
+
             case 1:
+                if(vh.pdSending!=null) {
+                    if (body.isLoad()) {
+                        vh.pdSending.setVisibility(View.VISIBLE);
+                    } else {
+                        vh.pdSending.setVisibility(View.GONE);
+                    }
+                }
                 vh.tvName.setText(body.getSenderName());
 
                 final String content = body.getContent();
@@ -174,6 +190,17 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
                 }
                 break;
             case 2:
+                if(vh.pdSending!=null)
+                if(body.isLoad())
+                {
+                    vh.pdSending.setVisibility(View.VISIBLE);
+                    vh.voiceDuration.setVisibility(View.GONE);
+                }
+                else
+                {
+                    vh.pdSending.setVisibility(View.GONE);
+                    vh.voiceDuration.setVisibility(View.VISIBLE);
+                }
                 vh.tvName.setText(body.getSenderName());
                 vh.voiceDuration.setHint(body.getTimeLength() + "＂");
 
@@ -215,12 +242,22 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
 
                 break;
             case 3:
+                if(vh.pdSending!=null)
+                if(body.isLoad())
+                {
+                    vh.pdSending.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    vh.pdSending.setVisibility(View.GONE);
+                }
                 vh.tvName.setText(body.getSenderName());
                 // vh.voiceDuration.setHint(body.getTimeLength() + "＂");
                 vh.voiceDuration.setVisibility(View.GONE);
                 Glide.with(context)
                         .load(body.getContent()).override(60, 80)
                         .into(vh.voiceContent);
+                if(!body.isLoad())
                 vh.voiceContent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -230,28 +267,70 @@ public class ChatAdapter extends MyBaseAdapter<ChatListResponse.ChatListBody> {
 
                 break;
             case 4:
+                if(vh.pdSending!=null)
+                if(body.isLoad())
+                {
+                    vh.pdSending.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    vh.pdSending.setVisibility(View.GONE);
+                }
                 vh.tvName.setText(body.getSenderName());
                 vh.voiceDuration.setVisibility(View.GONE);
-                vh.voiceContent.setBackground(new BitmapDrawable(createVideoThumbnail(body.getContent(), 60, 80)));
-                vh.voiceContent.setImageResource(R.drawable.video_play);
+                new GetPicture(body.getContent(), vh.voiceContent).execute();
+                if(!body.isLoad())
                 vh.voiceContent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ((ListItemCallback<String>)context).performItemCallback(body.getContent());
                     }
                 });
-
-
-
-
-
                 break;
         }
 
         return convertView;
     }
 
-    private Bitmap createVideoThumbnail(String url, int width, int height) {
+    // private class getViedoThum extends AsyncTask<String>
+
+    /**
+     * 异步获取图片
+     *
+     * @author chang
+     */
+    public static class GetPicture extends AsyncTask<String, Void, Bitmap> {
+
+        private String mUrl;
+        private WeakReference<ImageView> mImageView;
+
+        public GetPicture(String url, ImageView imageView) {
+            mUrl = url;
+            mImageView = new WeakReference<ImageView>(imageView);
+            //mImageView.setBackgroundResource(R.drawable.history_icon);
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... arg0) {
+            // TODO Auto-generated method stub
+            Bitmap bitmap = createVideoThumbnail(mUrl, 60, 80);
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(bitmap);
+
+            if (bitmap != null) {
+                mImageView.get().setBackground(new BitmapDrawable(bitmap));
+                mImageView.get().setImageResource(R.drawable.video_play);
+            } else {
+                mImageView.get().setBackgroundResource(R.drawable.history_icon);
+            }
+        }
+    }
+    private static Bitmap createVideoThumbnail(String url, int width, int height) {
         Bitmap bitmap = null;
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         int kind = MediaStore.Video.Thumbnails.MINI_KIND;

@@ -12,6 +12,7 @@ import android.view.View;
 import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
+import com.honyum.elevatorMan.constant.ConstantIntent;
 import com.honyum.elevatorMan.net.SendChatRequest;
 import com.honyum.elevatorMan.net.UploadImageRequest;
 import com.honyum.elevatorMan.net.UploadImageResponse;
@@ -29,6 +30,8 @@ import java.net.URLEncoder;
 public class CommonPicturePickActivity extends BaseFragmentActivity {
 
 
+    public static final int PICK_TAG = 2;
+
     private final int RESULT_OK = -1;
 
     private final int RESULT_CANCEL = 0;
@@ -40,6 +43,7 @@ public class CommonPicturePickActivity extends BaseFragmentActivity {
 
 
     private Intent intent;
+    private Uri uri;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,7 +83,7 @@ public class CommonPicturePickActivity extends BaseFragmentActivity {
                     imgFile.delete();
                 }
 
-                Uri uri = Uri.fromFile(imgFile);
+                uri = Uri.fromFile(imgFile);
 
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
@@ -147,34 +151,7 @@ public class CommonPicturePickActivity extends BaseFragmentActivity {
 
         addTask(netTask);
     }
-    private RequestBean getImageRequestBean(String userId, String token, String path) {
-        UploadImageRequest request = new UploadImageRequest();
-        request.setHead(new NewRequestHead().setuserId(userId).setaccessToken(token));
-        request.setBody(request.new UploadImageBody().setImg(path));
-        return request;
-    }
 
-
-    private void requestUploadImage(final String path) {
-        NetTask task = new NetTask(getConfig().getServer() + NetConstant.UP_LOAD_IMG,
-                getImageRequestBean(getConfig().getUserId(), getConfig().getToken(), path)) {
-            @Override
-            protected void onResponse(NetTask task, String result) {
-                UploadImageResponse response = UploadImageResponse.getUploadImageResponse(result);
-                if (response.getHead() != null && response.getHead().getRspCode().equals("0")) {
-                    String url = response.getBody().getUrl();
-                   // showAppToast(getString(R.string.sucess));
-                    sendChat(3, url);
-                    //3是图片
-
-                }
-                //Log.e("!!!!!!!!!!!!!!", "onResponse: "+ msInfoList.get(0).getMainttypeId());
-
-            }
-        };
-
-        addTask(task);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -189,8 +166,7 @@ public class CommonPicturePickActivity extends BaseFragmentActivity {
 
         //拍摄照片
         if (requestCode == CAMERA_REQ_CODE) {
-           String tag = getIntent().getStringExtra("tag");
-
+            String tag = getIntent().getStringExtra("tag");
             String dir = Utils.getTempPath();
             String fileName = tag + ".jpg";
 
@@ -198,12 +174,15 @@ public class CommonPicturePickActivity extends BaseFragmentActivity {
 
             //删除之前的图片文件
             File file = new File(dir, fileName);
+            if(file!=null)
             file.delete();
-            Utils.saveBitmapWithQuality(bitmap, dir, fileName, 50);
+            Utils.saveBitmapWithQuality(bitmap, dir, fileName, 60);
             intent = new Intent();
             intent.putExtra("tag", tag);
-            intent.putExtra("result", dir + "/" + fileName);
-            requestUploadImage(Utils.imgToStrByBase64(dir + "/" + fileName));
+            intent.putExtra(ConstantIntent.INTENT_DATA, dir + "/" + fileName);
+            setResult(PICK_TAG,intent);
+            finish();
+
         }
 
         //选取照片
@@ -219,13 +198,16 @@ public class CommonPicturePickActivity extends BaseFragmentActivity {
             String fileName = tag + ".jpg";
 
             File file = new File(dir, fileName);
+            if(file!=null)
             file.delete();
 
             Utils.saveBitmapWithQuality(bitmap, dir, fileName, 50);
             intent = new Intent();
             intent.putExtra("tag", tag);
-            intent.putExtra("result", dir + "/" + fileName);
-            requestUploadImage(Utils.imgToStrByBase64(dir + "/" + fileName));
+            intent.putExtra(ConstantIntent.INTENT_DATA, dir + "/" + fileName);
+            setResult(PICK_TAG,intent);
+            finish();
+            //requestUploadImage(Utils.imgToStrByBase64(dir + "/" + fileName));
         }
     }
 }

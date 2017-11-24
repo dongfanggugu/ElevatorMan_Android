@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/layout_title"
+        android:id="@+id/title"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        >
+        <EditText
+            android:id="@+id/et_eve_num"
+            android:clickable="false"
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_margin="@dimen/size_10dp"
+            android:padding="@dimen/size_5dp"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:hint="请输入电梯编号"
+            android:textSize="15sp"
+            android:background="@drawable/shape_alarm_info"/>
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10dp"
+            android:textSize="15dp"
+            android:text="取消"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/ele_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+</LinearLayout>

@@ -1442,8 +1442,9 @@ public class WorkerActivity extends WorkerBaseActivity implements
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent sIntent = new Intent(WorkerActivity.this, LocationService.class);
-                startService(sIntent);
+//                Intent sIntent = new Intent(WorkerActivity.this, LocationService.class);
+//                startService(sIntent);
+                startLocationService();
                 isCenter = true;
             }
 

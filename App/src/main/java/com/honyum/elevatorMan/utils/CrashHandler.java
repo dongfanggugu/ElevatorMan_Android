@@ -89,9 +89,10 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         }
         collectDeviceInfo(mContext);
         saveCrashInfo2File(ex);
-        SysActivityManager.getInstance().exit();
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
+
+//        SysActivityManager.getInstance().exit();
+//        android.os.Process.killProcess(android.os.Process.myPid());
+//        System.exit(1);
         return true;
     }
 
@@ -161,6 +162,21 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             Log.e(TAG, "an error occured while writing file to the file");
             e.printStackTrace();
         }
+    }
+
+    public static File[] getFiles()
+    {
+        String sdPath = Utils.getSdPath();
+        if (null == sdPath) {
+            Log.i(TAG, "the device has no sd card");
+            return null;
+        }
+        String path = sdPath + "/Elevator";
+        File dir = new File(path);
+        if (!dir.exists()) {
+            return null;
+        }
+        return dir.listFiles();
     }
 
 }

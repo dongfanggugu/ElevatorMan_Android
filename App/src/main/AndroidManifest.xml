@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.honyum.elevatorMan"
-    android:versionCode="150"
-    android:versionName="@string/app_version">
+    android:versionCode="157"
+    android:versionName="V1.57">
+    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!更新的时候,需要改一下是否开启Crashhandler-->
+    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!更新的时候,修改正式服务器的IP地址-->
 
     <uses-sdk
         android:minSdkVersion="15"
@@ -57,10 +59,13 @@
 
 
     <!-- Optional for location -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-feature android:name="android.hardware.location" />
+    <uses-feature android:name="android.hardware.location.network" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
@@ -73,6 +78,7 @@
         android:icon="@drawable/logo2"
         android:label="@string/app1_name"
         tools:replace="android:label"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -162,9 +168,22 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" />
+            android:process=":remote"
+             />
+
+
+
+        <service
+            android:name=".service.JobAwakenService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+
+
+
         <service android:name=".service.LocationService"
-            />
+            android:enabled="true"
+        />
+            <!--/>-->
         <!-- <service android:name=".service.TimerService"/> -->
 
 
@@ -596,6 +615,30 @@
             android:screenOrientation="landscape" />
         <activity android:name=".activity.property.MaintBackInfoActivity"></activity>
         <activity android:name=".activity.maintenance.MaintenanceServiceActivity"></activity>
+        <activity android:name=".activity.company.CompanyApplyActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".activity.company.InsuranceActivity" />
+        <activity android:name=".activity.company.InsuranceLookActivity" />
+        <activity android:name=".activity.common.SignLeaveActivity" />
+        <activity android:name=".activity.common.SignActivity" />
+        <activity android:name=".activity.common.InputEveNumActivity" />
+        <activity android:name=".activity.common.EveUploadMainActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity android:name=".activity.common.EveListInfoActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity android:name=".activity.common.ShowElevatInfoActivity" />
+        <activity android:name=".activity.common.ShowEleInfoActivity" />
+        <activity android:name=".activity.common.SelectPhotoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogStyleBottom"/>
+        <activity android:name=".activity.common.RecordUpdateListActivity" />
+        <activity android:name=".activity.common.LiveActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|navigation|keyboard"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:theme="@style/LiveStyle"/>/>
     </application>
 
 </manifest>

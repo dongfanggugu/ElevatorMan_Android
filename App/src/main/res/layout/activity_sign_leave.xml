@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:id="@+id/ll_start_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_start_lable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10dp"
+            android:layout_weight="1"
+            android:text="开始时间" />
+
+        <TextView
+            android:id="@+id/tv_start_time"
+            android:layout_width="0dp"
+            android:hint="点击选择时间"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10dp"
+            android:layout_weight="2" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lessgray"
+        />
+    <LinearLayout
+        android:id="@+id/ll_end_time"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10dp"
+            android:layout_weight="1"
+            android:text="结束时间" />
+
+        <TextView
+            android:id="@+id/tv_end_time"
+            android:layout_width="0dp"
+            android:hint="点击选择时间"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10dp"
+            android:layout_weight="2" />
+
+    </LinearLayout>
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:visibility="gone"
+        android:background="@color/lessgray"
+        />
+    <TextView
+        android:layout_margin="@dimen/size_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请假原因"/>
+    <EditText
+        android:id="@+id/et_reason"
+        android:layout_margin="@dimen/size_20dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:lines="5"
+        android:maxLines="5"
+        android:gravity="top"
+        android:hint="输入请假原因"
+        android:padding="@dimen/size_5dp"
+        android:background="@drawable/shape_alarm_info"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textColor="@color/titleblue"/>
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提交"
+        android:gravity="center"
+        android:padding="@dimen/size_10dp"
+        android:layout_margin="@dimen/size_20dp"
+        android:textColor="@color/white"
+        android:background="@drawable/selector_plan_submit"/>
+
+</LinearLayout>

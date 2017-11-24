@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.util.Base64;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,11 +21,11 @@ import com.chorstar.jni.ChorstarJNI;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.common.ChatActivity;
 import com.honyum.elevatorMan.activity.common.HelpCenterActivity;
-import com.honyum.elevatorMan.activity.common.InsuranceBuyActivity;
 import com.honyum.elevatorMan.activity.common.MallActivity;
 import com.honyum.elevatorMan.activity.common.NousActivity;
 import com.honyum.elevatorMan.activity.common.NousDetailActivity;
 import com.honyum.elevatorMan.activity.common.PersonActivity;
+import com.honyum.elevatorMan.activity.common.SignActivity;
 import com.honyum.elevatorMan.activity.worker.LiftKnowledgeActivity;
 import com.honyum.elevatorMan.adapter.BannerAdapter;
 import com.honyum.elevatorMan.adapter.PageIndicatorAdapter;
@@ -36,19 +38,24 @@ import com.honyum.elevatorMan.net.AdvDetailRequest;
 import com.honyum.elevatorMan.net.AdvDetailResponse;
 import com.honyum.elevatorMan.net.BannerResponse;
 import com.honyum.elevatorMan.net.EmptyRequest;
+import com.honyum.elevatorMan.net.GetApplyResponse;
+import com.honyum.elevatorMan.net.GetApplyResponseBody;
 import com.honyum.elevatorMan.net.PersonResponse;
 import com.honyum.elevatorMan.net.PersonsRequest;
+import com.honyum.elevatorMan.net.UploadFileRequest;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.NewRequestHead;
 import com.honyum.elevatorMan.net.base.RequestBean;
-import com.honyum.elevatorMan.service.LocationService;
+import com.honyum.elevatorMan.net.base.RequestHead;
+import com.honyum.elevatorMan.utils.CrashHandler;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.honyum.elevatorMan.activity.common.ChatActivity.MODE_PROPERTY;
-import static com.honyum.elevatorMan.activity.common.ChatActivity.MODE_WORKER;
 
 /**
  * Created by Star on 2017/6/14.
@@ -104,23 +111,42 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
                 final String i = response.getBody().getContent();
                 if(iv!=null)
                 {
-                    iv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
                             Intent intent = new Intent(MainPageActivity.this, NousDetailActivity.class);
                             Bundle bundle=new Bundle();
                             bundle.putString("kntype", "详情");
                             bundle.putString("content",i);
                             intent.putExtras(bundle);
                             startActivity(intent);
-                        }
-                    });
-
                 }
 
             }
         };
 
+        addBackGroundTask(netTask);
+    }
+
+    private RequestBean requestFileLog(String fileArray, String filename) {
+        RequestHead head = new NewRequestHead().setaccessToken(getConfig().getToken()).setuserId(getConfig().getUserId());
+
+        UploadFileRequest request = new UploadFileRequest();
+        request.setHead(head);
+
+        request.setBody(request.new UploadFileRequestBody().setImg(fileArray).setName(filename));
+        return request;
+    }
+
+    private void uploadLogFile(String fileArray, String filename, final String path) {
+        String server = getConfig().getServer() + NetConstant.UPLOAD_FILE;
+
+        NetTask netTask = new NetTask(server, requestFileLog(fileArray, filename)) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                File deleteFile = new File(path);
+                if (deleteFile != null) {
+                    deleteFile.delete();
+                }
+            }
+        };
         addBackGroundTask(netTask);
     }
 
@@ -228,20 +254,7 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
     }
     @Override
     public void performItemCallback(final ImageView iv) {
-        final String info = (String) iv.getTag(R.id.url);
-        if(info!="") {
-            iv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setAction("android.intent.action.VIEW");
-                    Uri content_url = Uri.parse(info);
-                    intent.setData(content_url);
-                    startActivity(intent);
-                }
-            });
-        }
-        else if(StringUtils.isNotEmpty((String) iv.getTag()))
+        if (StringUtils.isNotEmpty((String) iv.getTag()))
         {
             requestBannerAdv((String) iv.getTag(),iv);
         }
@@ -340,6 +353,8 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
      */
     private void initView() {
 
+        findViewById(R.id.tv_attendance).setOnClickListener(v -> jumpToAttendance());
+
         findViewById(R.id.ll_company_extra_content).setVisibility(View.VISIBLE);
 
         findViewById(R.id.ll_business).setOnClickListener(v -> jumpToMall());
@@ -383,7 +398,38 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
             }
         });
 
+        checkError();
         requestBanner();
+
+    }
+
+    private void checkError()
+    {
+        File[] files = CrashHandler.getFiles();
+        if (CrashHandler.getFiles() != null && files.length > 0) {
+            for (int i = 0; i < files.length; i++) {
+                File file = files[i];
+                if (file != null) {
+                    if (file.isDirectory()) {
+                        file.delete();
+                        Log.i("MainActivity", "删除文件夹！");
+                        return;
+                    }
+
+                }
+                try {
+                    FileInputStream fileInputStream = new FileInputStream(files[i]);
+                    byte[] buffer = new byte[(int) file.length()];
+                    fileInputStream.read(buffer);
+                    fileInputStream.close();
+                    uploadLogFile(Base64.encodeToString(buffer, Base64.DEFAULT), file.getName(), file.getAbsolutePath());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }
 
     }
 
@@ -424,6 +470,9 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
             case R.id.ll_person:
                 jumpToPerson();
                 break;
+            case R.id.tv_attendance:
+                jumpToAttendance();
+                break;
             case R.id.ll_bbs:
                 String region = getConfig().getRegion();
 
@@ -440,15 +489,85 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
                 break;
         }
     }
+
     private void jumpToMall() {
         Intent intent = new Intent(this, MallActivity.class);
         startActivity(intent);
 
 
     }
+
+    private void requestApply() {
+
+        String server = getConfig().getServer() + NetConstant.GET_APPLIY;
+        RequestBean request = new RequestBean();
+        RequestHead head = new RequestHead();
+        head.setAccessToken(getConfig().getToken());
+        head.setUserId(getConfig().getUserId());
+        request.setHead(head);
+
+        NetTask netTask = new NetTask(server, request) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                GetApplyResponse response = GetApplyResponse.getResponse(result);
+                dealResult(response);
+            }
+        };
+
+        addTask(netTask);
+
+    }
+
+    private void dealResult(GetApplyResponse response) {
+
+        if (response.getBody() != null) {
+            dealState(response.getBody());
+        }
+    }
+
+    private void dealState(GetApplyResponseBody body) {
+
+        switch (body.getState()) {
+
+            case "0": {
+                Intent it = new Intent(this, CompanyApplyActivity.class);
+                it.putExtra("data", body);
+                startActivity(it);
+                break;
+            }
+            case "1": {
+                Intent it = new Intent(this, InsuranceLookActivity.class);
+                startActivity(it);
+                break;
+            }
+            case "2": {
+                Intent it = new Intent(this, CompanyApplyActivity.class);
+                it.putExtra("data", body);
+                startActivity(it);
+                break;
+            }
+            default: {
+                GetApplyResponseBody gb = new GetApplyResponseBody();
+                gb.setState("99");
+                Intent it = new Intent(this, CompanyApplyActivity.class);
+                it.putExtra("data", gb);
+                startActivity(it);
+                break;
+            }
+        }
+
+    }
     private void jumpToInsurance() {
-        Intent intent = new Intent(this, InsuranceBuyActivity.class);
-        startActivity(intent);
+
+        if (getConfig().getBranchId().equals("0000000000")) {
+//        Intent intent = new Intent(this, CompanyApplyActivity.class);
+//        startActivity(intent);
+            requestApply();
+        } else {
+            GetApplyResponseBody b = new GetApplyResponseBody();
+            b.setState("1");
+            dealState(b);
+        }
     }
     /**
      * 跳转到维保服务页面
@@ -529,6 +648,11 @@ public class MainPageActivity extends BaseFragmentActivity implements View.OnCli
         bundle.putString("kntype", "故障码");
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+    private void jumpToAttendance() {
+        Intent intent = new Intent(this, SignActivity.class);
+        startActivity(intent);
+
     }
     /**
      * 跳转到操作手册

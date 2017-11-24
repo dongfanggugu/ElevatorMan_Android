@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.RequestHead;
 import com.honyum.elevatorMan.receiver.LocationReceiver;
 import com.honyum.elevatorMan.service.LocationService;
+import com.honyum.elevatorMan.utils.ToastUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -91,7 +93,10 @@ public class AlarmMapFragment extends Fragment implements LocationReceiver.ILoca
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        SDKInitializer.initialize(mContext.getApplicationContext());
+        if(mContext != null)
+                SDKInitializer.initialize(mContext.getApplicationContext());
+        else
+        SDKInitializer.initialize(getActivity().getApplicationContext());
         mView = inflater.inflate(R.layout.fragment_alarm_map, container, false);
         mMapView = (MapView) mView.findViewById(R.id.baidu_map);
         mMap = mMapView.getMap();
@@ -449,7 +454,7 @@ public class AlarmMapFragment extends Fragment implements LocationReceiver.ILoca
                 return false;
             }
         });*/
-        if (mContext.getConfig().getLat().equals("") || mContext.getConfig().getLng().equals("")) {
+        if (TextUtils.isEmpty(mContext.getConfig().getLat()) || TextUtils.isEmpty(mContext.getConfig().getLng())) {
 
         } else {
             LatLng cenpt = new LatLng(Double.valueOf(mContext.getConfig().getLat()), Double.valueOf(mContext.getConfig().getLng()));
@@ -564,6 +569,11 @@ public class AlarmMapFragment extends Fragment implements LocationReceiver.ILoca
     @Override
     public void onLocationComplete(double latitude, double longitude, String address) {
 
+        if(latitude == 0.0||longitude==0.0)
+        {
+            ToastUtils.showToast(mContext,"定位失败，请重试"+address);
+            return;
+        }
         LatLng point = new LatLng(latitude, longitude);
         MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(point);
         mMap.animateMapStatus(update);

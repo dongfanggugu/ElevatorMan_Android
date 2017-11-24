@@ -118,7 +118,14 @@ public class PersonActivity extends BaseFragmentActivity {
                 startActivity(intent);
             }
         });
-
+//信息采集
+        findViewById(R.id.ll_get_ele_info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PersonActivity.this, EveUploadMainActivity.class);
+                startActivity(intent);
+            }
+        });
         //操作证号
         findViewById(R.id.ll_operation).setOnClickListener(new View.OnClickListener() {
             @Override

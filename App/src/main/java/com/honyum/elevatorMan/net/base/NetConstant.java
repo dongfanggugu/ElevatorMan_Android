@@ -3,6 +3,95 @@ package com.honyum.elevatorMan.net.base;
 
 public class NetConstant {
 
+
+    /**
+     * 保险条款
+     *
+     */
+
+    public static final String GET_CHATUSERBYALARMID = "/getChatUserByAlarmId";
+
+
+    /**
+     * 保险条款
+     *
+     */
+
+    public static final String COMPANY_APPLY = "/h5/regProtocol";
+    /**
+     *  根据项目ID获取电梯信息
+     */
+    public static final String GET_ELEVATOR_BY_COMMUNITYID = "/getElevatorByCommunityID";
+    /**
+     *  根据距离获取项目信息
+     */
+    public static final String GET_COMMUNITY_BY_DISTANCE = "/getCommunityByDistance";
+    /**
+     *  获取扫码信息错误类型
+     */
+    public static final String EDIT_ERROR_REASON = "/editElevatorError";
+
+    /**
+     *  获取救援故障类型
+     */
+    public static final String TOP_FAULT_TYPE = "/getTopFaultType";
+    /**
+     *  获取扫码信息错误类型
+     */
+    public static final String ERROR_REASON = "/getErrorReason";
+    /**
+     * 根据识别编码获取电梯信息
+     */
+    public static final String ELE_RECORD_BYID = "/getElevatorByLiftNum";
+
+
+    /**
+     * 根据识别编码获取电梯信息
+     */
+    public static final String ELE_RECORD_UPDATE = "/editElevatorPosition";
+    /**
+     * 签到、签退、请假
+     */
+    public static final String SIGN = "/addAttendance";
+    /**
+     * 销假
+     */
+
+    public static final String SIGN_CANCEL = "/editAttendance";
+    /**
+     * 销假
+     */
+
+    public static final String SIGN_GET = "/getAttendance";
+
+
+    /**
+     * 上传log文件
+     */
+
+    public static final String UPLOAD_FILE = "/uploadFile";
+
+    /**
+     * 查询企业申请状态
+     */
+
+    public static final String GET_POLICY = "/getPolicyUserByUserInfo";
+    /**
+     * 查询企业申请状态
+     */
+
+    public static final String UPDATE_APPLIY = "/editAppliy";
+
+    /**
+     * 查询企业申请状态
+     */
+
+    public static final String GET_APPLIY = "/getAppliyByuserId";
+    /**
+     * 添加企业申请
+     */
+
+    public static final String ADD_APPLY = "/addAppliy";
     /**
      * 获取验证码
      */

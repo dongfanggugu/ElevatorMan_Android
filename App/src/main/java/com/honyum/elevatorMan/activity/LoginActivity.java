@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,12 +43,15 @@ import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.RequestHead;
+import com.honyum.elevatorMan.service.LocationService;
 import com.honyum.elevatorMan.utils.EncryptUtils;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.honyum.elevatorMan.service.JobAwakenService.isServiceWork;
 
 public class LoginActivity extends BaseFragmentActivity {
 
@@ -80,6 +84,14 @@ public class LoginActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_login);
         SysActivityManager.getInstance().addActivity(this);
         initView();
+        //stop the protect of location Service provide by JobService,
+        //this method require android version higher than android LOLLIPOP
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP)
+        {
+            cancelLocationJobService();
+        }
+        handler.removeCallbacksAndMessages(null);
+
     }
 
     @Override
@@ -121,7 +133,7 @@ public class LoginActivity extends BaseFragmentActivity {
 
         tvRegion = (TextView) findViewById(R.id.tv_region);
 
-        ((TextView) findViewById(R.id.tv_version)).setText(getString(R.string.app_version));
+        ((TextView) findViewById(R.id.tv_version)).setText(getString(R.string.appversion));
 
         initRegionChoice();
 

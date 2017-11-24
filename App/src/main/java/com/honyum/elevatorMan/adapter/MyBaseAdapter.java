@@ -52,6 +52,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+
     public void clearAll(boolean isClear) {
         if (isClear) {
             dataSource.clear();

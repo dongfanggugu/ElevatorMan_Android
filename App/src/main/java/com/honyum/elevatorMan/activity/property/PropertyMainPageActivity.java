@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.util.Base64;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,11 +31,16 @@ import com.honyum.elevatorMan.net.AdvDetailRequest;
 import com.honyum.elevatorMan.net.AdvDetailResponse;
 import com.honyum.elevatorMan.net.BannerResponse;
 import com.honyum.elevatorMan.net.EmptyRequest;
+import com.honyum.elevatorMan.net.UploadFileRequest;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.NewRequestHead;
+import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.RequestHead;
+import com.honyum.elevatorMan.utils.CrashHandler;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 public class PropertyMainPageActivity extends BaseFragmentActivity implements View.OnClickListener,ListItemCallback<ImageView> {
@@ -87,18 +94,13 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
                 final String i = response.getBody().getContent();
                 if(iv!=null)
                 {
-                    iv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+
                             Intent intent = new Intent(PropertyMainPageActivity.this, NousDetailActivity.class);
                             Bundle bundle=new Bundle();
                             bundle.putString("kntype", "详情");
                             bundle.putString("content",i);
                             intent.putExtras(bundle);
                             startActivity(intent);
-                        }
-                    });
-
                 }
 
             }
@@ -127,22 +129,6 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
             params.leftMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
             iv.setLayoutParams(params);
             iv.setBackgroundResource(R.drawable.sel_page_indicator);
-            if(pic.getPicUrl()!="") {
-                iv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.setAction("android.intent.action.VIEW");
-                        Uri content_url = Uri.parse(pic.getPicUrl());
-                        intent.setData(content_url);
-                        startActivity(intent);
-                    }
-                });
-            }
-            else
-            {
-                requestBannerAdv(pic.getId(),iv);
-            }
             llIndicator.addView(iv);
         }
         llIndicator.getChildAt(0).setEnabled(false);
@@ -176,6 +162,59 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
     }
 
 
+    private void checkError()
+    {
+        File[] files = CrashHandler.getFiles();
+        if (CrashHandler.getFiles() != null && files.length > 0) {
+            for (int i = 0; i < files.length; i++) {
+                File file = files[i];
+                if (file != null) {
+                    if (file.isDirectory()) {
+                        file.delete();
+                        Log.i("MainActivity", "删除文件夹！");
+                        return;
+                    }
+
+                }
+                try {
+                    FileInputStream fileInputStream = new FileInputStream(files[i]);
+                    byte[] buffer = new byte[(int) file.length()];
+                    fileInputStream.read(buffer);
+                    fileInputStream.close();
+                    uploadLogFile(Base64.encodeToString(buffer, Base64.DEFAULT), file.getName(), file.getAbsolutePath());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }
+
+    }
+    private RequestBean requestFileLog(String fileArray, String filename) {
+        RequestHead head = new NewRequestHead().setaccessToken(getConfig().getToken()).setuserId(getConfig().getUserId());
+
+        UploadFileRequest request = new UploadFileRequest();
+        request.setHead(head);
+
+        request.setBody(request.new UploadFileRequestBody().setImg(fileArray).setName(filename));
+        return request;
+    }
+
+    private void uploadLogFile(String fileArray, String filename, final String path) {
+        String server = getConfig().getServer() + NetConstant.UPLOAD_FILE;
+
+        NetTask netTask = new NetTask(server, requestFileLog(fileArray, filename)) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                File deleteFile = new File(path);
+                if (deleteFile != null) {
+                    deleteFile.delete();
+                }
+            }
+        };
+        addBackGroundTask(netTask);
+    }
 
     private void initView() {
 
@@ -241,6 +280,7 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
                         }).show();
             }
         });
+        checkError();
 
         requestBanner();
 
@@ -471,20 +511,8 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
     }
     @Override
     public void performItemCallback(final ImageView iv) {
-        final String info = (String) iv.getTag(R.id.url);
-        if(info!="") {
-            iv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setAction("android.intent.action.VIEW");
-                    Uri content_url = Uri.parse(info);
-                    intent.setData(content_url);
-                    startActivity(intent);
-                }
-            });
-        }
-        else if(StringUtils.isNotEmpty((String) iv.getTag()))
+        //final String info = (String) iv.getTag(R.id.url);
+      if(StringUtils.isNotEmpty((String) iv.getTag()))
         {
             requestBannerAdv((String) iv.getTag(),iv);
         }

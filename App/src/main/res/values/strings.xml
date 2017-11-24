@@ -19,7 +19,7 @@
     <string name="login_device">登录设备</string>
     <string name="real_play">预览</string>
 
-    <string name="app_version">V1.50</string>
+    <string name="appversion">V1.57</string>
     <string name="app1_name">梯美（管理）</string>
     <string name="hello_world">Hello world!</string>
     <string name="file_name">ElevatorMan</string>

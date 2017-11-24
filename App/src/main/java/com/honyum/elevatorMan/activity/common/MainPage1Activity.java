@@ -5,9 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.util.Base64;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import com.baidu.navisdk.util.common.StringUtils;
 import com.chorstar.jni.ChorstarJNI;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.company.CompanyApplyActivity;
+import com.honyum.elevatorMan.activity.company.InsuranceLookActivity;
 import com.honyum.elevatorMan.activity.maintenance.MaintenanceManagerActivity;
 import com.honyum.elevatorMan.activity.maintenance.MaintenanceServiceActivity;
 import com.honyum.elevatorMan.activity.worker.AlarmListActivity;
@@ -32,11 +35,27 @@ import com.honyum.elevatorMan.net.AdvDetailRequest;
 import com.honyum.elevatorMan.net.AdvDetailResponse;
 import com.honyum.elevatorMan.net.BannerResponse;
 import com.honyum.elevatorMan.net.EmptyRequest;
+import com.honyum.elevatorMan.net.GetApplyResponse;
+import com.honyum.elevatorMan.net.GetApplyResponseBody;
+import com.honyum.elevatorMan.net.UploadFileRequest;
 import com.honyum.elevatorMan.net.base.NetConstant;
 import com.honyum.elevatorMan.net.base.NetTask;
 import com.honyum.elevatorMan.net.base.NewRequestHead;
+import com.honyum.elevatorMan.net.base.RequestBean;
+import com.honyum.elevatorMan.net.base.RequestHead;
+import com.honyum.elevatorMan.utils.CrashHandler;
+import com.honyum.elevatorMan.utils.Utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.lang.ref.WeakReference;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.honyum.elevatorMan.activity.common.ChatActivity.MODE_PROPERTY;
 
 /**
  * Created by Star on 2017/6/9.
@@ -44,15 +63,17 @@ import java.util.List;
 
 public class MainPage1Activity extends BaseFragmentActivity implements View.OnClickListener, ListItemCallback<ImageView> {
 
+
     private boolean hasAlarm = false;
 
+
+    public static String TAG = MainPage1Activity.class.getSimpleName();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainpage1);
         initTitle();
         initView();
-
         startLocationService();
         //startService(new Intent(this, LocationService.class));
     }
@@ -75,10 +96,69 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
         addBackGroundTask(netTask);
     }
 
+    private void jumpToChat() {
+        Intent it = new Intent(this, ChatActivity.class);
+        it.putExtra("enter_mode", MODE_PROPERTY);
+        startActivity(it);
+    }
 
+    private void checkError() {
+        File[] files = CrashHandler.getFiles();
+        if (CrashHandler.getFiles() != null && files.length > 0) {
+            for (int i = 0; i < files.length; i++) {
+                File file = files[i];
+                if (file != null) {
+                    if (file.isDirectory()) {
+                        file.delete();
+                        Log.i("MainActivity", "删除文件夹！");
+                        return;
+                    }
 
+                }
+                try {
+                    FileInputStream fileInputStream = new FileInputStream(files[i]);
+                    byte[] buffer = new byte[(int) file.length()];
+                    fileInputStream.read(buffer);
+                    fileInputStream.close();
+                    uploadLogFile(Base64.encodeToString(buffer, Base64.DEFAULT), file.getName(), file.getAbsolutePath());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }
+
+    }
+
+    private RequestBean requestFileLog(String fileArray, String filename) {
+        RequestHead head = new NewRequestHead().setaccessToken(getConfig().getToken()).setuserId(getConfig().getUserId());
+
+        UploadFileRequest request = new UploadFileRequest();
+        request.setHead(head);
+
+        request.setBody(request.new UploadFileRequestBody().setImg(fileArray).setName(filename));
+        return request;
+    }
+
+    private void uploadLogFile(String fileArray, String filename, final String path) {
+        String server = getConfig().getServer() + NetConstant.UPLOAD_FILE;
+
+        NetTask netTask = new NetTask(server, requestFileLog(fileArray, filename)) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                File deleteFile = new File(path);
+                if (deleteFile != null) {
+                    deleteFile.delete();
+                }
+            }
+        };
+        addBackGroundTask(netTask);
+    }
 
     private int prePos;
+
+    ViewPager vp;
 
     private int curItemPos;
 
@@ -86,7 +166,7 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
 
         View view = findViewById(R.id.main_page_indicator);
 
-        final ViewPager vp = (ViewPager) view.findViewById(R.id.viewPager);
+        vp = (ViewPager) view.findViewById(R.id.viewPager);
         final BannerAdapter adapter = new BannerAdapter(this, pics);
         vp.setAdapter(adapter);
         vp.setCurrentItem(adapter.getCount() / 2);
@@ -121,42 +201,82 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
             }
         });
 
-        final Handler handler = new Handler();
+
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopPagerRepeat();
+    }
+
+    //using in OnResume() to start Banner Repeat
+    //at the same time, stop Repeat method must invoke at onPause()
+    public void startPagerRepeat() {
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 vp.setCurrentItem(curItemPos++);
                 handler.postDelayed(this, 5000);
+//                Log.i("LocationService", "查询了一次LocationService状态");
+//                saveInfo2File("查询了一次LocationService状态");
             }
         }, 5000);
+    }
+
+
+    public void stopPagerRepeat() {
+        handler.removeCallbacksAndMessages(null);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         checkAlarm();
+        startPagerRepeat();
+        //checkError();
     }
-    /**
-     * 检测是否有未完成的任务
-     */
-    private void checkAlarm() {
-        new Thread() {
-            @Override
-            public void run() {
 
-                Config config = getConfig();
-                System.out.print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+config.getBranchId());
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Log.i(TAG, "onDestroy");
+    }
+
+    static class MyThread extends Thread {
+        private WeakReference<MainPage1Activity> mMainPage1Activity;
+
+        public MyThread(MainPage1Activity mainPage1Activity) {
+            mMainPage1Activity = new WeakReference<MainPage1Activity>(mainPage1Activity);
+        }
+
+        @Override
+        public void run() {
+            if (mMainPage1Activity != null) {
+                Config config = mMainPage1Activity.get().getConfig();
+                System.out.print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + config.getBranchId());
                 boolean hasUnassigned = ChorstarJNI.hasAlarmUnassigned(config.getServer() + "/",
                         config.getToken(), config.getUserId());
                 boolean hasUnfinished = ChorstarJNI.hasAlarmUnfinished(config.getServer() + "/",
                         config.getToken(), config.getUserId());
 
-                hasAlarm = (hasUnassigned || hasUnfinished);
+                mMainPage1Activity.get().hasAlarm = (hasUnassigned || hasUnfinished);
 
                 Message msg = Message.obtain();
                 msg.arg1 = 0;
-                mHandler.sendMessage(msg);
+                mMainPage1Activity.get().mHandler.sendMessage(msg);
             }
+        }
+    }
+
+    /**
+     * 检测是否有未完成的任务
+     */
+    private void checkAlarm() {
+        new MyThread(this) {
         }.start();
     }
     @Override
@@ -167,11 +287,11 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
         if (hasAlarm) {
             view.setVisibility(View.VISIBLE);
             getConfig().setCurrDelay(getConfig().getLocationUploadTask());
-            startLocationService();
+            //startLocationService();
         } else {
             view.setVisibility(View.GONE);
             getConfig().setCurrDelay(getConfig().getLocationUpload());
-            startLocationService();
+            //startLocationService();
         }
     }
     /**
@@ -184,13 +304,15 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
      * 初始化视图
      */
     private void initView() {
+
+        findViewById(R.id.tv_attendance).setOnClickListener(this);
         findViewById(R.id.ll_rescue).setOnClickListener(this);
         findViewById(R.id.ll_maintenance).setOnClickListener(this);
         findViewById(R.id.ll_fix).setOnClickListener(this);
 //        findViewById(R.id.ll_person).setOnClickListener(this);
 //        findViewById(R.id.ll_person1).setOnClickListener(this);
         findViewById(R.id.ll_bbs).setOnClickListener(this);
-
+        findViewById(R.id.ll_chat_work).setOnClickListener(v -> jumpToChat());
         findViewById(R.id.tv_question).setOnClickListener(this);
         findViewById(R.id.tv_rule).setOnClickListener(this);
         findViewById(R.id.tv_num).setOnClickListener(this);
@@ -203,8 +325,7 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
                 startActivity(it);
             }
         });
-        findViewById(R.id.ll_work_insurance).setOnClickListener(v -> {Intent it = new Intent(MainPage1Activity.this, InsuranceBuyActivity.class);
-            startActivity(it);});
+        findViewById(R.id.ll_work_insurance).setOnClickListener(v -> jumpToInsurance());
         findViewById(R.id.ll_ebuy).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -236,11 +357,84 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
                         }).show();
             }
         });
+        checkError();
 
 
     }
 
+    private void requestApply() {
 
+        String server = getConfig().getServer() + NetConstant.GET_APPLIY;
+        RequestBean request = new RequestBean();
+        RequestHead head = new RequestHead();
+        head.setAccessToken(getConfig().getToken());
+        head.setUserId(getConfig().getUserId());
+        request.setHead(head);
+
+        NetTask netTask = new NetTask(server, request) {
+            @Override
+            protected void onResponse(NetTask task, String result) {
+                GetApplyResponse response = GetApplyResponse.getResponse(result);
+                dealResult(response);
+            }
+        };
+
+        addTask(netTask);
+
+    }
+
+    private void dealResult(GetApplyResponse response) {
+
+        if (response.getBody() != null) {
+            dealState(response.getBody());
+        }
+    }
+
+    private void dealState(GetApplyResponseBody body) {
+
+        switch (body.getState()) {
+
+            case "0": {
+                Intent it = new Intent(this, CompanyApplyActivity.class);
+                it.putExtra("data", body);
+                startActivity(it);
+                break;
+            }
+            case "1": {
+                Intent it = new Intent(this, InsuranceLookActivity.class);
+                startActivity(it);
+                break;
+            }
+            case "2": {
+                Intent it = new Intent(this, CompanyApplyActivity.class);
+                it.putExtra("data", body);
+                startActivity(it);
+                break;
+            }
+            default: {
+                GetApplyResponseBody gb = new GetApplyResponseBody();
+                gb.setState("99");
+                Intent it = new Intent(this, CompanyApplyActivity.class);
+                it.putExtra("data", gb);
+                startActivity(it);
+                break;
+            }
+        }
+
+    }
+
+    private void jumpToInsurance() {
+
+        if (getConfig().getBranchId().equals("0000000000")) {
+//        Intent intent = new Intent(this, CompanyApplyActivity.class);
+//        startActivity(intent);
+            requestApply();
+        } else {
+            GetApplyResponseBody b = new GetApplyResponseBody();
+            b.setState("1");
+            dealState(b);
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -256,7 +450,9 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
             case R.id.tv_handle:
                 jumpToHandle_rule();
                 break;
-
+            case R.id.tv_attendance:
+                jumpToAttendance();
+                break;
             case R.id.ll_rescue:
                 jumpToAlarmList();
                 break;
@@ -288,6 +484,12 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
 
                 break;
         }
+    }
+
+    private void jumpToAttendance() {
+        Intent intent = new Intent(this, SignActivity.class);
+        startActivity(intent);
+
     }
 
     private void jumpToMall() {
@@ -442,6 +644,40 @@ public class MainPage1Activity extends BaseFragmentActivity implements View.OnCl
         addBackGroundTask(netTask);
     }
 
+    /**
+     * 保存时间信息到文件
+     *
+     * @return
+     */
+    private void saveInfo2File(String red) {
+
+        try {
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+            String time = formatter.format(new Date());
+            String fileName = "time.log";
+
+            String sdPath = Utils.getSdPath();
+            if (null == sdPath) {
+                Log.i(TAG, "the device has no sd card");
+                return;
+            }
+            String path = sdPath + "/chorstar";
+            File dir = new File(path);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            FileOutputStream fos = new FileOutputStream(path + "/" + fileName, true);
+            fos.write((time + "\n").getBytes());
+            fos.write((red + "\n").getBytes());
+            //fos.write((result + "\n").toString().getBytes());
+            fos.close();
+
+            Log.e(TAG, path);
+        } catch (Exception e) {
+            Log.e(TAG, "an error occured while writing file to the file");
+            e.printStackTrace();
+        }
+    }
     @Override
     public void performItemCallback(final ImageView iv) {
         //final String info = (String) iv.getTag(R.id.url);

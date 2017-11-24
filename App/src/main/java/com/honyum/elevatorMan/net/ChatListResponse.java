@@ -4,6 +4,10 @@ package com.honyum.elevatorMan.net;
 import com.honyum.elevatorMan.net.base.Response;
 import com.honyum.elevatorMan.net.base.ResponseHead;
 
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
+
+import java.io.Serializable;
 import java.util.List;
 
 public class ChatListResponse extends Response {
@@ -30,7 +34,7 @@ public class ChatListResponse extends Response {
         this.body = body;
     }
 
-    public static class ChatListBody {
+    public static class ChatListBody extends DataSupport  implements Serializable{
 
         private Long code;
 
@@ -38,6 +42,9 @@ public class ChatListResponse extends Response {
 
         private String alarmId;
 
+        @Column(ignore = true)
+
+        //这里忽略了ID 字段 因为冲突，所以数据库中存储的ID 是litepal自动生成d的。 而不是数据里的ID
         private String id;
 
         private String sendTime;
@@ -49,6 +56,8 @@ public class ChatListResponse extends Response {
         private String type;
 
         private int timeLength;
+
+        private boolean isLoad =false;
 
         public int getTimeLength() {
             return timeLength;
@@ -120,6 +129,14 @@ public class ChatListResponse extends Response {
 
         public void setType(String type) {
             this.type = type;
+        }
+
+        public boolean isLoad() {
+            return isLoad;
+        }
+
+        public void setLoad(boolean load) {
+            isLoad = load;
         }
     }
 

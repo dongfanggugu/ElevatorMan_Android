@@ -1,16 +1,26 @@
 package com.honyum.elevatorMan.activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.widget.ImageView;
 
 import com.baidu.navisdk.util.common.StringUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.gifdecoder.GifDecoder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.bumptech.glide.request.target.Target;
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.activity.common.MainGroupActivity;
 import com.honyum.elevatorMan.activity.common.MainPage1Activity;
@@ -20,6 +30,8 @@ import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.net.LoginResponse;
 import com.honyum.elevatorMan.utils.Utils;
+
+import java.lang.ref.WeakReference;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -44,28 +56,66 @@ public class WelcomeActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_welcome);
         ImageView iv = (ImageView) findViewById(R.id.iv_welcome);
         Glide.with(this).load(R.drawable.welcome_page_gif)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .diskCacheStrategy(DiskCacheStrategy.NONE).listener(new RequestListener<Integer, GlideDrawable>() {
+            @Override
+            public boolean onException(Exception e, Integer integer, Target<GlideDrawable> target, boolean b) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(GlideDrawable glideDrawable, Integer integer, Target<GlideDrawable> target, boolean b, boolean b1) {
+                GifDrawable drawable = (GifDrawable) glideDrawable;
+                GifDecoder decoder = drawable.getDecoder();
+                int duration = 0;
+                for (int i = 0; i < drawable.getFrameCount(); i++) {
+                    duration += decoder.getDelay(i);
+                }
+                //发送延时消息，通知动画结束
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkRemoteVersion(new ICheckVersionCallback() {
+                            @Override
+                            public void onCheckVersion(int remoteVersion, String url, int isForce, String description) {
+                                updateApk(remoteVersion, url, isForce, description);
+                            }
+                        });
+                    }
+                }, duration);
+                return false;
+            }
+        })
                 .into(new GlideDrawableImageViewTarget(iv, 1));
 
-        LoginResponse s = null;
-        Log.d("Test",s+"111111D");
-        Log.i("Test",s+"111111i");
-        // 延迟1秒后执行run方法中的页面跳转
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                checkRemoteVersion(new ICheckVersionCallback() {
-                    @Override
-                    public void onCheckVersion(int remoteVersion, String url, int isForce, String description) {
-                        updateApk(remoteVersion, url, isForce, description);
-                    }
-                });
-            }
-        }, 5000);
+//        Resources res=getResources();
+//        Bitmap bmp= BitmapFactory.decodeResource(res, R.drawable.welcome_page_gif);
+
+//        // 延迟1秒后执行run方法中的页面跳转
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                checkRemoteVersion(new ICheckVersionCallback() {
+//                    @Override
+//                    public void onCheckVersion(int remoteVersion, String url, int isForce, String description) {
+//                        updateApk(remoteVersion, url, isForce, description);
+//                    }
+//                });
+//            }
+//        }, 5000);
 //        }
     }
 
-
+    private static class MyHandler extends Handler {
+        private WeakReference<WelcomeActivity> mWeakReference;
+        public MyHandler(WelcomeActivity activity) {
+            mWeakReference = new WeakReference<WelcomeActivity>(activity);
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mHandler != null) mHandler.removeCallbacksAndMessages(null);
+    }
 
     /**
      * 根据保存的信息跳转页面
@@ -113,7 +163,7 @@ public class WelcomeActivity extends BaseFragmentActivity {
             intent.setAction(Constant.ACTION_ALARM_RECEIVED);
         }
         startActivity(intent);
-       // finish();
+        //finish();
     }
 
     /**

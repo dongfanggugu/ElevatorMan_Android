@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,10 +19,12 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
+import android.support.annotation.RequiresApi;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
@@ -61,16 +66,18 @@ import com.honyum.elevatorMan.net.base.NetWorkManager;
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.RequestHead;
 import com.honyum.elevatorMan.receiver.ForeMsgReceiver;
+import com.honyum.elevatorMan.receiver.MainControllerBroadcast;
 import com.honyum.elevatorMan.service.DaemonService;
+import com.honyum.elevatorMan.service.JobAwakenService;
 import com.honyum.elevatorMan.service.LocationService;
 import com.honyum.elevatorMan.utils.DownloadFilesTask;
-import com.honyum.elevatorMan.utils.EncryptUtils;
 import com.honyum.elevatorMan.utils.RemindUtils;
 import com.honyum.elevatorMan.utils.Utils;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -91,14 +98,22 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 
     private ForeMsgReceiver mForeMsgReceiver;
 
-
+    protected static Handler handler = new Handler();
     //表示上次点击的时间，用来解决快速点击多次的问题
     private long mLastClickTime = 0;
 
 
     //用来维护消息弹出框，每个单独的弹出框维护单独的报警事件
     private static Map<String, AlertDialog> mAlertDialogMap = new HashMap<String, AlertDialog>();
+    private MainControllerBroadcast mMainControllerBroadcast;
 
+    public void registerReceiver1() {
+        mMainControllerBroadcast = new MainControllerBroadcast(mHandler);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constant.BASE_HANDLER);
+        registerReceiver(mMainControllerBroadcast, filter);
+        Log.e("Base", "mMainControllerBroadcast in");
+    }
 
 
     @Override
@@ -107,6 +122,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         super.onCreate(savedInstanceState);
         SysActivityManager.getInstance().addActivity(this);
         getMyApplication().setBaseActivity(this);
+
     }
 
 
@@ -116,6 +132,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         super.onResume();
         isForeground = true;
         registerForeMsg();
+        registerReceiver1();
      //   JPushInterface.onResume(this);
         //当是欢迎和登陆页面和注册页面时不需要进行判断
         if (this instanceof LoginActivity
@@ -140,6 +157,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
             startActivity(intent);
             this.finish();
         }
+
     }
 
     /**
@@ -154,7 +172,6 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 
         body.setUserName(userName);
         body.setPassword(password);
-
         request.setBody(body);
         request.setHead(head);
 
@@ -181,14 +198,11 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
                 setUserInfo(token, response.getBody(), password);
 
 
-                Intent intent = new Intent(BaseFragmentActivity.this, LocationService.class);
-                startService(intent);
-
-
-
-
-
-                addTask(getNetTask());
+//                Intent intent = new Intent(BaseFragmentActivity.this, LocationService.class);
+//                startService(intent);
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                    startLocationService();
+                //addTask(getNetTask());
 
 
                 //用户类型，type
@@ -206,60 +220,97 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 //                }
 //                finish();
             }
+
+            @Override
+            protected void onFailed(NetTask task, String errorCode, String errorMsg) {
+                super.onFailed(task, errorCode, errorMsg);
+                //保存错误编码
+                getConfig().setErrorCode(errorCode);
+
+                //清除token,role和user信息
+                clearUserInfo();
+
+                //如果在前台，杀掉服务，同时到登陆页面
+                if (!Utils.isApplicationBroughtToBackground(BaseFragmentActivity.this)) {
+
+                    SysActivityManager.getInstance().exit();
+                    Intent intent = new Intent(BaseFragmentActivity.this,
+                            LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                            | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            }
         };
         addBackGroundTask(task);
     }
 
     public static final int GPS_WEAK = -99;
-    /**
-     * 处理网路请求的错误信息
-     */
-    public Handler mHandler = new Handler() {
-        @Override
+
+
+
+    private static class MyHandler extends Handler {
+        private WeakReference<BaseFragmentActivity> mWeakReference;
+        public MyHandler(BaseFragmentActivity activity) {
+            mWeakReference = new WeakReference<BaseFragmentActivity>(activity);
+        }
         public void handleMessage(Message msg) {
             // TODO Auto-generated method stub
             super.handleMessage(msg);
 
-            Log.i("handler", "msg:" + msg.arg1);
+            try {
 
-            if (0 == msg.arg1) { // 请求成功，不做操作
-                handlerCallback();
-            } else if (-9 == msg.arg1 && !((String) msg.obj).contains("登录超时")) {
-                // 保存错误编码
-                getConfig().setErrorCode("" + msg.arg1);
 
-                //清除登陆信息
-                clearUserInfo();
+                Log.i("handler", "msg:" + msg.arg1);
 
-                // 跳转到登陆页面
-                SysActivityManager.getInstance().exit();
-                Intent intent = new Intent(BaseFragmentActivity.this,
-                        LoginActivity.class);
-                startActivity(intent);
-            }
-            else if (-9 == msg.arg1 && ((String) msg.obj).contains("登录超时")) {
 
-                login(getConfig().getUserName(),getConfig().getPwd());
-
-            } else if(msg.arg1 == GPS_WEAK)
-            {
-
-                showToast(msg.arg2+"");
-            }
-            else {
-                showToast((String) msg.obj);
-
-                //如果是欢迎页面，当网络请求失败后，需要进入登陆页面
-                if (BaseFragmentActivity.this instanceof WelcomeActivity) {
-                    SysActivityManager.getInstance().exit();
-                    Intent intent = new Intent(BaseFragmentActivity.this,
-                            LoginActivity.class);
-                    startActivity(intent);
+                if (19 == msg.what) {
+                    mWeakReference.get().showToast(msg.obj + "");
                 }
-            }
 
+                if (0 == msg.arg1) { // 请求成功，不做操作
+                    mWeakReference.get().handlerCallback();
+                } else if (-9 == msg.arg1 && !((String) msg.obj).contains("登录超时")) {
+                    // 保存错误编码
+                    mWeakReference.get().getConfig().setErrorCode("" + msg.arg1);
+
+                    //清除登陆信息
+                    mWeakReference.get().clearUserInfo();
+
+                    // 跳转到登陆页面
+                    SysActivityManager.getInstance().exit();
+                    Intent intent = new Intent(mWeakReference.get(),
+                            LoginActivity.class);
+                    mWeakReference.get().startActivity(intent);
+                } else if (-9 == msg.arg1 && ((String) msg.obj).contains("登录超时")) {
+
+                    mWeakReference.get().login(mWeakReference.get().getConfig().getUserName(), mWeakReference.get().getConfig().getPwd());
+
+                } else if (msg.arg1 == GPS_WEAK) {
+
+                    mWeakReference.get().showToast(msg.arg2 + "");
+                } else {
+                    mWeakReference.get().showToast((String) msg.obj);
+
+                    //如果是欢迎页面，当网络请求失败后，需要进入登陆页面
+                    if (mWeakReference.get() instanceof WelcomeActivity) {
+                        SysActivityManager.getInstance().exit();
+                        Intent intent = new Intent(mWeakReference.get(),
+                                LoginActivity.class);
+                        mWeakReference.get().startActivity(intent);
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-    };
+    }
+
+    /**
+     * 处理网路请求的错误信息
+     */
+    public Handler mHandler = new MyHandler(this);
 
     /**
      * mHandler接收消息后的回调
@@ -396,8 +447,6 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
      */
     public void addTask(NetTask task) {
 
-
-        this.setNetTask(task);
         addTask(task, true, null, null);
     }
 
@@ -697,12 +746,35 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
         //mJpushAliasThread.start();
     }
 
+    public static JobScheduler jobScheduler = null;
+
+
     public void startLocationService() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            JobInfo.Builder builder = new JobInfo.Builder(1, new ComponentName(this, JobAwakenService.class));
+            builder.setPeriodic(500);
+            JobInfo jobInfo = builder.build();
+            jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            jobScheduler.schedule(jobInfo);
+        }
+
+
         Intent intent = new Intent(this, LocationService.class);
         startService(intent);
-        //startService(new Intent(this, DaemonService.class));
+
+
+        startService(new Intent(this, DaemonService.class));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void cancelLocationJobService() {
+        if (jobScheduler != null && jobScheduler.getAllPendingJobs().size() >= 0)
+            for (JobInfo job : jobScheduler.getAllPendingJobs()) {
+                jobScheduler.cancel(job.getId());
+            }
+
+    }
     @Override
     protected void onPause() {
 
@@ -716,6 +788,9 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
                 unregisterReceiver(mForeMsgReceiver);
                 mForeMsgReceiver = null;
             }
+            if (mMainControllerBroadcast != null)
+                unregisterReceiver(mMainControllerBroadcast);
+            Log.e("Base", "mMainControllerBroadcast out");
         }
 
 
@@ -726,11 +801,16 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
     @Override
     protected void onStop() {
         super.onStop();
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.i("BaseActivity", "onDestroy: ");
+
+        if (mHandler != null)
+            mHandler.removeCallbacksAndMessages(null);
     }
 
     /**
@@ -889,6 +969,7 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
 //
 //        addTask(netTask);
     }
+
 
     /**
      * 请求报警列表
@@ -1333,15 +1414,15 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
      *
      * @author chang
      */
-    public class GetPicture extends AsyncTask<String, Void, String> {
+    public static class GetPicture extends AsyncTask<String, Void, String> {
 
         private String mUrl;
-        private ImageView mImageView;
+        private WeakReference<ImageView> mImageView;
 
         public GetPicture(String url, ImageView imageView) {
             mUrl = url;
-            mImageView = imageView;
-            mImageView.setImageResource(R.drawable.icon_person);
+            mImageView = new WeakReference(imageView);
+            mImageView.get().setImageResource(R.drawable.icon_person);
         }
 
         @Override
@@ -1364,9 +1445,9 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
             if (!StringUtils.isEmpty(result)) {
                 Bitmap bitmap = Utils.getBitmapBySize(result, 80, 80);
                 if (bitmap != null) {
-                    mImageView.setImageBitmap(bitmap);
+                    mImageView.get().setImageBitmap(bitmap);
                 } else {
-                    mImageView.setImageResource(R.drawable.icon_person);
+                    mImageView.get().setImageResource(R.drawable.icon_person);
                 }
             }
         }
@@ -1498,7 +1579,11 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
                     }
                     new JPushAliasThread(mAlias).start();
                 } else {
-                    showToast("推送服务注册失败，请检查网络再次登录!");
+
+                    Message message = Message.obtain();
+                    message.what = 10;
+                    message.obj = "推送服务注册失败，请检查网络再次登录!";
+                    mHandler.sendMessage(message);
                     logout();
                 }
                 mJpushCount++;
@@ -1534,7 +1619,6 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
             @Override
             protected void onResponse(NetTask task, String result) {
                 clearUserInfo();
-
                 //退出登录时，取消之前设置的闹钟
                 AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 for (PendingIntent pendingIntent : RemindUtils.mRemindList) {
@@ -1542,8 +1626,12 @@ public class BaseFragmentActivity extends SlidingFragmentActivity
                 }
                 //关闭定位服务
                 Intent sIntent = new Intent(BaseFragmentActivity.this, LocationService.class);
-                BaseFragmentActivity.this.stopService(sIntent);
+                stopService(sIntent);
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    cancelLocationJobService();
+                }
+                //handler.removeCallbacksAndMessages(null);
                 //启动
                 Intent intent = new Intent(BaseFragmentActivity.this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

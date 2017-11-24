@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.honyum.elevatorMan.R;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
+import com.honyum.elevatorMan.constant.ConstantIntent;
 import com.honyum.elevatorMan.net.SendChatRequest;
 import com.honyum.elevatorMan.net.UploadVideoRequest;
 import com.honyum.elevatorMan.net.VideoUrlResponse;
@@ -31,6 +32,7 @@ import com.honyum.elevatorMan.view.MovieRecorderView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+
 
 /**
  * 视频拍摄页面
@@ -56,6 +58,7 @@ public class RecordVideoActivity extends BaseFragmentActivity implements View.On
     private TextView textViewCountDown;
     private TextView textViewUpToCancel;//上移取消
     private TextView textViewReleaseToCancel;//释放取消
+    public static  final int VIDEO_TAG = 1;
     /**
      * 是否结束录制
      */
@@ -89,7 +92,11 @@ public class RecordVideoActivity extends BaseFragmentActivity implements View.On
                         buttonShoot.setEnabled(false);
                         movieRecorderView.stop();
                         // finishActivity();
-                        uploadVideo(movieRecorderView.getRecordFile().getAbsolutePath());
+                        Intent it = new Intent();
+                        it.putExtra(ConstantIntent.INTENT_DATA,movieRecorderView.getRecordFile().getAbsolutePath());
+                        setResult(VIDEO_TAG,it);
+                        finish();
+                        //uploadVideo(movieRecorderView.getRecordFile().getAbsolutePath());
                     }
                     break;
             }
@@ -202,60 +209,6 @@ public class RecordVideoActivity extends BaseFragmentActivity implements View.On
         //  checkCameraPermission();
     }
 
-    /**
-     * 上传视频文件
-     *
-     * @param filePath 文件路径
-     */
-    private void uploadVideo(String filePath) {
-
-        if (TextUtils.isEmpty(filePath)) {
-            return;
-        }
-        try {
-            //audioDuration = audioRecorder.getAudioDuration(filePath);
-
-            FileInputStream inputStream = new FileInputStream(filePath);
-            byte[] buffer = new byte[1024];
-            int len;
-            StringBuilder sb = new StringBuilder();
-            while ((len = inputStream.read(buffer)) != -1) {
-                String decode = Base64.encodeToString(buffer, 0, len, Base64.DEFAULT);
-                sb.append(decode);
-            }
-            inputStream.close();
-
-            String server = getConfig().getServer() + NetConstant.UPLOAD_VIDEO;
-
-            UploadVideoRequest request = new UploadVideoRequest();
-            RequestHead head = new RequestHead();
-            UploadVideoRequest.RequestBody body = request.new RequestBody();
-
-            head.setAccessToken(getConfig().getToken());
-            head.setUserId(getConfig().getUserId());
-
-            body.setVideo(sb.toString());
-
-            request.setHead(head);
-            request.setBody(body);
-
-            NetTask netTask = new NetTask(server, request) {
-                @Override
-                protected void onResponse(NetTask task, String result) {
-                    VideoUrlResponse response = VideoUrlResponse.getVideoUrl(result);
-                    String url = response.getBody().getUrl();
-
-                    finishActivity(url);
-
-                    //sendChat(CHAT_CONTENT_VOICE, audioUrl);
-                }
-            };
-
-            addBackGroundTask(netTask);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 //    /**
 //     * 检测摄像头和录音权限
@@ -361,13 +314,6 @@ public class RecordVideoActivity extends BaseFragmentActivity implements View.On
     @Override
     public void onDestroy() {
         //TODO 退出界面删除文件，如果要删除文件夹，需要提供文件夹路径
-        if (movieRecorderView.getRecordFile() != null) {
-            File file = new File(movieRecorderView.getRecordFile().getAbsolutePath());
-            if (file != null && file.exists()) {
-                Log.e(LOG_TAG, "file.exists():" + file.exists());
-                file.delete();
-            }
-        }
         super.onDestroy();
     }
 
@@ -380,7 +326,7 @@ public class RecordVideoActivity extends BaseFragmentActivity implements View.On
 //            Intent intent = new Intent(this, VideoPreviewActivity.class);
 //            intent.putExtra("path", movieRecorderView.getRecordFile().getAbsolutePath());
 //            startActivityForResult(intent, REQ_CODE);
-            sendChat(4,url);
+
             Intent intent = new Intent();
             //  intent.putExtra("tag", tag);
             intent.putExtra("result", url);

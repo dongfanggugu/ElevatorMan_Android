@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -22,7 +23,7 @@ import java.net.URL;
  */
 public class DownloadFilesTask extends AsyncTask<String, Integer, Long> {
 
-    private Activity activity;
+    private WeakReference<Activity> activity;
     private URL url; // 资源位置
     private ProgressDialog pbar;
     private long beginPosition; // 开始位置
@@ -31,7 +32,7 @@ public class DownloadFilesTask extends AsyncTask<String, Integer, Long> {
     public DownloadFilesTask(Activity activity, ProgressDialog pbar) {
         super();
         this.pbar = pbar;
-        this.activity = activity;
+        this.activity = new WeakReference<Activity>(activity);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class DownloadFilesTask extends AsyncTask<String, Integer, Long> {
         FileOutputStream output = null;
         // RandomAccessFile output = null;
         file = new File(Environment.getExternalStorageDirectory()
-                .getAbsolutePath(), activity.getString(R.string.file_name)
+                .getAbsolutePath(), activity.get().getString(R.string.file_name)
                 + ".apk");
         try {
             output = new FileOutputStream(file);
@@ -110,8 +111,8 @@ public class DownloadFilesTask extends AsyncTask<String, Integer, Long> {
             intent.setAction(android.content.Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(file),
                     "application/vnd.android.package-archive");
-            activity.startActivity(intent);
-            activity.finish();
+            activity.get().startActivity(intent);
+            activity.get().finish();
         } else {
             Log.e(tag, "File not exsit:" + apkpath);
         }

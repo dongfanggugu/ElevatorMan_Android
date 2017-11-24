@@ -19,6 +19,7 @@ import com.honyum.elevatorMan.utils.Utils;
 
 import java.io.File;
 import java.io.Serializable;
+import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
 
@@ -36,7 +37,7 @@ public abstract class BaseActivityWraper extends BaseFragmentActivity {
         preView();
         setContentView(getLayoutID());
         //这里注册了BK,只适用Activity
-        ButterKnife.bind( this ) ;
+        ButterKnife.bind(this) ;
         initTitleBar(getTitleString());
         initView();
 
@@ -94,14 +95,14 @@ public abstract class BaseActivityWraper extends BaseFragmentActivity {
      *
      * @author chang   获取图片提出公共
      */
-    public class GetPicture extends AsyncTask<String, Void, String> {
+    public static class  GetPicture extends AsyncTask<String, Void, String> {
 
         private String mUrl;
-        private ImageView mImageView;
+        private WeakReference<ImageView> mImageView;
 
         public GetPicture(String url, ImageView imageView) {
             mUrl = url;
-            mImageView = imageView;
+            mImageView = new WeakReference<ImageView>(imageView);
             //mImageView.setImageResource(R.drawable.icon_img_original);
         }
 
@@ -126,8 +127,8 @@ public abstract class BaseActivityWraper extends BaseFragmentActivity {
 
                // Bitmap bitmap = Utils.getImageFromFile(new File(result));
                 if (bitmap != null) {
-                    mImageView.setImageBitmap(bitmap);
-                    mImageView.setTag(R.id.file_path,result);
+                    mImageView.get().setImageBitmap(bitmap);
+                    mImageView.get().setTag(R.id.file_path,result);
                 } else {
                     //mImageView.setImageResource(R.drawable.icon_person);
                 }

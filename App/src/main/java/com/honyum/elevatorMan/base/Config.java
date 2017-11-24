@@ -29,8 +29,8 @@ public class Config implements Serializable {
 
 
 
-    //private String baseUrl = "http://211.147.152.6:8080/lift";
-    private String baseUrl = "http://www.chorstar.com:8081";
+  // private String baseUrl = "http://10.10.4.20:8080";
+     private String baseUrl = "http://www.chorstar.com:8081";
     //private String baseUrl = "http://192.168.0.82:8080";
 
     public Config(Context context) {

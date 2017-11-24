@@ -181,11 +181,20 @@ public class JPushMsgReceiver extends BroadcastReceiver {
                     + "/" + R.raw.message));
         }
 
-        String[] split = msg.split("说:");
+        if(msg.contains("说:"))
+        {
+            String[] split = msg.split("说:");
+            builder.setTicker(msg);
+            builder.setContentTitle(split[0]);
+            builder.setContentText(split[1]);
+        }
+        else
+        {
+            builder.setTicker(msg);
+            builder.setContentTitle(msg);
+            builder.setContentText(msg);
+        }
 
-        builder.setTicker(msg);
-        builder.setContentTitle(split[0]);
-        builder.setContentText(split[1]);
 
         int code = (int) (Long.parseLong(notifyId) % Integer.MAX_VALUE);
         //使用code参数标记每次传递的intent 参数都不同

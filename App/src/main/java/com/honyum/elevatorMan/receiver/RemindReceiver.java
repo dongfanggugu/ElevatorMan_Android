@@ -127,12 +127,12 @@ public class RemindReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        notify.setLatestEventInfo(context, title, message, pendingIntent);
-
-        NotificationManager manager = (NotificationManager) context
-                .getSystemService(Context.NOTIFICATION_SERVICE);
-
-        manager.notify(notifyId, notify);
+//        notify.setLatestEventInfo(context, title, message, pendingIntent);
+//
+//        NotificationManager manager = (NotificationManager) context
+//                .getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//        manager.notify(notifyId, notify);
     }
 
     /**

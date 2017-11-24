@@ -14,6 +14,7 @@ import com.honyum.elevatorMan.base.BaseFragmentActivity;
 import com.honyum.elevatorMan.utils.Utils;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 
 public class PersonSignActivity extends BaseFragmentActivity {
 
@@ -68,15 +69,15 @@ public class PersonSignActivity extends BaseFragmentActivity {
      *
      * @author chang
      */
-    public class GetPicture extends AsyncTask<String, Void, String> {
+    public static class GetPicture extends AsyncTask<String, Void, String> {
 
         private String mUrl;
-        private ImageView mImageView;
+        private WeakReference<ImageView> mImageView;
 
         public GetPicture(String url, ImageView imageView) {
             mUrl = url;
-            mImageView = imageView;
-            mImageView.setImageResource(R.drawable.icon_person);
+            mImageView = new WeakReference<ImageView>(imageView);
+            mImageView.get().setImageResource(R.drawable.icon_person);
         }
 
         @Override
@@ -101,9 +102,9 @@ public class PersonSignActivity extends BaseFragmentActivity {
 
                 Bitmap bitmap = Utils.getImageFromFile(new File(result));
                 if (bitmap != null) {
-                    mImageView.setImageBitmap(bitmap);
+                    mImageView.get().setImageBitmap(bitmap);
                 } else {
-                    mImageView.setImageResource(R.drawable.icon_person);
+                    mImageView.get().setImageResource(R.drawable.icon_person);
                 }
             }
         }

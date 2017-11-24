@@ -24,6 +24,7 @@ import com.honyum.elevatorMan.base.SysActivityManager;
 import com.honyum.elevatorMan.constant.Constant;
 import com.honyum.elevatorMan.service.LocationService;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,25 +106,33 @@ public class MainpageActivity extends BaseFragmentActivity implements View.OnCli
      * 检测是否有未完成的任务
      */
     private void checkAlarm() {
-        new Thread() {
-            @Override
-            public void run() {
+        new MyThread(this) {
+        }.start();
+    }
+    static class MyThread extends Thread {
+        private WeakReference<MainpageActivity> mMainPageActivity;
 
-                Config config = getConfig();
+        public MyThread(MainpageActivity mainPage1Activity) {
+            mMainPageActivity = new WeakReference<MainpageActivity>(mainPage1Activity);
+        }
+
+        @Override
+        public void run() {
+            if (mMainPageActivity != null) {
+                Config config = mMainPageActivity.get().getConfig();
                 boolean hasUnassigned = ChorstarJNI.hasAlarmUnassigned(config.getServer() + "/",
                         config.getToken(), config.getUserId());
                 boolean hasUnfinished = ChorstarJNI.hasAlarmUnfinished(config.getServer() + "/",
                         config.getToken(), config.getUserId());
 
-                hasAlarm = (hasUnassigned || hasUnfinished);
+                mMainPageActivity.get().hasAlarm = (hasUnassigned || hasUnfinished);
 
                 Message msg = Message.obtain();
                 msg.arg1 = 0;
-                mHandler.sendMessage(msg);
+                mMainPageActivity.get().mHandler.sendMessage(msg);
             }
-        }.start();
+        }
     }
-
     @Override
     protected void handlerCallback() {
         super.handlerCallback();

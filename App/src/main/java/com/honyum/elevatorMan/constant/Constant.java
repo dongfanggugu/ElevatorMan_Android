@@ -7,6 +7,9 @@ public class Constant {
 
 
 
+
+    public static final String BASE_HANDLER = "com.action.base_handler";
+
     /**
      * 用户角色
      */
@@ -134,5 +137,10 @@ public class Constant {
             put(ZHANG, "http://192.168.0.82:8080/lift/mobile");
         }
     };
+
+    public static final boolean crashHandlerEnable = false;
+
+
+
 
 }

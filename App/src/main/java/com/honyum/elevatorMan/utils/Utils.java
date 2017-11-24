@@ -19,6 +19,8 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.CallLog;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -58,8 +60,53 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
+    private static final String TAG = Utils.class.getSimpleName();
 
+    /**
+     * 将图片转换成BASE64
+     *
+     * @param bitmap
+     * @return
+     */
+    public static String imgToStrByBase64(Bitmap bitmap,int quality) {
 
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, bos);
+        byte[] bytes = bos.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+    public static Bitmap stringtoBitmap(String string) {
+        //将字符串转换成Bitmap类型
+        Bitmap bitmap = null;
+        try {
+            byte[] bitmapArray;
+            bitmapArray = Base64.decode(string, Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
+    }
+    /**
+     * 将图片转换成BASE64
+     *
+     * @param imgPath
+     * @return
+     */
+    public static String imgToStrByBase64BySize(String imgPath) {
+        if (StringUtils.isEmpty(imgPath)) {
+            return "";
+        }
+        File file = new File(imgPath);
+        if (!file.exists()) {
+            return "";
+        }
+
+        Bitmap bitmap = getBitmapBySize(imgPath, 480, 640);
+
+        return imgToStrByBase64(bitmap,80);
+    }
     public static boolean idCardValidate(String no) {
         // 对身份证号进行长度等简单判断
         if (no == null || no.length() != 18 || !no.matches("\\d{17}[0-9X]")) {
@@ -236,7 +283,40 @@ public class Utils {
         return false;
     }
 
+    /**
+     * 保存时间信息到文件
+     *
+     * @return
+     */
+    public static void saveInfo2File(String red,String name) {
 
+        try {
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+            String time = formatter.format(new Date());
+            String fileName = time+".log";
+
+            String sdPath = Utils.getSdPath();
+            if (null == sdPath) {
+                Log.i(TAG, "the device has no sd card");
+                return;
+            }
+            String path = sdPath + "/Elevator";
+            File dir = new File(path);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            FileOutputStream fos = new FileOutputStream(path + "/" + fileName, true);
+            fos.write((time + "\n").toString().getBytes());
+            fos.write((red + "\n").toString().getBytes());
+            fos.write((name + "\n").toString().getBytes());
+            fos.close();
+
+            Log.e(TAG, path);
+        } catch (Exception e) {
+            Log.e(TAG, "an error occured while writing file to the file");
+            e.printStackTrace();
+        }
+    }
     /**
      * 应用是否在后台运行
      *
@@ -453,6 +533,23 @@ public class Utils {
         return result;
     }
 
+    /**
+     * 验证邮箱
+     * @param email
+     * @return
+     */
+    public static boolean checkEmail(String email){
+        boolean flag = false;
+        try{
+            String check = "^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+            Pattern regex = Pattern.compile(check);
+            Matcher matcher = regex.matcher(email);
+            flag = matcher.matches();
+        }catch(Exception e){
+            flag = false;
+        }
+        return flag;
+    }
     /**
      * 根据图片url获取图片
      */
@@ -1088,6 +1185,8 @@ public class Utils {
      */
     public static long getTimestamp(String time) {
         try {
+            if(TextUtils.isEmpty(time))
+                return 0;
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
             Date date = format.parse(time);
             return date.getTime();
@@ -1209,6 +1308,21 @@ public class Utils {
         cursor.close();
 
         return durationTime > 0;
+    }
+
+    public static boolean isNumsEmpty(String... ss)
+    {
+        if(ss==null||ss.length==0)
+            return true;
+
+        for (int i = 0;i<ss.length;i++)
+        {
+            if(TextUtils.isEmpty(ss[i]))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

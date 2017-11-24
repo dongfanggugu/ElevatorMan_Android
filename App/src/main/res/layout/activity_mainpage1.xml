@@ -9,6 +9,15 @@
         layout="@layout/layout_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height" />
+    <TextView
+        android:id="@+id/tv_attendance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_margin="17dp"
+        android:text="考勤"
+        android:layout_alignTop="@id/title_main_page"/>
 
     <ScrollView
         android:layout_below="@id/title_main_page"
@@ -301,7 +310,24 @@
 
 
                 </LinearLayout>
-
+                <LinearLayout
+                    android:id="@+id/ll_chat_work"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="@dimen/size_10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/icon_alarm_chat" />
+                    <TextView
+                        android:layout_marginTop="@dimen/size_5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="救援聊天"/>
+                </LinearLayout>
 
             </LinearLayout>
 

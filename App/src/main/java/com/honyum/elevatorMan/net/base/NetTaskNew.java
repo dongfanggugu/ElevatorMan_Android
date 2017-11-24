@@ -56,7 +56,7 @@ public class NetTaskNew extends Thread {
 	
 	//abstract protected void onResponse(NetTask task, String result);
 	protected void onReturn(NetTaskNew task, String result) {
-		Log.i("newnettask", "result:" + result);
+		Log.i("NetTask", "result:" + result);
 	}
 	
 
@@ -86,7 +86,7 @@ public class NetTaskNew extends Thread {
 		if (uploadJson == null || uploadJson.equals("")) {
 			cancelConn();
 		}
-		Log.i("newnettask", "uploadJson:" + uploadJson);
+		Log.i("NetTask", "uploadJson:" + uploadJson);
 
 		// 获取所需上传对象的字节数组
 		byte[] outData = uploadJson.getBytes();
@@ -149,10 +149,11 @@ public class NetTaskNew extends Thread {
 		}
 
 		if (mResult != null) {
+			//Log.i("NetTask", "result:" + mResult);
 			onReturn(NetTaskNew.this, mResult);
-			//Log.i("newnettask", "result:" + mResult);
+
 		} else {
-			Log.i("newnettask", "result is null");
+			Log.i("NetTask", "result is null");
 		}
 		stopTask();
 	}
@@ -234,10 +235,10 @@ public class NetTaskNew extends Thread {
 					// 将数据base64处理
 					outData = bos.toByteArray();
 				} catch (UnsupportedEncodingException e) {
-					Log.e("newnettask", "network compress part error");
+					Log.e("NetTask", "network compress part error");
 					e.printStackTrace();
 				} catch (IOException e) {
-					Log.e("newnettask", "network compress part error");
+					Log.e("NetTask", "network compress part error");
 					e.printStackTrace();
 				}
 			}
@@ -266,7 +267,7 @@ public class NetTaskNew extends Thread {
 
 
 			} else {
-				Log.i("newnettask", "code:" + code);
+				Log.i("NetTask", "code:" + code);
 			}
 
 		} catch (Exception e) {

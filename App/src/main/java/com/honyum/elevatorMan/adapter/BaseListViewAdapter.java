@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
+import cn.jpush.android.api.PushNotificationBuilder;
+
 /**
  * Created by Star on 2017/6/10.
  */
@@ -19,6 +21,10 @@ public abstract class BaseListViewAdapter<T> extends android.widget.BaseAdapter 
     //保存item布局ID
     protected int mLayoutId;
 
+    public void fillDatas(List<T> datas)
+    {
+        mDatas = datas;
+    }
 
     //子类中构造。
     public BaseListViewAdapter(List<T> datas, Context context, int layoutId) {
@@ -26,6 +32,7 @@ public abstract class BaseListViewAdapter<T> extends android.widget.BaseAdapter 
         mContext = context;
         this.mLayoutId = layoutId;
     }
+
 
     @Override
     public int getCount() {

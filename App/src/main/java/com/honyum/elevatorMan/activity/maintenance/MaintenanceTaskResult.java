@@ -19,6 +19,7 @@ import com.honyum.elevatorMan.data.MaintenanceTaskInfo;
 import com.honyum.elevatorMan.utils.Utils;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 
 /**
  * Created by Star on 2017/6/12.
@@ -115,14 +116,14 @@ public class MaintenanceTaskResult extends BaseFragmentActivity {
      *
      * @author chang
      */
-    public class GetPicture extends AsyncTask<String, Void, String> {
+    public static class GetPicture extends AsyncTask<String, Void, String> {
 
         private String mUrl;
-        private ImageView mImageView;
+        private WeakReference<ImageView> mImageView;
 
         public GetPicture(String url, ImageView imageView) {
             mUrl = url;
-            mImageView = imageView;
+            mImageView = new WeakReference<ImageView>(imageView);
             //mImageView.setImageResource(R.drawable.icon_img_original);
         }
 
@@ -146,10 +147,10 @@ public class MaintenanceTaskResult extends BaseFragmentActivity {
 
                 //Bitmap bitmap = Utils.getImageFromFile(new File(result));
                 if (bitmap != null) {
-                    mImageView.setImageBitmap(bitmap);
-                    mImageView.setTag(R.id.file_path,result);
+                    mImageView.get().setImageBitmap(bitmap);
+                    mImageView.get().setTag(R.id.file_path,result);
                 } else {
-                    mImageView.setImageResource(R.drawable.defaut_image);
+                    mImageView.get().setImageResource(R.drawable.defaut_image);
                 }
             }
         }

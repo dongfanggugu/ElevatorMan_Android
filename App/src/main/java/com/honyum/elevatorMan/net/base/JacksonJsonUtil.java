@@ -6,6 +6,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import android.annotation.SuppressLint;
 
+import static org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion.NON_EMPTY;
+
 @SuppressLint("SimpleDateFormat")
 public class JacksonJsonUtil {
 	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -26,7 +28,8 @@ public class JacksonJsonUtil {
         /**  对json与pojo无对应的属性不会处理 */
         mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.configure(DeserializationConfig.Feature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
-        mapper.setDateFormat(simpleDateFormat);
+		mapper.setSerializationInclusion(NON_EMPTY);
+		mapper.setDateFormat(simpleDateFormat);
         
         return mapper;   
     } 

@@ -33,6 +33,7 @@ import com.honyum.elevatorMan.utils.Utils;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -199,14 +200,15 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
      *
      * @author chang
      */
-    class GetPicture extends AsyncTask<String, Void, String> {
+    static class  GetPicture extends AsyncTask<String, Void, String> {
 
         private String mUrl;
-        private ImageView mImageView;
+        private WeakReference<ImageView> mImageView;
+
 
         public GetPicture(String url, ImageView imageView) {
             mUrl = url;
-            mImageView = imageView;
+            mImageView = new WeakReference<ImageView>(imageView);
         }
 
         @Override
@@ -230,8 +232,8 @@ public class ProMainDetailActivity extends PropertyBaseActivity {
 
             if (!StringUtils.isEmpty(result)) {
                 Bitmap bitmap = Utils.getBitmapBySize(result, 60, 80);
-                mImageView.setImageBitmap(bitmap);
-                mImageView.setTag(result);
+                mImageView.get().setImageBitmap(bitmap);
+                mImageView.get().setTag(result);
             }
         }
     }

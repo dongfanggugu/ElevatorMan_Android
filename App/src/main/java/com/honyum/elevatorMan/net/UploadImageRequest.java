@@ -2,6 +2,7 @@ package com.honyum.elevatorMan.net;
 
 import com.honyum.elevatorMan.net.base.RequestBean;
 import com.honyum.elevatorMan.net.base.RequestBody;
+import com.honyum.elevatorMan.utils.Utils;
 
 /**
  * Created by Star on 2017/6/17.
@@ -29,7 +30,8 @@ public class UploadImageRequest extends RequestBean {
         }
 
         public UploadImageBody setImg(String img) {
-            this.img = img;
+
+            this.img = Utils.imgToStrByBase64(img);
             return this;
         }
 
