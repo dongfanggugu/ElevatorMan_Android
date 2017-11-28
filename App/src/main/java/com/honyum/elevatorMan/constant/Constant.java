@@ -1,10 +1,11 @@
 package com.honyum.elevatorMan.constant;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Constant {
-
 
 
 
@@ -141,6 +142,6 @@ public class Constant {
     public static final boolean crashHandlerEnable = false;
 
 
-
-
+    @Nullable
+    public static final String SUCCESS = "0";
 }

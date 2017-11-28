@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_ed_common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_10dp"
+            android:paddingBottom="@dimen/size_10dp"
+            android:paddingLeft="@dimen/size_10dp"
+            android:paddingRight="@dimen/size_5dp"
+            android:paddingTop="@dimen/size_10dp"
+            android:text="常用功能" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(按住拖动调整顺序)"
+            android:textColor="@color/gray" />
+
+    </LinearLayout>
+
+    <GridLayout
+        android:id="@+id/gl_e_common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></GridLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10dp"
+            android:paddingLeft="@dimen/size_20dp"
+            android:text="我的常用功能" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/size_10dp"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/size_10dp"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/size_10dp"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/size_10dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_bg"
+            android:paddingBottom="@dimen/size_5dp"
+            android:paddingLeft="@dimen/size_10dp"
+            android:paddingRight="@dimen/size_10dp"
+            android:paddingTop="@dimen/size_5dp"
+            android:text="编辑"
+            android:textColor="@color/titleblue" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/lessgray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_10dp"
+        android:drawableLeft="@drawable/back_icon"
+        android:drawablePadding="10dp"
+        android:padding="@dimen/size_10dp"
+        android:text="全部功能" />
+
+    <GridLayout
+        android:id="@+id/gl_e_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </GridLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/lessgray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_10dp"
+        android:drawableLeft="@drawable/back_icon"
+        android:drawablePadding="10dp"
+        android:padding="@dimen/size_10dp"
+        android:text="全部功能" />
+
+    <GridLayout
+        android:id="@+id/gl_e_manager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></GridLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/lessgray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_10dp"
+        android:drawableLeft="@drawable/back_icon"
+        android:drawablePadding="10dp"
+        android:padding="@dimen/size_10dp"
+        android:text="全部功能" />
+
+    <GridLayout
+        android:id="@+id/gl_e_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></GridLayout>
+
+</LinearLayout>

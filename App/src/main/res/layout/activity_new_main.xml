@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/ic_launcher"/>
+    <TextView
+        android:layout_marginLeft="@dimen/size_10dp"
+        android:padding="@dimen/size_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/back_icon"
+        android:drawablePadding="10dp"
+        android:text="常用功能"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"             android:gravity="center_horizontal"
+
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"             android:gravity="center_horizontal"
+
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"             android:gravity="center_horizontal"
+
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+
+
+
+
+    </LinearLayout>
+    <TextView
+        android:layout_marginLeft="@dimen/size_10dp"
+        android:padding="@dimen/size_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/back_icon"
+        android:drawablePadding="10dp"
+        android:text="全部功能"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:background="@drawable/ic_launcher"
+            android:layout_width="wrap_content"             android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="应急救援"
+            android:layout_gravity="center_vertical"
+            />
+        <View
+            android:layout_width="1dp"
+            android:background="@color/lessgray"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"             android:gravity="center_horizontal"
+
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"             android:gravity="center_horizontal"
+
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+
+
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lessgray"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:background="@drawable/ic_launcher"
+            android:layout_width="wrap_content"             android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="应急救援"
+            android:layout_gravity="center_vertical"
+            />
+        <View
+            android:layout_width="1dp"
+            android:background="@color/lessgray"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"             android:gravity="center_horizontal"
+
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"             android:gravity="center_horizontal"
+
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+
+
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lessgray"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"             android:gravity="center_horizontal"
+
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"             android:gravity="center_horizontal"
+
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"             android:gravity="center_horizontal"
+
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/main_page_indicator"
+                layout="@layout/layout_page_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <ListView
+        android:layout_margin="10dp"
+        android:background="@drawable/listview_back"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+    <TextView
+        android:layout_marginLeft="@dimen/size_10dp"
+        android:padding="@dimen/size_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/back_icon"
+        android:drawablePadding="10dp"
+        android:text="电梯百科"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"             android:gravity="center_horizontal"
+
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <View
+            android:layout_width="1dp"
+            android:background="@color/lessgray"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"             android:gravity="center_horizontal"
+
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+        <View
+            android:layout_width="1dp"
+            android:background="@color/lessgray"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_margin="@dimen/size_10dp"             android:gravity="center_horizontal"
+
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/><View
+        android:layout_width="1dp"
+        android:background="@color/lessgray"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"/>
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/size_10dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="应急救援"/>
+
+
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/ic_launcher"/>
+
+
+</LinearLayout>
+</ScrollView>
