@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<icons>
+
+    <icon id = "e_save">
+        <name>应急救援</name>
+        <image>ic_launcher</image>
+        <action>com.honyum.elevatorMan.activity.common.AboutActivity</action>
+    </icon>
+    <icon id = "e_save">
+        <name>应急救援</name>
+        <image>ic_launcher</image>
+        <action>com.honyum.elevatorMan.activity.common.AboutActivity</action>
+    </icon>
+    <icon id = "e_save">
+        <name>应急救援</name>
+        <image>ic_launcher</image>
+        <action>com.honyum.elevatorMan.activity.common.AboutActivity</action>
+    </icon>
+    <icon id = "e_save">
+        <name>应急救援</name>
+        <image>ic_launcher</image>
+        <action>com.honyum.elevatorMan.activity.common.AboutActivity</action>
+    </icon>
+    <icon id = "e_save">
+        <name>应急救援</name>
+        <image>ic_launcher</image>
+        <action>com.honyum.elevatorMan.activity.common.AboutActivity</action>
+    </icon>
+</icons>

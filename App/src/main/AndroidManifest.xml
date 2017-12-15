@@ -638,7 +638,10 @@
             android:exported="false"
             android:finishOnTaskLaunch="false"
             android:launchMode="singleInstance"
-            android:theme="@style/LiveStyle"/>/>
+            android:theme="@style/LiveStyle"/>
+        <activity android:name=".activity.common.EditIconActivity" />
+        <activity android:name=".activity.common.CommonMainPage" />
+        <activity android:name=".activity.common.ToDoListActivity" />/>
     </application>
 
 </manifest>

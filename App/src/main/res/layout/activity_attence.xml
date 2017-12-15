@@ -1,87 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="5"
-    >
+    android:orientation="vertical"
+    android:weightSum="5">
+
     <include
         android:id="@+id/title"
-        layout="@layout/layout_title"/>
-    <LinearLayout
+        layout="@layout/layout_title" />
+
+    <FrameLayout
+        android:id="@+id/fl_banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:background="@drawable/sign_image">
+
+        <TextView
+            android:id="@+id/tv_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="星期一"
+            android:textColor="@color/white"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:text="2010年11月22日"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+
+    </FrameLayout>
+
+    <RelativeLayout
         android:orientation="horizontal"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_20dp"
+            android:background="@drawable/corner_background_blue"
+            android:src="@drawable/sign_in" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上班"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/tv_sign_in"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="签到"
-            android:paddingTop="@dimen/size_10dp"
-            android:paddingBottom="@dimen/size_10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_20dp"
-            android:gravity="center"
             android:background="@drawable/selector_plan_submit"
-            android:layout_height="wrap_content" />
+            android:gravity="right"
+            android:paddingBottom="@dimen/size_10dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="@dimen/size_10dp"
+            android:text="签到"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/backgray"/>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_20dp"
+            android:background="@drawable/corner_background_blue"
+            android:src="@drawable/sing_out" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/image1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下班"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/tv_sign_out"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="签退"
-            android:paddingTop="@dimen/size_10dp"
-            android:paddingBottom="@dimen/size_10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_20dp"
-            android:gravity="center"
-            android:textColor="@color/white"
             android:background="@drawable/selector_plan_submit"
-            android:layout_height="wrap_content" />
+            android:gravity="right"
+            android:paddingBottom="@dimen/size_10dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="@dimen/size_10dp"
+            android:text="签退"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white" />
 
-    </LinearLayout>
-
-    <LinearLayout
+    </RelativeLayout>
+    <View
         android:layout_width="match_parent"
-        android:layout_weight="2"
-        android:layout_height="0dp"
-        android:weightSum="2"
+        android:layout_height="1dp"
+        android:background="@color/backgray"/>
+    <RelativeLayout
         android:orientation="horizontal"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_20dp"
+            android:background="@drawable/corner_background_green"
+            android:src="@drawable/sign_in" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/image2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请假"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/tv_leave"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="请假"
-            android:paddingTop="@dimen/size_10dp"
-            android:paddingBottom="@dimen/size_10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_20dp"
-            android:gravity="center"
-            android:textColor="@color/white"
             android:background="@drawable/selector_plan_submit"
-            android:layout_height="wrap_content" />
+            android:gravity="right"
+            android:paddingBottom="@dimen/size_10dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="@dimen/size_10dp"
+            android:text="签到"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/backgray"/>
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image3"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_20dp"
+            android:background="@drawable/corner_background_green"
+            android:src="@drawable/cancel_sign" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/image3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="销假"
-            android:paddingTop="@dimen/size_10dp"
-            android:paddingBottom="@dimen/size_10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:layout_margin="@dimen/size_20dp"
-            android:gravity="center"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/tv_cancel_leave"
-            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_20dp"
             android:background="@drawable/selector_plan_submit"
-            android:layout_height="wrap_content" />
+            android:gravity="right"
+            android:paddingBottom="@dimen/size_10dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="@dimen/size_10dp"
+            android:text="销假"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white" />
 
-    </LinearLayout>
-
+    </RelativeLayout>
 
 
 </LinearLayout>

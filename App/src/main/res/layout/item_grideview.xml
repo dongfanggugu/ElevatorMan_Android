@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/fun_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_10dp"
+        android:drawableLeft="@drawable/back_icon"
+        android:drawablePadding="10dp"
+        android:padding="@dimen/size_10dp"
+        android:text="全部功能" />
+
+    <com.honyum.elevatorMan.view.MyGridView
+        android:id="@+id/gl_e_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="4"
+        android:layout_marginLeft="@dimen/size_20dp"
+        android:scrollbars="none"
+        android:layout_marginBottom="@dimen/size_20dp"
+        android:stretchMode="columnWidth" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lessgray" />
+</LinearLayout >

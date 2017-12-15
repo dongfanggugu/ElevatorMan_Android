@@ -1,32 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/corner_background"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_pop_btn_text"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/pop_margin_vertical"
-            android:paddingTop="@dimen/pop_margin_vertical">
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="维保类型选择"
-                android:textColor="@color/white"
-                android:textSize="@dimen/pop_btn_text_size"/>
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_semi_month"
@@ -36,27 +19,35 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/pop_margin_vertical"
                 android:layout_marginLeft="@dimen/pop_margin_horizontal"
                 android:layout_marginRight="@dimen/pop_margin_horizontal"
                 android:layout_marginTop="@dimen/pop_margin_vertical"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_half_month"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="@dimen/size_20dp"
+                    android:background="@drawable/star_icon" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_half_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/semi_month"
                     android:textColor="@color/color_pop_text"
-                    android:textSize="@dimen/pop_text_size"/>
+                    android:textSize="@dimen/pop_text_size" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#dddddd"/>
+                android:background="#dddddd" />
 
             <LinearLayout
                 android:id="@+id/ll_month"
@@ -66,27 +57,34 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/pop_margin_vertical"
                     android:layout_marginLeft="@dimen/pop_margin_horizontal"
                     android:layout_marginRight="@dimen/pop_margin_horizontal"
                     android:layout_marginTop="@dimen/pop_margin_vertical"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/iv_star_month"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="@dimen/size_20dp"
 
+                        android:background="@drawable/star_icon" />
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/tv_star_month"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/month"
                         android:textColor="@color/color_pop_text"
-                        android:textSize="@dimen/pop_text_size"/>
+                        android:textSize="@dimen/pop_text_size" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#dddddd"/>
+                    android:background="#dddddd" />
 
                 <LinearLayout
                     android:id="@+id/ll_season"
@@ -96,27 +94,35 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/pop_margin_vertical"
                         android:layout_marginLeft="@dimen/pop_margin_horizontal"
                         android:layout_marginRight="@dimen/pop_margin_horizontal"
+                        android:gravity="center_vertical"
                         android:layout_marginTop="@dimen/pop_margin_vertical"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/iv_star_quarter"
+                            android:layout_width="30dp"
+                            android:layout_marginRight="@dimen/size_20dp"
 
+                            android:layout_height="30dp"
+                            android:background="@drawable/star_icon" />
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/tv_star_quarter"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/season"
                             android:textColor="@color/color_pop_text"
-                            android:textSize="@dimen/pop_text_size"/>
+                            android:textSize="@dimen/pop_text_size" />
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#dddddd"/>
+                        android:background="#dddddd" />
 
                     <LinearLayout
                         android:id="@+id/ll_semi_year"
@@ -126,27 +132,35 @@
                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/pop_margin_vertical"
                             android:layout_marginLeft="@dimen/pop_margin_horizontal"
                             android:layout_marginRight="@dimen/pop_margin_horizontal"
+                            android:gravity="center_vertical"
                             android:layout_marginTop="@dimen/pop_margin_vertical"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:id="@+id/iv_star_half_year"
+                                android:layout_width="30dp"
+                                android:layout_marginRight="@dimen/size_20dp"
 
+                                android:layout_height="30dp"
+                                android:background="@drawable/star_icon" />
                             <TextView
-                                android:layout_width="match_parent"
+                                android:id="@+id/tv_star_half_year"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="@string/semi_year"
                                 android:textColor="@color/color_pop_text"
-                                android:textSize="@dimen/pop_text_size"/>
+                                android:textSize="@dimen/pop_text_size" />
                         </LinearLayout>
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="#dddddd"/>
+                            android:background="#dddddd" />
 
                         <LinearLayout
                             android:id="@+id/ll_year"
@@ -156,27 +170,37 @@
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/pop_margin_vertical"
                                 android:layout_marginLeft="@dimen/pop_margin_horizontal"
                                 android:layout_marginRight="@dimen/pop_margin_horizontal"
                                 android:layout_marginTop="@dimen/pop_margin_vertical"
-                                android:orientation="vertical">
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/iv_star_year"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+
+                                    android:layout_marginRight="@dimen/size_20dp"
+                                    android:background="@drawable/star_icon" />
 
                                 <TextView
-                                    android:layout_width="match_parent"
+                                    android:id="@+id/tv_star_year"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="@string/year"
                                     android:textColor="@color/color_pop_text"
-                                    android:textSize="@dimen/pop_text_size"/>
+                                    android:textSize="@dimen/pop_text_size" />
                             </LinearLayout>
 
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="#dddddd"/>
+                                android:background="#dddddd" />
 
 
                         </LinearLayout>

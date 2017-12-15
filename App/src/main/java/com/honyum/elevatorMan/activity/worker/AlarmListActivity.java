@@ -112,6 +112,19 @@ public class AlarmListActivity extends WorkerBaseActivity {
      */
     private void initView() {
 
+        //约定0和1
+        if(getIntent().hasExtra("newCode"))
+        {
+            mCurrentPage = getIntent().getIntExtra("newCode",0);
+            findViewById(R.id.ll_bottom).setVisibility(View.GONE);
+            if(mCurrentPage == 0)
+            initTitleBar("报警处置", R.id.title_alarm_list,
+                    R.drawable.back_normal, backClickListener);
+            else
+                initTitleBar("接警汇总", R.id.title_alarm_list,
+                        R.drawable.back_normal, backClickListener);
+
+        }
 
         //接收到的报警
         findViewById(R.id.ll_alarm).setOnClickListener(new View.OnClickListener() {

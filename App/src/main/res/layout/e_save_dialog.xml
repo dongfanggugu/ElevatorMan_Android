@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/transparent"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent"
+    android:padding="@dimen/size_20dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:layout_margin="@dimen/size_10dp"
+        android:textColor="@color/titleblue"
+        android:text="E救援"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/size_20dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner_background">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/alert_deal"
+                android:gravity="center_horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/warn_deal"
+                android:drawablePadding="5dp"
+                android:text="报警处置"/>
+            <TextView
+                android:id="@+id/alert_detail"
+                android:layout_width="0dp"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/warn_detail"
+                android:drawablePadding="5dp"
+                android:text="报警汇总"/>
+            <TextView
+                android:id="@+id/alert_contract"
+                android:layout_width="0dp"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/save_contract"
+                android:drawablePadding="5dp"
+                android:text="救援交流"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

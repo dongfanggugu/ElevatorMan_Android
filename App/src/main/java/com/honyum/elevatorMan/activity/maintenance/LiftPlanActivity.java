@@ -137,9 +137,11 @@ public class LiftPlanActivity extends BaseFragmentActivity {
             LiftInfo info = mList.get(position);
             convertView.setTag(info);
             TextView tvCode = (TextView) convertView.findViewById(R.id.tv_code);
-            TextView tvAdd = (TextView) convertView.findViewById(R.id.tv_address);
 
+            TextView tvAdd = (TextView) convertView.findViewById(R.id.tv_address);
+            TextView index = (TextView) convertView.findViewById(R.id.tv_index);
             tvCode.setText(info.getNum());
+            index.setText(position+1+"");
             tvAdd.setText(info.getAddress());
 
             return convertView;

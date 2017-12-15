@@ -29,12 +29,6 @@ public class FixTaskListAdapter extends BaseListViewAdapter<FixInfo> {
                         +" "+o.getTel())
                 .setText(R.id.tv_time, "预约："+o.getRepairTime())
                 .setText(R.id.tv_index,index+1+"").setText(R.id.tv_datenumber,o.getVillaInfo().getCellName())
-                .setOnClickListener(R.id.ll_taskdetailinfo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ((ListItemCallback)mContext).performItemCallback(o);
-
-                    }
-                });
+                .setOnClickListener(R.id.ll_taskdetailinfo, v -> ((ListItemCallback)mContext).performItemCallback(o));
     }
 }

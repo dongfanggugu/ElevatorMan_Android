@@ -1,13 +1,20 @@
 package com.honyum.elevatorMan.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.util.SparseArray;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.honyum.elevatorMan.R;
 
 public class BaseViewHolder {
     //复用的View
@@ -31,6 +38,20 @@ public class BaseViewHolder {
         mConvertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
         //设置 tag
         mConvertView.setTag(this);
+    }
+
+    public BaseViewHolder setBackGround(int viewId, int color) {
+        View tv = getView(viewId);
+        tv.setBackgroundColor(ContextCompat.getColor(tv.getContext(), color));
+        return this;
+    }
+
+    public BaseViewHolder setBoundsCompoundDrawables(int viewId, Drawable dwLeft) {
+        TextView tv = getView(viewId);
+        int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30.00f, tv.getContext().getResources().getDisplayMetrics());
+        dwLeft.setBounds(0, 0, size, size);//第一0是距左边距离，第二0是距上边距离，40分别是长宽
+        tv.setCompoundDrawables(null, dwLeft, null, null);//只放左边
+        return this;
     }
 
     /**
@@ -63,9 +84,61 @@ public class BaseViewHolder {
         }
     }
 
+    //resize view Size, input dp Unit ,this method will covert to ps value auto
+    public BaseViewHolder setSize(int viewId, int width, int height) {
+        View tv = getView(viewId);
+        ViewGroup.LayoutParams params = tv.getLayoutParams();
+        int psWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, width, tv.getContext().getResources().getDisplayMetrics());
+        int psHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height, tv.getContext().getResources().getDisplayMetrics());
+        params.width = psWidth;
+        params.height = psHeight;
+        tv.setLayoutParams(params);
+        return this;
+    }
+
+    /**
+     * @param viewId
+     * @param width
+     * @param height
+     * @param direction 0 left 1 top 2 right 3 bottom
+     * @return
+     */
+    public BaseViewHolder setTextViewDrawableSize(int viewId, int width, int height, int direction) {
+
+        View tv = getView(viewId);
+        TextView textView;
+        if (tv instanceof TextView)
+            textView = (TextView) tv;
+        else
+            throw new RuntimeException("input type mistake ,require TextView");
+        Drawable[] drawables = textView.getCompoundDrawables();
+        int psWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, width, tv.getContext().getResources().getDisplayMetrics());
+        int psHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height, tv.getContext().getResources().getDisplayMetrics());
+
+        if (direction < 3)
+            drawables[direction].setBounds(0, 0, psWidth, psHeight);
+        else
+            throw new RuntimeException("out of bound direction ");
+        setSize(viewId, width, height);
+        return this;
+
+    }
+
+
     //获取 convertView
     public View getConvertView() {
         return mConvertView;
+    }
+
+    /**
+     * 设置 ImageView 的值
+     *
+     * @param viewId
+     * @return
+     */
+    public boolean isVisible(int viewId) {
+        View tv = getView(viewId);
+        return tv.getVisibility() == View.VISIBLE;
     }
 
     /**
@@ -119,6 +192,7 @@ public class BaseViewHolder {
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
         return this;
     }
+
 
     /**
      * 设置tag

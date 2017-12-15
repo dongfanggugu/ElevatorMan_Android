@@ -1,5 +1,6 @@
 package com.honyum.elevatorMan.base;
 
+import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,12 @@ public class MyApplication extends LitePalApplication {
     private Config config;
 
     private BaseFragmentActivity baseActivity;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {

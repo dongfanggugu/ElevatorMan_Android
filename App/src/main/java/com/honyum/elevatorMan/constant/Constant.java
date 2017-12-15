@@ -1,5 +1,6 @@
 package com.honyum.elevatorMan.constant;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -144,4 +145,6 @@ public class Constant {
 
     @Nullable
     public static final String SUCCESS = "0";
+    @NotNull
+    public static final String WORK_ICON  ="worker";
 }

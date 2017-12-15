@@ -229,12 +229,7 @@ public class LiftCompleteActivity extends BaseFragmentActivity {
             holder.tvLiftCode.setText(liftInfo.getNum());
             holder.tvLiftAdd.setText(liftInfo.getAddress());
 
-            holder.ivVideo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startLiftVideo(liftInfo.getId());
-                }
-            });
+            holder.ivVideo.setOnClickListener(v -> startLiftVideo(liftInfo.getId()));
 
 
             holder.flState.setVisibility(View.VISIBLE);
@@ -261,67 +256,42 @@ public class LiftCompleteActivity extends BaseFragmentActivity {
             holder.tvPlanType.setText(liftInfo.getPlanType());
 
 
-            holder.tvEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(LiftCompleteActivity.this, PlanActivity.class);
-                    intent.putExtra("enter_type", "modify");
-                    intent.putExtra("lift", liftInfo);
-                    intent.putExtra("pos", position);
+            holder.tvEdit.setOnClickListener(v -> {
+                Intent intent = new Intent(LiftCompleteActivity.this, PlanActivity.class);
+                intent.putExtra("enter_type", "modify");
+                intent.putExtra("lift", liftInfo);
+                intent.putExtra("pos", position);
 
-                    startActivity(intent);
-                }
+                startActivity(intent);
             });
 
-            holder.tvDel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            holder.tvDel.setOnClickListener(v -> new AlertDialog.Builder(LiftCompleteActivity.this)
+                    .setMessage("确认删除此电梯维保计划?")
+                    .setTitle("提示")
+                    .setPositiveButton("确认", (dialog, which) -> {
+                        dialog.dismiss();
+                        deletePlan(getConfig().getUserId(), getConfig().getToken(),
+                                liftInfo.getId(), liftInfo.getNum());
+                    }).setNegativeButton("取消", (dialog, which) -> dialog.dismiss()).show());
 
+            holder.llDetail.setOnClickListener(v -> {
+
+                if (liftInfo.getPropertyFlg().equals("3")) {
                     new AlertDialog.Builder(LiftCompleteActivity.this)
-                            .setMessage("确认删除此电梯维保计划?")
+                            .setMessage("此计划已被物业拒绝，请修改计划")
                             .setTitle("提示")
-                            .setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    deletePlan(getConfig().getUserId(), getConfig().getToken(),
-                                            liftInfo.getId(), liftInfo.getNum());
-                                }
-                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    }).show();
+                            .setPositiveButton("确认", (dialog, which) -> dialog.dismiss()).show();
+                    return;
                 }
-            });
+                Intent intent = new Intent();
+                intent.putExtra("enter_type", "add");
+                intent.putExtra("lift", liftInfo);
 
-            holder.llDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (liftInfo.getPropertyFlg().equals("3")) {
-                        new AlertDialog.Builder(LiftCompleteActivity.this)
-                                .setMessage("此计划已被物业拒绝，请修改计划")
-                                .setTitle("提示")
-                                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                }).show();
-                        return;
-                    }
-                    Intent intent = new Intent();
-                    intent.putExtra("enter_type", "add");
-                    intent.putExtra("lift", liftInfo);
-
-                    intent.setClass(LiftCompleteActivity.this, MaintenanceActivity.class);
+                intent.setClass(LiftCompleteActivity.this, MaintenanceActivity.class);
 
 
-                    startActivity(intent);
+                startActivity(intent);
 
-                }
             });
             return convertView;
         }

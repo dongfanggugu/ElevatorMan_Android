@@ -62,6 +62,12 @@ import java.util.regex.Pattern;
 public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
 
+
+    public  static  int  getResource(String imageName,Context ctx){
+        int resId = ctx.getResources().getIdentifier(imageName, "drawable", ctx.getPackageName());
+        //如果没有在"mipmap"下找到imageName,将会返回0
+        return resId;
+    }
     /**
      * 将图片转换成BASE64
      *

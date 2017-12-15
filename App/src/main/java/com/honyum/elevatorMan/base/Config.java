@@ -29,9 +29,9 @@ public class Config implements Serializable {
 
 
 
-  // public static String baseUrl = "http://10.10.4.20:8080";
+    //public static String baseUrl = "http://10.10.4.20:8080";
      public static String baseUrl = "http://www.chorstar.com:8081";
-    //public static String baseUrl = "http://192.168.0.82:8080";
+   // public static String baseUrl = "http://192.168.0.108:8080";
 
     public Config(Context context) {
         mPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);

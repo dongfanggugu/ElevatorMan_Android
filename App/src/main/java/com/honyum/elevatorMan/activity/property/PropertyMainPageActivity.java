@@ -17,10 +17,13 @@ import android.widget.TextView;
 
 import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
+import com.honyum.elevatorMan.activity.common.CommonMainPage;
+import com.honyum.elevatorMan.activity.common.EditIconActivity;
 import com.honyum.elevatorMan.activity.common.MainPage1Activity;
 import com.honyum.elevatorMan.activity.common.NousActivity;
 import com.honyum.elevatorMan.activity.common.NousDetailActivity;
 import com.honyum.elevatorMan.activity.common.PersonActivity;
+import com.honyum.elevatorMan.activity.common.ToDoListActivity;
 import com.honyum.elevatorMan.activity.company.MainPageActivity;
 import com.honyum.elevatorMan.adapter.BannerAdapter;
 import com.honyum.elevatorMan.base.BaseFragmentActivity;
@@ -219,36 +222,25 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
     private void initView() {
 
 
-        findViewById(R.id.ll_rescue).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jumpToCurAlarm();
-            }
+
+
+        findViewById(R.id.tv_attendance).setOnClickListener(v -> {
+
+
+            Intent it = new Intent(PropertyMainPageActivity.this, ToDoListActivity.class);
+            startActivity(it);
         });
-        findViewById(R.id.ll_maintenance).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jumpToProjectList();
-            }
-        });
-        findViewById(R.id.ll_fix).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jumpToNearMt();
-            }
-        });
+        findViewById(R.id.ll_rescue).setOnClickListener(v -> jumpToCurAlarm());
+        findViewById(R.id.ll_maintenance).setOnClickListener(v -> jumpToProjectList());
+        findViewById(R.id.ll_fix).setOnClickListener(v -> jumpToNearMt());
 //        findViewById(R.id.ll_person).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                jumpToPerson();
 //            }
 //        });
-        findViewById(R.id.ll_bbs).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jumpToElevatorMall();
-            }
-        });
+
+        findViewById(R.id.ll_bbs).setOnClickListener(v -> jumpToElevatorMall());
 
         ((TextView)findViewById(R.id.tv_evemall)).setText("电梯商城");
         ((TextView)findViewById(R.id.tv_nhfix)).setText("附近维保");
@@ -264,20 +256,11 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(PropertyMainPageActivity.this).setTitle("呼出:"+telNum)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent1 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + telNum));
-                                startActivity(intent1);
-                            }
+                        .setPositiveButton("确定", (dialog, which) -> {
+                            Intent intent1 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + telNum));
+                            startActivity(intent1);
                         })
-                        .setNegativeButton("返回", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
+                        .setNegativeButton("返回", (dialog, which) -> dialog.dismiss()).show();
             }
         });
         checkError();
@@ -422,12 +405,9 @@ public class PropertyMainPageActivity extends BaseFragmentActivity implements Vi
 
     @Override
     public void onBackPressed() {
-        popMsgAlertWithCancel(getString(R.string.exit_confirm), new IConfirmCallback() {
-            @Override
-            public void onConfirm() {
-                PropertyMainPageActivity.super.onBackPressed();
-                SysActivityManager.getInstance().exit();
-            }
+        popMsgAlertWithCancel(getString(R.string.exit_confirm), () -> {
+            PropertyMainPageActivity.super.onBackPressed();
+            SysActivityManager.getInstance().exit();
         }, "否", "是", getString(R.string.exit_confirm));
     }
     /**

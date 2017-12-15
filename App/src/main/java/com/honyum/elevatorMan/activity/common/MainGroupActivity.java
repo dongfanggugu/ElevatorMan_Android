@@ -174,8 +174,8 @@ public class MainGroupActivity extends ActivityGroup {
         switch (flag) {
             case 0:
                 bodyView.removeAllViews();
-                View v = getLocalActivityManager().startActivity("one",
-                        new Intent(MainGroupActivity.this, MainPage1Activity.class)).getDecorView();
+                View v = getLocalActivityManager().startActivity("one",     ///
+                        new Intent(MainGroupActivity.this, CommonMainPage.class)).getDecorView();
                 bodyView.addView(v);
                 iv_page.setBackgroundResource(R.drawable.select_page);
                 iv_order.setBackgroundResource(R.drawable.normal_order);

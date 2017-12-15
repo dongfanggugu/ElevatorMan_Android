@@ -6,14 +6,21 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.baidu.navisdk.util.common.StringUtils;
 import com.honyum.elevatorMan.R;
@@ -30,10 +37,22 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class PlanActivity extends WorkerBaseActivity {
+    private DatePicker datePicker;
+    private TimePicker timePicker;
+    Date date;
+    String s1;
+    String s2;
+    private boolean isTimePass;
+    private View dialogLayout;
+    private AlertDialog alertDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,17 +83,22 @@ public class PlanActivity extends WorkerBaseActivity {
 
     /**
      * 初始化界面
+     *
      * @param intent
      */
     private void initView(final Intent intent) {
         if (null == intent) {
             return;
         }
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date d = new Date(System.currentTimeMillis());
+        String s = sdf.format(d).toString();
         final LiftInfo liftInfo = (LiftInfo) intent.getSerializableExtra("lift");
         ((TextView) findViewById(R.id.tv_lift_code)).setText(liftInfo.getNum());
         ((TextView) findViewById(R.id.tv_lift_add)).setText(liftInfo.getAddress());
-
+        dialogLayout = LayoutInflater.from(this).inflate(R.layout.dia_datetime_layout, null);
+        datePicker = (DatePicker) dialogLayout.findViewById(R.id.datePicker);
+        timePicker = (TimePicker) dialogLayout.findViewById(R.id.timePicker);
 
         //维保日期处理
         final TextView tvPlanDate = (TextView) findViewById(R.id.tv_plan_date);
@@ -85,9 +109,67 @@ public class PlanActivity extends WorkerBaseActivity {
             tvPlanType.setText(liftInfo.getPlanType());
 
         } else {
-            tvPlanDate.setText(Utils.dateToString(new Date()));
+            tvPlanDate.setText(s);
             tvPlanType.setText("半月保");
         }
+        date = new Date();
+
+        //使用dialog组合日期和时间控件。
+        findViewById(R.id.ll_date).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                timePicker.setIs24HourView(true);
+                timePicker.setCurrentHour(date.getHours() + 1);
+                timePicker.setCurrentMinute(0);
+                int minute = timePicker.getCurrentMinute();
+                s2 = "  " + (timePicker.getCurrentHour()) + ":" + (minute < 10 ? "0" + minute : minute);
+                timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+
+                    @Override
+                    public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                        s2 = ("  " + hourOfDay + ":" + (minute < 10 ? "0" + minute : minute));
+                    }
+                });
+                alertDialog.show();
+            }
+        });
+        alertDialog = new AlertDialog.Builder(this).setTitle("选择时间").setView(dialogLayout).setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        s1 = (datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth());
+                        String dateString = s1 + s2;
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        Date d = new Date();
+                        try {
+                            isTimePass = false;
+                            d = sdf.parse(dateString);
+                            long t = d.getTime();
+                            long cl = System.currentTimeMillis();
+
+                            if (cl > t) {
+                                isTimePass = false;
+                            } else {
+                                isTimePass = true;
+                            }
+                            tvPlanDate.setText(dateString);
+                            dialog.dismiss();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int arg1) {
+                dialog.dismiss();
+            }
+        }).create();
+        //end 组合控件
 
         //日期设置后回调接口
         final DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -98,26 +180,26 @@ public class PlanActivity extends WorkerBaseActivity {
             }
         };
 
-        //点击日期时修改
-        findViewById(R.id.ll_date).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(Utils.stringToDate(tvPlanDate.getText().toString()));
-                DatePickerDialog datePickerDialog = new DatePickerDialog(PlanActivity.this, dateSetListener,
-                        calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DATE)) {
-                    @Override
-                    protected void onStop() {
-                    }
-                };
-                DatePicker datePicker = datePickerDialog.getDatePicker();
-                datePicker.setSpinnersShown(false);
-
-                datePicker.setCalendarViewShown(true);
-                datePickerDialog.show();
-            }
-        });
+//        //点击日期时修改
+//        findViewById(R.id.ll_date).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(Utils.stringToDate(tvPlanDate.getText().toString()));
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(PlanActivity.this, dateSetListener,
+//                        calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+//                        calendar.get(Calendar.DATE)) {
+//                    @Override
+//                    protected void onStop() {
+//                    }
+//                };
+//                DatePicker datePicker = datePickerDialog.getDatePicker();
+//                datePicker.setSpinnersShown(false);
+//
+//                datePicker.setCalendarViewShown(true);
+//                datePickerDialog.show();
+//            }
+//        });
 
 
         //维保计划类型选择
@@ -166,6 +248,7 @@ public class PlanActivity extends WorkerBaseActivity {
             mDialog = dialog;
             mTextView = textView;
         }
+
         @Override
         public void onClick(View v) {
             mDialog.dismiss();
@@ -191,6 +274,7 @@ public class PlanActivity extends WorkerBaseActivity {
 
     /**
      * 维保类型选择
+     *
      * @param textView
      */
     private void popTypeSelector(TextView textView) {
@@ -198,6 +282,10 @@ public class PlanActivity extends WorkerBaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view);
         AlertDialog dialog = builder.create();
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+//        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+
 
         View.OnClickListener listener = new TypeSelector(dialog, textView);
 
@@ -207,11 +295,43 @@ public class PlanActivity extends WorkerBaseActivity {
         view.findViewById(R.id.ll_semi_year).setOnClickListener(listener);
         view.findViewById(R.id.ll_year).setOnClickListener(listener);
 
+
+        List<TextView> textViews = new ArrayList<>(5);
+        textViews.add((TextView) view.findViewById(R.id.tv_half_month));
+        textViews.add((TextView) view.findViewById(R.id.tv_star_month));
+        textViews.add((TextView) view.findViewById(R.id.tv_star_quarter));
+        textViews.add((TextView) view.findViewById(R.id.tv_star_half_year));
+        textViews.add((TextView) view.findViewById(R.id.tv_star_year));
+
+
+        List<ImageView> imageViews = new ArrayList<>(5);
+        imageViews.add((ImageView) view.findViewById(R.id.iv_half_month));
+        imageViews.add((ImageView) view.findViewById(R.id.iv_star_month));
+        imageViews.add((ImageView) view.findViewById(R.id.iv_star_quarter));
+        imageViews.add((ImageView) view.findViewById(R.id.iv_star_half_year));
+        imageViews.add((ImageView) view.findViewById(R.id.iv_star_year));
+
+
+        String selectedString = textView.getText() + "";
+
+        int selectedIndex = 0;
+        if (!TextUtils.isEmpty(selectedString)) {
+            for (int i = 0; i < textViews.size(); i++) {
+                if (selectedString.equals(textViews.get(i).getText() + "")) {
+                    selectedIndex = i;
+                    break;
+                }
+            }
+            imageViews.get(selectedIndex).setBackgroundResource(R.drawable.star_selected);
+            textViews.get(selectedIndex).setTextColor(getResources().getColor(R.color.title_bg_color));
+
+        }
         dialog.show();
     }
 
     /**
      * 获取提交维保计划的bean
+     *
      * @param userId
      * @param token
      * @param id
@@ -220,7 +340,7 @@ public class PlanActivity extends WorkerBaseActivity {
      * @return
      */
     public static RequestBean getReportPlanRequest(String userId, String token, String id, String planDate,
-                                             String planType) {
+                                                   String planType) {
         ReportPlanRequest request = new ReportPlanRequest();
         RequestHead head = new RequestHead();
         ReportPlanRequest.ReportPlanReqBody body = request.new ReportPlanReqBody();
@@ -240,6 +360,7 @@ public class PlanActivity extends WorkerBaseActivity {
 
     /**
      * 上传维保计划
+     *
      * @param userId
      * @param token
      * @param id
